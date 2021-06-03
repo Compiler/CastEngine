@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.17.3)
 project (CastMain VERSION 1.0.0)
 
-set(VULKAN_ROOT C:/VulkanSDK/1.2.162.1)
+set(VULKAN_ROOT "$ENV{VULKAN_SDK}") #make sure your VULKAN_SDK environment variable is set
 set(VULKAN_LIB "${VULKAN_ROOT}/Lib/")
 set(VULKAN_INCLUDE "${VULKAN_ROOT}/Include")
 
