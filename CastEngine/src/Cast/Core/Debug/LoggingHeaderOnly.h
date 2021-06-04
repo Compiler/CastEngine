@@ -8,7 +8,10 @@
 #endif
 #include<stdio.h>
 #ifdef CAST_DEBUG_MODE
-#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+//#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+//#define __FILENAME__ strrchr("\\" __FILE__, '\\') + 1
+#define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
+
 #define ANSI_COLOR_RED          "\x1b[31m"
 #define ANSI_COLOR_BOLD_RED     "\x1b[1;31m"
 #define ANSI_COLOR_GREEN        "\x1b[32m"
@@ -26,11 +29,35 @@
 #define STR_FROM_INT(x) #x
 #define STR(x) STR_FROM_INT(x)
 #define test(...) printf(ANSI_COLOR_BOLD_RED "TEST::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_RED __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
-#define CAST_ERROR(...) printf(ANSI_COLOR_BOLD_RED "ERROR::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_RED __VA_ARGS__); printf(ANSI_COLOR_RESET "\n"); assert(false)
-#define CAST_NON_FATAL_ERROR(...) printf(ANSI_COLOR_BOLD_RED "ERROR::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_RED __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
-#define CAST_LOG(...) printf(ANSI_COLOR_BOLD_CYAN "LOG::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_CYAN __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
-#define CAST_DEBUG(...) printf(ANSI_COLOR_BOLD_GREEN "LOG::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_GREEN __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
-#define CAST_WARN(...) printf(ANSI_COLOR_BOLD_YELLOW "WARN::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_YELLOW __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
-#define CAST_INIT_LOG(...) printf(ANSI_COLOR_BOLD_BLUE "INIT::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_BLUE __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
-#define CAST_UNLOAD_LOG(...) printf(ANSI_COLOR_BOLD_MAGENTA "UNLOAD::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_MAGENTA __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
+#define PF_CAST_ERROR(...) printf(ANSI_COLOR_BOLD_RED "ERROR::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_RED __VA_ARGS__); printf(ANSI_COLOR_RESET "\n"); assert(false)
+#define PF_CAST_NON_FATAL_ERROR(...) printf(ANSI_COLOR_BOLD_RED "ERROR::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_RED __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
+#define PF_CAST_LOG(...) printf(ANSI_COLOR_BOLD_CYAN "LOG::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_CYAN __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
+#define PF_CAST_DEBUG(...) printf(ANSI_COLOR_BOLD_GREEN "LOG::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_GREEN __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
+#define PF_CAST_WARN(...) printf(ANSI_COLOR_BOLD_YELLOW "WARN::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_YELLOW __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
+#define PF_CAST_INIT_LOG(...) printf(ANSI_COLOR_BOLD_BLUE "INIT::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_BLUE __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
+#define PF_CAST_UNLOAD_LOG(...) printf(ANSI_COLOR_BOLD_MAGENTA "UNLOAD::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_MAGENTA __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
+
+
+void vlog(const char* file, int line, fmt::string_view format, fmt::format_args args) {
+    auto thing = fmt::emphasis::bold | fg(fmt::color::lime_green);
+    fmt::print(fmt::emphasis::bold | fg(fmt::color::lime_green), "{}:{} : ", file, line);
+    fmt::vprint(format, args);
+}
+
+template <typename S, typename... Args>
+void log(const char* file, int line, const S& format, Args&&... args) {
+  vlog(file, line, format, fmt::make_args_checked<Args...>(format, args...));
+}
+#define CAST_LOG(format, ...) log(__FILENAME__, __LINE__, FMT_STRING(format), __VA_ARGS__)
+
+
+
+#define NA_CAST_DEBUG(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::lime_green), "{}:{}" __FILENAME__, STR(__LINE__), __VA_ARGS__)
+#define NA_CAST_WARNING(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::yellow), "{}:" STR(__LINE__) " " __VA_ARGS__ "\n", __FILENAME__)
+#define NA_CAST_ERROR(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::red), "{}:" STR(__LINE__) " " __VA_ARGS__ "\n", __FILENAME__)
+#define NA_CAST_DEBUG_NNL(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::lime_green), "{}:" STR(__LINE__) " " __VA_ARGS__, __FILENAME__)
+#define NA_CAST_LOG_NNL(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::mint_cream), "{}:" STR(__LINE__) " " __VA_ARGS__, __FILENAME__)
+#define NA_CAST_WARNING_NNL(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::yellow), "{}:" STR(__LINE__) " " __VA_ARGS__, __FILENAME__)
+#define NA_CAST_ERROR_NNL(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::red), "{}:" STR(__LINE__) " " __VA_ARGS__, __FILENAME__)
+
 #endif

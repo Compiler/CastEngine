@@ -1,6 +1,5 @@
 #pragma once
 #include <fmt/core.h>
-#include <fmt/color.h>
 #include <fmt/format.h>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
