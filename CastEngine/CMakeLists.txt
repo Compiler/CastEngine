@@ -3,8 +3,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(
 	CastEngine SHARED 
-	src/Cast/TestFile.cpp
-	src/Cast/TestFile.h
+	src/Cast/Core/Debug/Logging.h
+	src/Cast/Core/Rendering/RenderContext.cpp
+	src/Cast/Core/Rendering/RenderContext.h
 	)
 
 
