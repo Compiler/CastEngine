@@ -38,6 +38,11 @@
 #define PF_CAST_UNLOAD_LOG(...) printf(ANSI_COLOR_BOLD_MAGENTA "UNLOAD::" __FILE__ ":" STR(__LINE__) "\t" ANSI_COLOR_RESET ANSI_COLOR_MAGENTA __VA_ARGS__); printf(ANSI_COLOR_RESET "\n")
 
 
+/*  TODO
+  - MAKE __FILENAME__ start from root and go to file name, this allows for instant lookup.
+  - Colored after text, vprint takes 'const text_style& ts' as second parameter, print takes 'const text_style& ts' as first
+  - Deprecate other methods?
+*/
 void vlog(const char* file, int line, fmt::string_view format, fmt::format_args args) {
     auto thing = fmt::emphasis::bold | fg(fmt::color::lime_green);
     fmt::print(fmt::emphasis::bold | fg(fmt::color::lime_green), "{}:{} : ", file, line);
