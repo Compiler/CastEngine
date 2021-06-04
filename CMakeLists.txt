@@ -14,6 +14,7 @@ set(GLFW_ABS_INCLUDE "${GLFW_ABS_ROOT}/include")
 set(ENTT_ROOT extern/entt)
 set(ENTT_ABS_ROOT "${CMAKE_SOURCE_DIR}/${ENTT_ROOT}")
 
+set(FMT_ROOT extern/fmt)
 
 set(EXTERN_DIR "${CMAKE_SOURCE_DIR}/extern")
 
@@ -26,3 +27,4 @@ message("${GLFW_ABS_INCLUDE}")
 
 add_subdirectory(CastEngine) #this needs to be first
 add_subdirectory(CastDriver)
+add_subdirectory(extern/fmt EXCLUDE_FROM_ALL)

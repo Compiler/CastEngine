@@ -3,7 +3,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(
 	CastEngine SHARED 
+	src/Cast/Core/EngineCore.h
 	src/Cast/Core/Debug/Logging.h
+	src/Cast/Core/Debug/LoggingUserFormatter.h
 	src/Cast/Core/Rendering/RenderContext.cpp
 	src/Cast/Core/Rendering/RenderContext.h
 	)
@@ -33,12 +35,15 @@ target_include_directories(CastEngine PUBLIC "${GLFW_ABS_INCLUDE}")
 target_include_directories(CastEngine PUBLIC "${EXTERN_DIR}/glm")
 target_include_directories(CastEngine PUBLIC "${EXTERN_DIR}/stbimage")
 target_include_directories(CastEngine PUBLIC "${VULKAN_INCLUDE}")
+target_include_directories(CastEngine PUBLIC "${FMT_ROOT}/include")
 
 target_link_directories(CastEngine PUBLIC "${GLFW_ABS_LIB}")
 target_link_directories(CastEngine PUBLIC "${VULKAN_LIB}")
+target_link_directories(CastEngine PUBLIC "${FMT_ROOT}/")
 target_link_libraries(CastEngine glfw3dll)
 target_link_libraries(CastEngine vulkan-1)
 target_link_libraries(CastEngine pthread)
+target_link_libraries(CastEngine fmt::fmt-header-only)
 
 find_package(OpenGL REQUIRED)
 target_link_libraries(CastEngine OpenGL::GL)
