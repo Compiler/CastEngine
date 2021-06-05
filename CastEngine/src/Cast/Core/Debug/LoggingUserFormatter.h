@@ -24,6 +24,7 @@ struct fmt::formatter<glm::vec2> {
         }
 };
 
+
 template <>
 struct fmt::formatter<glm::vec3> {
     char presentation = 'f';

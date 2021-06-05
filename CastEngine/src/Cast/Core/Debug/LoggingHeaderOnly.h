@@ -39,24 +39,30 @@
 
 
 /*  TODO
-  - MAKE __FILENAME__ start from root and go to file name, this allows for instant lookup.
   - Colored after text, vprint takes 'const text_style& ts' as second parameter, print takes 'const text_style& ts' as first
   - Deprecate other methods?
 */
-void vlog(const char* file, int line, fmt::string_view format, fmt::format_args args) {
+void vlog(const fmt::text_style style, const char* file, int line, fmt::string_view format, fmt::format_args args) {
     auto thing = fmt::emphasis::bold | fg(fmt::color::lime_green);
-    fmt::print(fmt::emphasis::bold | fg(fmt::color::lime_green), "{}:{} : ", file, line);
+    fmt::print(style, "{}:{} : ", file, line);
     fmt::vprint(format, args);
+    fmt::print("\n");
 }
 
 template <typename S, typename... Args>
-void log(const char* file, int line, const S& format, Args&&... args) {
-  vlog(file, line, format, fmt::make_args_checked<Args...>(format, args...));
+void log(const fmt::text_style style, const char* file, int line, const S& format, Args&&... args) {
+  vlog(style, file, line, format, fmt::make_args_checked<Args...>(format, args...));
 }
-#define CAST_LOG(format, ...) log(__FILENAME__, __LINE__, FMT_STRING(format), __VA_ARGS__)
+
+//#define FULL_PATHS
+#define CAST_LOG(format, ...) log(fmt::emphasis::bold | fg(fmt::color::mint_cream), __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
+#define CAST_DEBUG(format, ...) log(fmt::emphasis::bold | fg(fmt::color::lime_green), __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
+#define CAST_WARNING(format, ...) log(fmt::emphasis::bold | fg(fmt::color::yellow), __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
+#define CAST_ERROR(format, ...) log(fmt::emphasis::bold | fg(fmt::color::red), __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
 
 
 
+#define NA_CAST_LOG(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::mint_cream), "{}:" STR(__LINE__) " " __VA_ARGS__ "\n", __FILENAME__)
 #define NA_CAST_DEBUG(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::lime_green), "{}:{}" __FILENAME__, STR(__LINE__), __VA_ARGS__)
 #define NA_CAST_WARNING(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::yellow), "{}:" STR(__LINE__) " " __VA_ARGS__ "\n", __FILENAME__)
 #define NA_CAST_ERROR(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::red), "{}:" STR(__LINE__) " " __VA_ARGS__ "\n", __FILENAME__)
