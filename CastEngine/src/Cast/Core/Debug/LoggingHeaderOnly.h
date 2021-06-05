@@ -39,8 +39,7 @@
 
 
 /*  TODO
-  - Colored after text, vprint takes 'const text_style& ts' as second parameter, print takes 'const text_style& ts' as first
-  - Deprecate other methods?
+  - colored intermediate text
 */
 void vlog(const fmt::text_style style, const char* file, int line, fmt::string_view format, fmt::format_args args) {
     auto thing = fmt::emphasis::bold | fg(fmt::color::lime_green);
