@@ -48,17 +48,33 @@ void vlog(const fmt::text_style style, const char* file, int line, fmt::string_v
     fmt::print("\n");
 }
 
+void f_vlog(const fmt::text_style style, const char* file, int line, fmt::string_view format, fmt::format_args args) {
+    auto thing = fmt::emphasis::bold | fg(fmt::color::lime_green);
+    fmt::print(fmt::emphasis::italic | fg(fmt::color::indian_red), "!FATAL!\t");
+    fmt::print(style, "{}:{} : ", file, line);
+    fmt::vprint(format, args);
+    fmt::print("\n");
+}
+
+
 template <typename S, typename... Args>
 void log(const fmt::text_style style, const char* file, int line, const S& format, Args&&... args) {
   vlog(style, file, line, format, fmt::make_args_checked<Args...>(format, args...));
 }
+
+template <typename S, typename... Args>
+void assert_log(bool exp, const char* file, int line, const S& format, Args&&... args) {
+  f_vlog(fmt::emphasis::bold | fg(fmt::color::red), file, line, format, fmt::make_args_checked<Args...>(format, args...));
+  assert(exp);
+}
+
 
 //#define FULL_PATHS
 #define CAST_LOG(format, ...) log(fmt::emphasis::bold | fg(fmt::color::mint_cream), __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
 #define CAST_DEBUG(format, ...) log(fmt::emphasis::bold | fg(fmt::color::lime_green), __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
 #define CAST_WARNING(format, ...) log(fmt::emphasis::bold | fg(fmt::color::yellow), __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
 #define CAST_ERROR(format, ...) log(fmt::emphasis::bold | fg(fmt::color::red), __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
-
+#define CAST_FATAL(exp, format, ...) assert_log(exp, __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
 
 
 #define NA_CAST_LOG(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::mint_cream), "{}:" STR(__LINE__) " " __VA_ARGS__ "\n", __FILENAME__)

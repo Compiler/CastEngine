@@ -9,6 +9,9 @@ add_library(
 	src/Cast/Core/Debug/LoggingUserFormatter.h
 	src/Cast/Core/Rendering/RenderContext.cpp
 	src/Cast/Core/Rendering/RenderContext.h
+	src/Cast/Core/Rendering/Renderer.h
+	src/Cast/Core/Rendering/Window.cpp
+	src/Cast/Core/Rendering/Window.h
 	)
 
 
@@ -29,6 +32,7 @@ add_custom_command(TARGET CastEngine PRE_BUILD
 
 
 target_compile_definitions(CastEngine PUBLIC CAST_DEBUG_MODE=1)
+target_compile_definitions(CastEngine PUBLIC CAST_ENGINE_NAME=CastEngine)
 
 target_include_directories(CastEngine PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_include_directories(CastEngine PUBLIC "${ENTT_ABS_ROOT}")
