@@ -12,6 +12,8 @@ namespace Cast{
             OpenGLWindow(int width, int height, const char* windowName);
             void update();
             void destroy();
+            void setSize(int width, int height);
+
         
             inline bool shouldClose(){return glfwWindowShouldClose(_window);}
     };

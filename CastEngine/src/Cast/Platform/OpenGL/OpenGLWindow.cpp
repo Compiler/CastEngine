@@ -10,10 +10,11 @@ namespace Cast{
         glfwWindowHint(GLFW_SAMPLES, 4);
         glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
         _window = glfwCreateWindow(width, height, windowName, 0, 0);
-        
+
         glfwSetWindowUserPointer(_window, reinterpret_cast<void*>(this));
 
         glfwSetFramebufferSizeCallback(_window, OpenGLCallbacks::framebufferSizeCallback);  
+        glfwSetWindowSizeCallback(_window, OpenGLCallbacks::windowResizeCallback);
     }
 
 
@@ -25,6 +26,15 @@ namespace Cast{
         CAST_WARN("Destroying OpenGLWindow");
         glfwTerminate();
     }
+
+
+
+    void OpenGLWindow::setSize(int width, int height){
+        m_width = width;
+        m_height = height;
+        glfwSetWindowSize(_window, m_width, m_height);
+    }
+
 
 
 }

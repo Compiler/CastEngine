@@ -15,8 +15,8 @@ namespace Cast{
             virtual void update() = 0;
             virtual void destroy() = 0;
             virtual bool shouldClose() = 0;
+            virtual void setSize(int width, int height) = 0;
 
-            void setSize(int width, int height);
             inline int getHeight(){return m_height;}
             inline int getWidth(){return m_width;}
 
