@@ -3,6 +3,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(
 	CastEngine SHARED 
+	src/Cast/Core/EngineCore.cpp
 	src/Cast/Core/EngineCore.h
 	src/Cast/Core/Debug/Logger.h
 	src/Cast/Core/Debug/LoggingHeaderOnly.h
@@ -12,6 +13,8 @@ add_library(
 	src/Cast/Core/Rendering/Renderer.h
 	src/Cast/Core/Rendering/Window.cpp
 	src/Cast/Core/Rendering/Window.h
+	src/Cast/Platform/OpenGL/OpenGLWindow.cpp
+	src/Cast/Platform/OpenGL/OpenGLWindow.h
 	)
 
 

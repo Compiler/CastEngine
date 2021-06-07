@@ -72,9 +72,10 @@ void assert_log(bool exp, const char* file, int line, const S& format, Args&&...
 //#define FULL_PATHS
 #define CAST_LOG(format, ...) log(fmt::emphasis::bold | fg(fmt::color::mint_cream), __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
 #define CAST_DEBUG(format, ...) log(fmt::emphasis::bold | fg(fmt::color::lime_green), __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
-#define CAST_WARNING(format, ...) log(fmt::emphasis::bold | fg(fmt::color::yellow), __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
+#define CAST_WARN(format, ...) log(fmt::emphasis::bold | fg(fmt::color::yellow), __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
 #define CAST_ERROR(format, ...) log(fmt::emphasis::bold | fg(fmt::color::red), __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
-#define CAST_FATAL(exp, format, ...) assert_log(exp, __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
+#define CAST_FATAL(format, ...) assert_log(false, __FILENAME__, __LINE__, FMT_STRING(format)  __VA_OPT__(,) __VA_ARGS__)
+#define CAST_ASSERT(exp) assert(exp)
 
 
 #define NA_CAST_LOG(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::mint_cream), "{}:" STR(__LINE__) " " __VA_ARGS__ "\n", __FILENAME__)

@@ -6,13 +6,16 @@
 namespace Cast{
 
     class Window{
-
+        protected:
+            int m_width; 
+            int m_height;
+            const char* m_windowName;
         public:
-            Window(int width, int height);
-            void destroy();
+            Window(int width, int height, const char* windowName);
+            virtual void update() = 0;
+            virtual void destroy() = 0;
+            virtual bool shouldClose() = 0;
 
-        private:
-            GLFWwindow* _window;
 
 
     };
