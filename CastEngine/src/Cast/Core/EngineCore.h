@@ -12,6 +12,7 @@ namespace Cast{
             void update();
             void render();
             void destroy();
+            inline bool closeRequested(){return _window->shouldClose();}
 
     };
 

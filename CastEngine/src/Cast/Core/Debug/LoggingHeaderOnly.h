@@ -41,14 +41,14 @@
 /*  TODO
   - colored intermediate text
 */
-void vlog(const fmt::text_style style, const char* file, int line, fmt::string_view format, fmt::format_args args) {
+inline void vlog(const fmt::text_style style, const char* file, int line, fmt::string_view format, fmt::format_args args) {
     auto thing = fmt::emphasis::bold | fg(fmt::color::lime_green);
     fmt::print(style, "{}:{} : ", file, line);
     fmt::vprint(format, args);
     fmt::print("\n");
 }
 
-void f_vlog(const fmt::text_style style, const char* file, int line, fmt::string_view format, fmt::format_args args) {
+inline void f_vlog(const fmt::text_style style, const char* file, int line, fmt::string_view format, fmt::format_args args) {
     auto thing = fmt::emphasis::bold | fg(fmt::color::lime_green);
     fmt::print(fmt::emphasis::italic | fg(fmt::color::indian_red), "!FATAL!\t");
     fmt::print(style, "{}:{} : ", file, line);
@@ -58,12 +58,12 @@ void f_vlog(const fmt::text_style style, const char* file, int line, fmt::string
 
 
 template <typename S, typename... Args>
-void log(const fmt::text_style style, const char* file, int line, const S& format, Args&&... args) {
+inline void log(const fmt::text_style style, const char* file, int line, const S& format, Args&&... args) {
   vlog(style, file, line, format, fmt::make_args_checked<Args...>(format, args...));
 }
 
 template <typename S, typename... Args>
-void assert_log(bool exp, const char* file, int line, const S& format, Args&&... args) {
+inline void assert_log(bool exp, const char* file, int line, const S& format, Args&&... args) {
   f_vlog(fmt::emphasis::bold | fg(fmt::color::red), file, line, format, fmt::make_args_checked<Args...>(format, args...));
   assert(exp);
 }

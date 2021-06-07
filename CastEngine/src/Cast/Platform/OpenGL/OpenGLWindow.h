@@ -1,6 +1,7 @@
 #pragma once
 #include <Cast/Core/Rendering/Window.h>
 #include <Cast/Core/Debug/LoggingHeaderOnly.h>
+#include <Cast/Platform/OpenGL/OpenGLCallbacks.h>
 namespace Cast{
 
     class OpenGLWindow : public Cast::Window{
