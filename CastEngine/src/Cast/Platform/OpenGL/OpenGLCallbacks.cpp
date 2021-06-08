@@ -8,6 +8,7 @@ namespace Cast{
 
     void OpenGLCallbacks::windowResizeCallback(GLFWwindow* window, int width, int height){
         Cast::OpenGLWindow* myWindow = reinterpret_cast<Cast::OpenGLWindow*>(glfwGetWindowUserPointer(window));
+        glViewport(0, 0, width, height);
         myWindow->setSize(width, height);
     }
 

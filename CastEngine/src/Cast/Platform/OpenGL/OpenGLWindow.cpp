@@ -10,7 +10,7 @@ namespace Cast{
         glfwWindowHint(GLFW_SAMPLES, 4);
         glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
         _window = glfwCreateWindow(width, height, windowName, 0, 0);
-
+        glfwMakeContextCurrent(_window);
         glfwSetWindowUserPointer(_window, reinterpret_cast<void*>(this));
 
         glfwSetFramebufferSizeCallback(_window, OpenGLCallbacks::framebufferSizeCallback);  

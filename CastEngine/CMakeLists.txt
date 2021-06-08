@@ -16,6 +16,8 @@ add_library(
 	src/Cast/Platform/GLFW/GLFWInputKeyStore.h
 	src/Cast/Platform/OpenGL/OpenGLCallbacks.cpp
 	src/Cast/Platform/OpenGL/OpenGLCallbacks.h
+	src/Cast/Platform/OpenGL/OpenGLContext.cpp
+	src/Cast/Platform/OpenGL/OpenGLContext.h
 	src/Cast/Platform/OpenGL/OpenGLWindow.cpp
 	src/Cast/Platform/OpenGL/OpenGLWindow.h
 	)
