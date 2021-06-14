@@ -25,7 +25,7 @@ print(ammend_data)
 cmake_file = open(engine_dir + 'CMakeLists.txt')
 data = cmake_file.read();
 #data = data.replace('add_library([^)]*)', 'add_library(sup)')
-data = re.sub('add_library([^)]*)', ammend_data, data, flags = re.DOTALL)
+data = re.sub('add_library([^)]*)', ammend_data, data, count = 1, flags = re.DOTALL)
 
 cmake_file = open(engine_dir + 'CMakeLists.txt', 'w')
 cmake_file.write(data)

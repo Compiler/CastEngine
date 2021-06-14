@@ -15,6 +15,8 @@ add_library(
 	src/Cast/Core/Rendering/Renderer.h
 	src/Cast/Core/Rendering/Window.cpp
 	src/Cast/Core/Rendering/Window.h
+	src/Cast/Core/Rendering/Shader/ShaderProgram.cpp
+	src/Cast/Core/Rendering/Shader/ShaderProgram.h
 	src/Cast/Platform/GLFW/GLFWInputKeyStore.h
 	src/Cast/Platform/OpenGL/OpenGLCallbacks.cpp
 	src/Cast/Platform/OpenGL/OpenGLCallbacks.h
@@ -22,6 +24,8 @@ add_library(
 	src/Cast/Platform/OpenGL/OpenGLContext.h
 	src/Cast/Platform/OpenGL/OpenGLWindow.cpp
 	src/Cast/Platform/OpenGL/OpenGLWindow.h
+	src/Cast/Platform/Windows/FileLoaderFactory.cpp
+	src/Cast/Platform/Windows/FileLoaderFactory.h
 	)
 
 
@@ -51,6 +55,7 @@ target_include_directories(CastEngine PUBLIC "${EXTERN_DIR}/glm")
 target_include_directories(CastEngine PUBLIC "${EXTERN_DIR}/stbimage")
 target_include_directories(CastEngine PUBLIC "${VULKAN_INCLUDE}")
 target_include_directories(CastEngine PUBLIC "${FMT_ROOT}/include")
+target_include_directories(CastEngine PUBLIC "${GLAD_INC}")
 
 target_link_directories(CastEngine PUBLIC "${GLFW_ABS_LIB}")
 target_link_directories(CastEngine PUBLIC "${VULKAN_LIB}")
@@ -59,6 +64,9 @@ target_link_libraries(CastEngine glfw3dll)
 target_link_libraries(CastEngine vulkan-1)
 target_link_libraries(CastEngine pthread)
 target_link_libraries(CastEngine fmt::fmt-header-only)
+target_link_libraries(CastEngine glad)
 
 find_package(OpenGL REQUIRED)
 target_link_libraries(CastEngine OpenGL::GL)
+
+

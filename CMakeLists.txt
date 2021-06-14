@@ -18,6 +18,9 @@ set(FMT_ROOT extern/fmt)
 
 set(EXTERN_DIR "${CMAKE_SOURCE_DIR}/extern")
 
+set(GLAD_ROOT "${EXTERN_DIR}/glad")
+set(GLAD_INC "${EXTERN_DIR}/glad/include")
+
 #cmake -G "MinGW Makefiles" ..
 #target_include_directories(src PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}src/")
 set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}")
@@ -28,3 +31,4 @@ message("${GLFW_ABS_INCLUDE}")
 add_subdirectory(CastEngine) #this needs to be first
 add_subdirectory(CastDriver)
 add_subdirectory(extern/fmt EXCLUDE_FROM_ALL)
+add_subdirectory(extern/glad)
