@@ -1,13 +1,15 @@
 #pragma once
-
+#include <Cast/Core/Rendering/Window.h>
 
 namespace Cast{
+    class Window;
     /*
         RenderContext is an abstract class that allows for switching between different rendering contexts(opengl, vulkan, directx)
     */
     class RenderContext{
 
-
+        protected:
+            Cast::Window* m_window;
         
         public:
             enum class API{
@@ -24,6 +26,7 @@ namespace Cast{
             virtual void clearDepthBit() = 0;
             virtual void clearColorBit() = 0;
 
+            inline Window* getWindow(){return m_window;}
 
         private:
             static API _contextAPI;

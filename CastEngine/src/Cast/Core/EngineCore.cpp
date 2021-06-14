@@ -6,7 +6,6 @@ namespace Cast{
     void EngineCore::init(){
         switch(RenderContext::getAPI()){
             case RenderContext::API::OpenGL:{
-                _window = new OpenGLWindow(1920, 1080, "Cast Engine");
                 _renderContext = new OpenGLContext();
                 CAST_DEBUG("Created OpenGL Context");
                 break;
@@ -20,7 +19,7 @@ namespace Cast{
 
 
 
-        _window->update();
+        _renderContext->getWindow()->update();
 
 
     }

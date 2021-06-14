@@ -35,6 +35,10 @@ namespace Cast{
         glfwSetWindowSize(_window, m_width, m_height);
     }
 
+    void OpenGLWindow::setPosition(int x, int y){
+        glfwSetWindowPos(_window, x, y);
+    }
+
 
 
 }

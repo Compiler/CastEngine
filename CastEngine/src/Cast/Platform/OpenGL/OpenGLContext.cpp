@@ -2,6 +2,9 @@
 
 namespace Cast{
 
+    OpenGLContext::OpenGLContext(){
+        m_window = new OpenGLWindow(1920, 1080, "Cast Engine");
+    }
     void OpenGLContext::clearColor(float r, float g, float b, float a){
         glClearColor(r,g,b,a);
     }

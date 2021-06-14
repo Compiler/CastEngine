@@ -13,6 +13,7 @@ namespace Cast{
             void update();
             void destroy();
             void setSize(int width, int height);
+            void setPosition(int x, int y);
 
         
             inline bool shouldClose(){return glfwWindowShouldClose(_window);}
