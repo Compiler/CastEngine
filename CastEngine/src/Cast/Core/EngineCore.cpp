@@ -17,11 +17,8 @@ namespace Cast{
 
     void EngineCore::update(){
 
-
-
+        InputManager::clear();
         _renderContext->getWindow()->update();
-
-
     }
 
     void EngineCore::render(){
@@ -29,6 +26,7 @@ namespace Cast{
         _renderContext->clearColor(1.0, 0.0, 0.0, 1.0);
         _renderContext->clearColorBit();
 
+        _renderContext->getWindow()->render();
     }
 
     void EngineCore::destroy(){

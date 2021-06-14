@@ -15,12 +15,17 @@ namespace Cast{
 
         glfwSetFramebufferSizeCallback(_window, OpenGLCallbacks::framebufferSizeCallback);  
         glfwSetWindowSizeCallback(_window, OpenGLCallbacks::windowResizeCallback);
+        glfwSetKeyCallback(_window, OpenGLCallbacks::keyCallback);
+        glfwSetMouseButtonCallback(_window, OpenGLCallbacks::mouseClickCallback);
+        glfwSetCursorPosCallback(_window, OpenGLCallbacks::cursorPositionCallback);
     }
 
 
     void OpenGLWindow::update(){
-        glfwSwapBuffers(_window);
         glfwPollEvents();    
+    }
+    void OpenGLWindow::render(){
+        glfwSwapBuffers(_window);
     }
     void OpenGLWindow::destroy(){
         CAST_WARN("Destroying OpenGLWindow");

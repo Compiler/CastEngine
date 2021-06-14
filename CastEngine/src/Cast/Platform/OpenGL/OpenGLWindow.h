@@ -11,6 +11,7 @@ namespace Cast{
         public:
             OpenGLWindow(int width, int height, const char* windowName);
             void update();
+            void render();
             void destroy();
             void setSize(int width, int height);
             void setPosition(int x, int y);

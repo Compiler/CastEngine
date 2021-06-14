@@ -1,6 +1,7 @@
 #pragma once
 #include <Cast/Core/Debug/LoggingHeaderOnly.h>
 #include <Cast/Platform/OpenGL/OpenGLContext.h>
+#include <Cast/Core/Input/InputManager.h>
 namespace Cast{
 
     class EngineCore{

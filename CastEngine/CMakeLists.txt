@@ -8,6 +8,8 @@ add_library(
 	src/Cast/Core/Debug/Logger.h
 	src/Cast/Core/Debug/LoggingHeaderOnly.h
 	src/Cast/Core/Debug/LoggingUserFormatter.h
+	src/Cast/Core/Input/InputManager.cpp
+	src/Cast/Core/Input/InputManager.h
 	src/Cast/Core/Rendering/RenderContext.cpp
 	src/Cast/Core/Rendering/RenderContext.h
 	src/Cast/Core/Rendering/Renderer.h
