@@ -64,7 +64,6 @@ namespace Cast{
 
     void ShaderProgram::uniform_set1Integer(const char* name, int32_t value, bool print){
         int id = _check_uniform_(name, print);
-		//CAST_LOG("setting uniform '" << name << "' to value " << value << " at uniform id " << id);
         glUniform1i(id, value);
         GLenum error = glGetError();
 		if(error != GL_NO_ERROR){
