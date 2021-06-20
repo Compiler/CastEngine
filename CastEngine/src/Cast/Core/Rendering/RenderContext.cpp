@@ -7,6 +7,6 @@ namespace Cast{
     void RenderContext::setAPI(RenderContext::API newAPI){
         this->_contextAPI = newAPI;
     }
-    RenderContext::API RenderContext::getAPI(){return _contextAPI;}
+    RenderContext::API RenderContext::GetAPI(){return _contextAPI;}
 
 }

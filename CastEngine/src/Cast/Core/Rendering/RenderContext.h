@@ -20,7 +20,7 @@ namespace Cast{
             };
 
             void setAPI(API newAPI);
-            static API getAPI();
+            static API GetAPI();
 
             virtual void clearColor(float r, float g, float b, float a) = 0;
             virtual void clearDepthBit() = 0;

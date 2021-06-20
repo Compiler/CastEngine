@@ -4,7 +4,7 @@ namespace Cast{
 
 
     void EngineCore::init(){
-        switch(RenderContext::getAPI()){
+        switch(RenderContext::GetAPI()){
             case RenderContext::API::OpenGL:{
                 _renderContext = new OpenGLContext();
                 CAST_DEBUG("Created OpenGL Context");

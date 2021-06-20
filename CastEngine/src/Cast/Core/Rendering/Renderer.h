@@ -7,8 +7,9 @@ namespace Cast{
 
         public:
             static void Create();
+            
             static void Destroy();
-            static RenderContext::API getAPI(){return RenderContext::getAPI();}
+            static RenderContext::API GetAPI(){return RenderContext::GetAPI();}
 
     };
 
