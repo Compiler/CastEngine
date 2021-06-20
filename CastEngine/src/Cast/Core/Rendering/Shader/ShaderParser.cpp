@@ -1,6 +1,6 @@
 #include "ShaderParser.h"
 
-namespace Czast{
+namespace Cast{
 
     const char* ShaderParser::getShaderSource(const char* filePath){
         std::vector<const char*> includes{};
@@ -14,7 +14,7 @@ namespace Czast{
             CAST_LOG("Trying to append '{}'", include);
 
 		    std::string appendedShaderSrc;
-            std::string appendFileLocation = GIP_INTERNAL_SHADER("") + include;
+            std::string appendFileLocation = CAST_INTERNAL_SHADER("") + include;
 		    FileLoaderFactory::loadTextFromFile(appendFileLocation.c_str(), appendedShaderSrc);
 
             shaderSrc = shaderSrc.substr(0, location) + appendedShaderSrc + shaderSrc.substr(end+1);
