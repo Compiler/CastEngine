@@ -1,13 +1,14 @@
-#include "ShaderProgram.h"
+#include "OpenGLShaderProgram.h"
 
 
 namespace Cast{
 
 
-    uint32_t ShaderProgram::_loadShader(const char* fileName, int type){
+    uint32_t OpenGLShaderProgram::_loadShader(const char* fileName, int type){
         uint32_t shaderID;
-
+		CAST_LOG("Sending to parser");
 		const char* shaderSrcChar = ShaderParser::getShaderSource(fileName);
+		CAST_LOG("Done parsing");
         shaderID = glCreateShader(type);
 		glShaderSource(shaderID, 1, &shaderSrcChar, NULL);
 		glCompileShader(shaderID);
@@ -32,7 +33,8 @@ namespace Cast{
 
     }
 
-    void ShaderProgram::loadShader(const char* vertexFile, const char* fragmentFile){
+    void OpenGLShaderProgram::loadShader(const char* vertexFile, const char* fragmentFile){
+		CAST_LOG("Loading shaders: {}, {}", vertexFile, fragmentFile);
         uint32_t vid = _loadShader(vertexFile, SHADER_TYPE_VERTEX);
         uint32_t fid = _loadShader(fragmentFile, SHADER_TYPE_FRAGMENT);
 
@@ -60,7 +62,7 @@ namespace Cast{
     }
 
 
-    void ShaderProgram::uniform_set1Integer(const char* name, int32_t value, bool print){
+    void OpenGLShaderProgram::uniform_set1Integer(const char* name, int32_t value, bool print){
         int id = _check_uniform_(name, print);
         glUniform1i(id, value);
         GLenum error = glGetError();
@@ -70,7 +72,7 @@ namespace Cast{
         
     }
 
-    void ShaderProgram::uniform_set1Float(const char* name, float value){
+    void OpenGLShaderProgram::uniform_set1Float(const char* name, float value){
   		int id = _check_uniform_(name, true);
         glUniform1fv(id, 1, &value);
         GLenum error = glGetError();
@@ -80,7 +82,7 @@ namespace Cast{
 
 	}
 
-	void ShaderProgram::uniform_set1Mat4(const char* name, const float* value){
+	void OpenGLShaderProgram::uniform_set1Mat4(const char* name, const float* value){
   		int id = _check_uniform_(name, false);
         glUniformMatrix4fv(id, 1, GL_FALSE, value);
         GLenum error = glGetError();

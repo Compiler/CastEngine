@@ -5,6 +5,7 @@ add_library(
 	CastEngine SHARED 
 	src/Cast/Core/EngineCore.cpp
 	src/Cast/Core/EngineCore.h
+	src/Cast/Core/Components/Transform.h
 	src/Cast/Core/Debug/Logger.h
 	src/Cast/Core/Debug/LoggingHeaderOnly.h
 	src/Cast/Core/Debug/LoggingUserFormatter.h
@@ -15,10 +16,12 @@ add_library(
 	src/Cast/Core/Rendering/Renderer.h
 	src/Cast/Core/Rendering/Window.cpp
 	src/Cast/Core/Rendering/Window.h
+	src/Cast/Core/Rendering/Shader/OpenGLShaderProgram.cpp
+	src/Cast/Core/Rendering/Shader/OpenGLShaderProgram.h
 	src/Cast/Core/Rendering/Shader/ShaderParser.cpp
 	src/Cast/Core/Rendering/Shader/ShaderParser.h
-	src/Cast/Core/Rendering/Shader/ShaderProgram.cpp
-	src/Cast/Core/Rendering/Shader/ShaderProgram.h
+	src/Cast/Core/Utils/DebugScene.cpp
+	src/Cast/Core/Utils/DebugScene.h
 	src/Cast/Core/Utils/Files/FileLoaderFactory.cpp
 	src/Cast/Core/Utils/Files/FileLoaderFactory.h
 	src/Cast/Platform/GLFW/GLFWInputKeyStore.h

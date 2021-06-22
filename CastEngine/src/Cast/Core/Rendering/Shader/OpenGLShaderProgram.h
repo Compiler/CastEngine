@@ -1,10 +1,9 @@
 #pragma once
+#include <glad/glad.h>
 #include <stdint.h>
 #include <string>
-#include <cassert>
 #include <Cast/Core/Debug/LoggingHeaderOnly.h>
 #include <Cast/Core/Rendering/Shader/ShaderParser.h>//temporary
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 
@@ -13,9 +12,13 @@
 #define SHADER_TYPE_GEOMETRY    (int) 0x8DD9
 #define SHADER_TYPE_TESSELATION (uint8_t)GL_arb_tesselation_shader
 
+#ifdef CAST_DEBUG_MODE
+#define CAST_CHECK_CALL(name, ...) _check_uniform_(name); 
+#endif
+
 namespace Cast{
 
-    class ShaderProgram{
+    class OpenGLShaderProgram{
         
         private:
             uint32_t _loadShader(const char* fileName, int type);
@@ -29,7 +32,7 @@ namespace Cast{
                 return uniformID;
             }
         public:
-            ShaderProgram() = default;
+            OpenGLShaderProgram() = default;
             void loadShader(const char* vertexFile, const char* fragFile);
             void loadShader(const char* vertexFile, const char* fragFile, const char* geomFile);
 

@@ -3,8 +3,8 @@
 namespace Cast{
 
     const char* ShaderParser::getShaderSource(const char* filePath){
-        std::vector<const char*> includes{};
 		std::string shaderSrc;
+        CAST_LOG("Parsing: {}", filePath);
 		FileLoaderFactory::loadTextFromFile(filePath, shaderSrc);
         std::size_t location = shaderSrc.find("#include");
         while(location != std::string::npos){

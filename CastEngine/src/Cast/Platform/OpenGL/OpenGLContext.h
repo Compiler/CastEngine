@@ -1,4 +1,5 @@
 #pragma once
+#include <glad/glad.h>
 #include <Cast/Core/Rendering/RenderContext.h>
 #include <Cast/Platform/OpenGL/OpenGLWindow.h>
 #include <GLFW/glfw3.h>

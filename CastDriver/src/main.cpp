@@ -4,13 +4,13 @@
 int main(){
     CAST_DEBUG("Engine starting");
     Cast::EngineCore core_engine{};
-    core_engine.init();
+    core_engine.load();
     while(!core_engine.closeRequested()){
         core_engine.update();
         core_engine.render();
     }
     CAST_WARN("Closing engine");
-    core_engine.destroy();
+    core_engine.unload();
 
     return 0;
 
