@@ -1,8 +1,9 @@
 #pragma once
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <Cast/Core/Rendering/RenderContext.h>
 #include <Cast/Platform/OpenGL/OpenGLWindow.h>
-#include <GLFW/glfw3.h>
+
 namespace Cast{
 
     class OpenGLContext : public Cast::RenderContext{

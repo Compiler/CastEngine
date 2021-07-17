@@ -51,6 +51,8 @@ add_custom_command(TARGET CastEngine PRE_BUILD
 
 
 target_compile_definitions(CastEngine PUBLIC CAST_DEBUG_MODE=1)
+#target_compile_definitions(CastEngine PUBLIC GLFW_INCLUDE_NONE)
+ 
 target_compile_definitions(CastEngine PUBLIC CAST_ENGINE_NAME=CastEngine)
 
 target_include_directories(CastEngine PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
@@ -62,6 +64,8 @@ target_include_directories(CastEngine PUBLIC "${VULKAN_INCLUDE}")
 target_include_directories(CastEngine PUBLIC "${FMT_ROOT}/include")
 target_include_directories(CastEngine PUBLIC "${GLAD_INC}")
 
+find_package(OpenGL REQUIRED)
+target_link_libraries(CastEngine OpenGL::GL)
 target_link_directories(CastEngine PUBLIC "${GLFW_ABS_LIB}")
 target_link_directories(CastEngine PUBLIC "${VULKAN_LIB}")
 target_link_directories(CastEngine PUBLIC "${FMT_ROOT}/")
@@ -71,7 +75,5 @@ target_link_libraries(CastEngine pthread)
 target_link_libraries(CastEngine fmt::fmt-header-only)
 target_link_libraries(CastEngine glad)
 
-find_package(OpenGL REQUIRED)
-target_link_libraries(CastEngine OpenGL::GL)
 
 

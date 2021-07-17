@@ -1,10 +1,10 @@
 #pragma once
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <stdint.h>
 #include <string>
 #include <Cast/Core/Debug/LoggingHeaderOnly.h>
-#include <Cast/Core/Rendering/Shader/ShaderParser.h>//temporary
-#include <GLFW/glfw3.h>
+#include <Cast/Core/Rendering/Shader/ShaderParser.h>
 
 
 #define SHADER_TYPE_VERTEX      (int) 0x8B31

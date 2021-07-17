@@ -4,6 +4,7 @@ namespace Cast{
 
 
     void EngineCore::load(){
+        CAST_DEBUG("Loading contexts");
         switch(RenderContext::GetAPI()){
             case RenderContext::API::OpenGL:{
                 _renderContext = new OpenGLContext();
@@ -12,6 +13,7 @@ namespace Cast{
             };
             default: CAST_FATAL("Window type not supported");
         }
+        CAST_DEBUG("Loading scene");
         _scene.load();
     }
 
