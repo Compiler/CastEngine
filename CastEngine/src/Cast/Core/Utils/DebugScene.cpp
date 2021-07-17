@@ -4,7 +4,7 @@ namespace Cast{
 
     void DebugScene::load(){
         //_shader.loadShader(CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("RayMarching_orig.glsl"));
-        //_shader.loadShader(CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("RayMarching_incl.glsl"));
+        _shader.loadShader(CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("RayMarching_incl.glsl"));
         CAST_LOG("Loaded shader");
         float ext = 0.95f;
         float vertices[] = {
@@ -18,6 +18,7 @@ namespace Cast{
         };  
         unsigned int VBO;
         unsigned int VAO;
+        CAST_LOG("Gen vertex");
         glGenVertexArrays(1, &VAO);  
         glBindVertexArray(VAO);
 
