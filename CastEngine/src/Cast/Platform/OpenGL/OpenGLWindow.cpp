@@ -32,6 +32,10 @@ namespace Cast{
         glfwSetCursorPosCallback(_window, OpenGLCallbacks::cursorPositionCallback);
         CAST_DEBUG("Created OpenGL Window.");
 
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
+            CAST_FATAL("Failed to initialize GLAD");
+        }   
+
     }
 
 

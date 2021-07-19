@@ -4,7 +4,7 @@ namespace Cast{
 
     void DebugScene::load(){
         //_shader.loadShader(CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("RayMarching_orig.glsl"));
-        //_shader.loadShader(CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("RayMarching_incl.glsl"));
+        _shader.loadShader(CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("RayMarching_incl.glsl"));
         CAST_LOG("Loaded shader");
         float ext = 0.95f;
         float vertices[] = {
@@ -38,8 +38,8 @@ namespace Cast{
     }
     void DebugScene::update(){}
     void DebugScene::render(){
-        //_shader.use();
-        //_shader.uniform_set1Float("u_time", glfwGetTime());
+        _shader.use();
+        _shader.uniform_set1Float("u_time", glfwGetTime());
         glDrawArrays(GL_TRIANGLES, 0, 6);
     }
     void DebugScene::unload(){}

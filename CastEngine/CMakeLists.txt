@@ -64,16 +64,14 @@ target_include_directories(CastEngine PUBLIC "${VULKAN_INCLUDE}")
 target_include_directories(CastEngine PUBLIC "${FMT_ROOT}/include")
 target_include_directories(CastEngine PUBLIC "${GLAD_INC}")
 
-find_package(OpenGL REQUIRED)
-target_link_libraries(CastEngine OpenGL::GL)
 target_link_directories(CastEngine PUBLIC "${GLFW_ABS_LIB}")
 target_link_directories(CastEngine PUBLIC "${VULKAN_LIB}")
-target_link_directories(CastEngine PUBLIC "${FMT_ROOT}/")
+
+target_link_libraries(CastEngine glad)
 target_link_libraries(CastEngine glfw3dll)
 target_link_libraries(CastEngine vulkan-1)
 target_link_libraries(CastEngine pthread)
 target_link_libraries(CastEngine fmt::fmt-header-only)
-target_link_libraries(CastEngine glad)
 
 
 
