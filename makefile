@@ -1,24 +1,47 @@
-WIN_BUILD_SCRIPTS_LOC = build_scripts_windows\\
+BUILD_SCRIPTS_ROOT = build_scripts
+
+WIN_BUILD_SCRIPTS_LOC = $(BUILD_SCRIPTS_ROOT)\\build_scripts_windows\\
+LINUX_BUILD_SCRIPTS_LOC = $(BUILD_SCRIPTS_ROOT)/build_scripts_linux/
+
+BUILD_LOC = $(WIN_BUILD_SCRIPTS_LOC) #defaults to windows
+EXTENSION = .bat 
+PRE_BUILD = 
+POST_BUILD = 
+
+ifeq ($(OS),Windows_NT)
+	BUILD_LOC = $(WIN_BUILD_SCRIPTS_LOC)
+	EXTENSION = .bat
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+		BUILD_LOC = $(LINUX_BUILD_SCRIPTS_LOC)
+		EXTENSION = .sh
+		PRE_BUILD = chmod -R 777 build_scripts/* ;
+		POST_BUILD =  chmod -R 777 build ;
+	endif
+endif
 
 all: main
 
 main:
-	$(WIN_BUILD_SCRIPTS_LOC)build.bat
+	$(PRE_BUILD)
+	$(BUILD_LOC)build$(EXTENSION)
+	$(POST_BUILD)
 
-launch:#default to windows
-	$(WIN_BUILD_SCRIPTS_LOC)build_run.bat
 
-run:#default to windows
-	$(WIN_BUILD_SCRIPTS_LOC)run.bat
+run:
+	$(PRE_BUILD)
+	$(POST_BUILD)
+	$(BUILD_LOC)run$(EXTENSION)
 
-clean:#default to windows
-	$(WIN_BUILD_SCRIPTS_LOC)clean.bat
+clean:
+	$(PRE_BUILD)
+	$(POST_BUILD)
+	$(BUILD_LOC)clean$(EXTENSION)
 
-win_launch:
-	$(WIN_BUILD_SCRIPTS_LOC)build_run.bat
 
-win_run:
-	$(WIN_BUILD_SCRIPTS_LOC)run.bat
-
-win_clean:
-	$(WIN_BUILD_SCRIPTS_LOC)clean.bat
+launch:
+	$(PRE_BUILD)
+	$(BUILD_LOC)build$(EXTENSION)
+	$(POST_BUILD)
+	$(BUILD_LOC)run$(EXTENSION)

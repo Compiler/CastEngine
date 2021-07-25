@@ -1,7 +1,7 @@
 import os
 import re
 engine_name = 'CastEngine'
-engine_dir= engine_name + '\\'
+engine_dir= engine_name + '/'
 
 extensions=['.cpp', '.hpp', '.h']
 src_files = []

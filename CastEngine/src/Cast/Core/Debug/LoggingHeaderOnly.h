@@ -7,6 +7,7 @@
 #pragma diag_suppress 2486
 #endif
 #include<stdio.h>
+
 #ifdef CAST_DEBUG_MODE
 //#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 //#define __FILENAME__ strrchr("\\" __FILE__, '\\') + 1
