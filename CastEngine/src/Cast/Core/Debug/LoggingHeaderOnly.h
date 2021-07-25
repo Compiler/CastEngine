@@ -89,17 +89,34 @@ inline void assert_log(bool exp, const char* file, int line, const S& format, Ar
 #define NA_CAST_ERROR_NNL(...) fmt::print(fmt::emphasis::bold | fg(fmt::color::red), "{}:" STR(__LINE__) " " __VA_ARGS__, __FILENAME__)
 
 #else
-
+#undef CAST_LOG
 #define CAST_LOG(format, ...) 
+
+#undef CAST_DEBUG
 #define CAST_DEBUG(format, ...) 
+
+#undef CAST_WARN
 #define CAST_WARN(format, ...) 
+
+#undef CAST_ERROR
 #define CAST_ERROR(format, ...) 
+
+#undef CAST_FATAL
 #define CAST_FATAL(format, ...) 
 
+#undef CAST_LOG
 #define CAST_LOG(...) 
+
+#undef CAST_DEBUG
 #define CAST_DEBUG(...) 
+
+#undef CAST_WARN
 #define CAST_WARN(...) 
+
+#undef CAST_ERROR
 #define CAST_ERROR(...) 
+
+#undef CAST_FATAL
 #define CAST_FATAL(...) 
 
 
