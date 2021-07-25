@@ -16,6 +16,10 @@ namespace Cast{
             ext, -ext, 1,1.0f,     1.0f, 0.0f, 1.0f, 1.0f,
             ext, ext, 1, 1.0f,     1.0f, 0.0f, 1.0f, 1.0f
         };  
+        
+        VertexBuffer buffer{vertices};
+        
+        
         unsigned int VBO;
         unsigned int VAO;
 
