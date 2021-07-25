@@ -3,7 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <stdint.h>
 #include <string>
-#include <Cast/Core/Debug/LoggingHeaderOnly.h>
+#include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Rendering/Shader/ShaderParser.h>
 
 

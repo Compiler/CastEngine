@@ -1,5 +1,5 @@
 #pragma once
-#include <Cast/Core/Debug/LoggingHeaderOnly.h>
+#include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Utils/Files/FileLoaderFactory.h>
 #include <vector>
 

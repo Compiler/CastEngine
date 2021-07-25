@@ -3,7 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <string>
 #include <Cast/Core/Rendering/Window.h>
-#include <Cast/Core/Debug/LoggingHeaderOnly.h>
+#include <Cast/Core/Debug/Logger.h>
 #include <Cast/Platform/OpenGL/OpenGLCallbacks.h>
 namespace Cast{
 

@@ -1,5 +1,5 @@
 #pragma once
-#include <Cast/Core/Debug/LoggingHeaderOnly.h>
+#include <Cast/Core/Debug/Logger.h>
 #include <Cast/Platform/OpenGL/OpenGLWindow.h>
 #include <Cast/Platform/GLFW/GLFWInputKeyStore.h>
 #include <Cast/Core/Input/InputManager.h>

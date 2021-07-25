@@ -1,5 +1,5 @@
 #pragma once
-#include <Cast/Core/Debug/LoggingHeaderOnly.h>
+#include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Rendering/RenderContext.h>
 
 namespace Cast{

@@ -1,4 +1,4 @@
-#include <Cast/Core/Debug/LoggingHeaderOnly.h>
+#include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/EngineCore.h>
 
 int main(){

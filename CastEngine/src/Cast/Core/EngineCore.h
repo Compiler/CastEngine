@@ -1,6 +1,6 @@
 #pragma once
 #include <Cast/Platform/OpenGL/Rendering/OpenGLContext.h>
-#include <Cast/Core/Debug/LoggingHeaderOnly.h>
+#include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Input/InputManager.h>
 #include <Cast/Core/Components/Transform.h>
 #include <Cast/Core/Scenes/DebugScene.h>
