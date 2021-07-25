@@ -2,6 +2,8 @@
 
 namespace Cast{
 
-    class VertexArray{};
+    class VertexArray{
+        
+    };
 
 }
