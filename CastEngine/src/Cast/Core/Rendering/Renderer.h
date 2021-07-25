@@ -1,4 +1,5 @@
 #pragma once
+#include <glm/vec3.hpp>
 #include <Cast/Core/Rendering/RenderContext.h>
 
 namespace Cast{
@@ -6,9 +7,7 @@ namespace Cast{
     class Renderer{
 
         public:
-            static void Create();
-            
-            static void Destroy();
+            virtual void DrawTriangle(glm::vec3 vertices[3]) = 0;
             static RenderContext::API GetAPI(){return RenderContext::GetAPI();}
 
     };

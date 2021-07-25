@@ -7,6 +7,7 @@ namespace Cast{
         CAST_DEBUG("Loading contexts");
         switch(RenderContext::GetAPI()){
             case RenderContext::API::OpenGL:{
+                _renderer = new OpenGLRenderer();
                 _renderContext = new OpenGLContext();
                 CAST_DEBUG("Created OpenGL Context");
                 break;
@@ -28,7 +29,7 @@ namespace Cast{
 
         _renderContext->clearColor(1.0, 0.0, 0.0, 1.0);
         _renderContext->clearColorBit();
-
+        
         _scene.render();
         _renderContext->getWindow()->render();
     }

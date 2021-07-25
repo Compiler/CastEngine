@@ -20,17 +20,19 @@ add_library(
 	src/Cast/Core/Rendering/Shader/OpenGLShaderProgram.h
 	src/Cast/Core/Rendering/Shader/ShaderParser.cpp
 	src/Cast/Core/Rendering/Shader/ShaderParser.h
-	src/Cast/Core/Utils/DebugScene.cpp
-	src/Cast/Core/Utils/DebugScene.h
+	src/Cast/Core/Scenes/DebugScene.cpp
+	src/Cast/Core/Scenes/DebugScene.h
 	src/Cast/Core/Utils/Files/FileLoaderFactory.cpp
 	src/Cast/Core/Utils/Files/FileLoaderFactory.h
 	src/Cast/Platform/GLFW/GLFWInputKeyStore.h
 	src/Cast/Platform/OpenGL/OpenGLCallbacks.cpp
 	src/Cast/Platform/OpenGL/OpenGLCallbacks.h
-	src/Cast/Platform/OpenGL/OpenGLContext.cpp
-	src/Cast/Platform/OpenGL/OpenGLContext.h
 	src/Cast/Platform/OpenGL/OpenGLWindow.cpp
 	src/Cast/Platform/OpenGL/OpenGLWindow.h
+	src/Cast/Platform/OpenGL/Rendering/OpenGLContext.cpp
+	src/Cast/Platform/OpenGL/Rendering/OpenGLContext.h
+	src/Cast/Platform/OpenGL/Rendering/OpenGLRenderer.cpp
+	src/Cast/Platform/OpenGL/Rendering/OpenGLRenderer.h
 	)
 
 

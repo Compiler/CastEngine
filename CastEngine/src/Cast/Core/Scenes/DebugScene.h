@@ -1,5 +1,5 @@
 #pragma once
-#include <Cast/Platform/OpenGL/OpenGLContext.h>
+#include <Cast/Platform/OpenGL/Rendering/OpenGLContext.h>
 #include <Cast/Core/Debug/LoggingHeaderOnly.h>
 #include <Cast/Core/Rendering/Shader/OpenGLShaderProgram.h>
 
