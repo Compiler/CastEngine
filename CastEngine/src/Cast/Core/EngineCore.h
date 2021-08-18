@@ -1,10 +1,10 @@
 #pragma once
-#include <Cast/Platform/OpenGL/Rendering/OpenGLContext.h>
+#include <Cast/API/OpenGL/Rendering/OpenGLContext.h>
 #include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Input/InputManager.h>
 #include <Cast/Core/Components/Transform.h>
 #include <Cast/Core/Scenes/DebugScene.h>
-#include <Cast/Platform/OpenGL/Rendering/OpenGLRenderer.h>
+#include <Cast/API/OpenGL/Rendering/OpenGLRenderer.h>
 namespace Cast{
 
     class EngineCore{

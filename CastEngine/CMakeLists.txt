@@ -13,9 +13,6 @@ add_library(
 	src/Cast/Core/Rendering/RenderContext.cpp
 	src/Cast/Core/Rendering/RenderContext.h
 	src/Cast/Core/Rendering/Renderer.h
-	src/Cast/Core/Rendering/VertexArray.h
-	src/Cast/Core/Rendering/VertexBuffer.cpp
-	src/Cast/Core/Rendering/VertexBuffer.h
 	src/Cast/Core/Rendering/Window.cpp
 	src/Cast/Core/Rendering/Window.h
 	src/Cast/Core/Rendering/Shader/OpenGLShaderProgram.cpp
@@ -26,15 +23,19 @@ add_library(
 	src/Cast/Core/Scenes/DebugScene.h
 	src/Cast/Core/Utils/Files/FileLoaderFactory.cpp
 	src/Cast/Core/Utils/Files/FileLoaderFactory.h
-	src/Cast/Platform/GLFW/GLFWInputKeyStore.h
-	src/Cast/Platform/OpenGL/OpenGLCallbacks.cpp
-	src/Cast/Platform/OpenGL/OpenGLCallbacks.h
-	src/Cast/Platform/OpenGL/OpenGLWindow.cpp
-	src/Cast/Platform/OpenGL/OpenGLWindow.h
-	src/Cast/Platform/OpenGL/Rendering/OpenGLContext.cpp
-	src/Cast/Platform/OpenGL/Rendering/OpenGLContext.h
-	src/Cast/Platform/OpenGL/Rendering/OpenGLRenderer.cpp
-	src/Cast/Platform/OpenGL/Rendering/OpenGLRenderer.h
+	src/Cast/API/GLFW/GLFWInputKeyStore.h
+	src/Cast/API/OpenGL/OpenGLCallbacks.cpp
+	src/Cast/API/OpenGL/OpenGLCallbacks.h
+	src/Cast/API/OpenGL/OpenGLWindow.cpp
+	src/Cast/API/OpenGL/OpenGLWindow.h
+	src/Cast/API/OpenGL/Rendering/OpenGLContext.cpp
+	src/Cast/API/OpenGL/Rendering/OpenGLContext.h
+	src/Cast/API/OpenGL/Rendering/OpenGLRenderer.cpp
+	src/Cast/API/OpenGL/Rendering/OpenGLRenderer.h
+	src/Cast/API/OpenGL/Rendering/OpenGLVertexArray.h
+	src/Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.cpp
+	src/Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.h
+	src/Cast/API/Vulkan/Rendering/VulkanContext.h
 	)
 
 

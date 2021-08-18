@@ -2,7 +2,7 @@
 
 namespace Cast{
 
-    class VertexArray{
+    class OpenGLVertexArray{
         private:
             unsigned int _id;
         

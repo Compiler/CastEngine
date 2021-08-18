@@ -17,7 +17,7 @@ namespace Cast{
             ext, ext, 1, 1.0f,     1.0f, 0.0f, 1.0f, 1.0f
         };  
         
-        VertexBuffer buffer{vertices};
+        OpenGLVertexBuffer buffer{vertices};
         
         
         unsigned int VBO;

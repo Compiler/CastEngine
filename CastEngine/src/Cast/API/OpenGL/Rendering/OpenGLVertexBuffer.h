@@ -2,7 +2,7 @@
 #include <memory>
 namespace Cast{
 
-    class VertexBuffer{
+    class OpenGLVertexBuffer{
         private:
             float* _buffer;
         public:

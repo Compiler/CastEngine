@@ -1,5 +1,5 @@
 #pragma once
-#include <Cast/Platform/GLFW/GLFWInputKeyStore.h>
+#include <Cast/API/GLFW/GLFWInputKeyStore.h>
 #include <glm/vec2.hpp>
 #include <vector>
 #include <memory>

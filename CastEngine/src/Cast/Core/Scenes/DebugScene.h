@@ -1,8 +1,8 @@
 #pragma once
-#include <Cast/Platform/OpenGL/Rendering/OpenGLContext.h>
+#include <Cast/API/OpenGL/Rendering/OpenGLContext.h>
 #include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Rendering/Shader/OpenGLShaderProgram.h>
-#include <Cast/Core/Rendering/VertexBuffer.h>
+#include <Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.h>
 namespace Cast{
 
     class DebugScene{

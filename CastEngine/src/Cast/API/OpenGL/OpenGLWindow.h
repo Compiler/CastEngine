@@ -4,7 +4,7 @@
 #include <string>
 #include <Cast/Core/Rendering/Window.h>
 #include <Cast/Core/Debug/Logger.h>
-#include <Cast/Platform/OpenGL/OpenGLCallbacks.h>
+#include <Cast/API/OpenGL/OpenGLCallbacks.h>
 namespace Cast{
 
     class OpenGLWindow : public Cast::Window{

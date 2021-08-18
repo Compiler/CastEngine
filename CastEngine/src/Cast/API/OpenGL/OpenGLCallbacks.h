@@ -1,7 +1,7 @@
 #pragma once
 #include <Cast/Core/Debug/Logger.h>
-#include <Cast/Platform/OpenGL/OpenGLWindow.h>
-#include <Cast/Platform/GLFW/GLFWInputKeyStore.h>
+#include <Cast/API/OpenGL/OpenGLWindow.h>
+#include <Cast/API/GLFW/GLFWInputKeyStore.h>
 #include <Cast/Core/Input/InputManager.h>
 #include <GLFW/glfw3.h>
 
