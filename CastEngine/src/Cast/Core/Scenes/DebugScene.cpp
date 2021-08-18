@@ -17,8 +17,9 @@ namespace Cast{
             ext, ext, 1, 1.0f,     1.0f, 0.0f, 1.0f, 1.0f
         };  
         
-        OpenGLVertexBuffer buffer{vertices};
-        
+        std::vector<float> verts= {1,2};
+        OpenGLVertexBuffer<float> buffer(verts);
+        buffer.init(GL_DYNAMIC_DRAW);
         
         unsigned int VBO;
         unsigned int VAO;

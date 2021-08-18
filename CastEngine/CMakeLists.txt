@@ -3,6 +3,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(
 	CastEngine SHARED 
+	src/Cast/API/GLFW/GLFWInputKeyStore.h
+	src/Cast/API/OpenGL/OpenGLCallbacks.cpp
+	src/Cast/API/OpenGL/OpenGLCallbacks.h
+	src/Cast/API/OpenGL/OpenGLWindow.cpp
+	src/Cast/API/OpenGL/OpenGLWindow.h
+	src/Cast/API/OpenGL/Rendering/OpenGLContext.cpp
+	src/Cast/API/OpenGL/Rendering/OpenGLContext.h
+	src/Cast/API/OpenGL/Rendering/OpenGLRenderer.cpp
+	src/Cast/API/OpenGL/Rendering/OpenGLRenderer.h
+	src/Cast/API/OpenGL/Rendering/OpenGLVertexArray.h
+	src/Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.cpp
+	src/Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.h
+	src/Cast/API/Vulkan/Rendering/VulkanContext.h
 	src/Cast/Core/EngineCore.cpp
 	src/Cast/Core/EngineCore.h
 	src/Cast/Core/Components/Transform.h
@@ -23,19 +36,6 @@ add_library(
 	src/Cast/Core/Scenes/DebugScene.h
 	src/Cast/Core/Utils/Files/FileLoaderFactory.cpp
 	src/Cast/Core/Utils/Files/FileLoaderFactory.h
-	src/Cast/API/GLFW/GLFWInputKeyStore.h
-	src/Cast/API/OpenGL/OpenGLCallbacks.cpp
-	src/Cast/API/OpenGL/OpenGLCallbacks.h
-	src/Cast/API/OpenGL/OpenGLWindow.cpp
-	src/Cast/API/OpenGL/OpenGLWindow.h
-	src/Cast/API/OpenGL/Rendering/OpenGLContext.cpp
-	src/Cast/API/OpenGL/Rendering/OpenGLContext.h
-	src/Cast/API/OpenGL/Rendering/OpenGLRenderer.cpp
-	src/Cast/API/OpenGL/Rendering/OpenGLRenderer.h
-	src/Cast/API/OpenGL/Rendering/OpenGLVertexArray.h
-	src/Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.cpp
-	src/Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.h
-	src/Cast/API/Vulkan/Rendering/VulkanContext.h
 	)
 
 

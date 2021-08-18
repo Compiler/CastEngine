@@ -119,5 +119,8 @@ inline void assert_log(bool exp, const char* file, int line, const S& format, Ar
 #undef CAST_FATAL
 #define CAST_FATAL(...) 
 
+#undef CAST_ASSERT
+#define CAST_ASSERT(...) 
+
 
 #endif
