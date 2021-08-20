@@ -7,21 +7,18 @@ namespace Cast{
         _shader.loadShader(CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("RayMarching_incl.glsl"));
         CAST_LOG("Loaded shader");
         float ext = 0.95f;
-        float vertices[] = {
-            -ext, -ext, 1, 1.0f,    1.0f, 0.0f, 1.0f, 1.0f,    
+
+        std::vector<float>&& vertices= { -ext, -ext, 1, 1.0f,    1.0f, 0.0f, 1.0f, 1.0f,    
             -ext, ext, 1,1.0f,     1.0f, 0.0f, 1.0f, 1.0f,
             ext, ext, 1, 1.0f,     1.0f, 0.0f, 1.0f, 1.0f,
             
             -ext, -ext, 1, 1.0f,    1.0f, 0.0f, 1.0f, 1.0f,    
             ext, -ext, 1,1.0f,     1.0f, 0.0f, 1.0f, 1.0f,
-            ext, ext, 1, 1.0f,     1.0f, 0.0f, 1.0f, 1.0f
-        };  
+            ext, ext, 1, 1.0f,     1.0f, 0.0f, 1.0f, 1.0f};
+        CAST_ERROR("Vertices: {}", vertices.at(0));
+        OpenGLVertexBuffer<float> buffer(std::move(vertices));
+
         
-        std::vector<float> verts= {1,2};
-        OpenGLVertexBuffer<float> buffer(verts);
-        buffer.init(GL_DYNAMIC_DRAW);
-        
-        unsigned int VBO;
         unsigned int VAO;
 
 
@@ -30,9 +27,7 @@ namespace Cast{
         glGenVertexArrays(1, &VAO);  
         glBindVertexArray(VAO);
 
-        glGenBuffers(1, &VBO);  
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);  
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        buffer.init(GL_DYNAMIC_DRAW);
 
 
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);

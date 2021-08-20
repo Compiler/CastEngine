@@ -11,7 +11,7 @@ namespace Cast{
             std::vector<T> _buffer;
             uint32_t _id;
         public:
-            OpenGLVertexBuffer(std::vector<T> buffer):_buffer(std::move(buffer)){
+            OpenGLVertexBuffer(std::vector<T>&& buffer):_buffer(std::move(buffer)){
                 CAST_ASSERT(std::is_fundamental<T>());
             }
 
@@ -20,6 +20,9 @@ namespace Cast{
                 glBindBuffer(GL_ARRAY_BUFFER, this->_id);  
                 CAST_ASSERT(_buffer.size() > 0);
                 glBufferData(GL_ARRAY_BUFFER, sizeof(_buffer[0]) * _buffer.size(), _buffer.data(), drawType);
+            }
+            void setVertices(std::vector<T> buffer){
+                _buffer = std::move(buffer);
             }
 
     };
