@@ -17,14 +17,8 @@ namespace Cast{
             ext, ext, 1, 1.0f,     1.0f, 0.0f, 1.0f, 1.0f};
         OpenGLVertexBuffer<float> buffer(std::move(vertices));
         buffer.init(GL_DYNAMIC_DRAW);
-        Cast::VAOLayout layout;
-        layout.strideCount.push_back(std::pair<int, int>(0, 4));
-        layout.strideCount.push_back(std::pair<int, int>(4, 4));
-        OpenGLVertexArray vao{layout};
-        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-        glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(4 * sizeof(float)));
-        glEnableVertexAttribArray(0);  
-        glEnableVertexAttribArray(1);  
+        Cast::VAOLayout layout{VAOElement{4}, VAOElement{4}};
+        OpenGLVertexArray vao{std::move(layout)};
 
 
         CAST_DEBUG("Finished loading debug scene");

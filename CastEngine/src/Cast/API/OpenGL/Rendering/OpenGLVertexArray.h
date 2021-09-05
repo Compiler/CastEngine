@@ -7,23 +7,38 @@ namespace Cast{
     struct VAOElement{
         int count;
         friend class VAOLayout;
+        friend class OpenGLVertexArray;
         VAOElement(int count): count(count){}
         private:
             int _offset;
 
     };
     struct VAOLayout{
-        std::vector<VAOElement> elements;
-        int stride;
-        void calculate_settings(){
-            int sum = 0;
-            for(auto& element : elements){
-                element._offset = sum;
-                sum += element.count;
+        public:
+            std::vector<VAOElement> elements;
+            int stride;
+            VAOLayout();
+            VAOLayout(std::initializer_list<VAOElement> elements){
+                this->elements = std::vector<VAOElement>(elements.begin(), elements.end());
+                _calculate_settings();
             }
 
-            this->stride = sum;
-        }
+            void setElements(std::initializer_list<VAOElement> elements){
+                this->elements = std::vector<VAOElement>(elements.begin(), elements.end());
+                _calculate_settings();
+            }
+
+
+        private:
+            void _calculate_settings(){
+                int sum = 0;
+                for(auto& element : elements){
+                    element._offset = sum;
+                    sum += element.count;
+                }
+
+                this->stride = sum;
+            }
     };
     class OpenGLVertexArray{
         private:
