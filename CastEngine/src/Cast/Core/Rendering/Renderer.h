@@ -1,13 +1,21 @@
 #pragma once
 #include <glm/vec3.hpp>
+#include <vector>
 #include <Cast/Core/Rendering/RenderContext.h>
 
 namespace Cast{
 
     class Renderer{
-
+        protected:
+            std::vector<float> m_vertices;
+            int m_currentAliveVertices;
+            int m_offsetToAliveVertices;
         public:
-            virtual void DrawTriangle(glm::vec3 vertices[3]) = 0;
+            static int MAX_VERTICES;
+            Renderer():m_currentAliveVertices(0),m_offsetToAliveVertices(0){}
+            virtual void SubmitTriangle(glm::vec3 vertices[3], glm::vec3 color[3]) = 0;
+            virtual void Draw();
+
             static RenderContext::API GetAPI(){return RenderContext::GetAPI();}
 
     };

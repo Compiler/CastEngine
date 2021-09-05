@@ -27,7 +27,7 @@ namespace Cast{
 
     void EngineCore::render(){
 
-        _renderContext->clearColor(1.0, 0.0, 0.0, 1.0);
+        _renderContext->clearColor(0.4, 0.4, 0.4, 1.0);
         _renderContext->clearColorBit();
         
         _scene.render();

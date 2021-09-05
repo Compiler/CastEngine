@@ -17,7 +17,7 @@ namespace Cast{
         public:
             std::vector<VAOElement> elements;
             int stride;
-            VAOLayout();
+            VAOLayout(){}
             VAOLayout(std::initializer_list<VAOElement> elements){
                 this->elements = std::vector<VAOElement>(elements.begin(), elements.end());
                 _calculate_settings();
@@ -46,7 +46,9 @@ namespace Cast{
             VAOLayout _layout;
 
         public:
+            OpenGLVertexArray() = default;
             OpenGLVertexArray(VAOLayout&& layout);
+            void init();
             inline void setLayout(VAOLayout&& layout) noexcept {_layout = std::move(layout);}
 
     };
