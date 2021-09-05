@@ -11,7 +11,7 @@ namespace Cast{
             std::vector<T> _buffer;
             uint32_t _id;
         public:
-            OpenGLVertexBuffer(std::vector<T>&& buffer):_buffer(std::move(buffer)){
+            OpenGLVertexBuffer(std::vector<T>&& buffer) noexcept :_buffer(std::move(buffer)) {
                 CAST_ASSERT(std::is_fundamental<T>());
             }
 

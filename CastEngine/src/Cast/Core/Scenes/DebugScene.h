@@ -3,6 +3,7 @@
 #include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Rendering/Shader/OpenGLShaderProgram.h>
 #include <Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.h>
+#include <Cast/API/OpenGL/Rendering/OpenGLVertexArray.h>
 namespace Cast{
 
     class DebugScene{

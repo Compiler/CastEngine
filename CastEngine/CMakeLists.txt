@@ -12,6 +12,7 @@ add_library(
 	src/Cast/API/OpenGL/Rendering/OpenGLContext.h
 	src/Cast/API/OpenGL/Rendering/OpenGLRenderer.cpp
 	src/Cast/API/OpenGL/Rendering/OpenGLRenderer.h
+	src/Cast/API/OpenGL/Rendering/OpenGLVertexArray.cpp
 	src/Cast/API/OpenGL/Rendering/OpenGLVertexArray.h
 	src/Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.cpp
 	src/Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.h
