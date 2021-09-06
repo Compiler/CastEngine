@@ -26,6 +26,7 @@ add_library(
 	src/Cast/Core/Input/InputManager.h
 	src/Cast/Core/Rendering/RenderContext.cpp
 	src/Cast/Core/Rendering/RenderContext.h
+	src/Cast/Core/Rendering/Renderer.cpp
 	src/Cast/Core/Rendering/Renderer.h
 	src/Cast/Core/Rendering/Window.cpp
 	src/Cast/Core/Rendering/Window.h

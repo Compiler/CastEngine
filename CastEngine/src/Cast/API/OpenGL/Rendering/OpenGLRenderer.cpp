@@ -2,8 +2,7 @@
 
 namespace Cast{
 
-    OpenGLRenderer::OpenGLRenderer():_layout({VAOElement(4), VAOElement(4)}){ 
-        
+    OpenGLRenderer::OpenGLRenderer():Renderer(), _layout({VAOElement(4), VAOElement(4)}){ 
     }
     void OpenGLRenderer::SubmitTriangle(glm::vec3 vertices[3], glm::vec3 color[3]){
         CAST_DEBUG("OPENGL Drawing vertices!");
@@ -37,9 +36,10 @@ namespace Cast{
 
     void OpenGLRenderer::Draw(){
         _buffer.setVertices(std::move(m_vertices));
+        _buffer.init();
         _vao.setLayout(std::move(_layout));
         _vao.init();
-        glDrawArrays(GL_TRIANGLES, 0, m_vertices.size());
+        glDrawArrays(GL_TRIANGLES, 0, 100);
 
         m_vertices.clear();
         
