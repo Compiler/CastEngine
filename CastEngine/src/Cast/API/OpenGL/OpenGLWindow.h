@@ -59,7 +59,7 @@ namespace Cast{
             case GL_DEBUG_SEVERITY_LOW:          info += "Severity: low\n"; break;
             case GL_DEBUG_SEVERITY_NOTIFICATION: info += "Severity: notification\n"; break;
         } 
-        CAST_DEBUG("%s", info.c_str());
+        CAST_DEBUG("{}", info.c_str());
         
     }
 #endif
