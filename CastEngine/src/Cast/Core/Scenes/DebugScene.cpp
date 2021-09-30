@@ -13,7 +13,7 @@ namespace Cast{
         static glm::vec3 verts[3]{glm::vec3(-1, -1, 1), glm::vec3(-1,1,1), glm::vec3(1,1,1)};
         static glm::vec3 cols[3]{glm::vec3(0, 1, 1), glm::vec3(1,1,0), glm::vec3(1,1,1)};
         //glDrawArrays(GL_TRIANGLES, 0, 6);
-        _renderer.SubmitTriangle(verts, cols);
+        _renderer.SubmitTriangle(-0.5, -0.5, 1);
         _renderer.Draw();
     }
     void DebugScene::unload(){}

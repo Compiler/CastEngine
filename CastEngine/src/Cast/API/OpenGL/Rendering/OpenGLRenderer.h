@@ -14,6 +14,7 @@ namespace Cast{
         public:
             OpenGLRenderer();
             void SubmitTriangle(glm::vec3 vertices[3], glm::vec3 color[3]);
+            void SubmitTriangle(float bottomLeftX, float bottomLeftY, float size);
             void Draw();
             ~OpenGLRenderer(){}
     };

@@ -16,6 +16,29 @@ namespace Cast{
 
         
     }
+    void OpenGLRenderer::SubmitTriangle(float bottomLeftX, float bottomLeftY, float size){
+        this->m_vertices.push_back(bottomLeftX);
+        this->m_vertices.push_back(bottomLeftY);
+        this->m_vertices.push_back(1);
+        this->m_vertices.push_back(1);
+        //default color red
+        this->m_vertices.insert(this->m_vertices.end(), {1,0,1,1});
+
+        this->m_vertices.push_back(bottomLeftX + size);
+        this->m_vertices.push_back(bottomLeftY);
+        this->m_vertices.push_back(1);
+        this->m_vertices.push_back(1);
+
+        this->m_vertices.insert(this->m_vertices.end(), {1,0,1,1});
+
+        this->m_vertices.push_back(bottomLeftX + size / 2.0);
+        this->m_vertices.push_back(bottomLeftY + size);
+        this->m_vertices.push_back(1);
+        this->m_vertices.push_back(1);
+        
+        this->m_vertices.insert(this->m_vertices.end(), {1,0,1,1});
+        
+    }
      
     void OpenGLRenderer::SubmitTriangle(glm::vec3 vertices[3], glm::vec3 color[3]){
         this->m_vertices.push_back(vertices[0].x);
