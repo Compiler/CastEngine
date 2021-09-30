@@ -1,11 +1,15 @@
 #pragma once
 #define GLFW_INCLUDE_VULKAN
-#include <Cast/API/OpenGL/Rendering/OpenGLContext.h>
 #include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Input/InputManager.h>
 #include <Cast/Core/Components/Transform.h>
 #include <Cast/Core/Scenes/DebugScene.h>
+
+#include <Cast/API/OpenGL/Rendering/OpenGLContext.h>
 #include <Cast/API/OpenGL/Rendering/OpenGLRenderer.h>
+
+#include <Cast/API/Vulkan/Rendering/VulkanContext.h>
+
 namespace Cast{
 
     class EngineCore{

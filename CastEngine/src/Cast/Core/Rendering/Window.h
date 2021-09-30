@@ -1,4 +1,5 @@
 #pragma once
+#include <GLFW/glfw3.h>
 #include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Rendering/RenderContext.h>
 
@@ -8,6 +9,7 @@ namespace Cast{
         protected:
             int m_width, m_height;
             const char* m_windowName;
+            GLFWwindow* _window;
         public:
             Window(int width, int height, const char* windowName);
             virtual void update() = 0;
@@ -18,6 +20,7 @@ namespace Cast{
             virtual void setPosition(int x, int y) = 0;
 
 
+            inline GLFWwindow* getWindowHandle(){return _window;}
             inline int getHeight(){return m_height;}
             inline int getWidth(){return m_width;}
 

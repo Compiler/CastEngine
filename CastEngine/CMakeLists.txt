@@ -19,9 +19,12 @@ add_library(
 	src/Cast/API/Vulkan/DebugUtils/VkDebugUtils.cpp
 	src/Cast/API/Vulkan/DebugUtils/VkDebugUtils.h
 	src/Cast/API/Vulkan/Rendering/Vertex.h
+	src/Cast/API/Vulkan/Rendering/VulkanContext.cpp
 	src/Cast/API/Vulkan/Rendering/VulkanContext.h
 	src/Cast/API/Vulkan/Rendering/VulkanInstance.cpp
 	src/Cast/API/Vulkan/Rendering/VulkanInstance.h
+	src/Cast/API/Vulkan/Rendering/VulkanWindow.cpp
+	src/Cast/API/Vulkan/Rendering/VulkanWindow.h
 	src/Cast/Core/EngineCore.cpp
 	src/Cast/Core/EngineCore.h
 	src/Cast/Core/Components/Transform.h

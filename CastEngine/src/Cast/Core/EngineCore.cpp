@@ -21,6 +21,12 @@ namespace Cast{
                 CAST_DEBUG("Created OpenGL Context");
                 break;
             };
+            case RenderContext::API::Vulkan:{
+                //_renderer = new VulkanRenderer();
+                _renderContext = new VulkanContext();
+                CAST_DEBUG("Created Vulkan Context");
+                break;
+            };
             default: CAST_FATAL("Window type not supported");
         }
         CAST_DEBUG("Loading scene");

@@ -8,8 +8,6 @@
 namespace Cast{
 
     class OpenGLWindow : public Cast::Window{
-        private:
-            GLFWwindow* _window;
 
         public:
             OpenGLWindow(int width, int height, const char* windowName);
