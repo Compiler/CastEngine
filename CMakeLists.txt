@@ -8,6 +8,7 @@ if(UNIX AND NOT APPLE)
 endif()
 
 
+
 if(LINUX)
     message("LINUX MACHINE")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
@@ -25,6 +26,10 @@ option(BUILD_SHARED_LIBS "" OFF)
 
 set(ROOT "${CMAKE_SOURCE_DIR}")
 set(DEPENDENCIES "${CMAKE_SOURCE_DIR}/Dependencies")
+
+set(VULKAN_ROOT "$ENV{VULKAN_SDK}") #potential to fail on unix
+set(VULKAN_LIB "${VULKAN_ROOT}/Lib/")
+set(VULKAN_INCLUDE "${VULKAN_ROOT}/Include")
 
 set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}")
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}")

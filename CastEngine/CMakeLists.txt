@@ -49,13 +49,16 @@ target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${DEPENDENCIES}/gla
 target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${DEPENDENCIES}/fmt/include")
 target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${DEPENDENCIES}/glm")
 target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${DEPENDENCIES}/stbimage")
+target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${VULKAN_INCLUDE}")
 
 target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${ROOT}/${LIBRARY_PROJECT_NAME}/src/")#link the root
 
 message("\n\n\n=======================\n${ROOT}/${LIBRARY_PROJECT_NAME}/src/")
 
+target_link_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${VULKAN_LIB}")
 
 target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE glad)
 target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE glfw ${GLFW_LIBRARIES})
 target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE fmt)
+target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE vulkan-1)
 

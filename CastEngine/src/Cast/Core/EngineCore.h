@@ -1,4 +1,5 @@
 #pragma once
+#define GLFW_INCLUDE_VULKAN
 #include <Cast/API/OpenGL/Rendering/OpenGLContext.h>
 #include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Input/InputManager.h>

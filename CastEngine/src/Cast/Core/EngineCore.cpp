@@ -4,6 +4,15 @@ namespace Cast{
 
 
     void EngineCore::load(){
+
+
+
+        uint32_t extensionCount = 0;
+        vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+        CAST_DEBUG("Vulkan Extensions supported: {}", extensionCount);
+
+
+
         CAST_DEBUG("Loading contexts");
         switch(RenderContext::GetAPI()){
             case RenderContext::API::OpenGL:{
