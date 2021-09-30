@@ -19,9 +19,19 @@ namespace Cast{
                 None = 0, Color = 1, Depth = 2, Stencil = 3 
             };
 
-            void setAPI(API newAPI);
+            static void setAPI(API newAPI);
             static API GetAPI();
 
+
+            virtual void Load(){
+            }
+            virtual void Update(){
+            }
+            virtual void Render(){
+            }
+            virtual void Unload(){
+            }
+            //TODO Move these functions to the respective renderer
             virtual void clearColor(float r, float g, float b, float a) = 0;
             virtual void clearDepthBit() = 0;
             virtual void clearColorBit() = 0;

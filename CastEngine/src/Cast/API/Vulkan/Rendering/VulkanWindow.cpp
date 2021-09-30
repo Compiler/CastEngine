@@ -6,7 +6,6 @@ namespace Cast{
         CAST_DEBUG("Init glfw");
         glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-        glfwWindowHint(GLFW_SAMPLES, 4);
         CAST_DEBUG("GLFWWindowHints enabled");
         #ifdef CAST_DEBUG_MODE
             CAST_DEBUG("Enabling Debug Context");
@@ -26,14 +25,7 @@ namespace Cast{
 
         
         #ifdef CAST_DEBUG_MODE
-            int flags; glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
-            if (flags & GL_CONTEXT_FLAG_DEBUG_BIT)
-            {
-                glEnable(GL_DEBUG_OUTPUT);
-                glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS); 
-                glDebugMessageCallback(glDebugOutput, nullptr);
-                glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE); 
-            }
+            
         #else
             CAST_LOG("Cast not in debug mode");
         #endif

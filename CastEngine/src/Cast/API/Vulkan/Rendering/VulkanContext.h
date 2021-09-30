@@ -9,6 +9,12 @@ namespace Cast{
             VulkanInstance _vulkanInstance;
         public:
             VulkanContext();
+
+            
+            void Load();
+            void Update();
+            void Render();
+            void Unload();
             void clearColor(float r, float g, float b, float a);
             void clearDepthBit();
             void clearColorBit();

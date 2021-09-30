@@ -5,7 +5,7 @@ Cast::RenderContext::API Cast::RenderContext::_contextAPI = Cast::RenderContext:
 namespace Cast{
 
     void RenderContext::setAPI(RenderContext::API newAPI){
-        this->_contextAPI = newAPI;
+        RenderContext::_contextAPI = newAPI;
     }
     RenderContext::API RenderContext::GetAPI(){return _contextAPI;}
 
