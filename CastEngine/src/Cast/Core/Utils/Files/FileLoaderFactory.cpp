@@ -16,6 +16,18 @@ namespace Cast { namespace FileLoaderFactory{
 		stbi_set_flip_vertically_on_load(true);
 		return stbi_load(name, width, height, numOfColChannels, req_comp);
 	}
+    std::vector<char> readSPV(const char* fileName){
+        std::ifstream file(fileName, std::ios::ate | std::ios::binary);
+        if(!file.is_open()){CAST_ERROR("Couldn't open file '{}'", fileName);}
+        size_t fileSize = (size_t) file.tellg();
+        std::vector<char> buffer(fileSize);
+        file.seekg(0);
+        file.read(buffer.data(), fileSize);
+        file.close();
+
+        return buffer;
+
+    }
 
 	void free(void* data) { stbi_image_free(data); }
 

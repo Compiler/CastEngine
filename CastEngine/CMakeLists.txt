@@ -16,7 +16,12 @@ add_library(
 	src/Cast/API/OpenGL/Rendering/OpenGLVertexArray.h
 	src/Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.cpp
 	src/Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.h
+	src/Cast/API/Vulkan/DebugUtils/VkDebugUtils.cpp
+	src/Cast/API/Vulkan/DebugUtils/VkDebugUtils.h
+	src/Cast/API/Vulkan/Rendering/Vertex.h
 	src/Cast/API/Vulkan/Rendering/VulkanContext.h
+	src/Cast/API/Vulkan/Rendering/VulkanInstance.cpp
+	src/Cast/API/Vulkan/Rendering/VulkanInstance.h
 	src/Cast/Core/EngineCore.cpp
 	src/Cast/Core/EngineCore.h
 	src/Cast/Core/Components/Transform.h
