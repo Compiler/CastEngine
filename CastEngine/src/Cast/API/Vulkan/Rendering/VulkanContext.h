@@ -1,5 +1,4 @@
 #pragma once
-#include <glfw/glfw3.h>
 #include <Cast/Core/Rendering/RenderContext.h>
 #include <Cast/API/Vulkan/Rendering/VulkanInstance.h>
 #include <Cast/API/Vulkan/Rendering/VulkanWindow.h>

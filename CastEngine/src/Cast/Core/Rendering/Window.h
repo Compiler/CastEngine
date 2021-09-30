@@ -1,8 +1,9 @@
 #pragma once
-#include <GLFW/glfw3.h>
+
 #include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Rendering/RenderContext.h>
-
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 namespace Cast{
 
     class Window{
