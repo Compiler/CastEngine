@@ -127,7 +127,7 @@ namespace Cast{
                         return i;
                     }
                 }
-
+                return 4444;
                 CAST_ERROR("failed to find suitable memory type!");
             }
 
@@ -177,14 +177,7 @@ namespace Cast{
 
         public:
             inline static float sz = 0.95;
-            std::vector<Vertex_Tmp> vertices = {
-                {glm::vec4(-sz, -sz, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)},
-                {glm::vec4( sz, -sz, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)},
-                {glm::vec4( sz,  sz, 0.0f, 1.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)}, 
-                {glm::vec4( sz,  sz, 0.0f, 1.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)},
-                {glm::vec4(-sz,  sz, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)},
-                {glm::vec4(-sz, -sz, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)},
-            };
+            static std::vector<Vertex_Tmp> vertices;
 
             void load(GLFWwindow* window);
 

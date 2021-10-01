@@ -1,7 +1,14 @@
 #include "VulkanInstance.h"
 
 namespace Cast{
-
+    std::vector<Vertex_Tmp> VulkanInstance::vertices = {
+        {glm::vec4(-VulkanInstance::sz, -VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)},
+        {glm::vec4( VulkanInstance::sz, -VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)},
+        {glm::vec4( VulkanInstance::sz,  VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)}, 
+        {glm::vec4( VulkanInstance::sz,  VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)},
+        {glm::vec4(-VulkanInstance::sz,  VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)},
+        {glm::vec4(-VulkanInstance::sz, -VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)},
+    };
     void VulkanInstance::load(GLFWwindow* window){
         uint32_t extensionCount = 0;
         _windowRef = window;

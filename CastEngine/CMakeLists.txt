@@ -23,6 +23,8 @@ add_library(
 	src/Cast/API/Vulkan/Rendering/VulkanContext.h
 	src/Cast/API/Vulkan/Rendering/VulkanInstance.cpp
 	src/Cast/API/Vulkan/Rendering/VulkanInstance.h
+	src/Cast/API/Vulkan/Rendering/VulkanRenderer.cpp
+	src/Cast/API/Vulkan/Rendering/VulkanRenderer.h
 	src/Cast/API/Vulkan/Rendering/VulkanWindow.cpp
 	src/Cast/API/Vulkan/Rendering/VulkanWindow.h
 	src/Cast/Core/EngineCore.cpp
