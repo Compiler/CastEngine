@@ -5,6 +5,14 @@ namespace Cast{
     VulkanRenderer::VulkanRenderer(){
 
     }
+
+    void VulkanRenderer::clearColor(float r, float g, float b, float a){
+    }
+
+    void VulkanRenderer::clearDepthBit(){}
+
+    void VulkanRenderer::clearColorBit(){}
+
     void VulkanRenderer::SubmitTriangle(glm::vec3 vertices[3], glm::vec3 color[3]){
         VulkanInstance::vertices.push_back({glm::vec4(vertices[0].x, vertices[0].y, vertices[0].z, 1.0), glm::vec4(color[0].x, color[0].y, color[0].z, 1.0) });
     }
@@ -16,5 +24,12 @@ namespace Cast{
     void VulkanRenderer::Draw(){
         VulkanInstance::vertices.clear();
     }
+
+
+
+    VulkanRenderer::~VulkanRenderer(){
+        CAST_DEBUG("Vulkan Renderer unloading");
+    }
+
 
 }

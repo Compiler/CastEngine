@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include <Cast/Core/Utils/Files/FileLoaderFactory.h>
 #include <Cast/API/Vulkan/DebugUtils/VkDebugUtils.h>
+#include <Cast/API/Vulkan/Rendering/VulkanShaderProgram.h>
 
 #include <vector>
 #include <cstring>
@@ -79,6 +80,7 @@ namespace Cast{
     class VulkanInstance{
 
         private:
+            VulkanShaderProgram _shaderProgram;
             VkInstance _vulkanInstance;
             VkPhysicalDevice _physicalDevice;
             VkDevice _logicalDevice;
@@ -179,7 +181,7 @@ namespace Cast{
             inline static float sz = 0.95;
             static std::vector<Vertex_Tmp> vertices;
 
-            void load(GLFWwindow* window);
+            void load(GLFWwindow* window, VulkanShaderProgram shader = {});
 
             void render();
 

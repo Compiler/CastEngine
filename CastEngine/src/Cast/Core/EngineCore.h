@@ -8,6 +8,7 @@
 #include <Cast/API/OpenGL/Rendering/OpenGLContext.h>
 #include <Cast/API/OpenGL/Rendering/OpenGLRenderer.h>
 
+#include <Cast/API/Vulkan/Rendering/VulkanRenderer.h>
 #include <Cast/API/Vulkan/Rendering/VulkanContext.h>
 
 namespace Cast{

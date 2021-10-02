@@ -4,9 +4,10 @@ namespace Cast{
     
         VulkanShaderProgram::VulkanShaderProgram(VkDevice& logicalDevice, const char* vertFilePath, const char* fragFilePath){
             load(logicalDevice, vertFilePath, fragFilePath);
+            _isSet = true;
         }
 
-        void VulkanShaderProgram::load(VkDevice& logicalDevice, const char* vertFilePath, const char* fragFilePath){
+        PipeLineShaderInfo VulkanShaderProgram::load(VkDevice& logicalDevice, const char* vertFilePath, const char* fragFilePath){
             auto vertShaderCode = Cast::FileLoaderFactory::readSPV(CAST_INTERNAL_SHADER("passthrough_vert.spv"));
             auto fragShaderCode = Cast::FileLoaderFactory::readSPV(CAST_INTERNAL_SHADER("RayMarching_frag.spv"));
 
@@ -25,7 +26,9 @@ namespace Cast{
             fragShaderStageInfo.module = fragShaderModule;
             fragShaderStageInfo.pName = "main";
 
-            VkPipelineShaderStageCreateInfo shaderStages[] = {vertShaderStageInfo, fragShaderStageInfo};
+            VkPipelineShaderStageCreateInfo shaderStages[2] = {vertShaderStageInfo, fragShaderStageInfo};
+            _pipelineData = {shaderStages[0], shaderStages[1], vertShaderModule, fragShaderModule};
+            return _pipelineData;
         }
 
 

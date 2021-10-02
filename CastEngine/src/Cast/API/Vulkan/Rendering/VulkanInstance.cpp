@@ -9,7 +9,8 @@ namespace Cast{
         {glm::vec4(-VulkanInstance::sz,  VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)},
         {glm::vec4(-VulkanInstance::sz, -VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)},
     };
-    void VulkanInstance::load(GLFWwindow* window){
+    void VulkanInstance::load(GLFWwindow* window, VulkanShaderProgram shader){
+        _shaderProgram = shader;
         uint32_t extensionCount = 0;
         _windowRef = window;
         vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
@@ -364,27 +365,17 @@ namespace Cast{
     }
 
     void VulkanInstance::_createGraphicsPipeline(){
-        auto vertShaderCode = Cast::FileLoaderFactory::readSPV(CAST_INTERNAL_SHADER("passthrough_vert.spv"));
-        auto fragShaderCode = Cast::FileLoaderFactory::readSPV(CAST_INTERNAL_SHADER("passthrough_frag.spv"));
-
-        VkShaderModule vertShaderModule = _createShaderModule(vertShaderCode);
-        VkShaderModule fragShaderModule = _createShaderModule(fragShaderCode);
-
-
-        VkPipelineShaderStageCreateInfo vertShaderStageInfo{};
-        vertShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-        vertShaderStageInfo.stage = VK_SHADER_STAGE_VERTEX_BIT;
-        vertShaderStageInfo.module = vertShaderModule;
-        vertShaderStageInfo.pName = "main";
-
-        VkPipelineShaderStageCreateInfo fragShaderStageInfo{};
-        fragShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
-        fragShaderStageInfo.stage = VK_SHADER_STAGE_FRAGMENT_BIT;
-        fragShaderStageInfo.module = fragShaderModule;
-        fragShaderStageInfo.pName = "main";
-
-        VkPipelineShaderStageCreateInfo shaderStages[] = {vertShaderStageInfo, fragShaderStageInfo};
-
+        PipeLineShaderInfo shaderInfo;
+        VkPipelineShaderStageCreateInfo shaderStages[2] = {};
+        if(!_shaderProgram.isSet()){
+            shaderInfo = _shaderProgram.load(_logicalDevice, CAST_INTERNAL_SHADER("passthrough_vert.spv"), CAST_INTERNAL_SHADER("passthrough_frag.spv"));
+            shaderStages[0] = shaderInfo.vert_data;
+            shaderStages[1] = shaderInfo.frag_data;
+        }else{
+            shaderInfo = _shaderProgram.getPipeLineShaderInfo();
+            shaderStages[0] = shaderInfo.vert_data;
+            shaderStages[1] = shaderInfo.frag_data;
+        }
 
         auto bindingDescription = Vertex_Tmp::getBindingDescription();
         auto attributeDescriptions = Vertex_Tmp::getAttributeDescriptions();
@@ -516,8 +507,8 @@ namespace Cast{
             CAST_ERROR("failed to create graphics pipeline!");
         }
 
-        vkDestroyShaderModule(_logicalDevice, vertShaderModule, nullptr);
-        vkDestroyShaderModule(_logicalDevice, fragShaderModule, nullptr);
+        vkDestroyShaderModule(_logicalDevice, shaderInfo.vert_module, nullptr);
+        vkDestroyShaderModule(_logicalDevice, shaderInfo.frag_module, nullptr);
     }
 
     //wraps the code in a vkshadermodule object before being passed to the pipeline

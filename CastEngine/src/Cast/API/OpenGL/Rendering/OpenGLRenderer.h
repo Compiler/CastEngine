@@ -13,13 +13,16 @@ namespace Cast{
 
         public:
             OpenGLRenderer();
+
             void clearColor(float r, float g, float b, float a);
             void clearDepthBit();
             void clearColorBit();
+
             void SubmitTriangle(glm::vec3 vertices[3], glm::vec3 color[3]);
             void SubmitTriangle(float bottomLeftX, float bottomLeftY, float size);
             void Draw();
-            ~OpenGLRenderer(){}
+
+            ~OpenGLRenderer();
     };
 
 }

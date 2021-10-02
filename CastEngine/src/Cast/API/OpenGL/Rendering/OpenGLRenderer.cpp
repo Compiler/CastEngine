@@ -80,4 +80,8 @@ namespace Cast{
 
     }
 
+
+    OpenGLRenderer::~OpenGLRenderer(){}
+
+
 }
