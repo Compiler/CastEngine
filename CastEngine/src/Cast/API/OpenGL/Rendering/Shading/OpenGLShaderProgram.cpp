@@ -62,6 +62,11 @@ namespace Cast{
 		CAST_LOG("Loaded Shader '{}'", shaderFilePath);
 	}
 
+    void OpenGLShaderProgram::loadShader(std::initializer_list<Shader> shaders){
+		for(auto shader : shaders) _shaderIDS.push_back(_loadShader(shader.filePath, shader.type));
+	}
+
+
 	void OpenGLShaderProgram::compile(){
 		_shaderProgram = glCreateProgram();
 		for(auto shaderID : _shaderIDS){
@@ -80,34 +85,6 @@ namespace Cast{
 		}
 	}
 
-
-    void OpenGLShaderProgram::loadShaders(const char* vertexFile, const char* fragmentFile){
-		CAST_LOG("Loading shaders: {}, {}", vertexFile, fragmentFile);
-        uint32_t vid = _loadShader(vertexFile, Shader::ShaderType::Vertex);
-        uint32_t fid = _loadShader(fragmentFile, Shader::ShaderType::Fragment);
-
-
-        _shaderProgram = glCreateProgram();
-
-		glAttachShader(_shaderProgram, vid);
-		glAttachShader(_shaderProgram, fid);
-		glLinkProgram(_shaderProgram);
-
-		{
-			int  success;
-			char infoLog[512];
-			glGetProgramiv(_shaderProgram, GL_LINK_STATUS, &success);
-			if(!success) {
-				glGetProgramInfoLog(_shaderProgram, 512, NULL, infoLog);
-				CAST_ERROR("CAST_ERROR::SHADER::COMP::LINKING_FAILED\t{}", infoLog);
-				assert(false);
-			}
-		}
-
-
-		CAST_LOG("Loaded Shader '{}' and '{}'", vertexFile, fragmentFile);
-
-    }
 
 
     void OpenGLShaderProgram::uniform_set1Integer(const char* name, int32_t value, bool print){
