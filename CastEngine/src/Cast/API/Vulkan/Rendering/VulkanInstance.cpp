@@ -365,7 +365,7 @@ namespace Cast{
 
     void VulkanInstance::_createGraphicsPipeline(){
         auto vertShaderCode = Cast::FileLoaderFactory::readSPV(CAST_INTERNAL_SHADER("passthrough_vert.spv"));
-        auto fragShaderCode = Cast::FileLoaderFactory::readSPV(CAST_INTERNAL_SHADER("RayMarching_frag.spv"));
+        auto fragShaderCode = Cast::FileLoaderFactory::readSPV(CAST_INTERNAL_SHADER("passthrough_frag.spv"));
 
         VkShaderModule vertShaderModule = _createShaderModule(vertShaderCode);
         VkShaderModule fragShaderModule = _createShaderModule(fragShaderCode);

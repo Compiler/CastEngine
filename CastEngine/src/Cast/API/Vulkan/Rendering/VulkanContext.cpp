@@ -25,9 +25,4 @@ namespace Cast{
         this->m_window->destroy();
     }
 
-    void VulkanContext::clearColor(float r, float g, float b, float a){
-    }
-    void VulkanContext::clearDepthBit(){}
-    void VulkanContext::clearColorBit(){}
-
 }

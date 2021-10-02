@@ -13,6 +13,9 @@ namespace Cast{
         public:
             static int MAX_VERTICES;
             Renderer():m_currentAliveVertices(0),m_offsetToAliveVertices(0){}
+            virtual void clearColor(float r, float g, float b, float a) = 0;
+            virtual void clearDepthBit() = 0;
+            virtual void clearColorBit() = 0;
             virtual void SubmitTriangle(glm::vec3 vertices[3], glm::vec3 color[3]) = 0;
             virtual void SubmitTriangle(float bottomLeftX, float bottomLeftY, float size) = 0;
             virtual void Draw() = 0;

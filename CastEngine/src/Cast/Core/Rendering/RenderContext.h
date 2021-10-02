@@ -23,18 +23,12 @@ namespace Cast{
             static API GetAPI();
 
 
-            virtual void Load(){
-            }
-            virtual void Update(){
-            }
-            virtual void Render(){
-            }
-            virtual void Unload(){
-            }
-            //TODO Move these functions to the respective renderer
-            virtual void clearColor(float r, float g, float b, float a) = 0;
-            virtual void clearDepthBit() = 0;
-            virtual void clearColorBit() = 0;
+            virtual void Load(){}
+            virtual void Update(){}
+            virtual void Render(){}
+            virtual void Unload(){}
+
+
 
             inline Window* getWindow(){return m_window;}
 

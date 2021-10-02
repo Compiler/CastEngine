@@ -14,7 +14,6 @@ namespace Cast{
         VulkanInstance::vertices.push_back({glm::vec4(bottomLeftX + size / 2.0, bottomLeftY + size, 1, 1.0), glm::vec4(1,0,1,1) });
     }
     void VulkanRenderer::Draw(){
-        
         VulkanInstance::vertices.clear();
     }
 

@@ -15,9 +15,7 @@ namespace Cast{
             void Update();
             void Render();
             void Unload();
-            void clearColor(float r, float g, float b, float a);
-            void clearDepthBit();
-            void clearColorBit();
+
 
             
 

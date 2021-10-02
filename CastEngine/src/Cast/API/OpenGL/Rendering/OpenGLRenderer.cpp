@@ -7,6 +7,18 @@ namespace Cast{
     }
 
 
+    
+    void OpenGLRenderer::clearColor(float r, float g, float b, float a){
+        glClearColor(r,g,b,a);
+    }
+    void OpenGLRenderer::clearColorBit(){
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
+    void OpenGLRenderer::clearDepthBit(){
+        glClear(GL_DEPTH_BUFFER_BIT);
+    }
+
+
     void OpenGLRenderer::Draw(){
         _buffer.setVertices(std::move(m_vertices));
         _buffer.init();

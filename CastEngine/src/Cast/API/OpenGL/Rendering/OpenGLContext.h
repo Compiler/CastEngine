@@ -11,9 +11,7 @@ namespace Cast{
         public:
             OpenGLContext();
             
-            void clearColor(float r, float g, float b, float a);
-            void clearDepthBit();
-            void clearColorBit();
+
             
             void Load();
             void Update();
