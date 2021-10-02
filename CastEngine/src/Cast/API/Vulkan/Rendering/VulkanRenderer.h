@@ -15,6 +15,8 @@ namespace Cast{
             void SubmitTriangle(float bottomLeftX, float bottomLeftY, float size);
             void Draw();
 
+            void SetShader(std::initializer_list<Shader> shaders);
+
             ~VulkanRenderer();
     };
 

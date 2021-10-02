@@ -3,8 +3,10 @@
 namespace Cast{
 
     void DebugScene::load(){
-        //_shader.loadShader(CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("RayMarching_orig.glsl"));
-        _shader.loadShader(CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("passthrough.frag"));
+        _shader.loadShader(CAST_INTERNAL_SHADER("passthrough.vert"), Shader::ShaderType::Vertex);
+        _shader.loadShader(CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Fragment);
+        _shader.compile();
+        _renderer.SetShader({{CAST_INTERNAL_SHADER("passthrough.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Fragment}});
         CAST_DEBUG("Loaded shader");
     }
     void DebugScene::update(){}

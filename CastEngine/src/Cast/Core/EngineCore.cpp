@@ -14,7 +14,7 @@ namespace Cast{
 
 
         CAST_DEBUG("Loading contexts");
-        RenderContext::setAPI(RenderContext::API::Vulkan);
+        //RenderContext::setAPI(RenderContext::API::Vulkan);
         switch(RenderContext::GetAPI()){
             case RenderContext::API::OpenGL:{
                 _renderer = new OpenGLRenderer();
@@ -33,11 +33,11 @@ namespace Cast{
             default: CAST_FATAL("Window type not supported");
         }
         CAST_DEBUG("Loading scene");
-        //_scene.load();
+        _scene.load();
     }
 
     void EngineCore::update(){
-        //_scene.update();
+        _scene.update();
         InputManager::clear();
         _renderContext->Update();
     }
@@ -47,7 +47,7 @@ namespace Cast{
         _renderer->clearColor(0.4, 0.4, 0.4, 1.0);
         _renderer->clearColorBit();
         
-        //_scene.render();
+        _scene.render();
         _renderContext->Render();
         _renderContext->getWindow()->render();
     }

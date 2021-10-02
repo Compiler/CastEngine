@@ -2,16 +2,41 @@
 
 
 namespace Cast{
+    uint32_t OpenGLShaderProgram::_getOpenGLValForShaderType(Shader::ShaderType type){
+		switch(type){
+			case Shader::ShaderType::Vertex:{
+				return SHADER_TYPE_VERTEX;
+				break;
+			}
+			case Shader::ShaderType::Fragment:{
+				return SHADER_TYPE_FRAGMENT;
+				break;
+			}
+			case Shader::ShaderType::Geometry:{
+				return SHADER_TYPE_GEOMETRY;
+				break;
+			}
+			// case Shader::ShaderType::Tesselation:{
+			// 	return SHADER_TYPE_TESSELATION;
+			// 	break;
+			// }
+			default:{
+				CAST_ERROR("Type doesn't exist");
+			}
+		}
+	}
 
 
-    uint32_t OpenGLShaderProgram::_loadShader(const char* fileName, int type){
+    uint32_t OpenGLShaderProgram::_loadShader(const char* fileName, Shader::ShaderType type){
         uint32_t shaderID;
 		CAST_LOG("Sending to parser");
 		const char* shaderSrcChar = ShaderParser::getShaderSource(fileName);
 		CAST_LOG("Done parsing");
-        shaderID = glCreateShader(type);
+		
+        shaderID = glCreateShader(_getOpenGLValForShaderType(type));
 		glShaderSource(shaderID, 1, &shaderSrcChar, NULL);
 		glCompileShader(shaderID);
+		int type_val = _getOpenGLValForShaderType(type);
 		{
 			int  success;
 			char infoLog[512];
@@ -19,9 +44,9 @@ namespace Cast{
 			if(!success){
 				glGetShaderInfoLog(shaderID, 512, NULL, infoLog);
                 std::string shaderType;
-                if(type == GL_VERTEX_SHADER) shaderType = "VERTEX";
-                else if(type == GL_FRAGMENT_SHADER) shaderType = "FRAGMENT";
-                else if(type == GL_GEOMETRY_SHADER) shaderType = "GEOMETRY";
+                if(type_val == GL_VERTEX_SHADER) shaderType = "VERTEX";
+                else if(type_val == GL_FRAGMENT_SHADER) shaderType = "FRAGMENT";
+                else if(type_val == GL_GEOMETRY_SHADER) shaderType = "GEOMETRY";
                 else{
 					CAST_ERROR("SHADER::{} TYPE_UNKNOWN - TYPE = {}", shaderType.c_str(), type);
 				}
@@ -32,11 +57,34 @@ namespace Cast{
         return shaderID;
 
     }
+    void OpenGLShaderProgram::loadShader(const char* shaderFilePath, Shader::ShaderType type){
+		_shaderIDS.push_back(_loadShader(shaderFilePath, type));
+		CAST_LOG("Loaded Shader '{}'", shaderFilePath);
+	}
 
-    void OpenGLShaderProgram::loadShader(const char* vertexFile, const char* fragmentFile){
+	void OpenGLShaderProgram::compile(){
+		_shaderProgram = glCreateProgram();
+		for(auto shaderID : _shaderIDS){
+			glAttachShader(_shaderProgram, shaderID);
+		}
+		glLinkProgram(_shaderProgram);
+		{
+			int  success;
+			char infoLog[512];
+			glGetProgramiv(_shaderProgram, GL_LINK_STATUS, &success);
+			if(!success) {
+				glGetProgramInfoLog(_shaderProgram, 512, NULL, infoLog);
+				CAST_ERROR("CAST_ERROR::SHADER::COMP::LINKING_FAILED\t{}", infoLog);
+				assert(false);
+			}
+		}
+	}
+
+
+    void OpenGLShaderProgram::loadShaders(const char* vertexFile, const char* fragmentFile){
 		CAST_LOG("Loading shaders: {}, {}", vertexFile, fragmentFile);
-        uint32_t vid = _loadShader(vertexFile, SHADER_TYPE_VERTEX);
-        uint32_t fid = _loadShader(fragmentFile, SHADER_TYPE_FRAGMENT);
+        uint32_t vid = _loadShader(vertexFile, Shader::ShaderType::Vertex);
+        uint32_t fid = _loadShader(fragmentFile, Shader::ShaderType::Fragment);
 
 
         _shaderProgram = glCreateProgram();

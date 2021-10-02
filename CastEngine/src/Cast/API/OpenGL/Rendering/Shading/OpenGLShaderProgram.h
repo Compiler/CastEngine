@@ -5,6 +5,7 @@
 #include <string>
 #include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Rendering/Shader/ShaderParser.h>
+#include <Cast/Core/Rendering/Shader/Shader.h>
 
 
 #define SHADER_TYPE_VERTEX      (int) 0x8B31
@@ -21,8 +22,10 @@ namespace Cast{
     class OpenGLShaderProgram{
         
         private:
-            uint32_t _loadShader(const char* fileName, int type);
+            uint32_t _getOpenGLValForShaderType(Shader::ShaderType type);
+            uint32_t _loadShader(const char* fileName, Shader::ShaderType type);
             uint32_t _shaderProgram;
+            std::vector<uint32_t> _shaderIDS;
 
             inline int _check_uniform_(const char* name, bool print = true){
                 GLint uniformID = glGetUniformLocation(_shaderProgram, name);
@@ -33,8 +36,11 @@ namespace Cast{
             }
         public:
             OpenGLShaderProgram() = default;
-            void loadShader(const char* vertexFile, const char* fragFile);
-            void loadShader(const char* vertexFile, const char* fragFile, const char* geomFile);
+            void loadShader(const char* shaderFilePath, Shader::ShaderType type);
+            void compile();
+            
+            void loadShaders(const char* vertexFile, const char* fragFile);
+            void loadShaders(const char* vertexFile, const char* fragFile, const char* geomFile);
 
             void use(){glUseProgram(_shaderProgram);}
 

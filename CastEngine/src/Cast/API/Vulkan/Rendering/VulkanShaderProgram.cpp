@@ -8,6 +8,11 @@ namespace Cast{
         }
 
         PipeLineShaderInfo VulkanShaderProgram::load(VkDevice& logicalDevice, const char* vertFilePath, const char* fragFilePath){
+            //TODO Compile shaders to spv if they arent in that format
+            // std::string vertexFilePath = vertFilePath;
+            // if(vertexFilePath.substr(vertexFilePath.find_last_of(".")) != "spv"){
+            //     CAST_DEBUG("'{}' is not a spv file, attempting to compile to spv...");
+            // }
             auto vertShaderCode = Cast::FileLoaderFactory::readSPV(vertFilePath);
             auto fragShaderCode = Cast::FileLoaderFactory::readSPV(fragFilePath);
 
