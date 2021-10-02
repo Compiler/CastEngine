@@ -16,6 +16,8 @@ add_library(
 	src/Cast/API/OpenGL/Rendering/OpenGLVertexArray.h
 	src/Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.cpp
 	src/Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.h
+	src/Cast/API/OpenGL/Rendering/Shading/OpenGLShaderProgram.cpp
+	src/Cast/API/OpenGL/Rendering/Shading/OpenGLShaderProgram.h
 	src/Cast/API/Vulkan/DebugUtils/VkDebugUtils.cpp
 	src/Cast/API/Vulkan/DebugUtils/VkDebugUtils.h
 	src/Cast/API/Vulkan/Rendering/Vertex.h
@@ -42,8 +44,6 @@ add_library(
 	src/Cast/Core/Rendering/Renderer.h
 	src/Cast/Core/Rendering/Window.cpp
 	src/Cast/Core/Rendering/Window.h
-	src/Cast/Core/Rendering/Shader/OpenGLShaderProgram.cpp
-	src/Cast/Core/Rendering/Shader/OpenGLShaderProgram.h
 	src/Cast/Core/Rendering/Shader/ShaderParser.cpp
 	src/Cast/Core/Rendering/Shader/ShaderParser.h
 	src/Cast/Core/Scenes/DebugScene.cpp

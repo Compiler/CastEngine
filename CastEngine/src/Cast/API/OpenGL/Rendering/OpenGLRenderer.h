@@ -1,6 +1,6 @@
 #pragma once
 #include <Cast/Core/Rendering/Renderer.h>
-#include <Cast/Core/Rendering/Shader/OpenGLShaderProgram.h>
+#include <Cast/API/OpenGL/Rendering/Shading/OpenGLShaderProgram.h>
 #include <Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.h>
 #include <Cast/API/OpenGL/Rendering/OpenGLVertexArray.h>
 namespace Cast{

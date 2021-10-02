@@ -38,7 +38,6 @@ namespace Cast{
 
     void EngineCore::update(){
         //_scene.update();
-
         InputManager::clear();
         _renderContext->Update();
     }
