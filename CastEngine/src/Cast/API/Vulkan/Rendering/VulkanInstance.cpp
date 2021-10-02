@@ -368,6 +368,7 @@ namespace Cast{
         PipeLineShaderInfo shaderInfo;
         VkPipelineShaderStageCreateInfo shaderStages[2] = {};
         if(!_shaderProgram.isSet()){
+            CAST_WARN("Loading default passthrough shaders");
             shaderInfo = _shaderProgram.load(_logicalDevice, CAST_INTERNAL_SHADER("passthrough_vert.spv"), CAST_INTERNAL_SHADER("passthrough_frag.spv"));
             shaderStages[0] = shaderInfo.vert_data;
             shaderStages[1] = shaderInfo.frag_data;

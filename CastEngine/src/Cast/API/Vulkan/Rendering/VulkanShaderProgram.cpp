@@ -8,8 +8,8 @@ namespace Cast{
         }
 
         PipeLineShaderInfo VulkanShaderProgram::load(VkDevice& logicalDevice, const char* vertFilePath, const char* fragFilePath){
-            auto vertShaderCode = Cast::FileLoaderFactory::readSPV(CAST_INTERNAL_SHADER("passthrough_vert.spv"));
-            auto fragShaderCode = Cast::FileLoaderFactory::readSPV(CAST_INTERNAL_SHADER("RayMarching_frag.spv"));
+            auto vertShaderCode = Cast::FileLoaderFactory::readSPV(vertFilePath);
+            auto fragShaderCode = Cast::FileLoaderFactory::readSPV(fragFilePath);
 
             VkShaderModule vertShaderModule = _createShaderModule(logicalDevice, vertShaderCode);
             VkShaderModule fragShaderModule = _createShaderModule(logicalDevice, fragShaderCode);
