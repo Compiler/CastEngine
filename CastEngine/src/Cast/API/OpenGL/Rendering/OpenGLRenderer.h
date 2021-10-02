@@ -13,6 +13,7 @@ namespace Cast{
             OpenGLVertexArray _vao;
             OpenGLVertexBuffer<float> _buffer;
             std::unordered_map<std::string, OpenGLShaderProgram> _shaderMap;
+            std::unordered_map<std::string, std::string> _shaderMapNamed;
 
         
         public:
@@ -25,8 +26,8 @@ namespace Cast{
             void SubmitTriangle(glm::vec3 vertices[3], glm::vec3 color[3]);
             void SubmitTriangle(float bottomLeftX, float bottomLeftY, float size);
 
-            void SetShader(std::initializer_list<Shader> shaders);
-            OpenGLShaderProgram getShader(std::string key){return _shaderMap[key];};
+            void SetShader(const char* name, std::initializer_list<Shader> shaders);
+            OpenGLShaderProgram getShader(std::string shaderName){return _shaderMap[_shaderMapNamed[shaderName]];};
             void Draw();
 
             ~OpenGLRenderer();

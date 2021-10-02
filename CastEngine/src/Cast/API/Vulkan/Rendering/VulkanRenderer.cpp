@@ -5,7 +5,7 @@ namespace Cast{
     VulkanRenderer::VulkanRenderer(){
 
     }
-    void VulkanRenderer::SetShader(std::initializer_list<Shader> shaders){
+    void VulkanRenderer::SetShader(const char* name, std::initializer_list<Shader> shaders){
         CAST_LOG("Setting shader to ");
         for(auto shader : shaders){
             CAST_LOG("{}", shader.filePath);

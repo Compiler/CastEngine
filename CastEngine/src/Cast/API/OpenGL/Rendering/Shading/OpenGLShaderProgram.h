@@ -41,6 +41,7 @@ namespace Cast{
             void loadShader(std::initializer_list<Shader> shaders);
             void compile();
             
+            std::string test = "hello";
             void use(){glUseProgram(_shaderProgram);}
 
 
