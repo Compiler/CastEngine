@@ -41,8 +41,7 @@ namespace Cast{
             void loadShader(std::initializer_list<Shader> shaders);
             void compile();
             
-            std::string test = "hello";
-            void use(){glUseProgram(_shaderProgram);}
+            void use()const{glUseProgram(_shaderProgram);}
 
 
             void uniform_set1Integer(const char* name, int32_t value, bool print = true);

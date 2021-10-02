@@ -22,7 +22,6 @@ namespace Cast{
                 program.loadShader(shader.filePath, shader.type);
             }
             program.compile();
-            program.test = "Shader key";
             _shaderMap.emplace(shader_key, std::move(program));
             _shaderMapNamed.emplace(name, shader_key);
             

@@ -24,6 +24,7 @@ namespace Cast{
 				CAST_ERROR("Type doesn't exist");
 			}
 		}
+		return 44;
 	}
 
 

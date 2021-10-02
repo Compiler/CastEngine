@@ -27,7 +27,7 @@ namespace Cast{
             void SubmitTriangle(float bottomLeftX, float bottomLeftY, float size);
 
             void SetShader(const char* name, std::initializer_list<Shader> shaders);
-            OpenGLShaderProgram getShader(std::string shaderName){return _shaderMap[_shaderMapNamed[shaderName]];};
+            OpenGLShaderProgram& getShader(std::string shaderName){return _shaderMap[_shaderMapNamed[shaderName]];};
             void Draw();
 
             ~OpenGLRenderer();
