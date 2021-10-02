@@ -14,7 +14,7 @@ namespace Cast{
             OpenGLVertexBuffer<float> _buffer;
             std::unordered_map<std::string, OpenGLShaderProgram> _shaderMap;
 
-
+        
         public:
             OpenGLRenderer();
 
@@ -26,6 +26,7 @@ namespace Cast{
             void SubmitTriangle(float bottomLeftX, float bottomLeftY, float size);
 
             void SetShader(std::initializer_list<Shader> shaders);
+            OpenGLShaderProgram getShader(std::string key){return _shaderMap[key];};
             void Draw();
 
             ~OpenGLRenderer();

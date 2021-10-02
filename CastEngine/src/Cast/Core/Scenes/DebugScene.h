@@ -11,7 +11,7 @@ namespace Cast{
 
     class DebugScene{
         private:
-            OpenGLShaderProgram _shader;
+            //OpenGLShaderProgram _shader;
             OpenGLRenderer _renderer;
 
         public:

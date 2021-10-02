@@ -36,6 +36,7 @@ namespace Cast{
             }
         public:
             OpenGLShaderProgram() = default;
+
             void loadShader(const char* shaderFilePath, Shader::ShaderType type);
             void loadShader(std::initializer_list<Shader> shaders);
             void compile();

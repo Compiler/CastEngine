@@ -19,10 +19,10 @@ namespace Cast{
             CAST_LOG("New shader set, compiling and setting {}", shader_key);
             OpenGLShaderProgram program;
             for(auto shader : shaders){
-                if(shader.type == Shader::ShaderType::Vertex){
-                    //program.loadShader()
-                }
+                program.loadShader(shader.filePath, shader.type);
             }
+            program.compile();
+            _shaderMap.emplace(shader_key, std::move(program));
         }
     }
 
