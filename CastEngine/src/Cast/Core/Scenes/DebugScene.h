@@ -11,13 +11,14 @@ namespace Cast{
 
     class DebugScene{
         private:
-            OpenGLRenderer _renderer;
+            Renderer* _renderer;
 
         public:
             void load();
             void update();
             void render();
             void unload();
+            void setRenderer(Renderer* renderer){this->_renderer = renderer;}
     };
 
 }

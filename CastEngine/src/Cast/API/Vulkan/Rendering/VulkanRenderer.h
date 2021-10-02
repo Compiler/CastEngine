@@ -17,6 +17,11 @@ namespace Cast{
 
             void SetShader(const char* name, std::initializer_list<Shader> shaders);
 
+
+            ShaderProgram* GetShader(const char* name){};
+
+
+
             ~VulkanRenderer();
     };
 

@@ -59,18 +59,18 @@ namespace Cast{
 
     }
     void OpenGLShaderProgram::loadShader(const char* shaderFilePath, Shader::ShaderType type){
-		_shaderIDS.push_back(_loadShader(shaderFilePath, type));
+		_shaderIDs.push_back(_loadShader(shaderFilePath, type));
 		CAST_LOG("Loaded Shader '{}'", shaderFilePath);
 	}
 
     void OpenGLShaderProgram::loadShader(std::initializer_list<Shader> shaders){
-		for(auto shader : shaders) _shaderIDS.push_back(_loadShader(shader.filePath, shader.type));
+		for(auto shader : shaders) _shaderIDs.push_back(_loadShader(shader.filePath, shader.type));
 	}
 
 
 	void OpenGLShaderProgram::compile(){
 		_shaderProgram = glCreateProgram();
-		for(auto shaderID : _shaderIDS){
+		for(auto shaderID : _shaderIDs){
 			glAttachShader(_shaderProgram, shaderID);
 		}
 		glLinkProgram(_shaderProgram);

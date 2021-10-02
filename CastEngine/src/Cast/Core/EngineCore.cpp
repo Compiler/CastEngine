@@ -33,6 +33,7 @@ namespace Cast{
             default: CAST_FATAL("Window type not supported");
         }
         CAST_DEBUG("Loading scene");
+        _scene.setRenderer(_renderer);
         _scene.load();
     }
 

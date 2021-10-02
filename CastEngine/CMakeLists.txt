@@ -47,6 +47,7 @@ add_library(
 	src/Cast/Core/Rendering/Shader/Shader.h
 	src/Cast/Core/Rendering/Shader/ShaderParser.cpp
 	src/Cast/Core/Rendering/Shader/ShaderParser.h
+	src/Cast/Core/Rendering/Shader/ShaderProgram.h
 	src/Cast/Core/Scenes/DebugScene.cpp
 	src/Cast/Core/Scenes/DebugScene.h
 	src/Cast/Core/Utils/Files/FileLoaderFactory.cpp

@@ -17,12 +17,12 @@ namespace Cast{
 
         if(_shaderMap.find(shader_key) == _shaderMap.end()){
             CAST_LOG("New shader set, compiling and setting {}", shader_key);
-            OpenGLShaderProgram program;
+            OpenGLShaderProgram* program = new OpenGLShaderProgram();
             for(auto shader : shaders){
-                program.loadShader(shader.filePath, shader.type);
+                program->loadShader(shader.filePath, shader.type);
             }
-            program.compile();
-            _shaderMap.emplace(shader_key, std::move(program));
+            program->compile();
+            _shaderMap.emplace(shader_key, program);
             _shaderMapNamed.emplace(name, shader_key);
             
         }
@@ -42,11 +42,11 @@ namespace Cast{
 
 
     void OpenGLRenderer::Draw(){
+        int draw_size = m_vertices.size();
         _buffer.setVertices(std::move(m_vertices));
         _buffer.init();
         _vao.init();
-        glDrawArrays(GL_TRIANGLES, 0, 100);
-
+        glDrawArrays(GL_TRIANGLES, 0, draw_size);
 
         
     }

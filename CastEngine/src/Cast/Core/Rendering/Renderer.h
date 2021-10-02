@@ -3,6 +3,7 @@
 #include <vector>
 #include <Cast/Core/Rendering/RenderContext.h>
 #include <Cast/Core/Rendering/Shader/Shader.h>
+#include <Cast/Core/Rendering/Shader/ShaderProgram.h>
 
 namespace Cast{
 
@@ -21,6 +22,7 @@ namespace Cast{
             virtual void SubmitTriangle(float bottomLeftX, float bottomLeftY, float size) = 0;
             virtual void Draw() = 0;
             virtual void SetShader(const char* name, std::initializer_list<Shader> shaders) = 0;
+            virtual ShaderProgram* GetShader(const char* name) = 0;
             virtual ~Renderer(){}
 
             static RenderContext::API GetAPI(){return RenderContext::GetAPI();}
