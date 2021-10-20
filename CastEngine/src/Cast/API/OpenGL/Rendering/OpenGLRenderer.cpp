@@ -55,7 +55,7 @@ namespace Cast{
         this->m_vertices.push_back(bottomLeftY);
         this->m_vertices.push_back(1);
         this->m_vertices.push_back(1);
-        //default color red
+        //default color pink
         this->m_vertices.insert(this->m_vertices.end(), {1,0,1,1});
 
         this->m_vertices.push_back(bottomLeftX + size);

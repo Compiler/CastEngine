@@ -12,6 +12,7 @@ namespace Cast{
         }
     }
     void VulkanRenderer::clearColor(float r, float g, float b, float a){
+        
     }
 
     void VulkanRenderer::clearDepthBit(){}

@@ -11,6 +11,7 @@
 #include <string>
 #include <set>
 #include <algorithm>
+#include <unordered_map>
 #ifdef DEBUG_MODE
 const bool enableValidationLayers = true;
 #else
@@ -94,6 +95,7 @@ namespace Cast{
             VkExtent2D _swapChainExtent;
             VkPipelineLayout _pipelineLayout;
             VkRenderPass _renderPass;
+            std::unordered_map<const char*, VkPipeline> _pipelines;
             VkPipeline _graphicsPipeline;
             std::vector<VkFramebuffer> _swapChainFramebuffers;
             VkCommandPool _graphicsCommandPool;
