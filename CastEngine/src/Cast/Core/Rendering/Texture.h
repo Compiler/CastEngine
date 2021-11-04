@@ -5,9 +5,9 @@ namespace Cast{
 
     class Texture{
 
-        private:
+        protected:
             
-            uint32_t _width, _height;
+            uint32_t m_width, m_height;
             
 
         public:

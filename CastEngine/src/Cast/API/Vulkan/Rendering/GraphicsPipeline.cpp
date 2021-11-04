@@ -8,8 +8,8 @@ namespace Cast{
     }
 
     void GraphicsPipeline::load(VkDevice logicalDevice, const char* name, VulkanShaderProgram program){
-        // _name = name;
-        // _shaderProgram = program;
+        _name = name;
+        _shaderProgram = program;
 
         // if(!_shaderProgram.isSet()){
         //     CAST_WARN("Loading default passthrough shaders");
