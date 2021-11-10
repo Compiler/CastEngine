@@ -21,6 +21,7 @@ namespace Cast{
             void load(VkDevice logicalDevice, const char* name, VulkanShaderProgram program, VkExtent2D& swapExtent, VkRenderPass& renderPass);
 
             inline VkPipeline getPipeline(){return this->_graphicsPipeline;}
+            inline VulkanShaderProgram& getShaderProgram(){return this->_shaderProgram;}
 
 
     };

@@ -24,11 +24,11 @@ namespace Cast{
             VulkanShaderProgram()= default;
 
             //TODO Implement these
-            void loadShader(const char* shaderFilePath, Shader::ShaderType shaderType){}
-            void loadShader(std::initializer_list<Shader> shaders){}
-            void compile(){}
-            void use(){}
-            //end
+            void loadShader(const char* shaderFilePath, Shader::ShaderType shaderType){CAST_WARN("THIS FUNCTION DOES NOTHING~!!!!");}
+            void loadShader(std::initializer_list<Shader> shaders){CAST_WARN("THIS FUNCTION DOES NOTHING~!!!!");}
+            void compile(){CAST_WARN("THIS FUNCTION DOES NOTHING~!!!!");}
+            void use(){CAST_WARN("THIS FUNCTION DOES NOTHING~!!!!");}
+            //TODO end
 
 
             VulkanShaderProgram(VkDevice& logicalDevice, const char* vertFilePath, const char* fragFilePath);

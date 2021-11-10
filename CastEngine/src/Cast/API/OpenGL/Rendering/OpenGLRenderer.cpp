@@ -7,7 +7,7 @@ namespace Cast{
     }
 
 
-    void OpenGLRenderer::SetShader(const char* name, std::initializer_list<Shader> shaders){
+    void OpenGLRenderer::CreateShader(const char* name, std::initializer_list<Shader> shaders){
         CAST_LOG("Setting shader to ");
         std::string shader_key = "";
         for(auto shader : shaders){
@@ -17,11 +17,11 @@ namespace Cast{
 
         if(_shaderMap.find(shader_key) == _shaderMap.end()){
             CAST_LOG("New shader set, compiling and setting {}", shader_key);
-            OpenGLShaderProgram* program = new OpenGLShaderProgram();
+            OpenGLShaderProgram program = OpenGLShaderProgram();
             for(auto shader : shaders){
-                program->loadShader(shader.filePath, shader.type);
+                program.loadShader(shader.filePath, shader.type);
             }
-            program->compile();
+            program.compile();
             _shaderMap.emplace(shader_key, program);
             _shaderMapNamed.emplace(name, shader_key);
             

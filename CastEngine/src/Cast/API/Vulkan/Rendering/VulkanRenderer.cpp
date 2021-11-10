@@ -4,27 +4,31 @@ namespace Cast{
     
     VulkanRenderer::VulkanRenderer(VulkanInstance* instance){
         _instance = instance;
+        _graphicsPipelineMap.emplace("Default", _instance->createDefaultPipeline());
+        _instance->_graphicsPipeline = _graphicsPipelineMap["Default"].getPipeline();
+        _instance->_createGraphicsCommandBuffers();
 
     }
-    void VulkanRenderer::SetShader(const char* name, std::initializer_list<Shader> shaders){
-
-        CAST_LOG("Setting shader to ");
-        std::string shader_key = "";
-        for(auto shader : shaders){
-            CAST_LOG("{}", shader.filePath);
-            shader_key += std::to_string((int)shader.type) + shader.filePath;
+    void VulkanRenderer::SetShader(const char* name){
+        if(_graphicsPipelineMap.find(name) != _graphicsPipelineMap.end()){
+            _instance->_graphicsPipeline = _graphicsPipelineMap[name].getPipeline();
+            _instance->_createGraphicsCommandBuffers();
+        }else{
+            CAST_WARN("No shader by name '{}' found!", name);
         }
+    }
+    void VulkanRenderer::CreateShader(const char* name, std::initializer_list<Shader> shaders){
 
-        if(_shaderMap.find(shader_key) == _shaderMap.end()){
-            CAST_LOG("New shader set, compiling and setting {}", shader_key);
-            VulkanShaderProgram* program = new VulkanShaderProgram();
-            for(auto shader : shaders){
-                program->loadShader(shader.filePath, shader.type);
-            }
-            program->compile();
-            _shaderMap.emplace(shader_key, program);
-            _shaderMapNamed.emplace(name, shader_key);
-            
+        if(_graphicsPipelineMap.find(name) == _graphicsPipelineMap.end()){
+            CAST_LOG("no graphics pipeline set for the name '{}', creating new one", name);
+            VulkanShaderProgram program = VulkanShaderProgram();
+            //for(auto shader : shaders){
+            //    program.loadShader(shader.filePath, shader.type);
+            //}
+            //program.compile();
+            program.load(_instance->_logicalDevice, shaders.begin()->filePath, (shaders.begin() + 1)->filePath);
+            GraphicsPipeline pipe{_instance->_logicalDevice, name, program, _instance->_swapChainExtent, _instance->_renderPass};
+            _graphicsPipelineMap.emplace(name, pipe);
         }
         CAST_LOG("Setting shader to ");
         for(auto shader : shaders){

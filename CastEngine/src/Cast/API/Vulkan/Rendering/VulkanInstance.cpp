@@ -157,6 +157,15 @@ namespace Cast{
         _createGraphicsCommandBuffers();
 
     }
+    GraphicsPipeline VulkanInstance::createDefaultPipeline(){
+        Shader shader_vert{CAST_INTERNAL_SHADER("passthrough.vert"), Shader::ShaderType::Vertex};
+        Shader shader_frag{CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Vertex};
+        VulkanShaderProgram program =  VulkanShaderProgram();
+        program.load(this->_logicalDevice, shader_vert.filePath, shader_frag.filePath);
+        program.compile();
+        GraphicsPipeline pipe{_logicalDevice, "Default", program, _swapChainExtent, _renderPass};
+        return pipe;
+    }
 
 
     void VulkanInstance::render(){
@@ -366,8 +375,8 @@ namespace Cast{
     }
 
     void VulkanInstance::_createGraphicsPipeline(){
-
-        _pipeline = new GraphicsPipeline(_logicalDevice, "passthrough", VulkanShaderProgram(_logicalDevice, CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("passthrough.frag")), _swapChainExtent, _renderPass);
+        //default
+        _pipeline = new GraphicsPipeline(_logicalDevice, "passthrough", VulkanShaderProgram(_logicalDevice, CAST_INTERNAL_SHADER("passthrough_vert.spv"), CAST_INTERNAL_SHADER("red.spv")), _swapChainExtent, _renderPass);
         _graphicsPipeline = _pipeline->getPipeline();
     }
 

@@ -82,8 +82,8 @@ namespace Cast{
     };
 
     class VulkanInstance{
+        public:
 
-        private:
             VulkanShaderProgram _shaderProgram;
             VkInstance _vulkanInstance;
             VkPhysicalDevice _physicalDevice;
@@ -98,10 +98,7 @@ namespace Cast{
             VkExtent2D _swapChainExtent;
             VkPipelineLayout _pipelineLayout;
             VkRenderPass _renderPass;
-            //maps shader name to pipeline with that shader
-            std::unordered_map<const char*, VkPipeline> _pipelines;
             Cast::GraphicsPipeline* _pipeline;
-            VkPipeline _currentPipeline;
             VkPipeline _graphicsPipeline;
             std::vector<VkFramebuffer> _swapChainFramebuffers;
             VkCommandPool _graphicsCommandPool;
@@ -197,6 +194,9 @@ namespace Cast{
 
             void recreateSwapChain();
 
+            void setGraphicsPipeline(VkPipeline& pipe){this->_graphicsPipeline = pipe;}
+
+            GraphicsPipeline createDefaultPipeline();
         private:
             std::vector<const char*> getRequiredExtensions() {
                 uint32_t glfwExtensionCount = 0;
