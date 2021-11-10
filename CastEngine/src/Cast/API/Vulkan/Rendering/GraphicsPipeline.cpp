@@ -12,7 +12,7 @@ namespace Cast{
         _shaderProgram = program;
 
         if(!_shaderProgram.isSet()){
-            CAST_WARN("Loading default passthrough shaders");
+            CAST_ERROR("Loading default passthrough shaders");
             _shaderInfo = _shaderProgram.load(logicalDevice, CAST_INTERNAL_SHADER("passthrough_vert.spv"), CAST_INTERNAL_SHADER("passthrough_frag.spv"));
             _shaderStages[0] = _shaderInfo.vert_data;
             _shaderStages[1] = _shaderInfo.frag_data;

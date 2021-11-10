@@ -5,6 +5,7 @@
 #include <Cast/Core/Utils/Files/FileLoaderFactory.h>
 #include <Cast/API/Vulkan/DebugUtils/VkDebugUtils.h>
 #include <Cast/API/Vulkan/Rendering/VulkanShaderProgram.h>
+#include <Cast/API/Vulkan/Rendering/GraphicsPipeline.h>
 
 #include <vector>
 #include <cstring>
@@ -95,6 +96,7 @@ namespace Cast{
             VkExtent2D _swapChainExtent;
             VkPipelineLayout _pipelineLayout;
             VkRenderPass _renderPass;
+            //maps shader name to pipeline with that shader
             std::unordered_map<const char*, VkPipeline> _pipelines;
             VkPipeline _currentPipeline;
             VkPipeline _graphicsPipeline;

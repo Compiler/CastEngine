@@ -4,8 +4,10 @@
 namespace Cast{
 
     class VulkanRenderer : public Renderer{
+        private:
+            VulkanInstance* _instance;
         public:
-            VulkanRenderer();
+            VulkanRenderer(VulkanInstance* instance);
 
             void clearColor(float r, float g, float b, float a);
             void clearDepthBit();

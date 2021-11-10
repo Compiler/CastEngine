@@ -24,9 +24,9 @@ namespace Cast{
                 break;
             };
             case RenderContext::API::Vulkan:{
-                _renderer = new VulkanRenderer();
                 _renderContext = new VulkanContext();
                 _renderContext->Load();
+                _renderer = new VulkanRenderer(static_cast<VulkanContext*>(_renderContext)->getVulkanInstance());
                 CAST_DEBUG("Created Vulkan Context");
                 break;
             };

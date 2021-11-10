@@ -6,7 +6,7 @@ namespace Cast{
 
     class VulkanContext : public Cast::RenderContext{
         private:
-            VulkanInstance _vulkanInstance;
+            VulkanInstance* _vulkanInstance;
         public:
             VulkanContext();
 
@@ -16,6 +16,7 @@ namespace Cast{
             void Render();
             void Unload();
 
+            VulkanInstance* getVulkanInstance(){return this->_vulkanInstance;}
 
             
 

@@ -2,7 +2,8 @@
 
 namespace Cast{
     
-    VulkanRenderer::VulkanRenderer(){
+    VulkanRenderer::VulkanRenderer(VulkanInstance* instance){
+        _instance = instance;
 
     }
     void VulkanRenderer::SetShader(const char* name, std::initializer_list<Shader> shaders){
