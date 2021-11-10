@@ -6,6 +6,8 @@ namespace Cast{
     class VulkanRenderer : public Renderer{
         private:
             VulkanInstance* _instance;
+            std::unordered_map<std::string, VulkanShaderProgram*> _shaderMap;
+            std::unordered_map<std::string, std::string> _shaderMapNamed;
         public:
             VulkanRenderer(VulkanInstance* instance);
 
@@ -19,8 +21,8 @@ namespace Cast{
 
             void SetShader(const char* name, std::initializer_list<Shader> shaders);
 
-
-            ShaderProgram* GetShader(const char* name){CAST_WARN("FUNCTION NOT IMPLEMENTED");};
+            //TODO: Error check so we dont null out on bad names
+            ShaderProgram* GetShader(const char* name){return _shaderMap[_shaderMapNamed[std::string(name)]];};
 
 
 

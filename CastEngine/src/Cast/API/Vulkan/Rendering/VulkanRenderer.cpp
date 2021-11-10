@@ -7,6 +7,25 @@ namespace Cast{
 
     }
     void VulkanRenderer::SetShader(const char* name, std::initializer_list<Shader> shaders){
+
+        CAST_LOG("Setting shader to ");
+        std::string shader_key = "";
+        for(auto shader : shaders){
+            CAST_LOG("{}", shader.filePath);
+            shader_key += std::to_string((int)shader.type) + shader.filePath;
+        }
+
+        if(_shaderMap.find(shader_key) == _shaderMap.end()){
+            CAST_LOG("New shader set, compiling and setting {}", shader_key);
+            VulkanShaderProgram* program = new VulkanShaderProgram();
+            for(auto shader : shaders){
+                program->loadShader(shader.filePath, shader.type);
+            }
+            program->compile();
+            _shaderMap.emplace(shader_key, program);
+            _shaderMapNamed.emplace(name, shader_key);
+            
+        }
         CAST_LOG("Setting shader to ");
         for(auto shader : shaders){
             CAST_LOG("{}", shader.filePath);

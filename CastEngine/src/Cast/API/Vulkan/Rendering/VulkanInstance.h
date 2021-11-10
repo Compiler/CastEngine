@@ -24,6 +24,8 @@ const bool enableValidationLayers = false;
 #define DEBUG_FUNC(x) CAST_LOG("----\tStarting {}", #x); x; CAST_LOG("----\tEnding {}", #x)
 namespace Cast{
 
+    class GraphicsPipeline;
+
     struct Vertex_Tmp{  
         glm::vec4 position;
         glm::vec4 color;
@@ -98,6 +100,7 @@ namespace Cast{
             VkRenderPass _renderPass;
             //maps shader name to pipeline with that shader
             std::unordered_map<const char*, VkPipeline> _pipelines;
+            Cast::GraphicsPipeline* _pipeline;
             VkPipeline _currentPipeline;
             VkPipeline _graphicsPipeline;
             std::vector<VkFramebuffer> _swapChainFramebuffers;
