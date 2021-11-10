@@ -12,10 +12,13 @@ namespace Cast{
             PipeLineShaderInfo _shaderInfo;
             VkPipelineShaderStageCreateInfo _shaderStages[2];
 
+            VkPipeline _graphicsPipeline;
+            VkPipelineLayout _graphicsPipelineLayout;
+
         public:
             GraphicsPipeline() = default;
-            GraphicsPipeline(VkDevice logicalDevice, const char* name, VulkanShaderProgram program);
-            void load(VkDevice logicalDevice, const char* name, VulkanShaderProgram program);
+            GraphicsPipeline(VkDevice logicalDevice, const char* name, VulkanShaderProgram program, VkExtent2D& swapExtent, VkRenderPass& renderPass);
+            void load(VkDevice logicalDevice, const char* name, VulkanShaderProgram program, VkExtent2D& swapExtent, VkRenderPass& renderPass);
 
 
 

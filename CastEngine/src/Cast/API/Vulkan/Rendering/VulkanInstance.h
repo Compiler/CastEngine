@@ -96,6 +96,7 @@ namespace Cast{
             VkPipelineLayout _pipelineLayout;
             VkRenderPass _renderPass;
             std::unordered_map<const char*, VkPipeline> _pipelines;
+            VkPipeline _currentPipeline;
             VkPipeline _graphicsPipeline;
             std::vector<VkFramebuffer> _swapChainFramebuffers;
             VkCommandPool _graphicsCommandPool;

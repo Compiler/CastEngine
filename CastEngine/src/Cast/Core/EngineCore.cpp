@@ -14,7 +14,7 @@ namespace Cast{
 
 
         CAST_DEBUG("Loading contexts");
-        //RenderContext::setAPI(RenderContext::API::Vulkan);
+        RenderContext::setAPI(RenderContext::API::Vulkan);
         switch(RenderContext::GetAPI()){
             case RenderContext::API::OpenGL:{
                 _renderer = new OpenGLRenderer();

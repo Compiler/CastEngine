@@ -59,7 +59,7 @@ namespace Cast{
 
     }
 
-
+    
     void VulkanInstance::_createVertexBuffers(){
         VkDeviceSize bufferSize = sizeof(vertices[0]) * vertices.size();
        
@@ -120,7 +120,7 @@ namespace Cast{
 
     }
 
-
+    //Cleans up swap chain
     void VulkanInstance::_cleanupSwapChain(){
         for (size_t i = 0; i < _swapChainFramebuffers.size(); i++) {
             vkDestroyFramebuffer(_logicalDevice, _swapChainFramebuffers[i], nullptr);
@@ -280,6 +280,7 @@ namespace Cast{
             renderPassInfo.pClearValues = &_clearColor;
 
             vkCmdBeginRenderPass(_graphicsCommandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+            //TODO: THIS IS WHERE WE SET OUR PIPE!
             vkCmdBindPipeline(_graphicsCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, _graphicsPipeline); //VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR
             VkBuffer vertexBuffers[] = {_vertexBuffer};
             VkDeviceSize offsets[] = {0};

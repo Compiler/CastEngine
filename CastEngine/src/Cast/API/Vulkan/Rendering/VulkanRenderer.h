@@ -18,7 +18,7 @@ namespace Cast{
             void SetShader(const char* name, std::initializer_list<Shader> shaders);
 
 
-            ShaderProgram* GetShader(const char* name){};
+            ShaderProgram* GetShader(const char* name){CAST_WARN("FUNCTION NOT IMPLEMENTED");};
 
 
 
