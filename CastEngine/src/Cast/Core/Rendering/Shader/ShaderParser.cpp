@@ -37,9 +37,10 @@ namespace Cast{
         }
 
         CAST_LOG("Compiling '{}' to '{}'", fileName, outputName);
-        if(std::filesystem::exists(outputName)){
-            CAST_WARN("'{}' already exists, returning SPIR-V instead of compiling.", outputName);
-            std::vector<char> char_vec = FileLoaderFactory::readSPV(outputName);
+        std::string preface = std::string(CAST_INTERNAL_SHADER("")) + std::string(outputName);
+        if(std::filesystem::exists(preface)){
+            CAST_WARN("'{}' already exists, returning SPIR-V instead of compiling.", preface.c_str());
+            std::vector<char> char_vec = FileLoaderFactory::readSPV(preface.c_str());
             const uint32_t* casted = reinterpret_cast<const uint32_t*>(char_vec.data());
             return {casted, casted + char_vec.size()}; // this return the implicit type from return statement of the casted pointer
         }
@@ -62,10 +63,9 @@ namespace Cast{
 		compiler_output.resize(compiler_output.size() * (sizeof(uint32_t) / sizeof(char)), 0);
 
         //write
-        CAST_ERROR("We aren't writing the file to memory");
-        // std::ofstream fout(outputName, std::ios::out | std::ios::binary);
-        // fout.write((char*)&compiler_output[0], compiler_output.size());
-        // fout.close();
+        std::ofstream fout(preface, std::ios::out | std::ios::binary);
+        fout.write((char*)&compiler_output[0], compiler_output.size());
+        fout.close();
         return compiler_output;
 
     }
