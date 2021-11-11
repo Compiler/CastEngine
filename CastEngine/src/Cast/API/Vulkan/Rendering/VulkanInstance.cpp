@@ -376,7 +376,7 @@ namespace Cast{
 
     void VulkanInstance::_createGraphicsPipeline(){
         //default
-        _pipeline = new GraphicsPipeline(_logicalDevice, "passthrough", VulkanShaderProgram(_logicalDevice, CAST_INTERNAL_SHADER("passthrough_vert.spv"), CAST_INTERNAL_SHADER("red.spv")), _swapChainExtent, _renderPass);
+        _pipeline = new GraphicsPipeline(_logicalDevice, "passthrough", VulkanShaderProgram(_logicalDevice, CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("passthrough.frag")), _swapChainExtent, _renderPass);
         _graphicsPipeline = _pipeline->getPipeline();
     }
 

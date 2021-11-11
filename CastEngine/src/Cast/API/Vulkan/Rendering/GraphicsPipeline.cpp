@@ -149,7 +149,7 @@ namespace Cast{
         pipelineInfo.basePipelineIndex = -1; //Optional        
 
         if (vkCreateGraphicsPipelines(logicalDevice, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &_graphicsPipeline) != VK_SUCCESS) {
-            CAST_ERROR("failed to create graphics pipeline!");
+            CAST_FATAL("failed to create graphics pipeline!");
         }
 
         vkDestroyShaderModule(logicalDevice, _shaderInfo.vert_module, nullptr);

@@ -10,11 +10,12 @@ namespace Cast{
         void VulkanShaderProgram::loadShader(const char* shaderFilePath, Shader::ShaderType shaderType){
             std::string new_file_path = shaderFilePath;
             new_file_path += ".spv";
-            auto shader_spv_format = ShaderParser::compileGLSLToSPRV(shaderFilePath, new_file_path.c_str(), shaderType);)
+            auto shader_spv_format = ShaderParser::compileGLSLToSPRV(shaderFilePath, new_file_path.c_str(), shaderType);
             if(shader_spv_format.empty()){
                 CAST_FATAL("Shader '{}' couldnt not be compiled.", shaderFilePath);
             }
-            VkShaderModule shaderModule = _createShaderModule(logicalDevice, shader_spv_format);
+            CAST_FATAL("Redo");
+           // VkShaderModule shaderModule = _createShaderModule(logicalDevice, shader_spv_format);
         }
         void VulkanShaderProgram::loadShader(std::initializer_list<Shader> shaders){
             for(const auto& shader : shaders)loadShader(shader.filePath, shader.type);
@@ -26,8 +27,14 @@ namespace Cast{
             // if(vertexFilePath.substr(vertexFilePath.find_last_of(".")) != "spv"){
             //     CAST_DEBUG("'{}' is not a spv file, attempting to compile to spv...");
             // }
-            auto vertShaderCode = Cast::FileLoaderFactory::readSPV(vertFilePath);
-            auto fragShaderCode = Cast::FileLoaderFactory::readSPV(fragFilePath);
+
+            
+            //auto vertShaderCode = Cast::FileLoaderFactory::readSPV(vertFilePath);
+            //auto fragShaderCode = Cast::FileLoaderFactory::readSPV(fragFilePath);
+
+            auto vertShaderCode = Cast::ShaderParser::compileGLSLToSPRV(vertFilePath, "randv.spv", Shader::ShaderType::Vertex);
+            auto fragShaderCode = Cast::ShaderParser::compileGLSLToSPRV(fragFilePath, "randf.spv", Shader::ShaderType::Fragment);
+
 
             VkShaderModule vertShaderModule = _createShaderModule(logicalDevice, vertShaderCode);
             VkShaderModule fragShaderModule = _createShaderModule(logicalDevice, fragShaderCode);
@@ -58,6 +65,18 @@ namespace Cast{
             createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
             createInfo.codeSize = code.size();
             createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
+            VkShaderModule shaderModule;
+            if (vkCreateShaderModule(logicalDevice, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
+                CAST_ERROR("failed to create shader module!");
+            }
+            return shaderModule;
+        }
+
+        VkShaderModule VulkanShaderProgram::_createShaderModule(VkDevice& logicalDevice, const std::vector<uint32_t>& code){
+            VkShaderModuleCreateInfo createInfo{};
+            createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+            createInfo.codeSize = code.size();
+            createInfo.pCode = code.data();
             VkShaderModule shaderModule;
             if (vkCreateShaderModule(logicalDevice, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
                 CAST_ERROR("failed to create shader module!");

@@ -35,7 +35,8 @@ namespace Cast{
         }
         if(std::filesystem::exists(outputName)){
             CAST_WARN("Not compiling, '{}' already exists!", outputName);
-            return {};
+            auto char_vec = FileLoaderFactory::readSPV(outputName);
+            return std::vector<uint32_t>{char_vec.begin(), char_vec.end()};
         }
         std::string shaderSrc, errorSrc;
 		FileLoaderFactory::loadTextFromFile(fileName, shaderSrc);
@@ -49,7 +50,7 @@ namespace Cast{
         shaderc::SpvCompilationResult result = compiler.CompileGlslToSpv(shaderSrc, kind, errorSrc.data(), options);
         
         if(result.GetCompilationStatus() != shaderc_compilation_status_success){
-            CAST_FATAL("Error compiling glsl to sprv: {}", result.GetErrorMessage().c_str());
+            CAST_FATAL("Error compiling file '{}' glsl to sprv: {}", fileName, result.GetErrorMessage().c_str());
         }
 
         std::vector<uint32_t> compiler_output = { result.begin(), result.end() };

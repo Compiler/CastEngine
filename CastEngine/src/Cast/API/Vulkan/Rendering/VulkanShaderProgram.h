@@ -20,6 +20,7 @@ namespace Cast{
         private:
             bool _isSet = false;
             VkShaderModule _createShaderModule(VkDevice& logicalDevice, const std::vector<char>& code);
+            VkShaderModule _createShaderModule(VkDevice& logicalDevice, const std::vector<uint32_t>& code);
             PipeLineShaderInfo _pipelineData;
         public:
             VulkanShaderProgram()= default;

@@ -5,7 +5,7 @@ namespace Cast{
 
     void EngineCore::load(){
 
-        ShaderParser::compileGLSLToSPRV(CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("realtime_comp.spv"), Shader::ShaderType::Vertex);
+        //ShaderParser::compileGLSLToSPRV(CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("realtime_comp.spv"), Shader::ShaderType::Vertex);
         
 
 
