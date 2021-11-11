@@ -82,7 +82,8 @@ namespace Cast{
     };
 
     class VulkanInstance{
-        public:
+        friend class VulkanRenderer;
+        private:
 
             VulkanShaderProgram _shaderProgram;
             VkInstance _vulkanInstance;

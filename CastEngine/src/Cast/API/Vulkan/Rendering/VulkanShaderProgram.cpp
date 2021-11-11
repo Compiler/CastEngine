@@ -33,6 +33,7 @@ namespace Cast{
 
             VkPipelineShaderStageCreateInfo shaderStages[2] = {vertShaderStageInfo, fragShaderStageInfo};
             _pipelineData = {shaderStages[0], shaderStages[1], vertShaderModule, fragShaderModule};
+            _isSet = true;
             return _pipelineData;
         }
 
