@@ -32,8 +32,8 @@ namespace Cast{
             //auto vertShaderCode = Cast::FileLoaderFactory::readSPV(vertFilePath);
             //auto fragShaderCode = Cast::FileLoaderFactory::readSPV(fragFilePath);
 
-            auto vertShaderCode = Cast::ShaderParser::compileGLSLToSPRV(vertFilePath, "randv.spv", Shader::ShaderType::Vertex);
-            auto fragShaderCode = Cast::ShaderParser::compileGLSLToSPRV(fragFilePath, "randf.spv", Shader::ShaderType::Fragment);
+            auto vertShaderCode = Cast::ShaderParser::compileGLSLToSPRV(vertFilePath, CAST_INTERNAL_SHADER("randv.spv"), Shader::ShaderType::Vertex);
+            auto fragShaderCode = Cast::ShaderParser::compileGLSLToSPRV(fragFilePath, CAST_INTERNAL_SHADER("randf.spv"), Shader::ShaderType::Fragment);
 
 
             VkShaderModule vertShaderModule = _createShaderModule(logicalDevice, vertShaderCode);
@@ -76,7 +76,7 @@ namespace Cast{
             VkShaderModuleCreateInfo createInfo{};
             createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
             createInfo.codeSize = code.size();
-            createInfo.pCode = code.data();
+            createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
             VkShaderModule shaderModule;
             if (vkCreateShaderModule(logicalDevice, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
                 CAST_ERROR("failed to create shader module!");

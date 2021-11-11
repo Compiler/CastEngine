@@ -5,9 +5,6 @@ namespace Cast{
 
     void EngineCore::load(){
 
-        //ShaderParser::compileGLSLToSPRV(CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("realtime_comp.spv"), Shader::ShaderType::Vertex);
-        
-
 
         uint32_t extensionCount = 0;
         vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);

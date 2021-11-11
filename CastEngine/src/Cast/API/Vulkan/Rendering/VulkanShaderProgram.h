@@ -25,9 +25,9 @@ namespace Cast{
         public:
             VulkanShaderProgram()= default;
 
-            //TODO Implement these
             void loadShader(const char* shaderFilePath, Shader::ShaderType shaderType);
             void loadShader(std::initializer_list<Shader> shaders);
+            //TODO Implement these
             void compile(){CAST_WARN("THIS FUNCTION DOES NOTHING~!!!!");}
             void use(){CAST_WARN("THIS FUNCTION DOES NOTHING~!!!!");}
             //TODO end

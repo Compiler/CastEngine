@@ -34,9 +34,10 @@ namespace Cast{
             return {};
         }
         if(std::filesystem::exists(outputName)){
-            CAST_WARN("Not compiling, '{}' already exists!", outputName);
-            auto char_vec = FileLoaderFactory::readSPV(outputName);
-            return std::vector<uint32_t>{char_vec.begin(), char_vec.end()};
+            CAST_WARN("'{}' already exists, returning SPIR-V instead of compiling.", outputName);
+            std::vector<char> char_vec = FileLoaderFactory::readSPV(outputName);
+            const uint32_t* casted = reinterpret_cast<const uint32_t*>(char_vec.data());
+            return {casted, casted + char_vec.size()}; // this return the implicit type from return statement of the casted pointer
         }
         std::string shaderSrc, errorSrc;
 		FileLoaderFactory::loadTextFromFile(fileName, shaderSrc);
