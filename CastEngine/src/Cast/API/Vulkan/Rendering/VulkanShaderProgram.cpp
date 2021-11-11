@@ -2,26 +2,33 @@
 
 namespace Cast{
     
-        VulkanShaderProgram::VulkanShaderProgram(VkDevice& logicalDevice, const char* vertFilePath, const char* fragFilePath){
-            load(logicalDevice, vertFilePath, fragFilePath);
+        VulkanShaderProgram::VulkanShaderProgram(const char* vertFilePath, const char* fragFilePath){
+            load(vertFilePath, fragFilePath);
             _isSet = true;
         }
 
         void VulkanShaderProgram::loadShader(const char* shaderFilePath, Shader::ShaderType shaderType){
-            std::string new_file_path = shaderFilePath;
-            new_file_path += ".spv";
-            auto shader_spv_format = ShaderParser::compileGLSLToSPRV(shaderFilePath, new_file_path.c_str(), shaderType);
+            std::string shader_out_path = std::string(shaderFilePath) + ".spv";
+            auto shader_spv_format = ShaderParser::compileGLSLToSPRV(shaderFilePath, shader_out_path.c_str(), shaderType);
             if(shader_spv_format.empty()){
                 CAST_FATAL("Shader '{}' couldnt not be compiled.", shaderFilePath);
             }
-            CAST_FATAL("Redo");
-           // VkShaderModule shaderModule = _createShaderModule(logicalDevice, shader_spv_format);
+
+            // VkShaderModule shader_module = _createShaderModule(_logicalDevice, shader_spv_format);
+            // VkShaderStageFlagBits shader_bit = _getShaderBitFromType(shaderType);
+            // VkPipelineShaderStageCreateInfo shaderStageInfo{};
+            // shaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+            // shaderStageInfo.stage = shader_bit;
+            // shaderStageInfo.module = shader_module;
+            // shaderStageInfo.pName = "main";
+
+            //_shaderCreationData.push_back({shaderStageInfo, shader_module});
         }
         void VulkanShaderProgram::loadShader(std::initializer_list<Shader> shaders){
             for(const auto& shader : shaders)loadShader(shader.filePath, shader.type);
         }
 
-        PipeLineShaderInfo VulkanShaderProgram::load(VkDevice& logicalDevice, const char* vertFilePath, const char* fragFilePath){
+        PipeLineShaderInfo VulkanShaderProgram::load(const char* vertFilePath, const char* fragFilePath){
             //TODO Compile shaders to spv if they arent in that format
             // std::string vertexFilePath = vertFilePath;
             // if(vertexFilePath.substr(vertexFilePath.find_last_of(".")) != "spv"){
@@ -31,13 +38,14 @@ namespace Cast{
             
             //auto vertShaderCode = Cast::FileLoaderFactory::readSPV(vertFilePath);
             //auto fragShaderCode = Cast::FileLoaderFactory::readSPV(fragFilePath);
+            std::string vert_out_path = std::string(vertFilePath) + ".spv";
+            std::string frag_out_path = std::string(fragFilePath) + ".spv";
+            auto vertShaderCode = Cast::ShaderParser::compileGLSLToSPRV(vertFilePath, vert_out_path.c_str(), Shader::ShaderType::Vertex);
+            auto fragShaderCode = Cast::ShaderParser::compileGLSLToSPRV(fragFilePath, frag_out_path.c_str(), Shader::ShaderType::Fragment);
 
-            auto vertShaderCode = Cast::ShaderParser::compileGLSLToSPRV(vertFilePath, CAST_INTERNAL_SHADER("randv.spv"), Shader::ShaderType::Vertex);
-            auto fragShaderCode = Cast::ShaderParser::compileGLSLToSPRV(fragFilePath, CAST_INTERNAL_SHADER("randf.spv"), Shader::ShaderType::Fragment);
 
-
-            VkShaderModule vertShaderModule = _createShaderModule(logicalDevice, vertShaderCode);
-            VkShaderModule fragShaderModule = _createShaderModule(logicalDevice, fragShaderCode);
+            VkShaderModule vertShaderModule = _createShaderModule(vertShaderCode);
+            VkShaderModule fragShaderModule = _createShaderModule(fragShaderCode);
 
             VkPipelineShaderStageCreateInfo vertShaderStageInfo{};
             vertShaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
@@ -60,25 +68,25 @@ namespace Cast{
 
         //wraps the code in a vkshadermodule object before being passed to the pipeline
         //'code' is the bytecode representation of the glsl code - spirv 
-        VkShaderModule VulkanShaderProgram::_createShaderModule(VkDevice& logicalDevice, const std::vector<char>& code){
+        VkShaderModule VulkanShaderProgram::_createShaderModule(const std::vector<char>& code){
             VkShaderModuleCreateInfo createInfo{};
             createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
             createInfo.codeSize = code.size();
             createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
             VkShaderModule shaderModule;
-            if (vkCreateShaderModule(logicalDevice, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
+            if (vkCreateShaderModule(_logicalDevice, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
                 CAST_ERROR("failed to create shader module!");
             }
             return shaderModule;
         }
 
-        VkShaderModule VulkanShaderProgram::_createShaderModule(VkDevice& logicalDevice, const std::vector<uint32_t>& code){
+        VkShaderModule VulkanShaderProgram::_createShaderModule(const std::vector<uint32_t>& code){
             VkShaderModuleCreateInfo createInfo{};
             createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
             createInfo.codeSize = code.size();
             createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
             VkShaderModule shaderModule;
-            if (vkCreateShaderModule(logicalDevice, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
+            if (vkCreateShaderModule(_logicalDevice, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
                 CAST_ERROR("failed to create shader module!");
             }
             return shaderModule;

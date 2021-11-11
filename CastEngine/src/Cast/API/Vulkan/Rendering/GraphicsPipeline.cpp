@@ -151,6 +151,7 @@ namespace Cast{
         if (vkCreateGraphicsPipelines(logicalDevice, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &_graphicsPipeline) != VK_SUCCESS) {
             CAST_FATAL("failed to create graphics pipeline!");
         }
+       // for(auto& data : program.getPipeLineShaderInfo()) vkDestroyShaderModule(logicalDevice, data.shaderModule, nullptr);
 
         vkDestroyShaderModule(logicalDevice, _shaderInfo.vert_module, nullptr);
         vkDestroyShaderModule(logicalDevice, _shaderInfo.frag_module, nullptr);
