@@ -21,12 +21,9 @@ namespace Cast{
 
         if(_graphicsPipelineMap.find(name) == _graphicsPipelineMap.end()){
             CAST_LOG("no graphics pipeline set for the name '{}', creating new one", name);
-            VulkanShaderProgram program = VulkanShaderProgram();
-            //for(auto shader : shaders){
-            //    program.loadShader(shader.filePath, shader.type);
-            //}
-            //program.compile();
-            program.load(_instance->_logicalDevice, shaders.begin()->filePath, (shaders.begin() + 1)->filePath);
+            VulkanShaderProgram program = VulkanShaderProgram(_instance->_logicalDevice);
+            program.loadShader(shaders);
+            program.compile();
             GraphicsPipeline pipe{_instance->_logicalDevice, name, program, _instance->_swapChainExtent, _instance->_renderPass};
             _graphicsPipelineMap.emplace(name, pipe);
         }

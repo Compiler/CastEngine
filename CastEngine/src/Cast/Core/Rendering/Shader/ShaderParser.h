@@ -6,7 +6,7 @@
 #include <shaderc/shaderc.hpp>
 #include <fstream>
 #include <filesystem>
-
+#include <iostream>
 namespace Cast{
 
     class ShaderParser{

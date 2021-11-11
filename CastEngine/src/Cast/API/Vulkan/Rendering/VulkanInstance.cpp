@@ -158,12 +158,16 @@ namespace Cast{
 
     }
     GraphicsPipeline VulkanInstance::createDefaultPipeline(){
+        CAST_LOG("Default creation being called");
         Shader shader_vert{CAST_INTERNAL_SHADER("passthrough.vert"), Shader::ShaderType::Vertex};
-        Shader shader_frag{CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Vertex};
-        VulkanShaderProgram program =  VulkanShaderProgram();
-        program.load(this->_logicalDevice, shader_vert.filePath, shader_frag.filePath);
+        Shader shader_frag{CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Fragment};
+        VulkanShaderProgram program =  VulkanShaderProgram(this->_logicalDevice);
+        CAST_LOG("About to load shaders");
+        program.loadShader({shader_vert, shader_frag});
         program.compile();
+        CAST_LOG("Pipe starting");
         GraphicsPipeline pipe{_logicalDevice, "Default", program, _swapChainExtent, _renderPass};
+        CAST_LOG("Pipe done");
         return pipe;
     }
 
@@ -376,7 +380,14 @@ namespace Cast{
 
     void VulkanInstance::_createGraphicsPipeline(){
         //default
-        _pipeline = new GraphicsPipeline(_logicalDevice, "passthrough", VulkanShaderProgram(_logicalDevice, CAST_INTERNAL_SHADER("passthrough.vert"), CAST_INTERNAL_SHADER("passthrough.frag")), _swapChainExtent, _renderPass);
+        VulkanShaderProgram program{this->_logicalDevice};
+        Shader shader_vert{CAST_INTERNAL_SHADER("passthrough.vert"), Shader::ShaderType::Vertex};
+        Shader shader_frag{CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Fragment};
+        program.loadShader({shader_vert, shader_frag});
+        CAST_LOG("Loading complete");
+        CAST_LOG("Pipe starting~");
+        _pipeline = new GraphicsPipeline(_logicalDevice, "passthrough", program, _swapChainExtent, _renderPass);
+        CAST_LOG("Pipe Done~");
         _graphicsPipeline = _pipeline->getPipeline();
     }
 

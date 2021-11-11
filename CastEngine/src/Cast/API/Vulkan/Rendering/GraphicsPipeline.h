@@ -9,8 +9,8 @@ namespace Cast{
         private:
             VulkanShaderProgram _shaderProgram;
             const char* _name;
-            PipeLineShaderInfo _shaderInfo;
-            VkPipelineShaderStageCreateInfo _shaderStages[2];
+            //PipeLineShaderInfo _shaderInfo;
+            //VkPipelineShaderStageCreateInfo _shaderStages[2];
 
             VkPipeline _graphicsPipeline;
             VkPipelineLayout _graphicsPipelineLayout;

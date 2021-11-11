@@ -27,12 +27,16 @@ namespace Cast{
 
     }
 
-
     std::vector<uint32_t> ShaderParser::compileGLSLToSPRV(const char* fileName, const char* outputName, Shader::ShaderType type){
+
+
+
         if(!std::filesystem::exists(fileName)){
             CAST_ERROR("Error: The file '{}' does not exist", fileName);
             return {};
         }
+
+        CAST_LOG("Compiling '{}' to '{}'", fileName, outputName);
         if(std::filesystem::exists(outputName)){
             CAST_WARN("'{}' already exists, returning SPIR-V instead of compiling.", outputName);
             std::vector<char> char_vec = FileLoaderFactory::readSPV(outputName);
@@ -58,9 +62,10 @@ namespace Cast{
 		compiler_output.resize(compiler_output.size() * (sizeof(uint32_t) / sizeof(char)), 0);
 
         //write
-        std::ofstream fout(outputName, std::ios::out | std::ios::binary);
-        fout.write((char*)&compiler_output[0], compiler_output.size());
-        fout.close();
+        CAST_ERROR("We aren't writing the file to memory");
+        // std::ofstream fout(outputName, std::ios::out | std::ios::binary);
+        // fout.write((char*)&compiler_output[0], compiler_output.size());
+        // fout.close();
         return compiler_output;
 
     }

@@ -22,5 +22,7 @@ namespace Cast {
         //rgba default composition
         extern unsigned char* loadImage(const char name[], int* width, int* height, int* numOfColChannels, int req_comp = 4/*STBI_rgb_alpha = 4*/);
         extern void free(void* data);
+
+        extern bool file_exists(const std::string& name);
     }
 }

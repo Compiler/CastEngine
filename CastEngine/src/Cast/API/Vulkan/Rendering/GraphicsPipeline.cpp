@@ -11,16 +11,6 @@ namespace Cast{
         _name = name;
         _shaderProgram = program;
 
-        if(!_shaderProgram.isSet()){
-            CAST_ERROR("Loading default passthrough shaders");
-            _shaderInfo = _shaderProgram.load(logicalDevice, CAST_INTERNAL_SHADER("passthrough_vert.spv"), CAST_INTERNAL_SHADER("passthrough_frag.spv"));
-            _shaderStages[0] = _shaderInfo.vert_data;
-            _shaderStages[1] = _shaderInfo.frag_data;
-        }else{
-            _shaderInfo = _shaderProgram.getPipeLineShaderInfo();
-            _shaderStages[0] = _shaderInfo.vert_data;
-            _shaderStages[1] = _shaderInfo.frag_data;
-        }
 
         auto bindingDescription = Vertex_Tmp::getBindingDescription();
         auto attributeDescriptions = Vertex_Tmp::getAttributeDescriptions();
@@ -133,7 +123,7 @@ namespace Cast{
         VkGraphicsPipelineCreateInfo pipelineInfo{};
         pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
         pipelineInfo.stageCount = 2;
-        pipelineInfo.pStages = _shaderStages;
+        pipelineInfo.pStages = program.getShaderCreateInfo().data();
         pipelineInfo.pVertexInputState = &vertexInputInfo;
         pipelineInfo.pInputAssemblyState = &inputAssembly;
         pipelineInfo.pViewportState = &viewportState;
@@ -148,13 +138,13 @@ namespace Cast{
         pipelineInfo.basePipelineHandle = VK_NULL_HANDLE; //Optional
         pipelineInfo.basePipelineIndex = -1; //Optional        
 
+        
+        CAST_LOG("Attempting to create pipeline");
         if (vkCreateGraphicsPipelines(logicalDevice, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &_graphicsPipeline) != VK_SUCCESS) {
             CAST_FATAL("failed to create graphics pipeline!");
         }
-       // for(auto& data : program.getPipeLineShaderInfo()) vkDestroyShaderModule(logicalDevice, data.shaderModule, nullptr);
-
-        vkDestroyShaderModule(logicalDevice, _shaderInfo.vert_module, nullptr);
-        vkDestroyShaderModule(logicalDevice, _shaderInfo.frag_module, nullptr);
+        CAST_LOG("Pipeline completed");
+        for(auto& data : program.getShaderCreationData()) vkDestroyShaderModule(logicalDevice, data.shaderModule, nullptr);
     }
 
 

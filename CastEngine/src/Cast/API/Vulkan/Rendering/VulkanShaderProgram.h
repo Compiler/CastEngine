@@ -10,11 +10,6 @@
 namespace Cast{
     
     
-    struct PipeLineShaderInfo{
-        VkPipelineShaderStageCreateInfo vert_data;
-        VkPipelineShaderStageCreateInfo frag_data;
-        VkShaderModule vert_module, frag_module;
-    };
 
     struct ShaderPipelineData{
         VkPipelineShaderStageCreateInfo createInfo;
@@ -23,11 +18,10 @@ namespace Cast{
     class VulkanShaderProgram : public ShaderProgram{
 
         private:
-            bool _isSet = false;
             VkShaderModule _createShaderModule(const std::vector<char>& code);
             VkShaderModule _createShaderModule(const std::vector<uint32_t>& code);
-            PipeLineShaderInfo _pipelineData;
             std::vector<ShaderPipelineData> _shaderCreationData;
+            std::vector<VkPipelineShaderStageCreateInfo> _shaderCreateInfo;
 
             VkDevice _logicalDevice;
         public:
@@ -41,11 +35,10 @@ namespace Cast{
             void use(){CAST_WARN("THIS FUNCTION DOES NOTHING~!!!!");}
             //TODO end
 
-            //std::vector<ShaderPipelineData>& getShaderCreationData(){return this->_shaderCreationData;}
-            VulkanShaderProgram(const char* vertFilePath, const char* fragFilePath);
-            PipeLineShaderInfo load(const char* vertFilePath, const char* fragFilePath);
-            inline PipeLineShaderInfo getPipeLineShaderInfo(){return _pipelineData;}
-            inline bool isSet(){return _isSet;}
+            std::vector<ShaderPipelineData>& getShaderCreationData(){return this->_shaderCreationData;}
+            std::vector<VkPipelineShaderStageCreateInfo>& getShaderCreateInfo(){return this->_shaderCreateInfo;}
+            //PipeLineShaderInfo load(const char* vertFilePath, const char* fragFilePath);
+            inline bool isSet(){return true;}
             ~VulkanShaderProgram(){}
 
         private:
@@ -66,6 +59,7 @@ namespace Cast{
                     default:
                         CAST_FATAL("Failed to deduce shaderc type");
                     }
+            }
     };
 
 }
