@@ -7,6 +7,19 @@ namespace Cast{
             _isSet = true;
         }
 
+        void VulkanShaderProgram::loadShader(const char* shaderFilePath, Shader::ShaderType shaderType){
+            std::string new_file_path = shaderFilePath;
+            new_file_path += ".spv";
+            auto shader_spv_format = ShaderParser::compileGLSLToSPRV(shaderFilePath, new_file_path.c_str(), shaderType);)
+            if(shader_spv_format.empty()){
+                CAST_FATAL("Shader '{}' couldnt not be compiled.", shaderFilePath);
+            }
+            VkShaderModule shaderModule = _createShaderModule(logicalDevice, shader_spv_format);
+        }
+        void VulkanShaderProgram::loadShader(std::initializer_list<Shader> shaders){
+            for(const auto& shader : shaders)loadShader(shader.filePath, shader.type);
+        }
+
         PipeLineShaderInfo VulkanShaderProgram::load(VkDevice& logicalDevice, const char* vertFilePath, const char* fragFilePath){
             //TODO Compile shaders to spv if they arent in that format
             // std::string vertexFilePath = vertFilePath;

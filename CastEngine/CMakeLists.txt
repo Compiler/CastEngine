@@ -82,3 +82,5 @@ target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE glfw ${GLFW_LIBRARIES})
 target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE fmt)
 target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE vulkan-1)
 
+target_link_libraries("${LIBRARY_PROJECT_NAME}" PUBLIC shaderc_shared)
+

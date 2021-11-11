@@ -3,6 +3,7 @@
 #include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Utils/Files/FileLoaderFactory.h>
 #include <Cast/Core/Rendering/Shader/ShaderProgram.h>
+#include <Cast/Core/Rendering/Shader/ShaderParser.h>
 #include <string>
 #include <iostream>
 #include <vector>
@@ -24,8 +25,8 @@ namespace Cast{
             VulkanShaderProgram()= default;
 
             //TODO Implement these
-            void loadShader(const char* shaderFilePath, Shader::ShaderType shaderType){CAST_WARN("THIS FUNCTION DOES NOTHING~!!!!");}
-            void loadShader(std::initializer_list<Shader> shaders){CAST_WARN("THIS FUNCTION DOES NOTHING~!!!!");}
+            void loadShader(const char* shaderFilePath, Shader::ShaderType shaderType);
+            void loadShader(std::initializer_list<Shader> shaders);
             void compile(){CAST_WARN("THIS FUNCTION DOES NOTHING~!!!!");}
             void use(){CAST_WARN("THIS FUNCTION DOES NOTHING~!!!!");}
             //TODO end

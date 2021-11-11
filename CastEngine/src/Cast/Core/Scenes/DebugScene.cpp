@@ -4,9 +4,9 @@ namespace Cast{
 
     void DebugScene::load(){
         _renderer->CreateShader("passthrough", {{CAST_INTERNAL_SHADER("passthrough_vert.spv"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("passthrough_frag.spv"), Shader::ShaderType::Fragment}});
-        _renderer->CreateShader("red", {{CAST_INTERNAL_SHADER("passthrough_vert.spv"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("red_frag.spv"), Shader::ShaderType::Fragment}});
-        _renderer->SetShader("red");
+        _renderer->CreateShader("red", {{CAST_INTERNAL_SHADER("realtime_comp.spv"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("red_frag.spv"), Shader::ShaderType::Fragment}});
         _renderer->SetShader("passthrough");
+        _renderer->SetShader("red");
         CAST_DEBUG("Loaded shader");
     }
     void DebugScene::update(){}

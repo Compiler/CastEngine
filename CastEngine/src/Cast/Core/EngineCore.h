@@ -10,6 +10,7 @@
 
 #include <Cast/API/Vulkan/Rendering/VulkanRenderer.h>
 #include <Cast/API/Vulkan/Rendering/VulkanContext.h>
+#include <Cast/Core/Rendering/Shader/ShaderParser.h>
 
 namespace Cast{
 
