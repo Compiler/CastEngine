@@ -30,7 +30,9 @@ namespace Cast{
             void CreateShader(const char* name, std::initializer_list<Shader> shaders);
             //TODO: Error check so we dont null out on bad names
             OpenGLShaderProgram& GetShader(const char* name){return _shaderMap[_shaderMapNamed[std::string(name)]];};
-            void SetShader(const char* name){CAST_WARN("Unimplemented");};
+            void SetShader(const char* name){
+                this->GetShader(name).use();
+            };
 
             void Draw();
 
