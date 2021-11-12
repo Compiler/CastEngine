@@ -104,8 +104,8 @@ namespace Cast{
             VkPipeline _graphicsPipeline;
             std::vector<VkFramebuffer> _swapChainFramebuffers;
             VkCommandPool _graphicsCommandPool;
-            VkBuffer _vertexBuffer;
-            VkDeviceMemory _vertexBufferMemory;
+            VulkanBuffer vertexBuffer;
+
 
             inline void _createInstance(const char* appName, const char* engineName);
             inline void _createDebugMessenger();

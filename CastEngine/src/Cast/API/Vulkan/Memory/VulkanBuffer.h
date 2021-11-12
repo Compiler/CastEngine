@@ -14,6 +14,7 @@ namespace Cast{
             VkBuffer _buffer;
             VkDeviceMemory _bufferMemory;
         public:
+            VulkanBuffer() = default;
             VulkanBuffer(VkPhysicalDevice& physicalDevice, VkDevice& logicalDevice):_physicalDevice(physicalDevice), _logicalDevice(logicalDevice){
 
             }
@@ -92,6 +93,12 @@ namespace Cast{
                 vkQueueWaitIdle(queue);
 
                 vkFreeCommandBuffers(logicalDevice, commandPool, 1, &commandBuffer);
+            }
+
+
+            void unload(){
+                vkDestroyBuffer(_logicalDevice,_buffer, nullptr);
+                vkFreeMemory(_logicalDevice, _bufferMemory, nullptr);
             }
     };
 

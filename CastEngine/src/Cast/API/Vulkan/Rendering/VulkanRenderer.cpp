@@ -47,8 +47,12 @@ namespace Cast{
         VulkanInstance::vertices.push_back({glm::vec4(bottomLeftX, bottomLeftY, 1, 1.0), glm::vec4(1,0,1,1) });
         VulkanInstance::vertices.push_back({glm::vec4(bottomLeftX + size, bottomLeftY, 1, 1.0), glm::vec4(1,0,1,1) });
         VulkanInstance::vertices.push_back({glm::vec4(bottomLeftX + size / 2.0, bottomLeftY + size, 1, 1.0), glm::vec4(1,0,1,1) });
+
     }
     void VulkanRenderer::Draw(){
+        _instance->_createVertexBuffers();
+        _instance->_createGraphicsCommandBuffers();
+        _instance->_createSyncObjects();
         VulkanInstance::vertices.clear();
     }
 

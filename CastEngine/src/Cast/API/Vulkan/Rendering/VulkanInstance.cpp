@@ -41,7 +41,7 @@ namespace Cast{
         VkBuffer stagingBuffer;
         VkDeviceMemory stagingBufferMemory;
         VulkanBuffer staging{_physicalDevice, _logicalDevice};
-        VulkanBuffer vertex{_physicalDevice, _logicalDevice};
+        vertexBuffer = {_physicalDevice, _logicalDevice};
         staging.createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
         stagingBuffer = staging.getBuffer();
         stagingBufferMemory = staging.getDeviceMemory();
@@ -53,10 +53,8 @@ namespace Cast{
         memcpy(data, vertices.data(), (size_t) bufferSize);
         vkUnmapMemory(_logicalDevice, stagingBufferMemory);
         
-        vertex.createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
-        _vertexBuffer = vertex.getBuffer();
-        _vertexBufferMemory = vertex.getDeviceMemory();
-        VulkanBuffer::CopyBuffer(stagingBuffer, _vertexBuffer, bufferSize, _graphicsCommandPool, _graphicsQueue, _logicalDevice);
+        vertexBuffer.createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+        VulkanBuffer::CopyBuffer(stagingBuffer, vertexBuffer.getBuffer(), bufferSize, _graphicsCommandPool, _graphicsQueue, _logicalDevice);
         
         vkDestroyBuffer(_logicalDevice, stagingBuffer, nullptr);
         vkFreeMemory(_logicalDevice, stagingBufferMemory, nullptr);
@@ -239,7 +237,7 @@ namespace Cast{
             vkCmdBeginRenderPass(_graphicsCommandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
             //TODO: THIS IS WHERE WE SET OUR PIPE!
             vkCmdBindPipeline(_graphicsCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, _graphicsPipeline); //VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR
-            VkBuffer vertexBuffers[] = {_vertexBuffer};
+            VkBuffer vertexBuffers[] = {vertexBuffer.getBuffer()};
             VkDeviceSize offsets[] = {0};
             vkCmdBindVertexBuffers(_graphicsCommandBuffers[i], 0, 1, vertexBuffers, offsets);
             vkCmdDraw(_graphicsCommandBuffers[i], 6, 1, 0, 0);
@@ -739,8 +737,7 @@ namespace Cast{
     void VulkanInstance::unload(){
         CAST_DEBUG("Unloading VulkanInstance...");
         _cleanupSwapChain();
-        vkDestroyBuffer(_logicalDevice,_vertexBuffer, nullptr);
-        vkFreeMemory(_logicalDevice, _vertexBufferMemory, nullptr);
+        vertexBuffer.unload();
         vkDeviceWaitIdle(_logicalDevice);//wait for queue operations to finish for _logicalDevice
         for (size_t i = 0; i < _MAX_FRAMES_IN_FLIGHT; i++) {
             vkDestroySemaphore(_logicalDevice, _s_imagesAvailable[i], nullptr);
