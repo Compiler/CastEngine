@@ -4,8 +4,6 @@ namespace Cast{
 
 
     void EngineCore::load(){
-        CAST_LOG("HERE IS UNIX {}", UNIX);
-
 
         uint32_t extensionCount = 0;
         vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
