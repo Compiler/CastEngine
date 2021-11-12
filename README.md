@@ -8,7 +8,6 @@
 - Clone the repo and include the submodules
 - Add MinGW64 binaries to your environment variables into the path
 - ```> git clone --recurse-submodules -j8 git@github.com:Compiler/CastEngine.git```
-- ```> make```
 
 ### MSYS2
 - Download and install the installer from https://www.msys2.org/
@@ -38,3 +37,9 @@
   - sudo apt-get install xorg-dev libglu1-mesa-dev
   - Install the vulkan sdk
 - run: ```export VULKAN_SDK=``` and put your path to the parent of the bin folder
+  - This will create temp env, add the above line to ur bashrc file
+
+
+# Building and running after the above setup
+- ```> make```
+- ```> make run_vulkan``` or ```make run_opengl```
