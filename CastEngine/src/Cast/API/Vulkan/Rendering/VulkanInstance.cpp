@@ -34,39 +34,17 @@ namespace Cast{
     }
 
 
-    void VulkanInstance::_createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory){
-        VkBufferCreateInfo bufferInfo{};
-        bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
-        bufferInfo.usage = usage;
-        bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-        bufferInfo.size = size;
-
-        if (vkCreateBuffer(_logicalDevice, &bufferInfo, nullptr, &buffer) != VK_SUCCESS) {
-            CAST_ERROR("failed to create vertex buffer!");
-        }
-
-        VkMemoryRequirements memRequirements;
-        vkGetBufferMemoryRequirements(_logicalDevice, buffer, &memRequirements);
-        VkMemoryAllocateInfo allocInfo{};
-        allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-        allocInfo.allocationSize = memRequirements.size;
-        allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
-        if (vkAllocateMemory(_logicalDevice, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS) {
-            CAST_ERROR("failed to allocate vertex buffer memory!");
-        }
-        vkBindBufferMemory(_logicalDevice, buffer, bufferMemory, 0);
-
-
-    }
-
     
     void VulkanInstance::_createVertexBuffers(){
         VkDeviceSize bufferSize = sizeof(vertices[0]) * vertices.size();
        
         VkBuffer stagingBuffer;
         VkDeviceMemory stagingBufferMemory;
-        _createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT, stagingBuffer, stagingBufferMemory);
-
+        VulkanBuffer staging{_physicalDevice, _logicalDevice};
+        VulkanBuffer vertex{_physicalDevice, _logicalDevice};
+        staging.createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
+        stagingBuffer = staging.getBuffer();
+        stagingBufferMemory = staging.getDeviceMemory();
 
         
 
@@ -75,50 +53,16 @@ namespace Cast{
         memcpy(data, vertices.data(), (size_t) bufferSize);
         vkUnmapMemory(_logicalDevice, stagingBufferMemory);
         
-        _createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, _vertexBuffer, _vertexBufferMemory);
-        _copyBuffer(stagingBuffer, _vertexBuffer, bufferSize);
+        vertex.createBuffer(bufferSize, VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+        _vertexBuffer = vertex.getBuffer();
+        _vertexBufferMemory = vertex.getDeviceMemory();
+        VulkanBuffer::CopyBuffer(stagingBuffer, _vertexBuffer, bufferSize, _graphicsCommandPool, _graphicsQueue, _logicalDevice);
         
         vkDestroyBuffer(_logicalDevice, stagingBuffer, nullptr);
         vkFreeMemory(_logicalDevice, stagingBufferMemory, nullptr);
 
     }
 
-    void VulkanInstance::_copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size){
-        VkCommandBufferAllocateInfo allocInfo{};
-        allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
-        allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-        allocInfo.commandPool = _graphicsCommandPool;
-        allocInfo.commandBufferCount = 1;
-        VkCommandBuffer commandBuffer;
-        vkAllocateCommandBuffers(_logicalDevice, &allocInfo, &commandBuffer);
-
-
-        VkCommandBufferBeginInfo beginInfo{};
-        beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
-        beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-
-        vkBeginCommandBuffer(commandBuffer, &beginInfo);
-
-        VkBufferCopy copyRegion{};
-        //copyRegion.srcOffset = 0;
-        //copyRegion.dstOffset = 0;
-        copyRegion.size = size;
-        vkCmdCopyBuffer(commandBuffer, srcBuffer, dstBuffer, 1, &copyRegion);
-        vkEndCommandBuffer(commandBuffer);
-
-
-        VkSubmitInfo submitInfo{};
-        submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
-        submitInfo.commandBufferCount = 1;
-        submitInfo.pCommandBuffers = &commandBuffer;
-
-        vkQueueSubmit(_graphicsQueue, 1, &submitInfo, VK_NULL_HANDLE);
-        vkQueueWaitIdle(_graphicsQueue);
-
-        vkFreeCommandBuffers(_logicalDevice, _graphicsCommandPool, 1, &commandBuffer);
-
-
-    }
 
     //Cleans up swap chain
     void VulkanInstance::_cleanupSwapChain(){

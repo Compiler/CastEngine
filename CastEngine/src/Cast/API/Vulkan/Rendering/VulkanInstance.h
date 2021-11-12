@@ -6,6 +6,7 @@
 #include <Cast/API/Vulkan/DebugUtils/VkDebugUtils.h>
 #include <Cast/API/Vulkan/Rendering/VulkanShaderProgram.h>
 #include <Cast/API/Vulkan/Rendering/GraphicsPipeline.h>
+#include <Cast/API/Vulkan/Memory/VulkanBuffer.h>
 
 #include <vector>
 #include <cstring>
@@ -124,20 +125,6 @@ namespace Cast{
             inline void _createSyncObjects();
             inline void _cleanupSwapChain();
             inline void _createVertexBuffers();
-
-            inline void _createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory);
-            inline void _copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size);
-            uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties) {
-                VkPhysicalDeviceMemoryProperties memProperties;
-                vkGetPhysicalDeviceMemoryProperties(_physicalDevice, &memProperties);
-                for (uint32_t i = 0; i < memProperties.memoryTypeCount; i++) {
-                     if ((typeFilter & (1 << i)) && (memProperties.memoryTypes[i].propertyFlags & properties) == properties){
-                        return i;
-                    }
-                }
-                return 4444;
-                CAST_ERROR("failed to find suitable memory type!");
-            }
 
 
             const int _MAX_FRAMES_IN_FLIGHT = 2;

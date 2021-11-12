@@ -43,6 +43,7 @@ add_library(
 	src/Cast/API/Vulkan/Rendering/GraphicsPipeline.h
 	src/Cast/API/Vulkan/Rendering/VulkanRenderer.h
 	src/Cast/API/Vulkan/Rendering/VulkanShaderProgram.h
+	src/Cast/API/Vulkan/Memory/VulkanBuffer.h
 	src/Cast/API/Vulkan/DebugUtils/VkDebugUtils.cpp
 	src/Cast/API/Vulkan/DebugUtils/VkDebugUtils.h
 	src/Cast/API/OpenGL/OpenGLWindow.cpp
