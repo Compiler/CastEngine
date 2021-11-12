@@ -14,9 +14,16 @@
 
 namespace Cast{
     class EngineCore{
+        friend class Entry;
         private:
             Renderer* _renderer;
+            VulkanRenderer* _vulkanRenderer;
+            OpenGLRenderer* _openglRenderer;
+
             RenderContext* _renderContext;
+            VulkanContext* _vulkanRenderContext;
+            OpenGLContext* _openglRenderContext;
+
             DebugScene _scene{};
         public:
             enum StartState{ OpenGL = 0, Vulkan = 1 };

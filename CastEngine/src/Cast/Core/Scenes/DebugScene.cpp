@@ -11,10 +11,12 @@ namespace Cast{
     }
     void DebugScene::update(){}
     void DebugScene::render(){
+        static float offset = 0;
+        offset += 0.000001;
         //_renderer->GetShader("passthrough")->use();
         static glm::vec3 verts[3]{glm::vec3(-1, -1, 1), glm::vec3(-1,1,1), glm::vec3(1,1,1)};
         static glm::vec3 cols[3]{glm::vec3(0, 1, 1), glm::vec3(1,1,0), glm::vec3(1,1,1)};
-        _renderer->SubmitTriangle(-1.5, -0.5, 1);
+        _renderer->SubmitTriangle(-1.5 + offset, -0.5, 1);
         _renderer->Draw();
     }
     void DebugScene::unload(){}

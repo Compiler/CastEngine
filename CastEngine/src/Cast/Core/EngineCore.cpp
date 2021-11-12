@@ -4,21 +4,17 @@ namespace Cast{
 
     void EngineCore::swapAPI(RenderContext::API newAPI){
         RenderContext::setAPI(newAPI);
-        delete _renderer;
-        _renderContext->Unload();
-        delete _renderContext;
+        CAST_WARN("UNloading Current API");
         switch(RenderContext::GetAPI()){
             case RenderContext::API::OpenGL:{
-                _renderer = new OpenGLRenderer();
-                _renderContext = new OpenGLContext();
-                _renderContext->Load();
+                _renderer = _openglRenderer;
+                _renderContext = _openglRenderContext;
                 CAST_DEBUG("Created OpenGL Context");
                 break;
             };
             case RenderContext::API::Vulkan:{
-                _renderContext = new VulkanContext();
-                _renderContext->Load();
-                _renderer = new VulkanRenderer(static_cast<VulkanContext*>(_renderContext)->getVulkanInstance());
+                _renderer = _vulkanRenderer;
+                _renderContext = _vulkanRenderContext;
                 CAST_DEBUG("Created Vulkan Context");
                 break;
             };
@@ -35,54 +31,46 @@ namespace Cast{
         vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
         CAST_DEBUG("Vulkan Extensions supported: {}", extensionCount);
 
+        CAST_DEBUG("Loading renderers");
 
+        _openglRenderContext = new OpenGLContext();
+        _openglRenderContext->Load();
+        _openglRenderer = new OpenGLRenderer();
+        CAST_LOG("Loading Vulkan");
+        _vulkanRenderContext = new VulkanContext();
+        _vulkanRenderContext->Load();
+        _vulkanRenderer = new VulkanRenderer(_vulkanRenderContext->getVulkanInstance());
 
         CAST_DEBUG("Loading contexts");
         switch(state){
             case StartState::OpenGL:{
-                RenderContext::setAPI(RenderContext::API::OpenGL);
+                swapAPI(RenderContext::API::OpenGL);
                 break;
             }
             case StartState::Vulkan:{
-                RenderContext::setAPI(RenderContext::API::Vulkan);
+                swapAPI(RenderContext::API::Vulkan);
                 break;
             }
             default:{
-                RenderContext::setAPI(RenderContext::API::OpenGL);
+                swapAPI(RenderContext::API::OpenGL);
                 break;
             }
 
         }
 
-        switch(RenderContext::GetAPI()){
-            case RenderContext::API::OpenGL:{
-                _renderer = new OpenGLRenderer();
-                _renderContext = new OpenGLContext();
-                _renderContext->Load();
-                CAST_DEBUG("Created OpenGL Context");
-                break;
-            };
-            case RenderContext::API::Vulkan:{
-                _renderContext = new VulkanContext();
-                _renderContext->Load();
-                _renderer = new VulkanRenderer(static_cast<VulkanContext*>(_renderContext)->getVulkanInstance());
-                CAST_DEBUG("Created Vulkan Context");
-                break;
-            };
-            default: CAST_FATAL("Window type not supported");
-        }
-        CAST_DEBUG("Loading scene");
-        _scene.setRenderer(_renderer);
-        _scene.load();
+
     }
 
     void EngineCore::update(){
         _scene.update();
         InputManager::clear();
         _renderContext->Update();
+        if(InputManager::isKeyReleased(KeyCodes::KEY_ESCAPE)) this->_renderContext->getWindow()->destroy();
         if(InputManager::isKeyReleased(KeyCodes::KEY_SPACE)){
-            CAST_LOG("XD");
-            swapAPI(RenderContext::API::Vulkan);
+            static bool state = false;
+            if(state)swapAPI(RenderContext::API::OpenGL);
+            else swapAPI(RenderContext::API::Vulkan);
+            state = !state;
         }
     }
 
