@@ -37,6 +37,7 @@
   - sudo apt-get install xorg-dev libglu1-mesa-dev
   - Install the vulkan sdk
 - run: ```export VULKAN_SDK=``` and put your path to the parent of the bin folder
+  - This will create temp env, add the above line to ur bashrc file
 
 
 # Building and running after the above setup
