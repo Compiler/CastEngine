@@ -1,6 +1,6 @@
 #pragma once
 #define GLFW_INCLUDE_VULKAN
-#include <vulkan/vulkan.h>
+#include <Cast/API/Vulkan/VulkanIncludeWrapper.h>
 #include <glm/glm.hpp>
 #include <Cast/Core/Utils/Files/FileLoaderFactory.h>
 #include <Cast/API/Vulkan/DebugUtils/VkDebugUtils.h>

@@ -11,10 +11,22 @@ endif()
 
 if(LINUX)
     message("LINUX MACHINE")
+	set(OpenGL_GL_PREFERENCE "GLVND")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
     set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fPIC" )
+    set(VULKAN_ROOT "$ENV{VULKAN_SDK}")
+    set(VULKAN_LIB "${VULKAN_ROOT}/lib/")
+    set(VULKAN_INCLUDE "${VULKAN_ROOT}/include")
+    
+else()
+    set(VULKAN_ROOT "$ENV{VULKAN_SDK}")
+    set(VULKAN_LIB "${VULKAN_ROOT}/Lib/")
+    set(VULKAN_INCLUDE "${VULKAN_ROOT}/Include")
+
 endif()
 
+    
+message(STATUS "${VULKAN_ROOT}")
 set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -O3 -fPIC" )
 set(EXE_FINAL_NAME "CastEngine_Driver")
 
@@ -27,9 +39,6 @@ option(BUILD_SHARED_LIBS "" OFF)
 set(ROOT "${CMAKE_SOURCE_DIR}")
 set(DEPENDENCIES "${CMAKE_SOURCE_DIR}/Dependencies")
 
-set(VULKAN_ROOT "$ENV{VULKAN_SDK}") #potential to fail on unix
-set(VULKAN_LIB "${VULKAN_ROOT}/Lib/")
-set(VULKAN_INCLUDE "${VULKAN_ROOT}/Include")
 
 set(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}")
 set(EXECUTABLE_OUTPUT_PATH "${CMAKE_BINARY_DIR}")
@@ -43,3 +52,11 @@ add_subdirectory(Dependencies/glad)
 add_subdirectory(Dependencies/glm)
 add_subdirectory(Dependencies/fmt EXCLUDE_FROM_ALL)
 
+
+
+if(LINUX)
+    target_compile_definitions("${LIBRARY_PROJECT_NAME}" PUBLIC UNIX=1)
+else()
+    target_compile_definitions("${LIBRARY_PROJECT_NAME}" PUBLIC UNIX=0)
+endif()
+    
