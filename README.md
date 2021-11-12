@@ -1,5 +1,7 @@
 # CastEngine
 
+- Clone the repo with submodules: ```git clone --recurse-submodules -j8 ...```
+
 ## Building Windows
 
 ### MINGW
@@ -7,7 +9,7 @@
 - Rename C:/MinGW64/bin/mingw32-make.exe -> C:/MinGW64/bin/make.exe
 - Clone the repo and include the submodules
 - Add MinGW64 binaries to your environment variables into the path
-- ```> git clone --recurse-submodules -j8 git@github.com:Compiler/CastEngine.git```
+- Add the bin location to path
 
 ### MSYS2
 - Download and install the installer from https://www.msys2.org/
@@ -15,7 +17,7 @@
   - Reopen terminal and Run ```pacman -Su```
   - Run ```pacman -S --needed base-devel mingw-w64-x86_64-toolchain```
 - Rename C:/msys64/mingw64/bin/mingw32-make.exe -> C:/msys64/mingw64/bin/make.exe
-
+- Add the bin location to path
 
 ## Building your own GLSLC Binaries
 - Clone GLSLC from https://github.com/google/shaderc
@@ -30,7 +32,7 @@
 
 ## Building in Ubuntu
 - Make sure you have the correct tools
-  - Cmake, make
+  - CMAKE must be version 13 and above, Must have GCC/G++ support of C++17 and up
   - sudo apt-get install build-essential manpages-dev
   - sudo apt-get install mesa-utils
   - sudo apt-get install libgl1-mesa-dev
