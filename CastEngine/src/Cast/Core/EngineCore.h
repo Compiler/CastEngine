@@ -14,9 +14,16 @@
 
 namespace Cast{
     class EngineCore{
+        friend class Entry;
         private:
             Renderer* _renderer;
+            VulkanRenderer* _vulkanRenderer;
+            OpenGLRenderer* _openglRenderer;
+
             RenderContext* _renderContext;
+            VulkanContext* _vulkanRenderContext;
+            OpenGLContext* _openglRenderContext;
+
             DebugScene _scene{};
         public:
             enum StartState{ OpenGL = 0, Vulkan = 1 };
@@ -24,6 +31,8 @@ namespace Cast{
             void update();
             void render();
             void unload();
+
+            void swapAPI(RenderContext::API newAPI);
             inline bool closeRequested(){return _renderContext->getWindow()->shouldClose();}
 
     };

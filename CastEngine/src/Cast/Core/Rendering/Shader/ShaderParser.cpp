@@ -47,7 +47,7 @@ namespace Cast{
         std::string shaderSrc, errorSrc;
 		FileLoaderFactory::loadTextFromFile(fileName, shaderSrc);
         shaderc_shader_kind kind = castTypeToShaderCKind(type);
-
+        CAST_LOG("Compiling glsl");
         shaderc::CompileOptions options{};
         options.SetOptimizationLevel(shaderc_optimization_level_zero);
         options.SetGenerateDebugInfo();

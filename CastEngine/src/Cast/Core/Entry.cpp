@@ -24,9 +24,21 @@ namespace Cast{
             frameCount++;
             if(curTime - prevTime >= 1.0){
                 CAST_LOG("{}", frameCount);
-                frameCount = 0;
                 prevTime = curTime;
+                std::stringstream ss;
+                std::string api;
+                switch(RenderContext::GetAPI()){
+                    case RenderContext::API::OpenGL:{api = "OpenGL";break;};
+                    case RenderContext::API::Vulkan:{api = "Vulkan";break;};
+                    default: api = "NO_API";
+                }
+                ss << "[" << api << "] " << "Cast Engine : " << frameCount << " FPS";
+
+                glfwSetWindowTitle(core_engine._renderContext->getWindow()->getWindowHandle(), ss.str().c_str());
+                frameCount = 0;
+
             }
+
             core_engine.update();
             core_engine.render();
         }

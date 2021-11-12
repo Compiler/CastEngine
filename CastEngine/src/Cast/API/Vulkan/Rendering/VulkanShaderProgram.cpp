@@ -23,6 +23,7 @@ namespace Cast{
                 shader_module = _createShaderModule(shader_spv_format);
                 shader_bit = _getShaderBitFromType(shaderType);
             }
+            CAST_LOG("Creating pipe");
             VkPipelineShaderStageCreateInfo shaderStageInfo{};
             shaderStageInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
             shaderStageInfo.stage = shader_bit;
@@ -57,6 +58,7 @@ namespace Cast{
             createInfo.codeSize = code.size();
             createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
             VkShaderModule shaderModule;
+            CAST_LOG("Defining module");
             if (vkCreateShaderModule(_logicalDevice, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
                 CAST_ERROR("failed to create shader module!");
             }

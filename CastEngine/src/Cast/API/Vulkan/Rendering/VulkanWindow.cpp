@@ -20,6 +20,7 @@ namespace Cast{
 
         glfwMakeContextCurrent(_window);
         glfwSetWindowUserPointer(_window, reinterpret_cast<void*>(this));
+        glfwSetKeyCallback(_window, OpenGLCallbacks::keyCallback);
 
         CAST_DEBUG("Created Vulkan Window.");
 
