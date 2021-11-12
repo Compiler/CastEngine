@@ -13,14 +13,14 @@
 #include <Cast/Core/Rendering/Shader/ShaderParser.h>
 
 namespace Cast{
-
     class EngineCore{
         private:
             Renderer* _renderer;
             RenderContext* _renderContext;
             DebugScene _scene{};
         public:
-            void load();
+            enum StartState{ OpenGL = 0, Vulkan = 1 };
+            void load(StartState state = StartState::Vulkan);
             void update();
             void render();
             void unload();

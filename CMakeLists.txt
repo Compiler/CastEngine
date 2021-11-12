@@ -25,10 +25,15 @@ else()
 
 endif()
 
+set(RESOURCES_PATH "CastEngine/src/Resources/")
+set(RESOURCES_ABSOLUTE_PATH "${CMAKE_SOURCE_DIR}/${RESOURCES_PATH}")
     
 message(STATUS "${VULKAN_ROOT}")
 message(STATUS "${VULKAN_LIB}")
 message(STATUS "${VULKAN_INCLUDE}")
+message(STATUS "${RESOURCES_ABSOLUTE_PATH}")
+
+
 set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -O3 -fPIC" )
 set(EXE_FINAL_NAME "CastEngine_Driver")
 
@@ -61,4 +66,6 @@ if(LINUX)
 else()
     target_compile_definitions("${LIBRARY_PROJECT_NAME}" PUBLIC UNIX=0)
 endif()
+
+target_compile_definitions("${LIBRARY_PROJECT_NAME}" PUBLIC CAST_RESOURCES_ABSOLUTE_PATH="${RESOURCES_ABSOLUTE_PATH}")
     
