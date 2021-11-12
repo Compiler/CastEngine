@@ -1,6 +1,6 @@
 #pragma once
 #include <Cast/API/Vulkan/Rendering/VulkanShaderProgram.h>
-#include <Vulkan/vulkan.h>
+#include <Cast/API/Vulkan/VulkanIncludeWrapper.h>
 #include <Cast/API/Vulkan/Rendering/VulkanInstance.h>
 namespace Cast{
 

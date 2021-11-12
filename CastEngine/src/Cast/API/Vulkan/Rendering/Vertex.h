@@ -1,6 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
-#include <vulkan/vulkan.h>
+#include <Cast/API/Vulkan/VulkanIncludeWrapper.h>
 #include <array>
 namespace Cast{
 

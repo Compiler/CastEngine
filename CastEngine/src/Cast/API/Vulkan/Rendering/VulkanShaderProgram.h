@@ -1,5 +1,5 @@
 #pragma once
-#include <vulkan/vulkan.h>
+#include <Cast/API/Vulkan/VulkanIncludeWrapper.h>
 #include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Utils/Files/FileLoaderFactory.h>
 #include <Cast/Core/Rendering/Shader/ShaderProgram.h>
