@@ -2,6 +2,32 @@
 
 namespace Cast{
 
+    void EngineCore::swapAPI(RenderContext::API newAPI){
+        RenderContext::setAPI(newAPI);
+        delete _renderer;
+        _renderContext->Unload();
+        delete _renderContext;
+        switch(RenderContext::GetAPI()){
+            case RenderContext::API::OpenGL:{
+                _renderer = new OpenGLRenderer();
+                _renderContext = new OpenGLContext();
+                _renderContext->Load();
+                CAST_DEBUG("Created OpenGL Context");
+                break;
+            };
+            case RenderContext::API::Vulkan:{
+                _renderContext = new VulkanContext();
+                _renderContext->Load();
+                _renderer = new VulkanRenderer(static_cast<VulkanContext*>(_renderContext)->getVulkanInstance());
+                CAST_DEBUG("Created Vulkan Context");
+                break;
+            };
+            default: CAST_FATAL("Window type not supported");
+        }
+        CAST_DEBUG("Loading scene");
+        _scene.setRenderer(_renderer);
+        _scene.load();
+    }
 
     void EngineCore::load(StartState state){
 
@@ -22,11 +48,12 @@ namespace Cast{
                 break;
             }
             default:{
-                RenderContext::setAPI(RenderContext::API::Vulkan);
+                RenderContext::setAPI(RenderContext::API::OpenGL);
                 break;
             }
 
         }
+
         switch(RenderContext::GetAPI()){
             case RenderContext::API::OpenGL:{
                 _renderer = new OpenGLRenderer();
@@ -53,6 +80,10 @@ namespace Cast{
         _scene.update();
         InputManager::clear();
         _renderContext->Update();
+        if(InputManager::isKeyReleased(KeyCodes::KEY_SPACE)){
+            CAST_LOG("XD");
+            swapAPI(RenderContext::API::Vulkan);
+        }
     }
 
     void EngineCore::render(){

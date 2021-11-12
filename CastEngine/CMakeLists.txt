@@ -67,6 +67,7 @@ add_library(
 add_definitions(-D_DEBUG_MODE_ -DCAST_DEBUG_MODE)
 target_compile_definitions(${LIBRARY_PROJECT_NAME} PUBLIC "CAST_ENGINE_NAME=${LIBRARY_PROJECT_NAME}")
 
+
 target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${DEPENDENCIES}/glfw/include")
 target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${DEPENDENCIES}/glad/include")
 target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${DEPENDENCIES}/fmt/include")

@@ -24,6 +24,8 @@ namespace Cast{
             void update();
             void render();
             void unload();
+
+            void swapAPI(RenderContext::API newAPI);
             inline bool closeRequested(){return _renderContext->getWindow()->shouldClose();}
 
     };
