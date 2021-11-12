@@ -34,6 +34,16 @@ run:
 	$(POST_BUILD)
 	$(BUILD_LOC)run$(EXTENSION)
 
+run_vulkan:
+	$(PRE_BUILD)
+	$(POST_BUILD)
+	$(BUILD_LOC)run_vulkan$(EXTENSION)
+
+run_opengl:
+	$(PRE_BUILD)
+	$(POST_BUILD)
+	$(BUILD_LOC)run_opengl$(EXTENSION)
+
 clean:
 	$(PRE_BUILD)
 	$(POST_BUILD)
