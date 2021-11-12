@@ -3,9 +3,7 @@
 namespace Cast{
 
 
-    void EngineCore::load(){
-        CAST_LOG("HERE IS UNIX {}", UNIX);
-
+    void EngineCore::load(StartState state){
 
         uint32_t extensionCount = 0;
         vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
@@ -14,7 +12,21 @@ namespace Cast{
 
 
         CAST_DEBUG("Loading contexts");
-        RenderContext::setAPI(RenderContext::API::Vulkan);
+        switch(state){
+            case StartState::OpenGL:{
+                RenderContext::setAPI(RenderContext::API::OpenGL);
+                break;
+            }
+            case StartState::Vulkan:{
+                RenderContext::setAPI(RenderContext::API::Vulkan);
+                break;
+            }
+            default:{
+                RenderContext::setAPI(RenderContext::API::Vulkan);
+                break;
+            }
+
+        }
         switch(RenderContext::GetAPI()){
             case RenderContext::API::OpenGL:{
                 _renderer = new OpenGLRenderer();

@@ -6,8 +6,7 @@
 #include <vector>
 
 
-
-#define CAST_INTERNAL(x)         "../CastEngine/src/Resources/" x
+#define CAST_INTERNAL(x)         CAST_RESOURCES_ABSOLUTE_PATH x
 #define CAST_INTERNAL_SHADER(x)  CAST_INTERNAL("Shaders/") x
 #define CAST_INTERNAL_TEXTURE(x) CAST_INTERNAL("Textures/") x
 #define CAST_INTERNAL_MODEL(x)   CAST_INTERNAL("Models/") x

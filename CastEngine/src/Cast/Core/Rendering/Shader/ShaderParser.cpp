@@ -23,7 +23,6 @@ namespace Cast{
             location = shaderSrc.find("#include");
             
         }
-        CAST_LOG("Parse complete:\n{}", shaderSrc.c_str());
         return shaderSrc;
 
     }

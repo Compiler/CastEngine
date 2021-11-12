@@ -1,18 +1,6 @@
-#include <Cast/Core/Debug/Logger.h>
-#include <Cast/Core/EngineCore.h>
+#include <Cast/Core/Entry.h>
 
-int main(){
-    CAST_DEBUG("Engine starting");
-    Cast::EngineCore core_engine{};
-    core_engine.load();
-    while(!core_engine.closeRequested()){
-        core_engine.update();
-        core_engine.render();
-    }
-    CAST_WARN("Closing engine");
-    core_engine.unload();
-
-    return 0;
-
-
+int main(int argc, char *argv[]){
+    Cast::Entry entry{};
+    return entry.Run(argc, argv);
 }
