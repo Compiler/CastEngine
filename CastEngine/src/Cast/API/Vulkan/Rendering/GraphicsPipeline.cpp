@@ -29,9 +29,9 @@ namespace Cast{
 
         VkViewport viewport{};
         viewport.x = 0.0f;
-        viewport.y = swapExtent.height; //these 2 lines flip the y axis to be y up
-        viewport.width = swapExtent.width;
-        viewport.height = -swapExtent.height; //these 2 lines flip the y axis to be y up
+        viewport.y = 0.0f;
+        viewport.width = (float) swapExtent.width;
+        viewport.height = (float) swapExtent.height;
         viewport.minDepth = 0.0f;
         viewport.maxDepth = 1.0f;
 

@@ -22,8 +22,9 @@ namespace Cast{
         while(!core_engine.closeRequested()){
             double curTime = glfwGetTime();
             frameCount++;
-            if(curTime - prevTime >= 1.0){
+            if(frameCount == 60 || curTime - prevTime >= 1.0){
                 CAST_LOG("{}", frameCount);
+                while(curTime - prevTime < 1.0) curTime = glfwGetTime();
                 prevTime = curTime;
                 std::stringstream ss;
                 std::string api;
