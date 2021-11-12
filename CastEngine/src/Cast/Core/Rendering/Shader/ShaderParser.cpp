@@ -2,7 +2,7 @@
 
 namespace Cast{
 
-    const char* ShaderParser::getShaderSource(const char* filePath){
+    std::string ShaderParser::getShaderSource(const char* filePath){
 		std::string shaderSrc;
         CAST_LOG("Parsing: {}", filePath);
 		FileLoaderFactory::loadTextFromFile(filePath, shaderSrc);
@@ -23,7 +23,8 @@ namespace Cast{
             location = shaderSrc.find("#include");
             
         }
-        return shaderSrc.c_str();
+        CAST_LOG("Parse complete:\n{}", shaderSrc.c_str());
+        return shaderSrc;
 
     }
 

@@ -31,8 +31,10 @@ namespace Cast{
     uint32_t OpenGLShaderProgram::_loadShader(const char* fileName, Shader::ShaderType type){
         uint32_t shaderID;
 		CAST_LOG("Sending to parser");
-		const char* shaderSrcChar = ShaderParser::getShaderSource(fileName);
+		auto shaderSrc = ShaderParser::getShaderSource(fileName);
+		const char* shaderSrcChar = shaderSrc.c_str();
 		CAST_LOG("Done parsing");
+		CAST_LOG("{}", shaderSrc.c_str());
 		
         shaderID = glCreateShader(_getOpenGLValForShaderType(type));
 		glShaderSource(shaderID, 1, &shaderSrcChar, NULL);
@@ -51,6 +53,7 @@ namespace Cast{
                 else{
 					CAST_ERROR("SHADER::{} TYPE_UNKNOWN - TYPE = {}", shaderType.c_str(), type);
 				}
+				CAST_LOG("{}", shaderSrc.c_str());
 				CAST_ERROR("SHADER::{} COMPILATION FAILED - TYPE = {}", shaderType.c_str(), type);
 			}
 		}

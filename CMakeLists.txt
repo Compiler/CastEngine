@@ -16,7 +16,7 @@ if(LINUX)
     set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fPIC" )
     set(VULKAN_ROOT "$ENV{VULKAN_SDK}")
     set(VULKAN_LIB "${VULKAN_ROOT}/lib/")
-    set(VULKAN_INCLUDE "${VULKAN_ROOT}/include")
+    set(VULKAN_INCLUDE "${VULKAN_ROOT}/include/")
     
 else()
     set(VULKAN_ROOT "$ENV{VULKAN_SDK}")
@@ -27,6 +27,8 @@ endif()
 
     
 message(STATUS "${VULKAN_ROOT}")
+message(STATUS "${VULKAN_LIB}")
+message(STATUS "${VULKAN_INCLUDE}")
 set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -O3 -fPIC" )
 set(EXE_FINAL_NAME "CastEngine_Driver")
 
