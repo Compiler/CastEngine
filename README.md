@@ -32,7 +32,7 @@
 
 ## Building in Ubuntu
 - Make sure you have the correct tools
-  - Cmake, make
+  - CMAKE must be version 13 and above, Must have GCC/G++ support of C++17 and up
   - sudo apt-get install build-essential manpages-dev
   - sudo apt-get install mesa-utils
   - sudo apt-get install libgl1-mesa-dev
