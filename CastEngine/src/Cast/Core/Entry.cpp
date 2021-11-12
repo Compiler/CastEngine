@@ -9,10 +9,13 @@ namespace Cast{
         CAST_DEBUG("Engine starting");
         Cast::EngineCore core_engine{};
         Cast::EngineCore::StartState startingState = Cast::EngineCore::StartState::Vulkan;
+        CAST_LOG("{}", argc);
+        CAST_LOG("{}", argv[1]);
         if(argc != 0){
-            if(*argv[0] == 0)startingState = Cast::EngineCore::StartState::OpenGL;
-            if(*argv[0] == 1)startingState = Cast::EngineCore::StartState::Vulkan;
+            if(strcmp(argv[1], "OpenGL") == 0)startingState = Cast::EngineCore::StartState::OpenGL;
+            if(strcmp(argv[1], "Vulkan") == 0)startingState = Cast::EngineCore::StartState::Vulkan;
         }
+        CAST_LOG("Starting state: {}", startingState);
         core_engine.load(startingState);
         double prevTime = glfwGetTime();
         int frameCount = 0;

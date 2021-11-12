@@ -8,7 +8,6 @@ namespace Cast { namespace FileLoaderFactory{
         std::ifstream t(fileName);
         std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
         dst = str;
-        CAST_LOG("Loaded:\n{}", dst.c_str());
         if(dst.empty()){
             CAST_WARN("Couldn't open : '{}'", fileName);
         }

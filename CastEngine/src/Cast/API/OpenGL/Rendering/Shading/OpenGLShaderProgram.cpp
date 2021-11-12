@@ -34,7 +34,6 @@ namespace Cast{
 		auto shaderSrc = ShaderParser::getShaderSource(fileName);
 		const char* shaderSrcChar = shaderSrc.c_str();
 		CAST_LOG("Done parsing");
-		CAST_LOG("{}", shaderSrc.c_str());
 		
         shaderID = glCreateShader(_getOpenGLValForShaderType(type));
 		glShaderSource(shaderID, 1, &shaderSrcChar, NULL);
