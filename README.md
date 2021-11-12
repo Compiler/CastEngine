@@ -1,6 +1,6 @@
 # CastEngine
 
-- Clone the repo
+- Clone the repo with submodules: ```git clone --recurse-submodules -j8 ...```
 
 ## Building Windows
 
