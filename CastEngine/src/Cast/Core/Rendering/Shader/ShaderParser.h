@@ -12,7 +12,7 @@ namespace Cast{
     class ShaderParser{
 
         public:
-            static const char* getShaderSource(const char* filePath);
+            static std::string getShaderSource(const char* filePath);
             static std::vector<uint32_t> compileGLSLToSPRV(const char* fileName, const char* outputName, Shader::ShaderType type);
             static shaderc_shader_kind castTypeToShaderCKind(Shader::ShaderType type);
     };
