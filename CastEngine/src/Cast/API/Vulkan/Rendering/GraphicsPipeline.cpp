@@ -125,7 +125,7 @@ namespace Cast{
 
 
         createDescriptorSetLayout(logicalDevice);
-        
+
         VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
         pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
         pipelineLayoutInfo.setLayoutCount = 0; //Optional
@@ -169,6 +169,7 @@ namespace Cast{
     void GraphicsPipeline::unload(VkDevice& logicalDevice){
         vkDestroyPipeline(logicalDevice, _graphicsPipeline, nullptr);
         vkDestroyPipelineLayout(logicalDevice, _graphicsPipelineLayout, nullptr);
+        vkDestroyDescriptorSetLayout(logicalDevice, _descriptorSetLayout, nullptr);
     }
     
 

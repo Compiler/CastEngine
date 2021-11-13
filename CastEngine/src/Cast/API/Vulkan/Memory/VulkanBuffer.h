@@ -15,9 +15,8 @@ namespace Cast{
             VkDeviceMemory _bufferMemory;
         public:
             VulkanBuffer() = default;
-            VulkanBuffer(VkPhysicalDevice& physicalDevice, VkDevice& logicalDevice):_physicalDevice(physicalDevice), _logicalDevice(logicalDevice){
-
-            }
+            VulkanBuffer(VkPhysicalDevice& physicalDevice, VkDevice& logicalDevice):_physicalDevice(physicalDevice), _logicalDevice(logicalDevice){}
+            void load(VkPhysicalDevice& physicalDevice, VkDevice& logicalDevice){this->_physicalDevice = physicalDevice; this->_logicalDevice = logicalDevice;}
             uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties) {
                 VkPhysicalDeviceMemoryProperties memProperties;
                 vkGetPhysicalDeviceMemoryProperties(_physicalDevice, &memProperties);
@@ -31,6 +30,9 @@ namespace Cast{
             }
 
             void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties){
+                if(!_physicalDevice || !_logicalDevice){
+                    CAST_FATAL("No device set in buffer, can't create data.");
+                }
                 VkBufferCreateInfo bufferInfo{};
                 bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
                 bufferInfo.usage = usage;

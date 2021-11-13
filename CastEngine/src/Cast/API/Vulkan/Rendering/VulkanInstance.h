@@ -14,6 +14,16 @@
 #include <set>
 #include <algorithm>
 #include <unordered_map>
+
+
+
+#define GLM_FORCE_RADIANS
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+#include <chrono>
+
+
 #ifdef DEBUG_MODE
 const bool enableValidationLayers = true;
 #else
@@ -112,6 +122,9 @@ namespace Cast{
             std::vector<VkFramebuffer> _swapChainFramebuffers;
             VkCommandPool _graphicsCommandPool;
             VulkanBuffer vertexBuffer;
+            std::vector<VulkanBuffer> uboBuffers;
+            VkDescriptorPool _descriptorPool;
+            std::vector<VkDescriptorSet> _descriptorSets;
 
 
             inline void _createInstance(const char* appName, const char* engineName);
@@ -132,7 +145,10 @@ namespace Cast{
             inline void _createSyncObjects();
             inline void _cleanupSwapChain();
             inline void _createVertexBuffers();
-
+            inline void _createUniformBuffers();
+            inline void _createDescriptorPool();
+            inline void _createDescriptorSets();
+            inline void _updateUniformBuffer(uint32_t currentImage);
 
             const int _MAX_FRAMES_IN_FLIGHT = 2;
             size_t _currentFrame = 0;

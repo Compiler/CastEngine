@@ -26,7 +26,7 @@ namespace Cast{
 
             inline VkPipeline getPipeline(){return this->_graphicsPipeline;}
             inline VulkanShaderProgram& getShaderProgram(){return this->_shaderProgram;}
-
+            inline VkDescriptorSetLayout& getDescriptorSetLayout(){return this->_descriptorSetLayout;}
             void unload(VkDevice& logicalDevice);
 
 
