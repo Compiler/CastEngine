@@ -5,13 +5,13 @@ namespace Cast{
     VulkanRenderer::VulkanRenderer(VulkanInstance* instance){
         _instance = instance;
         _graphicsPipelineMap.emplace("Default", _instance->createDefaultPipeline());
-        _instance->_graphicsPipeline = _graphicsPipelineMap["Default"].getPipeline();
+        _instance->_pipeline = &_graphicsPipelineMap["Default"];
         _instance->_createGraphicsCommandBuffers();
 
     }
     void VulkanRenderer::SetShader(const char* name){
         if(_graphicsPipelineMap.find(name) != _graphicsPipelineMap.end()){
-            _instance->_graphicsPipeline = _graphicsPipelineMap[name].getPipeline();
+            _instance->_pipeline = &_graphicsPipelineMap[name];
             _instance->_createGraphicsCommandBuffers();
         }else{
             CAST_WARN("No shader by name '{}' found!", name);

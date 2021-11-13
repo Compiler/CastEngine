@@ -54,6 +54,20 @@ namespace Cast{
             bufferInfo.buffer = uboBuffers[i].getBuffer();
             bufferInfo.offset = 0;
             bufferInfo.range = sizeof(UniformBufferObject);
+
+            VkWriteDescriptorSet descriptorWrite{};
+            descriptorWrite.sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+            descriptorWrite.dstSet = _descriptorSets[i];
+            descriptorWrite.dstBinding = 0;
+            descriptorWrite.dstArrayElement = 0;
+            descriptorWrite.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+            descriptorWrite.descriptorCount = 1;
+            descriptorWrite.pBufferInfo = &bufferInfo;
+            descriptorWrite.pImageInfo = nullptr; // Optional
+            descriptorWrite.pTexelBufferView = nullptr; // Optional
+
+            vkUpdateDescriptorSets(_logicalDevice, 1, &descriptorWrite, 0, nullptr);
+
         }
 
     }
@@ -120,7 +134,6 @@ namespace Cast{
 
         vkFreeCommandBuffers(_logicalDevice, _graphicsCommandPool, static_cast<uint32_t>(_graphicsCommandBuffers.size()), _graphicsCommandBuffers.data());
 
-        vkDestroyPipeline(_logicalDevice, _graphicsPipeline, nullptr);
         vkDestroyRenderPass(_logicalDevice, _renderPass, nullptr);
 
         for (size_t i = 0; i < _swapChainImageViews.size(); i++) {
@@ -304,11 +317,14 @@ namespace Cast{
 
             vkCmdBeginRenderPass(_graphicsCommandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
             //TODO: THIS IS WHERE WE SET OUR PIPE!
-            vkCmdBindPipeline(_graphicsCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, _graphicsPipeline); //VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR
+            vkCmdBindPipeline(_graphicsCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, _pipeline->getPipeline()); //VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR
             VkBuffer vertexBuffers[] = {vertexBuffer.getBuffer()};
             VkDeviceSize offsets[] = {0};
             vkCmdBindVertexBuffers(_graphicsCommandBuffers[i], 0, 1, vertexBuffers, offsets);
-            vkCmdDraw(_graphicsCommandBuffers[i], 6, 1, 0, 0);
+
+
+            //vkCmdBindDescriptorSets(_graphicsCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, _pipeline->getPipelineLayout(), 0, 1, &_descriptorSets[i], 0, nullptr);
+            vkCmdDraw(_graphicsCommandBuffers[i], vertices.size(), 1, 0, 0);
 
             vkCmdEndRenderPass(_graphicsCommandBuffers[i]);
             if(vkEndCommandBuffer(_graphicsCommandBuffers[i]) != VK_SUCCESS){
@@ -398,7 +414,6 @@ namespace Cast{
         CAST_LOG("Pipe starting~");
         _pipeline = new GraphicsPipeline(_logicalDevice, "passthrough", program, _swapChainExtent, _renderPass);
         CAST_LOG("Pipe Done~");
-        _graphicsPipeline = _pipeline->getPipeline();
     }
 
     //wraps the code in a vkshadermodule object before being passed to the pipeline

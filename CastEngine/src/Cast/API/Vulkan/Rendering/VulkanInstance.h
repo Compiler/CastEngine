@@ -118,7 +118,6 @@ namespace Cast{
             VkPipelineLayout _pipelineLayout;
             VkRenderPass _renderPass;
             Cast::GraphicsPipeline* _pipeline;
-            VkPipeline _graphicsPipeline;
             std::vector<VkFramebuffer> _swapChainFramebuffers;
             VkCommandPool _graphicsCommandPool;
             VulkanBuffer vertexBuffer;
@@ -204,8 +203,6 @@ namespace Cast{
             void unload();
 
             void recreateSwapChain();
-
-            void setGraphicsPipeline(VkPipeline& pipe){this->_graphicsPipeline = pipe;}
 
             GraphicsPipeline createDefaultPipeline();
         private:
