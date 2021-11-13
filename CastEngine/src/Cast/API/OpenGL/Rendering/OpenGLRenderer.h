@@ -3,8 +3,13 @@
 #include <Cast/API/OpenGL/Rendering/Shading/OpenGLShaderProgram.h>
 #include <Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.h>
 #include <Cast/API/OpenGL/Rendering/OpenGLVertexArray.h>
+#include <Cast/Core/Rendering/Shader/UniformBufferObject.h>
+#include <Cast/Core/Rendering/Camera.h>
 #include <unordered_map>
 #include <string>
+#include <glm/glm.hpp>
+#include <glm/mat4x4.hpp>
+#include <glm/gtc/type_ptr.hpp>
 namespace Cast{
 
     class OpenGLRenderer : public Renderer{
@@ -15,6 +20,7 @@ namespace Cast{
             std::unordered_map<std::string, OpenGLShaderProgram> _shaderMap;
             std::unordered_map<std::string, std::string> _shaderMapNamed;
 
+            unsigned int _uboBufferID;
 
         
         public:

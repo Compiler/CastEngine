@@ -44,7 +44,7 @@ namespace Cast{
             
             void use(){glUseProgram(_shaderProgram);}
 
-
+            inline uint32_t getProgramID()const{return this->_shaderProgram;}
             void uniform_set1Integer(const char* name, int32_t value, bool print = true);
             void uniform_set1Float(const char* name, float value);
             void uniform_set1Mat4(const char* name, const float* value);

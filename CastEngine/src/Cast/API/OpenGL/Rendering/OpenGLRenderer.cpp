@@ -4,6 +4,19 @@ namespace Cast{
 
     OpenGLRenderer::OpenGLRenderer():Renderer(), _layout({VAOElement(4), VAOElement(4)}){ 
         _vao.setLayout(std::move(_layout));
+
+        glGenBuffers(1, &_uboBufferID);
+        
+        glBindBuffer(GL_UNIFORM_BUFFER, _uboBufferID);
+        glBufferData(GL_UNIFORM_BUFFER, sizeof(UniformBufferObject), NULL, GL_STATIC_DRAW);
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
+        Camera cam{};
+        cam.init(1080, 720);
+        glBindBufferRange(GL_UNIFORM_BUFFER, 0, _uboBufferID, 0, sizeof(UniformBufferObject));
+        glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(cam.ubo.model));
+        glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(cam.ubo.model));
+        glBufferSubData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(cam.ubo.model));
+
     }
 
 
@@ -18,6 +31,9 @@ namespace Cast{
         if(_shaderMap.find(shader_key) == _shaderMap.end()){
             CAST_LOG("New shader set, compiling and setting {}", shader_key);
             OpenGLShaderProgram program = OpenGLShaderProgram();
+            unsigned int uniformBlockIndex = glGetUniformBlockIndex(program.getProgramID(), "UniformBufferObject");
+            glUniformBlockBinding(program.getProgramID(), uniformBlockIndex, 0);
+
             for(auto shader : shaders){
                 program.loadShader(shader.filePath, shader.type);
             }

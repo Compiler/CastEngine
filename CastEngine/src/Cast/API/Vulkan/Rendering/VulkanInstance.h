@@ -16,7 +16,8 @@
 #include <unordered_map>
 
 
-
+#include <Cast/Core/Rendering/Shader/UniformBufferObject.h>
+#include <Cast/Core/Rendering/Camera.h>
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -71,12 +72,6 @@ namespace Cast{
 
     };
 
-    struct UniformBufferObject {
-        glm::mat4 model;
-        glm::mat4 view;
-        glm::mat4 proj;
-
-    };
 
 
     

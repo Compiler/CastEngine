@@ -16,11 +16,13 @@ add_library(
 	src/Cast/Core/Rendering/Renderer.h
 	src/Cast/Core/Rendering/Texture.cpp
 	src/Cast/Core/Rendering/Window.cpp
+	src/Cast/Core/Rendering/Camera.h
 	src/Cast/Core/Rendering/RenderContext.cpp
 	src/Cast/Core/Rendering/Renderer.cpp
 	src/Cast/Core/Rendering/Window.h
 	src/Cast/Core/Rendering/Texture.h
 	src/Cast/Core/Rendering/Shader/ShaderProgram.h
+	src/Cast/Core/Rendering/Shader/UniformBufferObject.h
 	src/Cast/Core/Rendering/Shader/Shader.h
 	src/Cast/Core/Rendering/Shader/ShaderParser.h
 	src/Cast/Core/Rendering/Shader/ShaderParser.cpp
