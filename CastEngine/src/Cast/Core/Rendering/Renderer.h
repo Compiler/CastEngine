@@ -1,5 +1,6 @@
 #pragma once
 #include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
 #include <vector>
 #include <Cast/Core/Rendering/RenderContext.h>
 #include <Cast/Core/Rendering/Shader/Shader.h>
@@ -12,6 +13,7 @@ namespace Cast{
             std::vector<float> m_vertices;
             int m_currentAliveVertices;
             int m_offsetToAliveVertices;
+            glm::vec4 m_curColor = {0.5, 0.5, 0.5, 1.0};
         public:
             static int MAX_VERTICES;
             Renderer():m_currentAliveVertices(0),m_offsetToAliveVertices(0){}
@@ -20,12 +22,15 @@ namespace Cast{
             virtual void clearColorBit() = 0;
             virtual void SubmitTriangle(glm::vec3 vertices[3], glm::vec3 color[3]) = 0;
             virtual void SubmitTriangle(float bottomLeftX, float bottomLeftY, float size) = 0;
+            virtual void SubmitCube(glm::vec3 position, float side_len) = 0;
             virtual void Draw() = 0;
             virtual void CreateShader(const char* name, std::initializer_list<Shader> shaders) = 0;
             virtual void SetShader(const char* name) = 0;
             virtual ShaderProgram& GetShader(const char* name) = 0;
             virtual ~Renderer(){}
 
+            void SetColor(glm::vec4& col){this->m_curColor = col;}
+            void SetColor(glm::vec4 col){this->m_curColor = col;}
             static RenderContext::API GetAPI(){return RenderContext::GetAPI();}
 
     };

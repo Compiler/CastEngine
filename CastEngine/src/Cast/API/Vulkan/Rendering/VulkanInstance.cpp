@@ -314,7 +314,6 @@ namespace Cast{
             renderPassInfo.pClearValues = &_clearColor;
 
             vkCmdBeginRenderPass(_graphicsCommandBuffers[i], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
-            //TODO: THIS IS WHERE WE SET OUR PIPE!
             vkCmdBindPipeline(_graphicsCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, _pipeline->getPipeline()); //VK_PIPELINE_BIND_POINT_RAY_TRACING_KHR
             VkBuffer vertexBuffers[] = {vertexBuffer.getBuffer()};
             VkDeviceSize offsets[] = {0};
