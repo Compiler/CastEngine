@@ -71,7 +71,6 @@ namespace Cast{
         vkFreeCommandBuffers(_logicalDevice, _graphicsCommandPool, static_cast<uint32_t>(_graphicsCommandBuffers.size()), _graphicsCommandBuffers.data());
 
         vkDestroyPipeline(_logicalDevice, _graphicsPipeline, nullptr);
-        vkDestroyPipelineLayout(_logicalDevice, _pipelineLayout, nullptr);
         vkDestroyRenderPass(_logicalDevice, _renderPass, nullptr);
 
         for (size_t i = 0; i < _swapChainImageViews.size(); i++) {
@@ -178,6 +177,7 @@ namespace Cast{
         _currentFrame = (_currentFrame+1)% _MAX_FRAMES_IN_FLIGHT;
 
     }
+
 
     void VulkanInstance::_createSyncObjects(){
         _f_inFlightFences.resize(_MAX_FRAMES_IN_FLIGHT);

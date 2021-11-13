@@ -5,6 +5,10 @@
 #include <Cast/Core/Debug/Logger.h>
 #include <vector>
 
+#ifndef CAST_RESOURCES_ABSOLUTE_PATH
+#define CAST_RESOURCES_ABSOLUTE_PATH "../"
+CAST_FATAL("Absolute path is relative. Did CMAKE forget to add the include?");
+#endif
 
 #define CAST_INTERNAL(x)         CAST_RESOURCES_ABSOLUTE_PATH x
 #define CAST_INTERNAL_SHADER(x)  CAST_INTERNAL("Shaders/") x

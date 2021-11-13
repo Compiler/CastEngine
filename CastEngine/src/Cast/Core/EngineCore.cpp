@@ -67,6 +67,7 @@ namespace Cast{
         _renderContext->Update();
         if(InputManager::isKeyReleased(KeyCodes::KEY_ESCAPE)) this->_renderContext->getWindow()->destroy();
         if(InputManager::isKeyReleased(KeyCodes::KEY_SPACE)){
+            CAST_WARN("Swapping API");
             if(RenderContext::GetAPI() == RenderContext::API::Vulkan)swapAPI(RenderContext::API::OpenGL);
             else swapAPI(RenderContext::API::Vulkan);
         }

@@ -6,6 +6,23 @@ namespace Cast{
     GraphicsPipeline::GraphicsPipeline(VkDevice logicalDevice, const char* name, VulkanShaderProgram program, VkExtent2D& swapExtent, VkRenderPass& renderPass){
         load(logicalDevice, name, program, swapExtent, renderPass);
     }
+    void GraphicsPipeline::createDescriptorSetLayout(VkDevice& logicalDevice){
+        VkDescriptorSetLayoutBinding uboLayoutBinding{};
+        uboLayoutBinding.binding = 0;
+        uboLayoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
+        uboLayoutBinding.descriptorCount = 1;
+        uboLayoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+        uboLayoutBinding.pImmutableSamplers = nullptr;
+
+        VkDescriptorSetLayoutCreateInfo layoutInfo{};
+        layoutInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+        layoutInfo.bindingCount = 1;
+        layoutInfo.pBindings = &uboLayoutBinding;
+
+        if (vkCreateDescriptorSetLayout(logicalDevice, &layoutInfo, nullptr, &_descriptorSetLayout) != VK_SUCCESS) {
+            CAST_FATAL("failed to create descriptor set layout!");
+        }
+    }
 
     void GraphicsPipeline::load(VkDevice logicalDevice, const char* name, VulkanShaderProgram program, VkExtent2D& swapExtent, VkRenderPass& renderPass){
         _name = name;
@@ -107,11 +124,12 @@ namespace Cast{
 
 
 
-
+        createDescriptorSetLayout(logicalDevice);
+        
         VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
         pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
         pipelineLayoutInfo.setLayoutCount = 0; //Optional
-        pipelineLayoutInfo.pSetLayouts = nullptr; //Optional
+        pipelineLayoutInfo.pSetLayouts = &_descriptorSetLayout; //UBO Layout
         pipelineLayoutInfo.pushConstantRangeCount = 0; //Optional
         pipelineLayoutInfo.pPushConstantRanges = nullptr; //Optional
 
@@ -146,6 +164,13 @@ namespace Cast{
         CAST_LOG("Pipeline completed");
         for(auto& data : program.getShaderCreationData()) vkDestroyShaderModule(logicalDevice, data.shaderModule, nullptr);
     }
+
+
+    void GraphicsPipeline::unload(VkDevice& logicalDevice){
+        vkDestroyPipeline(logicalDevice, _graphicsPipeline, nullptr);
+        vkDestroyPipelineLayout(logicalDevice, _graphicsPipelineLayout, nullptr);
+    }
+    
 
 
 }
