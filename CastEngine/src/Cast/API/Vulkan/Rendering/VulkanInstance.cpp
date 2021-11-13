@@ -63,8 +63,6 @@ namespace Cast{
             descriptorWrite.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
             descriptorWrite.descriptorCount = 1;
             descriptorWrite.pBufferInfo = &bufferInfo;
-            descriptorWrite.pImageInfo = nullptr; // Optional
-            descriptorWrite.pTexelBufferView = nullptr; // Optional
 
             vkUpdateDescriptorSets(_logicalDevice, 1, &descriptorWrite, 0, nullptr);
 
@@ -322,8 +320,7 @@ namespace Cast{
             VkDeviceSize offsets[] = {0};
             vkCmdBindVertexBuffers(_graphicsCommandBuffers[i], 0, 1, vertexBuffers, offsets);
 
-
-            //vkCmdBindDescriptorSets(_graphicsCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, _pipeline->getPipelineLayout(), 0, 1, &_descriptorSets[i], 0, nullptr);
+            vkCmdBindDescriptorSets(_graphicsCommandBuffers[i], VK_PIPELINE_BIND_POINT_GRAPHICS, _pipeline->getPipelineLayout(), 0, 1, &_descriptorSets[i], 0, nullptr);
             vkCmdDraw(_graphicsCommandBuffers[i], vertices.size(), 1, 0, 0);
 
             vkCmdEndRenderPass(_graphicsCommandBuffers[i]);
@@ -407,12 +404,12 @@ namespace Cast{
     void VulkanInstance::_createGraphicsPipeline(){
         //default
         VulkanShaderProgram program{this->_logicalDevice};
-        Shader shader_vert{CAST_INTERNAL_SHADER("passthrough.vert"), Shader::ShaderType::Vertex};
+        Shader shader_vert{CAST_INTERNAL_SHADER("passthrough_3d.vert"), Shader::ShaderType::Vertex};
         Shader shader_frag{CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Fragment};
         program.loadShader({shader_vert, shader_frag});
         CAST_LOG("Loading complete");
         CAST_LOG("Pipe starting~");
-        _pipeline = new GraphicsPipeline(_logicalDevice, "passthrough", program, _swapChainExtent, _renderPass);
+        _pipeline = new GraphicsPipeline(_logicalDevice, "passthrough_3d", program, _swapChainExtent, _renderPass);
         CAST_LOG("Pipe Done~");
     }
 
@@ -432,7 +429,7 @@ namespace Cast{
 
     void VulkanInstance::_createInstance(const char* appName, const char* engineName){
         if(enableValidationLayers && !_validatationLayersAssert()){
-            CAST_ERROR("Validation layers requested but are not availble -- Debug mode is off or validation layer couldn't be found");
+            CAST_FATAL("Validation layers requested but are not availble -- Debug mode is off or validation layer couldn't be found");
         }
 
         VkApplicationInfo appInfo{};

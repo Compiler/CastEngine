@@ -9,10 +9,10 @@ namespace Cast{
     void GraphicsPipeline::createDescriptorSetLayout(VkDevice& logicalDevice){
         VkDescriptorSetLayoutBinding uboLayoutBinding{};
         uboLayoutBinding.binding = 0;
-        uboLayoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
         uboLayoutBinding.descriptorCount = 1;
-        uboLayoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+        uboLayoutBinding.descriptorType = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
         uboLayoutBinding.pImmutableSamplers = nullptr;
+        uboLayoutBinding.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
 
         VkDescriptorSetLayoutCreateInfo layoutInfo{};
         layoutInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
@@ -27,6 +27,7 @@ namespace Cast{
     void GraphicsPipeline::load(VkDevice logicalDevice, const char* name, VulkanShaderProgram program, VkExtent2D& swapExtent, VkRenderPass& renderPass){
         _name = name;
         _shaderProgram = program;
+        createDescriptorSetLayout(logicalDevice);
 
 
         auto bindingDescription = Vertex_Tmp::getBindingDescription();
@@ -72,7 +73,7 @@ namespace Cast{
         rasterizer.lineWidth = 1.0f;
 
         rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
-        rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
+        rasterizer.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
 
         rasterizer.depthBiasEnable = VK_FALSE;
         rasterizer.depthBiasConstantFactor = 0.0f; //Optional
@@ -124,11 +125,10 @@ namespace Cast{
 
 
 
-        createDescriptorSetLayout(logicalDevice);
 
         VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
         pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-        pipelineLayoutInfo.setLayoutCount = 0; //Optional
+        pipelineLayoutInfo.setLayoutCount = 1; //UBO Layout
         pipelineLayoutInfo.pSetLayouts = &_descriptorSetLayout; //UBO Layout
         pipelineLayoutInfo.pushConstantRangeCount = 0; //Optional
         pipelineLayoutInfo.pPushConstantRanges = nullptr; //Optional

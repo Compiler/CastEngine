@@ -24,7 +24,7 @@
 #include <chrono>
 
 
-#ifdef DEBUG_MODE
+#ifdef CAST_DEBUG_MODE
 const bool enableValidationLayers = true;
 #else
 const bool enableValidationLayers = false;
