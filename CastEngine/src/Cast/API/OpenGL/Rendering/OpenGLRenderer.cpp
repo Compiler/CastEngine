@@ -3,6 +3,7 @@
 namespace Cast{
 
     OpenGLRenderer::OpenGLRenderer():Renderer(), _layout({VAOElement(4), VAOElement(4)}){ 
+        glEnable(GL_FRAMEBUFFER_SRGB); //Gamma correct
         _vao.setLayout(std::move(_layout));
 
         glGenBuffers(1, &_uboBufferID);
@@ -11,7 +12,7 @@ namespace Cast{
         glBufferData(GL_UNIFORM_BUFFER, sizeof(UniformBufferObject), NULL, GL_STATIC_DRAW);
         glBindBuffer(GL_UNIFORM_BUFFER, 0);
         Camera cam{};
-        cam.init(1080, 720);
+        cam.init(1920, 1080);
         glBindBufferRange(GL_UNIFORM_BUFFER, 0, _uboBufferID, 0, sizeof(UniformBufferObject));
         glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(cam.ubo.model));
         glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(cam.ubo.model));
@@ -48,6 +49,8 @@ namespace Cast{
     
     void OpenGLRenderer::clearColor(float r, float g, float b, float a){
         glClearColor(r,g,b,a);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_DEPTH_BUFFER_BIT);
     }
     void OpenGLRenderer::clearColorBit(){
         glClear(GL_COLOR_BUFFER_BIT);
