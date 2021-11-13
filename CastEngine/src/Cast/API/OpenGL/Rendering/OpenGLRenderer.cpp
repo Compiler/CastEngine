@@ -72,21 +72,21 @@ namespace Cast{
         this->m_vertices.push_back(1);
         this->m_vertices.push_back(1);
         //default color pink
-        this->m_vertices.insert(this->m_vertices.end(), {1,0,1,1});
+        this->m_vertices.insert(this->m_vertices.end(), {m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
 
         this->m_vertices.push_back(bottomLeftX + size);
         this->m_vertices.push_back(bottomLeftY);
         this->m_vertices.push_back(1);
         this->m_vertices.push_back(1);
 
-        this->m_vertices.insert(this->m_vertices.end(), {1,0,1,1});
+        this->m_vertices.insert(this->m_vertices.end(), {m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
 
         this->m_vertices.push_back(bottomLeftX + size / 2.0);
         this->m_vertices.push_back(bottomLeftY + size);
         this->m_vertices.push_back(1);
         this->m_vertices.push_back(1);
         
-        this->m_vertices.insert(this->m_vertices.end(), {1,0,1,1});
+        this->m_vertices.insert(this->m_vertices.end(), {m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
         
     }
      
@@ -116,6 +116,25 @@ namespace Cast{
         this->m_vertices.push_back(color[2].z);
         this->m_vertices.push_back(1);
 
+    }
+
+    void OpenGLRenderer::SubmitCube(glm::vec3 position, float side_len){
+        this->m_vertices.insert(m_vertices.end(), {position.x, position.y, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+        this->m_vertices.insert(m_vertices.end(), {position.x+side_len, position.y, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+        this->m_vertices.insert(m_vertices.end(), {position.x+side_len, position.y+side_len, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+
+        this->m_vertices.insert(m_vertices.end(), {position.x, position.y, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+        this->m_vertices.insert(m_vertices.end(), {position.x, position.y+side_len, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+        this->m_vertices.insert(m_vertices.end(), {position.x+side_len, position.y+side_len, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+
+        this->m_vertices.insert(m_vertices.end(), {position.x, position.y, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+        this->m_vertices.insert(m_vertices.end(), {position.x+side_len, position.y, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+        this->m_vertices.insert(m_vertices.end(), {position.x+side_len, position.y, position.z+side_len, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+
+        this->m_vertices.insert(m_vertices.end(), {position.x, position.y, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+        this->m_vertices.insert(m_vertices.end(), {position.x, position.y, position.z+side_len, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+        this->m_vertices.insert(m_vertices.end(), {position.x+side_len, position.y, position.z+side_len, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+        
     }
 
 

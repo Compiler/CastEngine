@@ -32,7 +32,7 @@ namespace Cast{
 
             void SubmitTriangle(glm::vec3 vertices[3], glm::vec3 color[3]);
             void SubmitTriangle(float bottomLeftX, float bottomLeftY, float size);
-            void SubmitCube(glm::vec3 position, float side_len){CAST_WARN("UNIMPLEMENTED");}
+            void SubmitCube(glm::vec3 position, float side_len);
 
             void CreateShader(const char* name, std::initializer_list<Shader> shaders);
             //TODO: Error check so we dont null out on bad names
