@@ -48,6 +48,14 @@ namespace Cast{
             CAST_FATAL("failed to allocate descriptor sets!");
         }
 
+
+        for (size_t i = 0; i < _swapChainImages.size(); i++) {
+            VkDescriptorBufferInfo bufferInfo{};
+            bufferInfo.buffer = uboBuffers[i].getBuffer();
+            bufferInfo.offset = 0;
+            bufferInfo.range = sizeof(UniformBufferObject);
+        }
+
     }
 
     void VulkanInstance::_createDescriptorPool(){

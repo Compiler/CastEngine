@@ -74,29 +74,30 @@ target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${DEPENDENCIES}/gla
 target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${DEPENDENCIES}/fmt/include")
 target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${DEPENDENCIES}/glm")
 target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${DEPENDENCIES}/stbimage")
-target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${VULKAN_INCLUDE}")
 
 target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${ROOT}/${LIBRARY_PROJECT_NAME}/src/")#link the root
 
 message("\n\n\n=======================\n${ROOT}/${LIBRARY_PROJECT_NAME}/src/")
 
-target_link_directories("${LIBRARY_PROJECT_NAME}" PUBLIC "${VULKAN_LIB}")
 
 target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE glad)
 target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE glfw ${GLFW_LIBRARIES})
 target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE fmt)
 
-if(LINUX)
-	target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE vulkan)
-else()
-	target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE vulkan-1)
-endif()
+#delete this?
+find_package(OpenGL REQUIRED)
+include_directories( ${OPENGL_INCLUDE_DIRS} )
+target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE ${OPENGL_LIBRARIES})
+####
 
-if(LINUX)
-	find_package(OpenGL REQUIRED)
-	include_directories( ${OPENGL_INCLUDE_DIRS} )
-	target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE ${OPENGL_LIBRARIES})
-endif()
 
-target_link_libraries("${LIBRARY_PROJECT_NAME}" PUBLIC shaderc_shared)
+
+find_package(Vulkan REQUIRED FATAL_ERROR)
+
+get_filename_component(VULKAN_LIBRARY_PATH ${Vulkan_LIBRARIES} DIRECTORY)
+
+target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC ${Vulkan_INCLUDE_DIRS})
+target_link_directories("${LIBRARY_PROJECT_NAME}" PRIVATE ${VULKAN_LIBRARY_PATH})
+target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE ${Vulkan_LIBRARIES} shaderc_shared)
+
 
