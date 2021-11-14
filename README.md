@@ -37,6 +37,7 @@
   - sudo apt-get install mesa-utils
   - sudo apt-get install libgl1-mesa-dev
   - sudo apt-get install xorg-dev libglu1-mesa-dev
+  - sudo apt install vulkan-validationlayers
   - Install the vulkan sdk
 - run: ```export VULKAN_SDK=``` and put your path to the parent of the bin folder
   - This will create temp env, add the above line to ur bashrc file
