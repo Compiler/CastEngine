@@ -177,12 +177,10 @@ namespace Cast{
     }
 
     void VulkanInstance::_updateUniformBuffer(uint32_t currentImage){
-        static auto startTime = std::chrono::high_resolution_clock::now();
-
-        auto currentTime = std::chrono::high_resolution_clock::now();
-        float time = std::chrono::duration<float, std::chrono::seconds::period>(currentTime - startTime).count();
+        
         Cast::Camera cam{};
         cam.init(_swapChainExtent.width, _swapChainExtent.height);
+        cam.update();
         UniformBufferObject ubo = cam.ubo;
         
 

@@ -14,17 +14,16 @@ namespace Cast{
     void DebugScene::update(){}
     void DebugScene::render(){
         static float offset = 0;
-        _renderer->clearColor(1.0, 0.3f, 0.6f, 1.0f);
-        //offset += 0.0001;
-        //_renderer->GetShader("passthrough")->use();
-        static glm::vec3 verts[3]{glm::vec3(-1, -1, 1), glm::vec3(-1,1,1), glm::vec3(1,1,1)};
-        static glm::vec3 cols[3]{glm::vec3(0, 1, 1), glm::vec3(1,1,0), glm::vec3(1,1,1)};
+        _renderer->SubmitTriangle(0.375, 0.5, 0.125);
+        _renderer->SubmitTriangle(0.5, 0.5, 0.125);
         _renderer->SetColor({0.12, 0.12, 0.9, 1});
         _renderer->SubmitTriangle(-0.5 + offset, -0.5, 0.25);
         _renderer->SetColor({0.9, 0.12, 0.12, 1});
         _renderer->SubmitTriangle(0.5 + -offset, -0.5, 0.25);
         _renderer->SetColor({0.12, 0.9, 0.12, 1});
         _renderer->SubmitCube({0.0f, 0.0f, 0.0f}, 0.25f);
+        _renderer->clearColor(1.0, 0.3f, 0.6f, 1.0f);
+        
         _renderer->Draw();
     }
     void DebugScene::unload(){}

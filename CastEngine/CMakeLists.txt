@@ -95,6 +95,7 @@ target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE ${OPENGL_LIBRARIES})
 
 
 find_package(Vulkan REQUIRED FATAL_ERROR)
+message("DKLFSJD : ${Vulkan_INCLUDE_DIRS}")
 
 get_filename_component(VULKAN_LIBRARY_PATH ${Vulkan_LIBRARIES} DIRECTORY)
 
