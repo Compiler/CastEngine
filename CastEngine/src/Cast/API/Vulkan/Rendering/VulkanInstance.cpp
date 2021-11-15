@@ -2,12 +2,12 @@
 
 namespace Cast{
     std::vector<Vertex_Tmp> VulkanInstance::vertices = {
-        {glm::vec4(-VulkanInstance::sz, -VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)},
-        {glm::vec4( VulkanInstance::sz, -VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)},
-        {glm::vec4( VulkanInstance::sz,  VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)}, 
-        {glm::vec4( VulkanInstance::sz,  VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)},
-        {glm::vec4(-VulkanInstance::sz,  VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)},
-        {glm::vec4(-VulkanInstance::sz, -VulkanInstance::sz, 0.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)},
+        {glm::vec4(-VulkanInstance::sz, -VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)},
+        {glm::vec4( VulkanInstance::sz, -VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)},
+        {glm::vec4( VulkanInstance::sz,  VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)}, 
+        {glm::vec4( VulkanInstance::sz,  VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)},
+        {glm::vec4(-VulkanInstance::sz,  VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)},
+        {glm::vec4(-VulkanInstance::sz, -VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)},
     };
     void VulkanInstance::load(GLFWwindow* window, VulkanShaderProgram shader){
         _shaderProgram = shader;
@@ -573,7 +573,7 @@ namespace Cast{
             if(swapChainAdequate){
                 CAST_LOG("Swap chain adequate");
             }else{
-                CAST_WARN("Swap chain inadequate");
+                CAST_FATAL("Swap chain inadequate");
             }
         }
 

@@ -59,12 +59,12 @@ namespace Cast{
 
             attributeDescriptions[0].binding = 0;
             attributeDescriptions[0].location = 0;
-            attributeDescriptions[0].format = VK_FORMAT_R32G32_SFLOAT;
+            attributeDescriptions[0].format = VK_FORMAT_R32G32B32A32_SFLOAT;
             attributeDescriptions[0].offset = offsetof(Vertex_Tmp, position);//((::size_t)&reinterpret_cast<char const volatile&>((((Vertex_Tmp*)0)->position)));
 
             attributeDescriptions[1].binding = 0;
             attributeDescriptions[1].location = 1;
-            attributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT;
+            attributeDescriptions[1].format = VK_FORMAT_R32G32B32A32_SFLOAT;
             attributeDescriptions[1].offset = offsetof(Vertex_Tmp, color);//((::size_t)&reinterpret_cast<char const volatile&>((((Vertex_Tmp*)0)->color)));
 
             return attributeDescriptions;
@@ -168,7 +168,7 @@ namespace Cast{
 
             const std::vector<const char*> _deviceExtensions = {
                 VK_KHR_SWAPCHAIN_EXTENSION_NAME,
-                VK_NV_RAY_TRACING_EXTENSION_NAME,
+               // VK_NV_RAY_TRACING_EXTENSION_NAME,
                 //VK_KHR_ACCELERATION_STRUCTURE_EXTENSION_NAME, 
                 //VK_KHR_RAY_TRACING_PIPELINE_EXTENSION_NAME, 
                 //VK_KHR_MAINTENANCE3_EXTENSION_NAME,
