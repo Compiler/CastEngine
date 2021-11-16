@@ -23,15 +23,15 @@ namespace Cast{
             CAST_FATAL("failed to create descriptor set layout!");
         }
     }
-
+    
     void GraphicsPipeline::load(VkDevice logicalDevice, const char* name, VulkanShaderProgram program, VkExtent2D& swapExtent, VkRenderPass& renderPass){
         _name = name;
         _shaderProgram = program;
         createDescriptorSetLayout(logicalDevice);
 
 
-        auto bindingDescription = Vertex_Tmp::getBindingDescription();
-        auto attributeDescriptions = Vertex_Tmp::getAttributeDescriptions();
+        auto bindingDescription = getBindingDescription();
+        auto attributeDescriptions = getAttributeDescriptions();
 
         VkPipelineVertexInputStateCreateInfo vertexInputInfo{};
         vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;

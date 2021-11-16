@@ -1,7 +1,7 @@
 #include "VulkanInstance.h"
 
 namespace Cast{
-    std::vector<Vertex_Tmp> VulkanInstance::vertices = {
+    std::vector<VertexTemplate> VulkanInstance::vertices = {
         {glm::vec4(-VulkanInstance::sz, -VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)},
         {glm::vec4( VulkanInstance::sz, -VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)},
         {glm::vec4( VulkanInstance::sz,  VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)}, 

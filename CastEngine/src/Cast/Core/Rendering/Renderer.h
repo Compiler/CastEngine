@@ -8,6 +8,18 @@
 
 namespace Cast{
 
+
+    struct VertexTemplate{  
+        
+        glm::vec4 position;
+        glm::vec4 color;
+        glm::vec4 normal;
+
+    };
+
+    
+
+
     class Renderer{
         protected:
             std::vector<float> m_vertices;
