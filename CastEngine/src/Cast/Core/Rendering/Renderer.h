@@ -3,6 +3,7 @@
 #include <glm/vec4.hpp>
 #include <vector>
 #include <Cast/Core/Rendering/RenderContext.h>
+#include <Cast/Core/Utils/Files/FileLoaderFactory.h>
 #include <Cast/Core/Rendering/Shader/Shader.h>
 #include <Cast/Core/Rendering/Shader/ShaderProgram.h>
 
@@ -32,6 +33,7 @@ namespace Cast{
             virtual void clearColor(float r, float g, float b, float a) = 0;
             virtual void clearDepthBit() = 0;
             virtual void clearColorBit() = 0;
+            virtual void SubmitVertexBuffer(const std::vector<VertexTemplate>& buffer) = 0;
             virtual void SubmitTriangle(glm::vec3 vertices[3], glm::vec3 color[3]) = 0;
             virtual void SubmitTriangle(float bottomLeftX, float bottomLeftY, float size) = 0;
             virtual void SubmitCube(glm::vec3 position, float side_len) = 0;

@@ -14,6 +14,7 @@ namespace Cast{
     void DebugScene::update(){}
     void DebugScene::render(){
         static float offset = 0;
+        static Cube cube{{0, 0, 1}, 0.5};
         _renderer->SubmitTriangle(0.375, 0.5, 0.125);
         _renderer->SubmitTriangle(0.5, 0.5, 0.125);
         _renderer->SetColor({0.12, 0.12, 0.9, 1});
@@ -21,7 +22,8 @@ namespace Cast{
         _renderer->SetColor({0.9, 0.12, 0.12, 1});
         _renderer->SubmitTriangle(0.5 + -offset, -0.5, 0.25);
         _renderer->SetColor({0.12, 0.9, 0.12, 1});
-        _renderer->SubmitCube({0.0f, 0.0f, 0.0f}, 0.25f);
+        _renderer->SubmitVertexBuffer(cube.getRendererVertices());
+        //_renderer->SubmitCube({0.0f, 0.0f, 0.0f}, 0.25f);
         _renderer->clearColor(1.0, 0.3f, 0.6f, 1.0f);
         
         _renderer->Draw();

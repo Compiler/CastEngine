@@ -30,6 +30,7 @@ namespace Cast{
             void clearDepthBit();
             void clearColorBit();
 
+            void SubmitVertexBuffer(const std::vector<VertexTemplate>& buffer);
             void SubmitTriangle(glm::vec3 vertices[3], glm::vec3 color[3]);
             void SubmitTriangle(float bottomLeftX, float bottomLeftY, float size);
             void SubmitCube(glm::vec3 position, float side_len);

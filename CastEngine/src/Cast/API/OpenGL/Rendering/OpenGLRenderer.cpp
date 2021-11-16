@@ -70,6 +70,15 @@ namespace Cast{
 
         
     }
+
+
+
+
+    void OpenGLRenderer::SubmitVertexBuffer(const std::vector<VertexTemplate>& buffer){
+        for(const auto& vertex : buffer){
+            this->m_vertices.insert(this->m_vertices.end(), {vertex.position.x, vertex.position.y, vertex.position.z, vertex.position.w, vertex.color.x, vertex.color.y, vertex.color.z, vertex.color.w });
+        }
+    }
     void OpenGLRenderer::SubmitTriangle(float bottomLeftX, float bottomLeftY, float size){
         this->m_vertices.push_back(bottomLeftX);
         this->m_vertices.push_back(bottomLeftY);
