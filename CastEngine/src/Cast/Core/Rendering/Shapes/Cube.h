@@ -18,7 +18,6 @@ namespace Cast{
                 float offset = _sideLength / 2.0f;
 
                 //front plane
-                this->setColor({0, 1, 0, 1});
                 this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {0, 0, 1.0f, 1.0f}});
                 this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {0, 0, 1.0f, 1.0f}});
                 this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {0, 0, 1.0f, 1.0f}});
@@ -27,7 +26,6 @@ namespace Cast{
                 this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {0, 0, 1.0f, 1.0f}});
 
                 //left plane
-                this->setColor({1, 0, 1, 1});
                 this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {-1.0f, 0, 0, 1.0f}});
                 this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {-1.0f, 0, 0, 1.0f}});
                 this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {-1.0f, 0, 0, 1.0f}});
@@ -36,7 +34,6 @@ namespace Cast{
                 this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {-1.0f, 0, 0, 1.0f}});
 
                 //right plane
-                this->setColor({1, 0, 0, 1});
                 this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {1.0f, 0, 0, 1.0f}});
                 this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {1.0f, 0, 0, 1.0f}});
                 this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {1.0f, 0, 0, 1.0f}});
@@ -47,7 +44,6 @@ namespace Cast{
 
 
                 //top plane
-                this->setColor({1, 1, 0, 1});
                 this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z - offset, 1.0}, m_color, {0, 1.0f, 0, 1.0f}});
                 this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z - offset, 1.0}, m_color, {0, 1.0f, 0, 1.0f}});
                 this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {0, 1.0f, 0, 1.0f}});
@@ -57,7 +53,6 @@ namespace Cast{
 
 
                 //bottom plane
-                this->setColor({1, 1, 1, 1});
                 this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {0, -1.0f, 0, 1.0f}});
                 this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {0, -1.0f, 0, 1.0f}});
                 this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {0, -1.0f, 0, 1.0f}});
@@ -66,7 +61,6 @@ namespace Cast{
                 this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {0, -1.0f, 0, 1.0f}});
 
                 //back plane
-                this->setColor({0, 1, 1, 1});
                 this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {0, 0, -1.0f, 1.0f}});
                 this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {0, 0, -1.0f, 1.0f}});
                 this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z - offset, 1.0}, m_color, {0, 0, -1.0f, 1.0f}});

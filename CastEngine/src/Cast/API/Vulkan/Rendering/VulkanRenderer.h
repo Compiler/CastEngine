@@ -6,8 +6,7 @@ namespace Cast{
     class VulkanRenderer : public Renderer{
         private:
             VulkanInstance* _instance;
-            std::unordered_map<std::string, GraphicsPipeline> _graphicsPipelineMap;
-
+            std::unordered_map<std::string, GraphicsPipeline> _graphicsPipelineMap; 
         public:
             VulkanRenderer(VulkanInstance* instance);
 

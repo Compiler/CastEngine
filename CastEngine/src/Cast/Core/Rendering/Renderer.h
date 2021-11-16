@@ -27,6 +27,7 @@ namespace Cast{
             int m_currentAliveVertices;
             int m_offsetToAliveVertices;
             glm::vec4 m_curColor = {0.5, 0.5, 0.5, 1.0};
+            glm::vec4 DEFAULT_NORMAL = {0, 0, -1, 1};//TODO Delete this lmao, make it relative to the cameras look position
         public:
             static int MAX_VERTICES;
             Renderer():m_currentAliveVertices(0),m_offsetToAliveVertices(0){}
