@@ -9,6 +9,9 @@ namespace Cast{
         //_renderer->SetShader("red");
         _renderer->CreateShader("passthrough_3d", {{CAST_INTERNAL_SHADER("passthrough_3d.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Fragment}});
         _renderer->SetShader("passthrough_3d");
+
+        _renderer->CreateShader("blinn_phong", {{CAST_INTERNAL_SHADER("blinn_phong.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("blinn_phong.frag"), Shader::ShaderType::Fragment}});
+        _renderer->SetShader("blinn_phong");
         CAST_DEBUG("Loaded shader");
     }
     void DebugScene::update(){}
