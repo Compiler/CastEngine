@@ -15,36 +15,64 @@ namespace Cast{
                 this->_sideLength = sideLen;
                 VertexTemplate t{_center, _center, _center};
 
-                this->setColor({0, 1, 1, 1});
                 float offset = _sideLength / 2.0f;
-                //top plane
-                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x + offset, _center.y, _center.z + offset, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x, _center.y, _center.z + offset, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x, _center.y, _center.z + offset, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x, _center.y + offset, _center.z + offset, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0}, m_color, m_color});
 
+                //front plane
                 this->setColor({0, 1, 0, 1});
-                //bottom plane
-                this->m_vertices.push_back({{_center.x, _center.y, _center.z, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x + offset, _center.y, _center.z, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x, _center.y + offset, _center.z, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x, _center.y, _center.z, 1.0}, m_color, m_color});
+                this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {0, 0, 1.0f, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {0, 0, 1.0f, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {0, 0, 1.0f, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {0, 0, 1.0f, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {0, 0, 1.0f, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {0, 0, 1.0f, 1.0f}});
 
+                //left plane
+                this->setColor({1, 0, 1, 1});
+                this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {-1.0f, 0, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {-1.0f, 0, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {-1.0f, 0, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {-1.0f, 0, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z - offset, 1.0}, m_color, {-1.0f, 0, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {-1.0f, 0, 0, 1.0f}});
 
+                //right plane
                 this->setColor({1, 0, 0, 1});
+                this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {1.0f, 0, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {1.0f, 0, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {1.0f, 0, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {1.0f, 0, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z - offset, 1.0}, m_color, {1.0f, 0, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {1.0f, 0, 0, 1.0f}});
+
+
+
                 //top plane
-                this->m_vertices.push_back({{_center.x + offset, _center.y, _center.z + offset, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x + offset, _center.y, _center.z, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x, _center.y, _center.z, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x, _center.y, _center.z, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x, _center.y, _center.z + offset, 1.0}, m_color, m_color});
-                this->m_vertices.push_back({{_center.x + offset, _center.y, _center.z + offset, 1.0}, m_color, m_color});
+                this->setColor({1, 1, 0, 1});
+                this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z - offset, 1.0}, m_color, {0, 1.0f, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z - offset, 1.0}, m_color, {0, 1.0f, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {0, 1.0f, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {0, 1.0f, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z + offset, 1.0}, m_color, {0, 1.0f, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z - offset, 1.0}, m_color, {0, 1.0f, 0, 1.0f}});
+
 
                 //bottom plane
+                this->setColor({1, 1, 1, 1});
+                this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {0, -1.0f, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {0, -1.0f, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {0, -1.0f, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {0, -1.0f, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {0, -1.0f, 0, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z + offset, 1.0}, m_color, {0, -1.0f, 0, 1.0f}});
+
+                //back plane
+                this->setColor({0, 1, 1, 1});
+                this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {0, 0, -1.0f, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {0, 0, -1.0f, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z - offset, 1.0}, m_color, {0, 0, -1.0f, 1.0f}});
+                this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z - offset, 1.0}, m_color, {0, 0, -1.0f, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z - offset, 1.0}, m_color, {0, 0, -1.0f, 1.0f}});
+                this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0}, m_color, {0, 0, -1.0f, 1.0f}});
 
 
             }
