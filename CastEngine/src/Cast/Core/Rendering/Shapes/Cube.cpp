@@ -17,6 +17,9 @@ namespace Cast{
         this->Translate(center);
         this->Rotate(rotation, axis);
         Load();
+
+        
+        
     }
 
 
@@ -36,6 +39,26 @@ namespace Cast{
         this->Translate(center);
         this->m_color = color;
         this->Rotate(rotation, axis);
+        //TODO: THIS IS TESTING CODE< DELETE!
+        glm::mat4 trans = glm::mat4(1.0f);
+        trans = glm::rotate(trans, glm::radians(rotation), axis);
+        trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));  
+
+        glm::mat4 model{1};
+        glm::mat4 tran{1};
+        glm::mat4 rot{1};
+        glm::mat4 scale{1};
+
+        rot = glm::rotate(trans, glm::radians(rotation), axis);
+        scale = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));  
+
+        model = rot * scale;
+
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 4; j++){
+                CAST_ERROR("{} = {}", trans[i][j], model[i][j]);
+            }
+        }
         Load();
     }
 
