@@ -17,11 +17,13 @@ if(LINUX)
     set(VULKAN_ROOT "$ENV{VULKAN_SDK}")
     set(VULKAN_LIB "${VULKAN_ROOT}/lib/")
     set(VULKAN_INCLUDE "${VULKAN_ROOT}/include/")
+    set(VULKAN_LIB_NAME "vulkan")
     
 else()
     set(VULKAN_ROOT "$ENV{VULKAN_SDK}")
     set(VULKAN_LIB "${VULKAN_ROOT}/Lib/")
     set(VULKAN_INCLUDE "${VULKAN_ROOT}/Include")
+    set(VULKAN_LIB_NAME "vulkan-1")
 
 endif()
 
