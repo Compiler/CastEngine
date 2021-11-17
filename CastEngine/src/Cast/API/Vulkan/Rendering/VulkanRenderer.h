@@ -1,5 +1,6 @@
 #pragma once
 #include <Cast/Core/Rendering/Renderer.h>
+#include <Cast/Core/Rendering/Shapes/Cube.h>
 #include <Cast/API/Vulkan/Rendering/VulkanInstance.h>
 #include <Cast/API/Vulkan/Rendering/GraphicsPipeline.h>
 namespace Cast{

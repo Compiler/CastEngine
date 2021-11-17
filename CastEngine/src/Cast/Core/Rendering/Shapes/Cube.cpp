@@ -36,6 +36,7 @@ namespace Cast{
     Cube::Cube(glm::vec3 center, float sideLen, float rotation, glm::vec3 axis, glm::vec4 color): _sideLength(sideLen){
         this->_center = {center.x, center.y, center.z, 1.0f};
         this->m_color = color;
+        this->Rotate(rotation, axis);
         load(rotation, axis);
     }
 

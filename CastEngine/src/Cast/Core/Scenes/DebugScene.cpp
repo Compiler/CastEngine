@@ -28,7 +28,7 @@ namespace Cast{
         _renderer->SetColor({0.12, 0.9, 0.12, 1});
         _renderer->SubmitVertexBuffer(cube.getRendererVertices());
         _renderer->SubmitVertexBuffer(cube2.getRendererVertices());
-        //_renderer->SubmitCube({0.0f, 0.0f, 0.0f}, 0.25f);
+        _renderer->SubmitCube({0.0f, 0.0f, 0.0f}, 0.25f);
         _renderer->clearColor(0.1f, 0.1f, 0.15f, 1.0f);
         
         _renderer->Draw();

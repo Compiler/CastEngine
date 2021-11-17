@@ -57,51 +57,8 @@ namespace Cast{
 
     }
     void VulkanRenderer::SubmitCube(glm::vec3 position, float side_len){
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x+side_len, position.y, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x+side_len, position.y+side_len, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x+side_len, position.y+side_len, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y+side_len, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-
-        VulkanInstance::vertices.push_back({glm::vec4(position.x+side_len, position.y+side_len, position.z + side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x+side_len, position.y, position.z + side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y, position.z + side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y, position.z + side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y+side_len, position.z + side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x+side_len, position.y+side_len, position.z + side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-
-        VulkanInstance::vertices.push_back({glm::vec4(position.x+side_len, position.y, position.z+side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x+side_len, position.y, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y, position.z+side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x+side_len, position.y, position.z+side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-
-        
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y + side_len, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x+side_len, position.y + side_len, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x+side_len, position.y + side_len, position.z+side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x+side_len, position.y + side_len, position.z+side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y + side_len, position.z+side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y + side_len, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-
-        
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y+side_len, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y+side_len, position.z+side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y+side_len, position.z+side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y, position.z+side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x, position.y, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-
-        VulkanInstance::vertices.push_back({glm::vec4(position.x + side_len, position.y+side_len, position.z+side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x + side_len, position.y+side_len, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x + side_len, position.y, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x + side_len, position.y, position.z, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x + side_len, position.y, position.z+side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-        VulkanInstance::vertices.push_back({glm::vec4(position.x + side_len, position.y+side_len, position.z+side_len, 1.0), m_curColor, DEFAULT_NORMAL});
-
-        
+        Cast::Cube cube{position, side_len, m_curColor};
+        SubmitVertexBuffer(cube.getRendererVertices());
     }
 
     void VulkanRenderer::Draw(){
