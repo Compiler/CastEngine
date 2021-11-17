@@ -28,7 +28,7 @@ namespace Cast{
         _renderer->SetColor({0.12, 0.9, 0.12, 1});
         _renderer->SubmitVertexBuffer(cube.getRendererVertices());
         cube.Rotate(1, glm::vec3(1,0,1));
-        cube.Translate(glm::vec3(0.001,0,0));
+        cube.Translate(glm::vec3(0.01, 0,0));
         cube.Load();
         //_renderer->SubmitVertexBuffer(cube2.getRendererVertices());
         _renderer->SubmitCube({0.0f, 0.0f, 0.0f}, 0.25f);
