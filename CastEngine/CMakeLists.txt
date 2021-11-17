@@ -60,6 +60,7 @@ add_library(
 	src/Cast/Core/Rendering/Shader/ShaderParser.h
 	src/Cast/Core/Rendering/Shader/ShaderProgram.h
 	src/Cast/Core/Rendering/Shader/UniformBufferObject.h
+	src/Cast/Core/Rendering/Shapes/Cube.cpp
 	src/Cast/Core/Rendering/Shapes/Cube.h
 	src/Cast/Core/Rendering/Shapes/Shape.h
 	src/Cast/Core/Scenes/DebugScene.cpp

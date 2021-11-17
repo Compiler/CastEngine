@@ -18,7 +18,7 @@ namespace Cast{
     void DebugScene::render(){
         static float offset = 0;
         static Cube cube{{0, 0, 1}, 0.5};
-        static Cube cube2{{-1, 0, 1}, 0.5, 45.0f, {1.0, 0, 1.0}};
+        static Cube cube2{{-1, 0, 1}, 0.5, 45.0f, {1.0, 0, 1.0}, {0, 0, 1, 1}};
         _renderer->SubmitTriangle(0.375, 0.5, 0.125);
         _renderer->SubmitTriangle(0.5, 0.5, 0.125);
         _renderer->SetColor({0.12, 0.12, 0.9, 1});
