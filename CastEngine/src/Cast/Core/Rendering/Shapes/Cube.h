@@ -7,7 +7,7 @@ namespace Cast{
     class Cube : public Shape{
 
         private:
-            glm::vec4 _center;
+            glm::vec4 _center{0, 0, 0, 1};
             float _sideLength;
 
         public:
