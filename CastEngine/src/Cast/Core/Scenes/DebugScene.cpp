@@ -17,7 +17,7 @@ namespace Cast{
     void DebugScene::update(){}
     void DebugScene::render(){
         static float offset = 0;
-        static Cube cube{{0, 0, 1}, 0.5};
+        static Cube cube{{0, 0, 0}, 0.5};
         static Cube cube2{{-1, 0, 1}, 0.5, 45.0f, {1.0, 0, 1.0}, {0, 0, 1, 1}};
         _renderer->SubmitTriangle(0.375, 0.5, 0.125);
         _renderer->SubmitTriangle(0.5, 0.5, 0.125);
@@ -27,7 +27,10 @@ namespace Cast{
         _renderer->SubmitTriangle(0.5 + -offset, -0.5, 0.25);
         _renderer->SetColor({0.12, 0.9, 0.12, 1});
         _renderer->SubmitVertexBuffer(cube.getRendererVertices());
-        _renderer->SubmitVertexBuffer(cube2.getRendererVertices());
+        cube.Rotate(1, glm::vec3(1,0,1));
+        cube.Translate(glm::vec3(0.001,0,0));
+        cube.Load();
+        //_renderer->SubmitVertexBuffer(cube2.getRendererVertices());
         _renderer->SubmitCube({0.0f, 0.0f, 0.0f}, 0.25f);
         _renderer->clearColor(0.1f, 0.1f, 0.15f, 1.0f);
         
