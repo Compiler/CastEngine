@@ -25,7 +25,9 @@ namespace Cast{
             void setColor(glm::vec4 color){this->m_color = color;}
             void Translate(glm::vec3 translation){this->m_translation = glm::translate(m_translation, translation);}
             void Rotate(float rotationDegrees, glm::vec3 axis){this->m_rotation = glm::rotate(this->m_rotation, glm::radians(rotationDegrees), axis);}
-            inline const glm::mat4 GetModel()const{return m_translation * m_rotation;}
+            void Scale(glm::vec3 scale){this->m_scale = glm::scale(this->m_scale, scale);}
+            void SetRotation(float rotationDegrees, glm::vec3 axis){this->m_rotation=glm::mat4(1.0f); Rotate(rotationDegrees, axis);}
+            inline const glm::mat4 GetModel()const{return m_scale * m_translation * m_rotation;}
 
     };
 

@@ -2,6 +2,7 @@
 #include <Cast/Core/Rendering/Renderer.h>
 #include <Cast/Core/Rendering/Shapes/Cube.h>
 #include <Cast/Core/Debug/Logger.h>
+#include <Cast/Core/Input/InputManager.h>
 namespace Cast{
 
     class DebugScene{

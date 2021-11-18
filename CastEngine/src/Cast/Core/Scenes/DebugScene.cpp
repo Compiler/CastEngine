@@ -26,9 +26,44 @@ namespace Cast{
         _renderer->SetColor({0.9, 0.12, 0.12, 1});
         _renderer->SubmitTriangle(0.5 + -offset, -0.5, 0.25);
         _renderer->SetColor({0.12, 0.9, 0.12, 1});
+
+        if(InputManager::isKeyPressed(KeyCodes::KEY_LEFT)){
+            cube.Rotate(-1, glm::vec3(0,1,0));
+        }else if(InputManager::isKeyPressed(KeyCodes::KEY_RIGHT)){
+            cube.Rotate(1, glm::vec3(0,1,0));
+        }else if(InputManager::isKeyPressed(KeyCodes::KEY_UP)){
+            cube.Rotate(1, glm::vec3(1, 0, 0));
+        }else if(InputManager::isKeyPressed(KeyCodes::KEY_DOWN)){
+            cube.Rotate(-1, glm::vec3(1, 0, 0));
+        }
+
+        float speed = 0.01f;
+        if(InputManager::isKeyPressed(KeyCodes::KEY_A)){
+            cube.Translate({speed, 0, 0});
+        }
+        if(InputManager::isKeyPressed(KeyCodes::KEY_D)){
+            cube.Translate({-speed, 0, 0});
+        }
+        if(InputManager::isKeyPressed(KeyCodes::KEY_W)){
+            cube.Translate({0, speed, 0});
+        }
+        if(InputManager::isKeyPressed(KeyCodes::KEY_S)){
+            cube.Translate({0, -speed, 0});
+        }
+
+        if(InputManager::isKeyPressed(KeyCodes::KEY_ENTER)){
+            cube.SetRotation(0, {1,1,1});
+        }
+
+        if(InputManager::isKeyPressed(KeyCodes::KEY_O)){
+            cube.Scale({1.015, 1.015, 1.015});
+        }
+        if(InputManager::isKeyPressed(KeyCodes::KEY_P)){
+            cube.Scale({0.95, 0.95, 0.95});
+        }
+
         _renderer->SubmitVertexBuffer(cube.getRendererVertices());
-        cube.Rotate(1, glm::vec3(1,0,1));
-        cube.Translate(glm::vec3(0.01, 0,0));
+
         cube.Load();
         //_renderer->SubmitVertexBuffer(cube2.getRendererVertices());
         _renderer->SubmitCube({0.0f, 0.0f, 0.0f}, 0.25f);
