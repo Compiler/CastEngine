@@ -11,6 +11,7 @@ namespace Cast{
         Camera cam{};
         cam.init(1920, 1080);
         cam.ubo.proj[0][0] *= -1;
+        cam.ubo.view = glm::lookAt(glm::vec3(2.0f, 2.0f, -5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
         cam.update();
         glGenBuffers(1, &_uboBufferID);
         glBindBuffer(GL_UNIFORM_BUFFER, _uboBufferID);
