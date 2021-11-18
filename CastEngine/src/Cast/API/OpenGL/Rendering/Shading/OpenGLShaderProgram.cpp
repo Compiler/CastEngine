@@ -30,10 +30,8 @@ namespace Cast{
 
     uint32_t OpenGLShaderProgram::_loadShader(const char* fileName, Shader::ShaderType type){
         uint32_t shaderID;
-		CAST_LOG("Sending to parser");
 		auto shaderSrc = ShaderParser::getShaderSource(fileName);
 		const char* shaderSrcChar = shaderSrc.c_str();
-		CAST_LOG("Done parsing");
 		
         shaderID = glCreateShader(_getOpenGLValForShaderType(type));
 		glShaderSource(shaderID, 1, &shaderSrcChar, NULL);
@@ -72,6 +70,9 @@ namespace Cast{
 
 	void OpenGLShaderProgram::compile(){
 		_shaderProgram = glCreateProgram();
+		if(_shaderProgram == 0) {
+			CAST_FATAL("Shader program failed to be created");
+		}
 		for(auto shaderID : _shaderIDs){
 			glAttachShader(_shaderProgram, shaderID);
 		}

@@ -32,7 +32,7 @@ namespace Cast{
         CAST_DEBUG("Vulkan Extensions supported: {}", extensionCount);
 
         CAST_DEBUG("Loading renderers");
-
+        
         _openglRenderContext = new OpenGLContext();
         _openglRenderContext->Load();
         _openglRenderer = new OpenGLRenderer();
@@ -68,7 +68,9 @@ namespace Cast{
         if(InputManager::isKeyReleased(KeyCodes::KEY_ESCAPE)) this->_renderContext->getWindow()->destroy();
         if(InputManager::isKeyReleased(KeyCodes::KEY_SPACE)){
             CAST_WARN("Swapping API");
-            if(RenderContext::GetAPI() == RenderContext::API::Vulkan)swapAPI(RenderContext::API::OpenGL);
+            if(RenderContext::GetAPI() == RenderContext::API::Vulkan){
+                swapAPI(RenderContext::API::OpenGL);
+            }
             else swapAPI(RenderContext::API::Vulkan);
         }
     }

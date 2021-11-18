@@ -1,6 +1,7 @@
 #pragma once
 #include <Cast/Core/Rendering/Renderer.h>
 #include <Cast/API/OpenGL/Rendering/Shading/OpenGLShaderProgram.h>
+#include <Cast/Core/Rendering/Shapes/Cube.h>
 #include <Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.h>
 #include <Cast/API/OpenGL/Rendering/OpenGLVertexArray.h>
 #include <Cast/Core/Rendering/Shader/UniformBufferObject.h>
@@ -18,7 +19,6 @@ namespace Cast{
             OpenGLVertexArray _vao;
             OpenGLVertexBuffer<float> _buffer;
             std::unordered_map<std::string, OpenGLShaderProgram> _shaderMap;
-            std::unordered_map<std::string, std::string> _shaderMapNamed;
 
             unsigned int _uboBufferID;
 
@@ -37,7 +37,7 @@ namespace Cast{
 
             void CreateShader(const char* name, std::initializer_list<Shader> shaders);
             //TODO: Error check so we dont null out on bad names
-            OpenGLShaderProgram& GetShader(const char* name){return _shaderMap[_shaderMapNamed[std::string(name)]];};
+            OpenGLShaderProgram& GetShader(const char* name){return _shaderMap[std::string(name)];};
             void SetShader(const char* name){
                 this->GetShader(name).use();
             };

@@ -20,6 +20,7 @@ namespace Cast{
 
         CAST_LOG("Creating window");
         _window = glfwCreateWindow(width, height, windowName, 0, 0);
+        glfwSetWindowPos(_window, 0, 0);
         CAST_DEBUG("GLFWWindow Context created");
 
         glfwMakeContextCurrent(_window);
@@ -43,6 +44,7 @@ namespace Cast{
             {
                 glEnable(GL_DEBUG_OUTPUT);
                 glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS); 
+                CAST_DEBUG("MOVING WINDOW");
                 glDebugMessageCallback(glDebugOutput, nullptr);
                 glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE); 
             }

@@ -4,6 +4,7 @@ namespace Cast{
 
     OpenGLRenderer::OpenGLRenderer():Renderer(), _layout({VAOElement(4), VAOElement(4)}){ 
         glEnable(GL_FRAMEBUFFER_SRGB); //Gamma correct
+        glDisable(GL_CULL_FACE);
         _vao.setLayout(std::move(_layout));
 
         glGenBuffers(1, &_uboBufferID);
@@ -23,25 +24,18 @@ namespace Cast{
 
 
     void OpenGLRenderer::CreateShader(const char* name, std::initializer_list<Shader> shaders){
-        CAST_LOG("Setting shader to ");
-        std::string shader_key = "";
-        for(auto shader : shaders){
-            CAST_LOG("{}", shader.filePath);
-            shader_key += std::to_string((int)shader.type) + shader.filePath;
-        }
-
-        if(_shaderMap.find(shader_key) == _shaderMap.end()){
-            CAST_LOG("New shader set, compiling and setting {}", shader_key);
+        if(_shaderMap.find(name) == _shaderMap.end()){
+            CAST_LOG("New shader set, compiling and setting {}", name);
             OpenGLShaderProgram program = OpenGLShaderProgram();
-            unsigned int uniformBlockIndex = glGetUniformBlockIndex(program.getProgramID(), "UniformBufferObject");
-            glUniformBlockBinding(program.getProgramID(), uniformBlockIndex, 0);
-
             for(auto shader : shaders){
                 program.loadShader(shader.filePath, shader.type);
             }
             program.compile();
-            _shaderMap.emplace(shader_key, program);
-            _shaderMapNamed.emplace(name, shader_key);
+            program.use();
+
+            unsigned int uniformBlockIndex = glGetUniformBlockIndex(program.getProgramID(), "UniformBufferObject");
+            glUniformBlockBinding(program.getProgramID(), uniformBlockIndex, 0);
+            _shaderMap.emplace(name, program);
             
         }
     }
@@ -84,8 +78,8 @@ namespace Cast{
         this->m_vertices.push_back(bottomLeftY);
         this->m_vertices.push_back(1);
         this->m_vertices.push_back(1);
-        //default color pink
         this->m_vertices.insert(this->m_vertices.end(), {m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+        this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_NORMAL.x, DEFAULT_NORMAL.y, DEFAULT_NORMAL.z, DEFAULT_NORMAL.w});
 
         this->m_vertices.push_back(bottomLeftX + size);
         this->m_vertices.push_back(bottomLeftY);
@@ -93,6 +87,7 @@ namespace Cast{
         this->m_vertices.push_back(1);
 
         this->m_vertices.insert(this->m_vertices.end(), {m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+        this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_NORMAL.x, DEFAULT_NORMAL.y, DEFAULT_NORMAL.z, DEFAULT_NORMAL.w});
 
         this->m_vertices.push_back(bottomLeftX + size / 2.0);
         this->m_vertices.push_back(bottomLeftY + size);
@@ -100,6 +95,7 @@ namespace Cast{
         this->m_vertices.push_back(1);
         
         this->m_vertices.insert(this->m_vertices.end(), {m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+        this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_NORMAL.x, DEFAULT_NORMAL.y, DEFAULT_NORMAL.z, DEFAULT_NORMAL.w});
         
     }
      
@@ -112,6 +108,8 @@ namespace Cast{
         this->m_vertices.push_back(color[0].y);
         this->m_vertices.push_back(color[0].z);
         this->m_vertices.push_back(1);
+        this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_NORMAL.x, DEFAULT_NORMAL.y, DEFAULT_NORMAL.z, DEFAULT_NORMAL.w});
+
         this->m_vertices.push_back(vertices[1].x);
         this->m_vertices.push_back(vertices[1].y);
         this->m_vertices.push_back(vertices[1].z);
@@ -120,33 +118,23 @@ namespace Cast{
         this->m_vertices.push_back(color[1].y);
         this->m_vertices.push_back(color[1].z);
         this->m_vertices.push_back(1);
+        this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_NORMAL.x, DEFAULT_NORMAL.y, DEFAULT_NORMAL.z, DEFAULT_NORMAL.w});
         this->m_vertices.push_back(vertices[2].x);
         this->m_vertices.push_back(vertices[2].y);
         this->m_vertices.push_back(vertices[2].z);
         this->m_vertices.push_back(1);
+        this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_NORMAL.x, DEFAULT_NORMAL.y, DEFAULT_NORMAL.z, DEFAULT_NORMAL.w});
         this->m_vertices.push_back(color[2].x);
         this->m_vertices.push_back(color[2].y);
         this->m_vertices.push_back(color[2].z);
         this->m_vertices.push_back(1);
+        this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_NORMAL.x, DEFAULT_NORMAL.y, DEFAULT_NORMAL.z, DEFAULT_NORMAL.w});
 
     }
 
     void OpenGLRenderer::SubmitCube(glm::vec3 position, float side_len){
-        this->m_vertices.insert(m_vertices.end(), {position.x, position.y, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
-        this->m_vertices.insert(m_vertices.end(), {position.x+side_len, position.y, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
-        this->m_vertices.insert(m_vertices.end(), {position.x+side_len, position.y+side_len, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
-
-        this->m_vertices.insert(m_vertices.end(), {position.x, position.y, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
-        this->m_vertices.insert(m_vertices.end(), {position.x, position.y+side_len, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
-        this->m_vertices.insert(m_vertices.end(), {position.x+side_len, position.y+side_len, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
-
-        this->m_vertices.insert(m_vertices.end(), {position.x, position.y, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
-        this->m_vertices.insert(m_vertices.end(), {position.x+side_len, position.y, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
-        this->m_vertices.insert(m_vertices.end(), {position.x+side_len, position.y, position.z+side_len, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
-
-        this->m_vertices.insert(m_vertices.end(), {position.x, position.y, position.z, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
-        this->m_vertices.insert(m_vertices.end(), {position.x, position.y, position.z+side_len, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
-        this->m_vertices.insert(m_vertices.end(), {position.x+side_len, position.y, position.z+side_len, 1.0, m_curColor.r, m_curColor.g, m_curColor.b, m_curColor.a});
+        Cube cube{position, side_len, m_curColor};
+        SubmitVertexBuffer(cube.getRendererVertices());
         
     }
 
