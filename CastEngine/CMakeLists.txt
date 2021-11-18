@@ -50,11 +50,13 @@ add_library(
 	src/Cast/Core/Scenes/DebugScene.cpp
 	src/Cast/Core/Scenes/DebugScene.h
 	src/Cast/Core/Rendering/Window.h
+	src/Cast/Core/Rendering/PerspectiveCamera.h
 	src/Cast/Core/Rendering/RenderContext.cpp
 	src/Cast/Core/Rendering/Window.cpp
 	src/Cast/Core/Rendering/Camera.h
 	src/Cast/Core/Rendering/Renderer.cpp
 	src/Cast/Core/Rendering/Texture.h
+	src/Cast/Core/Rendering/PerspectiveCamera.cpp
 	src/Cast/Core/Rendering/RenderContext.h
 	src/Cast/Core/Rendering/Renderer.h
 	src/Cast/Core/Rendering/Texture.cpp
