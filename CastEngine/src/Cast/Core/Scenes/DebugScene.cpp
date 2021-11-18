@@ -8,11 +8,10 @@ namespace Cast{
         //_renderer->CreateShader("red", {{CAST_INTERNAL_SHADER("passthrough.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("red.frag"), Shader::ShaderType::Fragment}});
         //_renderer->SetShader("red");
         _renderer->CreateShader("passthrough_3d", {{CAST_INTERNAL_SHADER("passthrough_3d.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Fragment}});
-        _renderer->SetShader("passthrough_3d");
-
         _renderer->CreateShader("blinn_phong", {{CAST_INTERNAL_SHADER("blinn_phong.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("blinn_phong.frag"), Shader::ShaderType::Fragment}});
+        _renderer->SetShader("passthrough_3d");
         _renderer->SetShader("blinn_phong");
-        CAST_DEBUG("Loaded shader");
+        CAST_DEBUG("Loaded shaders");
     }
     void DebugScene::update(){}
     void DebugScene::render(){
@@ -29,14 +28,22 @@ namespace Cast{
 
         if(InputManager::isKeyPressed(KeyCodes::KEY_LEFT)){
             cube.Rotate(-1, glm::vec3(0,1,0));
-        }else if(InputManager::isKeyPressed(KeyCodes::KEY_RIGHT)){
+        }
+        if(InputManager::isKeyPressed(KeyCodes::KEY_RIGHT)){
             cube.Rotate(1, glm::vec3(0,1,0));
-        }else if(InputManager::isKeyPressed(KeyCodes::KEY_UP)){
+        }
+        if(InputManager::isKeyPressed(KeyCodes::KEY_UP)){
             cube.Rotate(1, glm::vec3(1, 0, 0));
-        }else if(InputManager::isKeyPressed(KeyCodes::KEY_DOWN)){
+        }
+        if(InputManager::isKeyPressed(KeyCodes::KEY_DOWN)){
             cube.Rotate(-1, glm::vec3(1, 0, 0));
         }
-
+        if(InputManager::isKeyReleased(KeyCodes::KEY_1)){
+            _renderer->SetShader("blinn_phong");
+        }
+        if(InputManager::isKeyReleased(KeyCodes::KEY_2)){
+            _renderer->SetShader("passthrough_3d");
+        }
         float speed = 0.01f;
         if(InputManager::isKeyPressed(KeyCodes::KEY_A)){
             cube.Translate({speed, 0, 0});

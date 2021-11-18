@@ -2,19 +2,19 @@
 
 namespace Cast{
 
-    OpenGLRenderer::OpenGLRenderer():Renderer(), _layout({VAOElement(4), VAOElement(4)}){ 
+    OpenGLRenderer::OpenGLRenderer():Renderer(), _layout({VAOElement(4), VAOElement(4), VAOElement(4)}){ 
         glEnable(GL_FRAMEBUFFER_SRGB); //Gamma correct
         glDisable(GL_CULL_FACE);
+        glEnable(GL_DEPTH_TEST);  
         _vao.setLayout(std::move(_layout));
 
-        glGenBuffers(1, &_uboBufferID);
-        
-        glBindBuffer(GL_UNIFORM_BUFFER, _uboBufferID);
-        glBufferData(GL_UNIFORM_BUFFER, sizeof(UniformBufferObject), NULL, GL_STATIC_DRAW);
-        glBindBuffer(GL_UNIFORM_BUFFER, 0);
         Camera cam{};
         cam.init(1920, 1080);
         cam.ubo.proj[0][0] *= -1;
+        cam.update();
+        glGenBuffers(1, &_uboBufferID);
+        glBindBuffer(GL_UNIFORM_BUFFER, _uboBufferID);
+        glBufferData(GL_UNIFORM_BUFFER, sizeof(UniformBufferObject), NULL, GL_STATIC_DRAW);
         glBindBufferRange(GL_UNIFORM_BUFFER, 0, _uboBufferID, 0, sizeof(UniformBufferObject));
         glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(cam.ubo.model));
         glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(cam.ubo.view));
@@ -32,11 +32,9 @@ namespace Cast{
             }
             program.compile();
             program.use();
-
             unsigned int uniformBlockIndex = glGetUniformBlockIndex(program.getProgramID(), "UniformBufferObject");
             glUniformBlockBinding(program.getProgramID(), uniformBlockIndex, 0);
             _shaderMap.emplace(name, program);
-            
         }
     }
 
@@ -70,7 +68,7 @@ namespace Cast{
 
     void OpenGLRenderer::SubmitVertexBuffer(const std::vector<VertexTemplate>& buffer){
         for(const auto& vertex : buffer){
-            this->m_vertices.insert(this->m_vertices.end(), {vertex.position.x, vertex.position.y, vertex.position.z, vertex.position.w, vertex.color.x, vertex.color.y, vertex.color.z, vertex.color.w });
+            this->m_vertices.insert(this->m_vertices.end(), {vertex.position.x, vertex.position.y, vertex.position.z, vertex.position.w, vertex.color.x, vertex.color.y, vertex.color.z, vertex.color.w, vertex.normal.x, vertex.normal.y, vertex.normal.z, vertex.normal.w});
         }
     }
     void OpenGLRenderer::SubmitTriangle(float bottomLeftX, float bottomLeftY, float size){
@@ -119,11 +117,11 @@ namespace Cast{
         this->m_vertices.push_back(color[1].z);
         this->m_vertices.push_back(1);
         this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_NORMAL.x, DEFAULT_NORMAL.y, DEFAULT_NORMAL.z, DEFAULT_NORMAL.w});
+        
         this->m_vertices.push_back(vertices[2].x);
         this->m_vertices.push_back(vertices[2].y);
         this->m_vertices.push_back(vertices[2].z);
         this->m_vertices.push_back(1);
-        this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_NORMAL.x, DEFAULT_NORMAL.y, DEFAULT_NORMAL.z, DEFAULT_NORMAL.w});
         this->m_vertices.push_back(color[2].x);
         this->m_vertices.push_back(color[2].y);
         this->m_vertices.push_back(color[2].z);
