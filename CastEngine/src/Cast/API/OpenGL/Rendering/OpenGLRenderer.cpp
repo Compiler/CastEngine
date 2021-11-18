@@ -8,17 +8,18 @@ namespace Cast{
         glEnable(GL_DEPTH_TEST);  
         _vao.setLayout(std::move(_layout));
 
-        Camera cam{};
-        cam.init(1920, 1080, true);
-
-        cam.update();
+        UniformBufferObject ubo {glm::mat4(1.0f), glm::mat4(1.0f), glm::mat4(1.0f)};
+        Cast::PerspectiveCamera camera{1920, 1080, {2,2,5}, true};
+        ubo.proj = camera.getProjection();
+        ubo.view = camera.getView();
+        camera.Update();
         glGenBuffers(1, &_uboBufferID);
         glBindBuffer(GL_UNIFORM_BUFFER, _uboBufferID);
         glBufferData(GL_UNIFORM_BUFFER, sizeof(UniformBufferObject), NULL, GL_STATIC_DRAW);
         glBindBufferRange(GL_UNIFORM_BUFFER, 0, _uboBufferID, 0, sizeof(UniformBufferObject));
-        glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(cam.ubo.model));
-        glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(cam.ubo.view));
-        glBufferSubData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(cam.ubo.proj));
+        glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(ubo.model));
+        glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(ubo.view));
+        glBufferSubData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(ubo.proj));
 
     }
 

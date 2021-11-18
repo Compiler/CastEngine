@@ -178,13 +178,12 @@ namespace Cast{
 
     void VulkanInstance::_updateUniformBuffer(uint32_t currentImage){
         
-        Cast::Camera cam{};
-        cam.init(_swapChainExtent.width, _swapChainExtent.height);
-        cam.update();
-        UniformBufferObject ubo = cam.ubo;
+
+        UniformBufferObject ubo {glm::mat4(1.0f), glm::mat4(1.0f), glm::mat4(1.0f)};
         Cast::PerspectiveCamera camera{_swapChainExtent.width, _swapChainExtent.height, {2,2,5}};
-        //ubo.proj = camera.getProjection();
-        //ubo.view = camera.getView();
+        ubo.proj = camera.getProjection();
+        ubo.view = camera.getView();
+        camera.Update();
         
 
         void* data;
