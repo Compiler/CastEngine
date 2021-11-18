@@ -45,9 +45,12 @@ add_library(
 	src/Cast/Core/Input/InputManager.cpp
 	src/Cast/Core/Debug/LoggingUserFormatter.h
 	src/Cast/Core/Debug/Logger.h
+	src/Cast/Core/Utils/MathUtils.h
 	src/Cast/Core/Utils/Files/FileLoaderFactory.cpp
 	src/Cast/Core/Utils/Files/FileLoaderFactory.h
 	src/Cast/Core/Scenes/DebugScene.cpp
+	src/Cast/Core/Scenes/StressTestScene.h
+	src/Cast/Core/Scenes/StressTestScene.cpp
 	src/Cast/Core/Scenes/DebugScene.h
 	src/Cast/Core/Rendering/Window.h
 	src/Cast/Core/Rendering/PerspectiveCamera.h

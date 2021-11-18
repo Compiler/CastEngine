@@ -22,7 +22,9 @@ namespace Cast{
         }
         CAST_DEBUG("Loading scene");
         _scene.setRenderer(_renderer);
+        _stressScene.setRenderer(_renderer);
         _scene.load();
+        _stressScene.load();
     }
 
     void EngineCore::load(StartState state){
@@ -62,7 +64,8 @@ namespace Cast{
     }
 
     void EngineCore::update(){
-        _scene.update();
+        //_scene.update();
+        _stressScene.update();
         InputManager::clear();
         _renderContext->Update();
         if(InputManager::isKeyReleased(KeyCodes::KEY_ESCAPE)) this->_renderContext->getWindow()->destroy();
@@ -80,7 +83,8 @@ namespace Cast{
         _renderer->clearColor(0.4, 0.4, 0.4, 1.0);
         _renderer->clearColorBit();
         
-        _scene.render();
+        _stressScene.render();
+        //_scene.render();
         _renderContext->Render();
         _renderContext->getWindow()->render();
     }

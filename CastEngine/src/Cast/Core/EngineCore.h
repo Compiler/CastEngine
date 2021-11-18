@@ -4,6 +4,7 @@
 #include <Cast/Core/Input/InputManager.h>
 #include <Cast/Core/Components/Transform.h>
 #include <Cast/Core/Scenes/DebugScene.h>
+#include <Cast/Core/Scenes/StressTestScene.h>
 
 #include <Cast/API/OpenGL/Rendering/OpenGLContext.h>
 #include <Cast/API/OpenGL/Rendering/OpenGLRenderer.h>
@@ -25,6 +26,7 @@ namespace Cast{
             OpenGLContext* _openglRenderContext;
 
             DebugScene _scene{};
+            StressTestScene _stressScene{};
         public:
             enum StartState{ OpenGL = 0, Vulkan = 1 };
             void load(StartState state = StartState::Vulkan);
