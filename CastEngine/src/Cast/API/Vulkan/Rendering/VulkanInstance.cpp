@@ -182,6 +182,9 @@ namespace Cast{
         cam.init(_swapChainExtent.width, _swapChainExtent.height);
         cam.update();
         UniformBufferObject ubo = cam.ubo;
+        Cast::PerspectiveCamera camera{_swapChainExtent.width, _swapChainExtent.height, {2,2,5}};
+        //ubo.proj = camera.getProjection();
+        //ubo.view = camera.getView();
         
 
         void* data;

@@ -19,6 +19,7 @@
 
 #include <Cast/Core/Rendering/Shader/UniformBufferObject.h>
 #include <Cast/Core/Rendering/Camera.h>
+#include <Cast/Core/Rendering/PerspectiveCamera.h>
 #define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

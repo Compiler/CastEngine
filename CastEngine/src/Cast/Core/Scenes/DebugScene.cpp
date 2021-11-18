@@ -33,10 +33,10 @@ namespace Cast{
             cube.Rotate(1, glm::vec3(0,1,0));
         }
         if(InputManager::isKeyPressed(KeyCodes::KEY_UP)){
-            cube.Rotate(1, glm::vec3(1, 0, 0));
+            cube.Rotate(-1, glm::vec3(1, 0, 0));
         }
         if(InputManager::isKeyPressed(KeyCodes::KEY_DOWN)){
-            cube.Rotate(-1, glm::vec3(1, 0, 0));
+            cube.Rotate(1, glm::vec3(1, 0, 0));
         }
         if(InputManager::isKeyReleased(KeyCodes::KEY_1)){
             _renderer->SetShader("blinn_phong");
@@ -46,10 +46,10 @@ namespace Cast{
         }
         float speed = 0.01f;
         if(InputManager::isKeyPressed(KeyCodes::KEY_A)){
-            cube.Translate({speed, 0, 0});
+            cube.Translate({-speed, 0, 0});
         }
         if(InputManager::isKeyPressed(KeyCodes::KEY_D)){
-            cube.Translate({-speed, 0, 0});
+            cube.Translate({speed, 0, 0});
         }
         if(InputManager::isKeyPressed(KeyCodes::KEY_W)){
             cube.Translate({0, speed, 0});

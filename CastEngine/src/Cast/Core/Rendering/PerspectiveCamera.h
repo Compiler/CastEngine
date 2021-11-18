@@ -12,13 +12,18 @@ namespace Cast{
             glm::vec2 _cameraDimensions;
             glm::vec3 _cameraUp;
             glm::mat4 _projection, _view;
-            bool _needsUpdate;
-            bool _yUp;
+            bool _needsUpdate = true;
+            bool _yDown;
             float _fov, _near, _far;
         public:
 
-            PerspectiveCamera(float camWidth, float camHeight);
+            PerspectiveCamera(float camWidth, float camHeight, bool yDown = false);
+            PerspectiveCamera(float camWidth, float camHeight, glm::vec3 camPos, bool yDown = false);
             void Update();
+
+
+            inline const glm::mat4& getProjection(){return _projection;}
+            inline const glm::mat4& getView(){return _view;}
 
 
 
