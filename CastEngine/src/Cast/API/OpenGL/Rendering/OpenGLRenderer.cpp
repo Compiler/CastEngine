@@ -80,6 +80,7 @@ namespace Cast{
 
 
     void OpenGLRenderer::Draw(){
+        static std::vector<float> cube_instance = Cube::GetIdentityCubeFloats();
         int draw_size = m_vertices.size();
         _buffer.setVertices(std::move(m_vertices));
         _buffer.init();
