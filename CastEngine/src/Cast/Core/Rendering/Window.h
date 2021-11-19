@@ -10,20 +10,36 @@ namespace Cast{
         protected:
             int m_width, m_height;
             const char* m_windowName;
-            GLFWwindow* _window;
+            GLFWwindow* m_window;
         public:
             Window(int width, int height, const char* windowName);
-            virtual void update() = 0;
-            virtual void render() = 0;
-            virtual void destroy() = 0;
-            virtual bool shouldClose() = 0;
-            virtual void setSize(int width, int height) = 0;
-            virtual void setPosition(int x, int y) = 0;
+
+            void update(){
+                glfwPollEvents();    
+            }
+            void render(){
+                glfwSwapBuffers(m_window);
+            }
+            void destroy(){
+                CAST_WARN("Destroying VulkanWindow");
+                glfwTerminate();
+            }
+
+            void setSize(int width, int height){
+                m_width = width;
+                m_height = height;
+                glfwSetWindowSize(m_window, m_width, m_height);
+            }
+
+            void setPosition(int x, int y){
+                glfwSetWindowPos(m_window, x, y);
+            }
 
 
-            inline GLFWwindow* getWindowHandle(){return _window;}
+            inline GLFWwindow* getWindowHandle(){return m_window;}
             inline int getHeight(){return m_height;}
             inline int getWidth(){return m_width;}
+            inline bool shouldClose(){return glfwWindowShouldClose(m_window);}
 
 
 

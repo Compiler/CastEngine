@@ -15,12 +15,12 @@ namespace Cast{
         #endif
 
         CAST_LOG("Creating window");
-        _window = glfwCreateWindow(width, height, windowName, 0, 0);
+        m_window = glfwCreateWindow(width, height, windowName, 0, 0);
         CAST_DEBUG("GLFWWindow Context created");
 
-        glfwMakeContextCurrent(_window);
-        glfwSetWindowUserPointer(_window, reinterpret_cast<void*>(this));
-        glfwSetKeyCallback(_window, OpenGLCallbacks::keyCallback);
+        glfwMakeContextCurrent(m_window);
+        glfwSetWindowUserPointer(m_window, reinterpret_cast<void*>(this));
+        glfwSetKeyCallback(m_window, WindowCallbacks::keyCallback);
 
         CAST_DEBUG("Created Vulkan Window.");
 
@@ -37,26 +37,5 @@ namespace Cast{
     }
 
 
-    void VulkanWindow::update(){
-        glfwPollEvents();    
-    }
-    void VulkanWindow::render(){
-        glfwSwapBuffers(_window);
-    }
-    void VulkanWindow::destroy(){
-        CAST_WARN("Destroying VulkanWindow");
-        glfwTerminate();
-    }
 
-
-
-    void VulkanWindow::setSize(int width, int height){
-        m_width = width;
-        m_height = height;
-        glfwSetWindowSize(_window, m_width, m_height);
-    }
-
-    void VulkanWindow::setPosition(int x, int y){
-        glfwSetWindowPos(_window, x, y);
-    }
 }

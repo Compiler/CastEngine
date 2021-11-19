@@ -19,18 +19,18 @@ namespace Cast{
         #endif
 
         CAST_LOG("Creating window");
-        _window = glfwCreateWindow(width, height, windowName, 0, 0);
-        glfwSetWindowPos(_window, 0, 0);
+        m_window = glfwCreateWindow(width, height, windowName, 0, 0);
+        glfwSetWindowPos(m_window, 0, 0);
         CAST_DEBUG("GLFWWindow Context created");
 
-        glfwMakeContextCurrent(_window);
-        glfwSetWindowUserPointer(_window, reinterpret_cast<void*>(this));
+        glfwMakeContextCurrent(m_window);
+        glfwSetWindowUserPointer(m_window, reinterpret_cast<void*>(this));
 
-        glfwSetFramebufferSizeCallback(_window, OpenGLCallbacks::framebufferSizeCallback);  
-        glfwSetWindowSizeCallback(_window, OpenGLCallbacks::windowResizeCallback);
-        glfwSetKeyCallback(_window, OpenGLCallbacks::keyCallback);
-        glfwSetMouseButtonCallback(_window, OpenGLCallbacks::mouseClickCallback);
-        glfwSetCursorPosCallback(_window, OpenGLCallbacks::cursorPositionCallback);
+        glfwSetFramebufferSizeCallback(m_window, OpenGLCallbacks::framebufferSizeCallback);  
+        glfwSetWindowSizeCallback(m_window, OpenGLCallbacks::windowResizeCallback);
+        glfwSetKeyCallback(m_window, WindowCallbacks::keyCallback);
+        glfwSetMouseButtonCallback(m_window, WindowCallbacks::mouseClickCallback);
+        glfwSetCursorPosCallback(m_window, WindowCallbacks::cursorPositionCallback);
         CAST_DEBUG("Created OpenGL Window.");
 
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
@@ -44,7 +44,6 @@ namespace Cast{
             {
                 glEnable(GL_DEBUG_OUTPUT);
                 glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS); 
-                CAST_DEBUG("MOVING WINDOW");
                 glDebugMessageCallback(glDebugOutput, nullptr);
                 glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE); 
             }
@@ -56,29 +55,6 @@ namespace Cast{
 
     }
 
-
-    void OpenGLWindow::update(){
-        glfwPollEvents();    
-    }
-    void OpenGLWindow::render(){
-        glfwSwapBuffers(_window);
-    }
-    void OpenGLWindow::destroy(){
-        CAST_WARN("Destroying OpenGLWindow");
-        glfwTerminate();
-    }
-
-
-
-    void OpenGLWindow::setSize(int width, int height){
-        m_width = width;
-        m_height = height;
-        glfwSetWindowSize(_window, m_width, m_height);
-    }
-
-    void OpenGLWindow::setPosition(int x, int y){
-        glfwSetWindowPos(_window, x, y);
-    }
 
 
 

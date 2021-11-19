@@ -52,6 +52,7 @@ add_library(
 	src/Cast/Core/Scenes/StressTestScene.h
 	src/Cast/Core/Scenes/StressTestScene.cpp
 	src/Cast/Core/Scenes/DebugScene.h
+	src/Cast/Core/Rendering/WindowCallbacks.h
 	src/Cast/Core/Rendering/Window.h
 	src/Cast/Core/Rendering/PerspectiveCamera.h
 	src/Cast/Core/Rendering/RenderContext.cpp
@@ -62,6 +63,7 @@ add_library(
 	src/Cast/Core/Rendering/PerspectiveCamera.cpp
 	src/Cast/Core/Rendering/RenderContext.h
 	src/Cast/Core/Rendering/Renderer.h
+	src/Cast/Core/Rendering/WindowCallbacks.cpp
 	src/Cast/Core/Rendering/Texture.cpp
 	src/Cast/Core/Rendering/Shader/Shader.h
 	src/Cast/Core/Rendering/Shader/ShaderParser.h

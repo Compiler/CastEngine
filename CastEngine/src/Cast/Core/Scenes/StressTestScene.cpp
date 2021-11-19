@@ -15,8 +15,8 @@ namespace Cast{
         static float MIN_CUBE_SIZE = 0.1;
         glm::vec2 curCubeSize = {random_float(MIN_CUBE_SIZE, MAX_CUBE_SIZE), random_float(MIN_CUBE_SIZE, MAX_CUBE_SIZE)};
         _cubes = {};
-        float incremenet = 0.175;
-        float range = 8;
+        float incremenet = 0.275;
+        float range = 4;
         for(float x = -range; x <= range; x += incremenet){
             for(float z = -range; z <= range; z += incremenet){
                 for(float y = 1; y <= 1; y += incremenet){
