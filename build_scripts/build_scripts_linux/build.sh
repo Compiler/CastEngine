@@ -8,5 +8,5 @@ else
     mkdir build
 fi
 cd build
-cmake -j8 -DCMAKE_BUILD_TYPE=Debug ..
+cmake -j8 DCMAKE_CXX_FLAGS=-pg -DCMAKE_EXE_LINKER_FLAGS=-pg -DCMAKE_SHARED_LINKER_FLAGS=-pg -DCMAKE_BUILD_TYPE=Debug ..
 make

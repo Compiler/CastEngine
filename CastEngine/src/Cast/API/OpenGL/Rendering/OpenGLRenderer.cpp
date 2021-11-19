@@ -31,32 +31,15 @@ namespace Cast{
         glBufferSubData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(ubo.proj));
 
 
-        // _buffer.init();
-        // _buffer.setVertices(Cube::GetIdentityCubeFloats());
-        // _buffer.buffer();
-        // glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)(0 * sizeof(float)));
-        // glEnableVertexAttribArray(0);
+       
 
-        // glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)(4 * sizeof(float)));
-        // glEnableVertexAttribArray(1);
 
-        // glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)(8 * sizeof(float)));
-        // glEnableVertexAttribArray(2);
-
-        float quadVertices[] = {
-            // positions            // colors                   //normals
-            -0.05f,  0.05f, 0, 1,  1.0f, 0.0f, 0.0f, 1.0f,  0.0, 0.0, 1.0, 1.0,
-             0.05f, -0.05f, 0, 1,  0.0f, 1.0f, 0.0f, 1.0f,  0.0, 0.0, 1.0, 1.0,
-            -0.05f, -0.05f, 0, 1,  0.0f, 0.0f, 1.0f, 1.0f,  0.0, 0.0, 1.0, 1.0,
-             0.05f,  0.05f, 0, 1,  0.0f, 1.0f, 1.0f, 1.0f,  0.0, 0.0, 1.0, 1.0,
-             0.05f, -0.05f, 0, 1,  0.0f, 1.0f, 0.0f, 1.0f,  0.0, 0.0, 1.0, 1.0,
-            -0.05f,  0.05f, 0, 1,  1.0f, 0.0f, 0.0f, 1.0f,  0.0, 0.0, 1.0, 1.0,
-        };
 
         std::vector<float> cubeVertices = Cube::GetIdentityCubeFloats();
-        glGenBuffers(1, &quadVBO);
-        glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * cubeVertices.size(), cubeVertices.data(), GL_STATIC_DRAW);
+
+        _buffer.init();
+        _buffer.setVertices(Cube::GetIdentityCubeFloats());
+        _buffer.buffer();
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(1);
@@ -125,15 +108,6 @@ namespace Cast{
         
         _instanceBuffer.setVertices(std::move(m_verticesInstance));
         _instanceBuffer.buffer();
-        glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 16 * sizeof(float), (void*)(0 * sizeof(float)));
-        glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 16 * sizeof(float), (void*)(4 * sizeof(float)));
-        glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 16 * sizeof(float), (void*)(8 * sizeof(float)));
-        glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, 16 * sizeof(float), (void*)(12 * sizeof(float)));
-
-        glVertexAttribDivisor(3, 1);
-        glVertexAttribDivisor(4, 1);
-        glVertexAttribDivisor(5, 1);
-        glVertexAttribDivisor(6, 1);
 
         //glDrawArrays(GL_TRIANGLES, 0, draw_size);
         glDrawArraysInstanced(GL_TRIANGLES, 0, 36, draw_size);
