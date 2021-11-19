@@ -85,6 +85,8 @@ namespace Cast{
                 identity.push_back({{_center.x + offset, _center.y + offset, _center.z - offset, 1.0f}, m_color, {0, 0, -1.0f, 1.0f}, identity_model});
                 identity.push_back({{_center.x - offset, _center.y + offset, _center.z - offset, 1.0f}, m_color, {0, 0, -1.0f, 1.0f}, identity_model});
                 identity.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0f}, m_color, {0, 0, -1.0f, 1.0f}, identity_model});
+
+                return identity;
             }
 
 

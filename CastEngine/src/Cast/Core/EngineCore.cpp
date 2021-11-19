@@ -84,6 +84,7 @@ namespace Cast{
         _renderContext->Render();
         _renderContext->getWindow()->render();
         _stressScene.render();
+
     }
 
     void EngineCore::unload(){

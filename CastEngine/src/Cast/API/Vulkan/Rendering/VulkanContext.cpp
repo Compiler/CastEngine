@@ -11,6 +11,7 @@ namespace Cast{
     void VulkanContext::Load(){
         RenderContext::Load();
         _vulkanInstance->load(this->m_window->getWindowHandle());
+        LoadImGUI();
     }
     void VulkanContext::Update(){
         RenderContext::Update();
@@ -20,10 +21,28 @@ namespace Cast{
         RenderContext::Render();
         this->m_window->render();
         _vulkanInstance->render();
+        RenderImGUI();
     }
     void VulkanContext::Unload(){
         RenderContext::Unload();
         this->m_window->destroy();
+    }
+
+
+    void VulkanContext::LoadImGUI(){
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
+        ImGuiIO& io = ImGui::GetIO(); (void)io;
+        ImGui::StyleColorsDark();
+
+
+
+
+    }
+
+    void VulkanContext::RenderImGUI(){
+
+
     }
 
 }

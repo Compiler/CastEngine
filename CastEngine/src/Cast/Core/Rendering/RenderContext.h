@@ -28,6 +28,9 @@ namespace Cast{
             virtual void Render(){}
             virtual void Unload(){}
 
+            virtual void LoadImGUI() = 0;
+            virtual void RenderImGUI() = 0;
+
 
 
             inline Window* getWindow(){return m_window;}

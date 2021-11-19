@@ -66,8 +66,6 @@ namespace Cast{
                 attributeDescriptions[3].binding = 0;
                 attributeDescriptions[3].location = 3;
                 attributeDescriptions[3].format = VK_FORMAT_R32G32B32A32_SFLOAT;
-                CAST_ERROR("{}", offsetof(VertexTemplate, model));
-                CAST_ERROR("{}", offsetof(VertexTemplate, normal));
                 attributeDescriptions[3].offset = offsetof(VertexTemplate, model) + sizeof(glm::vec4) * 0;//((::size_t)&reinterpret_cast<char const volatile&>((((Vertex_Tmp*)0)->color)));
 
                 attributeDescriptions[4].binding = 0;

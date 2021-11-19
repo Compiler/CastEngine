@@ -74,6 +74,24 @@ add_library(
 	src/Cast/Core/Rendering/Shapes/Cube.h
 	src/Cast/Core/Rendering/Shapes/Shape.h
 	src/Cast/Core/Components/Transform.h
+	src/Cast/Vendor/ImGui/imgui_demo.cpp
+	src/Cast/Vendor/ImGui/imgui_impl_opengl3.cpp
+	src/Cast/Vendor/ImGui/imgui_widgets.cpp
+	src/Cast/Vendor/ImGui/imgui_draw.cpp
+	src/Cast/Vendor/ImGui/imstb_rectpack.h
+	src/Cast/Vendor/ImGui/imgui_impl_glfw.h
+	src/Cast/Vendor/ImGui/imstb_textedit.h
+	src/Cast/Vendor/ImGui/imstb_truetype.h
+	src/Cast/Vendor/ImGui/imgui_impl_vulkan.cpp
+	src/Cast/Vendor/ImGui/imconfig.h
+	src/Cast/Vendor/ImGui/imgui_impl_opengl3.h
+	src/Cast/Vendor/ImGui/imgui_impl_glfw.cpp
+	src/Cast/Vendor/ImGui/imgui.cpp
+	src/Cast/Vendor/ImGui/imgui.h
+	src/Cast/Vendor/ImGui/imgui_impl_vulkan.h
+	src/Cast/Vendor/ImGui/imgui_tables.cpp
+	src/Cast/Vendor/ImGui/imgui_internal.h
+	src/Cast/Vendor/ImGui/imgui_impl_opengl3_loader.h
 	)
 
 
