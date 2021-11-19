@@ -18,6 +18,7 @@ layout(location = 2) out vec4 o_fragPos;
 void main() {
     gl_Position = ubo.proj * ubo.view * ubo.model * vec4(a_position.xyz, 1.0);
     o_fragPos = a_position * ubo.model;
+    
     o_color = a_color;
     o_normal = a_normal;
 }

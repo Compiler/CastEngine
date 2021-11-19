@@ -64,11 +64,12 @@ namespace Cast{
     }
 
     void EngineCore::update(){
-        //_scene.update();
-        _stressScene.update();
+        if(_runStressTest)_stressScene.update();
+        else _scene.update();
         InputManager::clear();
         _renderContext->Update();
         if(InputManager::isKeyReleased(KeyCodes::KEY_ESCAPE)) this->_renderContext->getWindow()->destroy();
+        if(InputManager::isKeyReleased(KeyCodes::KEY_0)) _runStressTest = !_runStressTest;
         if(InputManager::isKeyReleased(KeyCodes::KEY_SPACE)){
             CAST_WARN("Swapping API");
             if(RenderContext::GetAPI() == RenderContext::API::Vulkan){
@@ -83,8 +84,8 @@ namespace Cast{
         _renderer->clearColor(0.4, 0.4, 0.4, 1.0);
         _renderer->clearColorBit();
         
-        _stressScene.render();
-        //_scene.render();
+        if(_runStressTest)_stressScene.render();
+        else _scene.render();
         _renderContext->Render();
         _renderContext->getWindow()->render();
     }

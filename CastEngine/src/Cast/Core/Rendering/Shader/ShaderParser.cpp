@@ -37,11 +37,19 @@ namespace Cast{
         CAST_LOG("Compiling '{}' to '{}'", fileName, outputName);
         std::string preface = std::string(CAST_INTERNAL_SHADER("")) + std::string(outputName);
         if(std::filesystem::exists(preface)){
-            CAST_WARN("'{}' already exists, returning SPIR-V instead of compiling.", preface.c_str());
-            std::vector<char> char_vec = FileLoaderFactory::readSPV(preface.c_str());
-            const uint32_t* casted = reinterpret_cast<const uint32_t*>(char_vec.data());
-            return {casted, casted + char_vec.size()}; // this return the implicit type from return statement of the casted pointer
+
+            CAST_WARN("'{}' already exists, checking return date.", preface.c_str());
+            auto file_last_write = std::filesystem::last_write_time(fileName);
+            auto output_last_write = std::filesystem::last_write_time(preface);
+            if(file_last_write <= output_last_write){
+                CAST_LOG("Loading old spv");
+                std::vector<char> char_vec = FileLoaderFactory::readSPV(preface.c_str());
+                const uint32_t* casted = reinterpret_cast<const uint32_t*>(char_vec.data());
+                return {casted, casted + char_vec.size()}; // this return the implicit type from return statement of the casted pointer
+            }
+
         }
+        CAST_LOG("File contents newer than spv, recompiling.");
         std::string shaderSrc, errorSrc;
 		FileLoaderFactory::loadTextFromFile(fileName, shaderSrc);
         shaderc_shader_kind kind = castTypeToShaderCKind(type);
