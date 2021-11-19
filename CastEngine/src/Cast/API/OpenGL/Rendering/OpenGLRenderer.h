@@ -20,7 +20,7 @@ namespace Cast{
             OpenGLVertexArray _vao;
             OpenGLVertexBuffer<float> _buffer;
             std::unordered_map<std::string, OpenGLShaderProgram> _shaderMap;
-
+            unsigned int _vaoID;
             unsigned int _uboBufferID;
 
         

@@ -4,10 +4,13 @@ namespace Cast{
 
     OpenGLRenderer::OpenGLRenderer():Renderer(), _layout({VAOElement(4), VAOElement(4), VAOElement(4), VAOElement(4), VAOElement(4), VAOElement(4), VAOElement(4)}){ 
         glEnable(GL_FRAMEBUFFER_SRGB); //Gamma correct
-        glDisable(GL_CULL_FACE);
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_FRONT);  
+        glFrontFace(GL_CCW);  
         glEnable(GL_DEPTH_TEST);  
         _vao.setLayout(std::move(_layout));
 
+        
         UniformBufferObject ubo {glm::mat4(1.0f), glm::mat4(1.0f), glm::mat4(1.0f)};
         Cast::PerspectiveCamera camera{1920, 1080, {2,2,5}, true};
         ubo.proj = camera.getProjection();
