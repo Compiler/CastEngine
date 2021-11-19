@@ -5,6 +5,7 @@ namespace Cast{
     void EngineCore::swapAPI(RenderContext::API newAPI){
         RenderContext::setAPI(newAPI);
         CAST_WARN("UNloading Current API");
+        //_renderContext->getWindow()->hideWindow();
         switch(RenderContext::GetAPI()){
             case RenderContext::API::OpenGL:{
                 _renderer = _openglRenderer;
@@ -20,6 +21,8 @@ namespace Cast{
             };
             default: CAST_FATAL("Window type not supported");
         }
+        //_renderContext->getWindow()->showWindow();
+        _renderContext->getWindow()->focusWindow();
         _stressScene.setRenderer(_renderer);
         _stressScene.load();
     }
@@ -32,6 +35,7 @@ namespace Cast{
 
         CAST_DEBUG("Loading renderers");
         
+        CAST_LOG("Loading OpenGL");
         _openglRenderContext = new OpenGLContext();
         _openglRenderContext->Load();
         _openglRenderer = new OpenGLRenderer();

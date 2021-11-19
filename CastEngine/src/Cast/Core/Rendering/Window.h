@@ -40,6 +40,9 @@ namespace Cast{
             inline int getHeight(){return m_height;}
             inline int getWidth(){return m_width;}
             inline bool shouldClose(){return glfwWindowShouldClose(m_window);}
+            inline void hideWindow()const{glfwHideWindow(m_window);}
+            inline void showWindow()const{glfwShowWindow(m_window);}
+            inline void focusWindow()const{glfwFocusWindow(m_window);}
 
 
 

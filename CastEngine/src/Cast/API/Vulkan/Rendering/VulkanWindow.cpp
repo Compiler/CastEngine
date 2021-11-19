@@ -16,6 +16,7 @@ namespace Cast{
 
         CAST_LOG("Creating window");
         m_window = glfwCreateWindow(width, height, windowName, 0, 0);
+        glfwSetWindowPos(m_window, 1920, 0);
         CAST_DEBUG("GLFWWindow Context created");
 
         glfwMakeContextCurrent(m_window);
@@ -25,14 +26,6 @@ namespace Cast{
         CAST_DEBUG("Created Vulkan Window.");
 
         
-        #ifdef CAST_DEBUG_MODE
-            
-        #else
-            CAST_LOG("Cast not in debug mode");
-        #endif
-
-
-
 
     }
 

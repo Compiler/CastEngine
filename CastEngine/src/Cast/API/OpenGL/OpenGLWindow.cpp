@@ -20,7 +20,7 @@ namespace Cast{
 
         CAST_LOG("Creating window");
         m_window = glfwCreateWindow(width, height, windowName, 0, 0);
-        glfwSetWindowPos(m_window, 0, 0);
+        glfwSetWindowPos(m_window, 1920, 0);
         CAST_DEBUG("GLFWWindow Context created");
 
         glfwMakeContextCurrent(m_window);
