@@ -8,31 +8,15 @@ namespace Cast{
         glCullFace(GL_FRONT);  
         glFrontFace(GL_CCW);  
         glEnable(GL_DEPTH_TEST);  
+
+
+
+
+
         _vao.setLayout(std::move(_layout));
-
+        glGenVertexArrays(1, &_vaoID);
         glBindVertexArray(_vaoID);
-        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(0 * sizeof(float)));
-        glEnableVertexAttribArray(0);
 
-        glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(4 * sizeof(float)));
-        glEnableVertexAttribArray(1);
-
-        glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(8 * sizeof(float)));
-        glEnableVertexAttribArray(2);
-
-        glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(12 * sizeof(float)));
-        glEnableVertexAttribArray(3);
-
-        glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(16 * sizeof(float)));
-        glEnableVertexAttribArray(4);
-
-        glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(20 * sizeof(float)));
-        glEnableVertexAttribArray(5);
-
-        glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(24 * sizeof(float)));
-        glEnableVertexAttribArray(6);
-        glBindVertexArray(_vaoID);
-        
         UniformBufferObject ubo {glm::mat4(1.0f), glm::mat4(1.0f), glm::mat4(1.0f)};
         Cast::PerspectiveCamera camera{1920, 1080, {2,2,5}, true};
         ubo.proj = camera.getProjection();
@@ -45,6 +29,61 @@ namespace Cast{
         glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(ubo.model));
         glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(ubo.view));
         glBufferSubData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(ubo.proj));
+
+
+        // _buffer.init();
+        // _buffer.setVertices(Cube::GetIdentityCubeFloats());
+        // _buffer.buffer();
+        // glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)(0 * sizeof(float)));
+        // glEnableVertexAttribArray(0);
+
+        // glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)(4 * sizeof(float)));
+        // glEnableVertexAttribArray(1);
+
+        // glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)(8 * sizeof(float)));
+        // glEnableVertexAttribArray(2);
+
+        float quadVertices[] = {
+            // positions            // colors                   //normals
+            -0.05f,  0.05f, 0, 1,  1.0f, 0.0f, 0.0f, 1.0f,  0.0, 0.0, 1.0, 1.0,
+             0.05f, -0.05f, 0, 1,  0.0f, 1.0f, 0.0f, 1.0f,  0.0, 0.0, 1.0, 1.0,
+            -0.05f, -0.05f, 0, 1,  0.0f, 0.0f, 1.0f, 1.0f,  0.0, 0.0, 1.0, 1.0,
+             0.05f,  0.05f, 0, 1,  0.0f, 1.0f, 1.0f, 1.0f,  0.0, 0.0, 1.0, 1.0,
+             0.05f, -0.05f, 0, 1,  0.0f, 1.0f, 0.0f, 1.0f,  0.0, 0.0, 1.0, 1.0,
+            -0.05f,  0.05f, 0, 1,  1.0f, 0.0f, 0.0f, 1.0f,  0.0, 0.0, 1.0, 1.0,
+        };
+
+        std::vector<float> cubeVertices = Cube::GetIdentityCubeFloats();
+        glGenBuffers(1, &quadVBO);
+        glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * cubeVertices.size(), cubeVertices.data(), GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 12 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 12* sizeof(float), (void*)(4 * sizeof(float)));
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, 12* sizeof(float), (void*)(8 * sizeof(float)));
+
+
+
+        _instanceBuffer.init();
+        glEnableVertexAttribArray(3);
+        glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 16 * sizeof(float), (void*)(0 * sizeof(float)));
+        glVertexAttribDivisor(3, 1);
+
+        glEnableVertexAttribArray(4);
+        glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 16 * sizeof(float), (void*)(4 * sizeof(float)));
+        glVertexAttribDivisor(4, 1);
+
+        glEnableVertexAttribArray(5);
+        glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 16 * sizeof(float), (void*)(8 * sizeof(float)));
+        glVertexAttribDivisor(5, 1);
+
+        glEnableVertexAttribArray(6);
+        glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, 16 * sizeof(float), (void*)(12 * sizeof(float)));
+        glVertexAttribDivisor(6, 1);
+
+
 
     }
 
@@ -80,12 +119,24 @@ namespace Cast{
 
 
     void OpenGLRenderer::Draw(){
-        static std::vector<float> cube_instance = Cube::GetIdentityCubeFloats();
-        int draw_size = m_vertices.size();
-        _buffer.setVertices(std::move(m_vertices));
-        _buffer.init();
-        _vao.init();
-        glDrawArrays(GL_TRIANGLES, 0, draw_size);
+        int draw_size = m_verticesInstance.size();
+
+
+        
+        _instanceBuffer.setVertices(std::move(m_verticesInstance));
+        _instanceBuffer.buffer();
+        glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, 16 * sizeof(float), (void*)(0 * sizeof(float)));
+        glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 16 * sizeof(float), (void*)(4 * sizeof(float)));
+        glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, 16 * sizeof(float), (void*)(8 * sizeof(float)));
+        glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, 16 * sizeof(float), (void*)(12 * sizeof(float)));
+
+        glVertexAttribDivisor(3, 1);
+        glVertexAttribDivisor(4, 1);
+        glVertexAttribDivisor(5, 1);
+        glVertexAttribDivisor(6, 1);
+
+        //glDrawArrays(GL_TRIANGLES, 0, draw_size);
+        glDrawArraysInstanced(GL_TRIANGLES, 0, 36, draw_size);
 
         
     }
@@ -95,11 +146,10 @@ namespace Cast{
 
     void OpenGLRenderer::SubmitVertexBuffer(const std::vector<VertexTemplate>& buffer){
         for(const auto& vertex : buffer){
-            this->m_vertices.insert(this->m_vertices.end(), {vertex.position.x, vertex.position.y, vertex.position.z, vertex.position.w, vertex.color.x, vertex.color.y, vertex.color.z, vertex.color.w, vertex.normal.x, vertex.normal.y, vertex.normal.z, vertex.normal.w});
-            this->m_vertices.insert(this->m_vertices.end(), {vertex.model[0][0], vertex.model[0][1], vertex.model[0][2], vertex.model[0][3]});
-            this->m_vertices.insert(this->m_vertices.end(), {vertex.model[1][0], vertex.model[1][1], vertex.model[1][2], vertex.model[1][3]});
-            this->m_vertices.insert(this->m_vertices.end(), {vertex.model[2][0], vertex.model[2][1], vertex.model[2][2], vertex.model[2][3]});
-            this->m_vertices.insert(this->m_vertices.end(), {vertex.model[3][0], vertex.model[3][1], vertex.model[3][2], vertex.model[3][3]});
+            this->m_verticesInstance.insert(this->m_verticesInstance.end(), {vertex.model[0][0], vertex.model[0][1], vertex.model[0][2], vertex.model[0][3]});
+            this->m_verticesInstance.insert(this->m_verticesInstance.end(), {vertex.model[1][0], vertex.model[1][1], vertex.model[1][2], vertex.model[1][3]});
+            this->m_verticesInstance.insert(this->m_verticesInstance.end(), {vertex.model[2][0], vertex.model[2][1], vertex.model[2][2], vertex.model[2][3]});
+            this->m_verticesInstance.insert(this->m_verticesInstance.end(), {vertex.model[3][0], vertex.model[3][1], vertex.model[3][2], vertex.model[3][3]});
         }
     }
     void OpenGLRenderer::SubmitTriangle(float bottomLeftX, float bottomLeftY, float size){

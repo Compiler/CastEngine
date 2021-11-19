@@ -19,9 +19,11 @@ namespace Cast{
             Cast::VAOLayout _layout;
             OpenGLVertexArray _vao;
             OpenGLVertexBuffer<float> _buffer;
+            OpenGLVertexBuffer<float> _instanceBuffer;
             std::unordered_map<std::string, OpenGLShaderProgram> _shaderMap;
             unsigned int _vaoID;
             unsigned int _uboBufferID;
+            unsigned int quadVBO;
 
         
         public:

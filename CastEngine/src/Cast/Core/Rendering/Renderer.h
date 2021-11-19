@@ -26,14 +26,15 @@ namespace Cast{
     class Renderer{
         protected:
             std::vector<float> m_vertices;
-            int m_currentAliveVertices;
-            int m_offsetToAliveVertices;
+            std::vector<float> m_verticesInstance;
+
+
             glm::vec4 m_curColor = {0.5, 0.5, 0.5, 1.0};
-            glm::vec4 DEFAULT_NORMAL = {0, 0, 1, 1};//TODO Delete this, make it relative to the cameras look position
-            glm::mat4 DEFAULT_MODEL = glm::mat4{1};      //TODO Delete this 
+            glm::vec4 DEFAULT_NORMAL = {0, 0, 1, 1};        //TODO Delete this, make it relative to the cameras look position
+            glm::mat4 DEFAULT_MODEL = glm::mat4{1};         //TODO Delete this 
         public:
             static int MAX_VERTICES;
-            Renderer():m_currentAliveVertices(0),m_offsetToAliveVertices(0){}
+            Renderer(){}
             virtual void clearColor(float r, float g, float b, float a) = 0;
             virtual void clearDepthBit() = 0;
             virtual void clearColorBit() = 0;
