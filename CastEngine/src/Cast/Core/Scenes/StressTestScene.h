@@ -15,6 +15,7 @@ namespace Cast{
             void render();
             void unload();
             void setRenderer(Renderer* renderer){this->_renderer = renderer;}
+            ~StressTestScene(){CAST_WARN("StresTestScene Unloaded");}
     };
 
 }

@@ -18,8 +18,6 @@ namespace Cast{
         this->Rotate(rotation, axis);
         Load();
 
-        
-        
     }
 
 
@@ -47,70 +45,64 @@ namespace Cast{
     void Cube::Load(){
         float offset = _sideLength / 2.0f;
         this->m_vertices.clear();
-        //glm::vec3 center = GetModel() * _center;
-        auto model = GetModel();
-
-        
-
-        auto normal_model = model;//glm::mat4(1);
-        
+        m_model = GetModel();
         this->setColor({1,0,0,1});
         //front plane
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y + offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(0, 0, 1.0f, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y - offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(0, 0, 1.0f, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y - offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(0, 0, 1.0f, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y - offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(0, 0, 1.0f, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y + offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(0, 0, 1.0f, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y + offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(0, 0, 1.0f, 1.0f)});
+        this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0f}, m_color, {0, 0, 1.0f, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z + offset, 1.0f}, m_color, {0, 0, 1.0f, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z + offset, 1.0f}, m_color, {0, 0, 1.0f, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z + offset, 1.0f}, m_color, {0, 0, 1.0f, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z + offset, 1.0f}, m_color, {0, 0, 1.0f, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0f}, m_color, {0, 0, 1.0f, 1.0f}, m_model});
 
         this->setColor({1,0,1,1});
         //left plane
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y + offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(-1.0f, 0, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y - offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(-1.0f, 0, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y - offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(-1.0f, 0, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y - offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(-1.0f, 0, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y + offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(-1.0f, 0, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y + offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(-1.0f, 0, 0, 1.0f)});
+        this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z + offset, 1.0f}, m_color, {-1.0f, 0, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z + offset, 1.0f}, m_color, {-1.0f, 0, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0f}, m_color, {-1.0f, 0, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0f}, m_color, {-1.0f, 0, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z - offset, 1.0f}, m_color, {-1.0f, 0, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z + offset, 1.0f}, m_color, {-1.0f, 0, 0, 1.0f}, m_model});
 
         this->setColor({0, 1,0,1});
 
         //right plane
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y - offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(1.0f, 0, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y - offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(1.0f, 0, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y + offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(1.0f, 0, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y + offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(1.0f, 0, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y + offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(1.0f, 0, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y - offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(1.0f, 0, 0, 1.0f)});
+        this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z - offset, 1.0f}, m_color, {1.0f, 0, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z + offset, 1.0f}, m_color, {1.0f, 0, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0f}, m_color, {1.0f, 0, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0f}, m_color, {1.0f, 0, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z - offset, 1.0f}, m_color, {1.0f, 0, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z - offset, 1.0f}, m_color, {1.0f, 0, 0, 1.0f}, m_model});
 
 
         this->setColor({0, 0, 1,1});
 
         //top plane
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y + offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(0, 1.0f, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y + offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(0, 1.0f, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y + offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(0, 1.0f, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y + offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(0, 1.0f, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y + offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(0, 1.0f, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y + offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(0, 1.0f, 0, 1.0f)});
+        this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z - offset, 1.0f}, m_color, {0, 1.0f, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z - offset, 1.0f}, m_color, {0, 1.0f, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0f}, m_color, {0, 1.0f, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z + offset, 1.0f}, m_color, {0, 1.0f, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z + offset, 1.0f}, m_color, {0, 1.0f, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z - offset, 1.0f}, m_color, {0, 1.0f, 0, 1.0f}, m_model});
 
 
         this->setColor({0, 1, 1,1});
         //bottom plane
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y - offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(0, -1.0f, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y - offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(0, -1.0f, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y - offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(0, -1.0f, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y - offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(0, -1.0f, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y - offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(0, -1.0f, 0, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y - offset, _center.z + offset, 1.0), m_color, normal_model * glm::vec4(0, -1.0f, 0, 1.0f)});
+        this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z + offset, 1.0f}, m_color, {0, -1.0f, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z - offset, 1.0f}, m_color, {0, -1.0f, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0f}, m_color, {0, -1.0f, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0f}, m_color, {0, -1.0f, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z + offset, 1.0f}, m_color, {0, -1.0f, 0, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z + offset, 1.0f}, m_color, {0, -1.0f, 0, 1.0f}, m_model});
 
         this->setColor({1, 1, 0,1});
         //back plane
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y - offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(0, 0, -1.0f, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y - offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(0, 0, -1.0f, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y + offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(0, 0, -1.0f, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x + offset, _center.y + offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(0, 0, -1.0f, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y + offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(0, 0, -1.0f, 1.0f)});
-        this->m_vertices.push_back({model * glm::vec4(_center.x - offset, _center.y - offset, _center.z - offset, 1.0), m_color, normal_model * glm::vec4(0, 0, -1.0f, 1.0f)});
+        this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0f}, m_color, {0, 0, -1.0f, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y - offset, _center.z - offset, 1.0f}, m_color, {0, 0, -1.0f, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z - offset, 1.0f}, m_color, {0, 0, -1.0f, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x + offset, _center.y + offset, _center.z - offset, 1.0f}, m_color, {0, 0, -1.0f, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y + offset, _center.z - offset, 1.0f}, m_color, {0, 0, -1.0f, 1.0f}, m_model});
+        this->m_vertices.push_back({{_center.x - offset, _center.y - offset, _center.z - offset, 1.0f}, m_color, {0, 0, -1.0f, 1.0f}, m_model});
 
     }
 

@@ -2,12 +2,12 @@
 
 namespace Cast{
     std::vector<VertexTemplate> VulkanInstance::vertices = {
-        {glm::vec4(-VulkanInstance::sz, -VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)},
-        {glm::vec4( VulkanInstance::sz, -VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)},
-        {glm::vec4( VulkanInstance::sz,  VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)}, 
-        {glm::vec4( VulkanInstance::sz,  VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)},
-        {glm::vec4(-VulkanInstance::sz,  VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)},
-        {glm::vec4(-VulkanInstance::sz, -VulkanInstance::sz, 1.0f, 1.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)},
+        {{-VulkanInstance::sz, -VulkanInstance::sz, 1.0f, 1.0f}, {1.0f, 0.0f, 0.0f, 1.0f}, {0, 0, 1, 1}, glm::mat4(1)},
+        {{ VulkanInstance::sz, -VulkanInstance::sz, 1.0f, 1.0f}, {0.0f, 1.0f, 0.0f, 1.0f}, {0, 0, 1, 1}, glm::mat4(1)},
+        {{ VulkanInstance::sz,  VulkanInstance::sz, 1.0f, 1.0f}, {0.0f, 0.0f, 1.0f, 1.0f}, {0, 0, 1, 1}, glm::mat4(1)}, 
+        {{ VulkanInstance::sz,  VulkanInstance::sz, 1.0f, 1.0f}, {0.0f, 0.0f, 1.0f, 1.0f}, {0, 0, 1, 1}, glm::mat4(1)},
+        {{-VulkanInstance::sz,  VulkanInstance::sz, 1.0f, 1.0f}, {0.0f, 1.0f, 0.0f, 1.0f}, {0, 0, 1, 1}, glm::mat4(1)},
+        {{-VulkanInstance::sz, -VulkanInstance::sz, 1.0f, 1.0f}, {1.0f, 0.0f, 0.0f, 1.0f}, {0, 0, 1, 1}, glm::mat4(1)},
     };
     void VulkanInstance::load(GLFWwindow* window, VulkanShaderProgram shader){
         _shaderProgram = shader;
@@ -87,7 +87,7 @@ namespace Cast{
     }
     
     void VulkanInstance::_createVertexBuffers(){
-        VkDeviceSize bufferSize = sizeof(vertices[0]) * vertices.size();
+        VkDeviceSize bufferSize = sizeof(VertexTemplate) * vertices.size();
        
         VkBuffer stagingBuffer;
         VkDeviceMemory stagingBufferMemory;
@@ -402,13 +402,13 @@ namespace Cast{
     void VulkanInstance::_createGraphicsPipeline(){
         //default
         VulkanShaderProgram program{this->_logicalDevice};
-        Shader shader_vert{CAST_INTERNAL_SHADER("passthrough_3d.vert"), Shader::ShaderType::Vertex};
+        Shader shader_vert{CAST_INTERNAL_SHADER("passthrough_instanced.vert"), Shader::ShaderType::Vertex};
         Shader shader_frag{CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Fragment};
         program.loadShader({shader_vert, shader_frag});
         CAST_LOG("Loading complete");
-        CAST_LOG("Pipe starting~");
-        _pipeline = new GraphicsPipeline(_logicalDevice, "passthrough_3d", program, _swapChainExtent, _renderPass);
-        CAST_LOG("Pipe Done~");
+        CAST_LOG("GraphicsPipeline creation starting");
+        _pipeline = new GraphicsPipeline(_logicalDevice, "passthrough_instanced", program, _swapChainExtent, _renderPass);
+        CAST_LOG("GraphicsPipeline creation  Done");
     }
 
     //wraps the code in a vkshadermodule object before being passed to the pipeline

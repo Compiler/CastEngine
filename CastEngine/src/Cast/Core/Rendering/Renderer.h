@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
 #include <vector>
 #include <Cast/Core/Rendering/RenderContext.h>
 #include <Cast/Core/Utils/Files/FileLoaderFactory.h>
@@ -11,10 +12,11 @@ namespace Cast{
 
 
     struct VertexTemplate{  
-        
         glm::vec4 position;
         glm::vec4 color;
         glm::vec4 normal;
+        glm::mat4 model;
+
 
     };
 
@@ -27,7 +29,8 @@ namespace Cast{
             int m_currentAliveVertices;
             int m_offsetToAliveVertices;
             glm::vec4 m_curColor = {0.5, 0.5, 0.5, 1.0};
-            glm::vec4 DEFAULT_NORMAL = {0, 0, 1, 1};//TODO Delete this lmao, make it relative to the cameras look position
+            glm::vec4 DEFAULT_NORMAL = {0, 0, 1, 1};//TODO Delete this, make it relative to the cameras look position
+            glm::mat4 DEFAULT_MODEL = glm::mat4{1};      //TODO Delete this 
         public:
             static int MAX_VERTICES;
             Renderer():m_currentAliveVertices(0),m_offsetToAliveVertices(0){}

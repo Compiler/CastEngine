@@ -20,10 +20,7 @@ namespace Cast{
             };
             default: CAST_FATAL("Window type not supported");
         }
-        CAST_DEBUG("Loading scene");
-        _scene.setRenderer(_renderer);
         _stressScene.setRenderer(_renderer);
-        _scene.load();
         _stressScene.load();
     }
 
@@ -59,35 +56,30 @@ namespace Cast{
             }
 
         }
+        _stressScene.load();
 
 
     }
 
     void EngineCore::update(){
-        if(_runStressTest)_stressScene.update();
-        else _scene.update();
+        _stressScene.update();
         InputManager::clear();
         _renderContext->Update();
         if(InputManager::isKeyReleased(KeyCodes::KEY_ESCAPE)) this->_renderContext->getWindow()->destroy();
-        if(InputManager::isKeyReleased(KeyCodes::KEY_0)) _runStressTest = !_runStressTest;
         if(InputManager::isKeyReleased(KeyCodes::KEY_SPACE)){
             CAST_WARN("Swapping API");
-            if(RenderContext::GetAPI() == RenderContext::API::Vulkan){
+            if(RenderContext::GetAPI() == RenderContext::API::Vulkan)
                 swapAPI(RenderContext::API::OpenGL);
-            }
-            else swapAPI(RenderContext::API::Vulkan);
+            else
+                swapAPI(RenderContext::API::Vulkan);
         }
     }
 
     void EngineCore::render(){
 
-        _renderer->clearColor(0.4, 0.4, 0.4, 1.0);
-        _renderer->clearColorBit();
-        
-        if(_runStressTest)_stressScene.render();
-        else _scene.render();
         _renderContext->Render();
         _renderContext->getWindow()->render();
+        _stressScene.render();
     }
 
     void EngineCore::unload(){

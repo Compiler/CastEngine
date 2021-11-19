@@ -2,7 +2,7 @@
 
 namespace Cast{
 
-    OpenGLRenderer::OpenGLRenderer():Renderer(), _layout({VAOElement(4), VAOElement(4), VAOElement(4)}){ 
+    OpenGLRenderer::OpenGLRenderer():Renderer(), _layout({VAOElement(4), VAOElement(4), VAOElement(4), VAOElement(4), VAOElement(4), VAOElement(4), VAOElement(4)}){ 
         glEnable(GL_FRAMEBUFFER_SRGB); //Gamma correct
         glDisable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);  
@@ -70,6 +70,10 @@ namespace Cast{
     void OpenGLRenderer::SubmitVertexBuffer(const std::vector<VertexTemplate>& buffer){
         for(const auto& vertex : buffer){
             this->m_vertices.insert(this->m_vertices.end(), {vertex.position.x, vertex.position.y, vertex.position.z, vertex.position.w, vertex.color.x, vertex.color.y, vertex.color.z, vertex.color.w, vertex.normal.x, vertex.normal.y, vertex.normal.z, vertex.normal.w});
+            this->m_vertices.insert(this->m_vertices.end(), {vertex.model[0][0], vertex.model[0][1], vertex.model[0][2], vertex.model[0][3]});
+            this->m_vertices.insert(this->m_vertices.end(), {vertex.model[1][0], vertex.model[1][1], vertex.model[1][2], vertex.model[1][3]});
+            this->m_vertices.insert(this->m_vertices.end(), {vertex.model[2][0], vertex.model[2][1], vertex.model[2][2], vertex.model[2][3]});
+            this->m_vertices.insert(this->m_vertices.end(), {vertex.model[3][0], vertex.model[3][1], vertex.model[3][2], vertex.model[3][3]});
         }
     }
     void OpenGLRenderer::SubmitTriangle(float bottomLeftX, float bottomLeftY, float size){

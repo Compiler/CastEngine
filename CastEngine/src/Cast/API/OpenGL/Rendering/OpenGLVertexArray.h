@@ -38,10 +38,10 @@ namespace Cast{
 
 
         private:
-        //TODO: Add a parameter named "Data layout" that allows for different orientations in memory
-        /**
-         *This orientation only allows for e0,e1,e2,...,en layouts It doesnt allow for swizzling in between 
-         */
+            //TODO: Add a parameter named "Data layout" that allows for different orientations in memory
+            /**
+             *This orientation only allows for e0,e1,e2,...,en layouts It doesnt allow for swizzling in between 
+            */
             void _calculate_settings(){
                 int sum = 0;
                 for(auto& element : elements){

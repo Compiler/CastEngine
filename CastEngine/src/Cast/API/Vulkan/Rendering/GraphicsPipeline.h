@@ -46,8 +46,8 @@ namespace Cast{
             }
 
 
-            inline static std::array<VkVertexInputAttributeDescription, 3> getAttributeDescriptions() {
-                std::array<VkVertexInputAttributeDescription, 3> attributeDescriptions{};
+            inline static std::array<VkVertexInputAttributeDescription, 7> getAttributeDescriptions() {
+                std::array<VkVertexInputAttributeDescription, 7> attributeDescriptions{};
                 attributeDescriptions[0].binding = 0;
                 attributeDescriptions[0].location = 0;
                 attributeDescriptions[0].format = VK_FORMAT_R32G32B32A32_SFLOAT;
@@ -58,12 +58,34 @@ namespace Cast{
                 attributeDescriptions[1].format = VK_FORMAT_R32G32B32A32_SFLOAT;
                 attributeDescriptions[1].offset = offsetof(VertexTemplate, color);//((::size_t)&reinterpret_cast<char const volatile&>((((Vertex_Tmp*)0)->color)));
 
-
-
                 attributeDescriptions[2].binding = 0;
                 attributeDescriptions[2].location = 2;
                 attributeDescriptions[2].format = VK_FORMAT_R32G32B32A32_SFLOAT;
                 attributeDescriptions[2].offset = offsetof(VertexTemplate, normal);//((::size_t)&reinterpret_cast<char const volatile&>((((Vertex_Tmp*)0)->color)));
+
+                attributeDescriptions[3].binding = 0;
+                attributeDescriptions[3].location = 3;
+                attributeDescriptions[3].format = VK_FORMAT_R32G32B32A32_SFLOAT;
+                CAST_ERROR("{}", offsetof(VertexTemplate, model));
+                CAST_ERROR("{}", offsetof(VertexTemplate, normal));
+                attributeDescriptions[3].offset = offsetof(VertexTemplate, model) + sizeof(glm::vec4) * 0;//((::size_t)&reinterpret_cast<char const volatile&>((((Vertex_Tmp*)0)->color)));
+
+                attributeDescriptions[4].binding = 0;
+                attributeDescriptions[4].location = 4;
+                attributeDescriptions[4].format = VK_FORMAT_R32G32B32A32_SFLOAT;
+                attributeDescriptions[4].offset = offsetof(VertexTemplate, model) + sizeof(glm::vec4) * 1;//((::size_t)&reinterpret_cast<char const volatile&>((((Vertex_Tmp*)0)->color)));
+
+
+                attributeDescriptions[5].binding = 0;
+                attributeDescriptions[5].location = 5;
+                attributeDescriptions[5].format = VK_FORMAT_R32G32B32A32_SFLOAT;
+                attributeDescriptions[5].offset = offsetof(VertexTemplate, model) + sizeof(glm::vec4) * 2;//((::size_t)&reinterpret_cast<char const volatile&>((((Vertex_Tmp*)0)->color)));
+
+
+                attributeDescriptions[6].binding = 0;
+                attributeDescriptions[6].location = 6;
+                attributeDescriptions[6].format = VK_FORMAT_R32G32B32A32_SFLOAT;
+                attributeDescriptions[6].offset = offsetof(VertexTemplate, model) + sizeof(glm::vec4) * 3;//((::size_t)&reinterpret_cast<char const volatile&>((((Vertex_Tmp*)0)->color)));
 
                 return attributeDescriptions;
             }

@@ -72,7 +72,6 @@ namespace Cast{
         rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
         rasterizer.lineWidth = 1.0f;
 
-        //TODO: support bit culling for performance!
         rasterizer.cullMode = VK_CULL_MODE_FRONT_BIT;//VK_CULL_MODE_NONE;
         rasterizer.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
 
