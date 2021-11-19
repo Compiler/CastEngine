@@ -31,10 +31,11 @@ namespace Cast{
        
 
         for(auto& cube : _cubes){
-            cube.Rotate(1, glm::vec3(0,0,1));
-            cube.Load();
-            _renderer->SubmitVertexBuffer(cube.getRendererVertices());
+            //cube.Rotate(1, glm::vec3(0,0,1));
+            //cube.Load();
+            //_renderer->SubmitVertexBuffer(cube.getRendererVertices());
         }
+        _renderer->SubmitVertexBuffer(_cubes[0].getRendererVertices());
 
         _renderer->clearColor(0.1f, 0.1f, 0.15f, 1.0f);
         

@@ -62,9 +62,9 @@ namespace Cast{
     }
 
     void EngineCore::update(){
-        _stressScene.update();
+        // _stressScene.update();
+        // _renderContext->Update();
         InputManager::clear();
-        _renderContext->Update();
         if(InputManager::isKeyReleased(KeyCodes::KEY_ESCAPE)) this->_renderContext->getWindow()->destroy();
         if(InputManager::isKeyReleased(KeyCodes::KEY_SPACE)){
             CAST_WARN("Swapping API");
@@ -77,9 +77,9 @@ namespace Cast{
 
     void EngineCore::render(){
 
-        _renderContext->Render();
-        _renderContext->getWindow()->render();
-        _stressScene.render();
+        // _renderContext->Render();
+        // _renderContext->getWindow()->render();
+        // _stressScene.render();
     }
 
     void EngineCore::unload(){

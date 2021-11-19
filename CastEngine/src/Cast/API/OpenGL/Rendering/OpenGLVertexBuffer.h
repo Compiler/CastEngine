@@ -26,9 +26,16 @@ namespace Cast{
                 glBindBuffer(GL_ARRAY_BUFFER, this->_id);  
                 glBufferData(GL_ARRAY_BUFFER, sizeof(T) * _buffer.size(), _buffer.data(), drawType);
             }
+
+            void bufferVertices(std::vector<T>& buffer, uint32_t drawType = GL_STATIC_DRAW){
+                CAST_ASSERT(buffer.size() > 0);
+                glBindBuffer(GL_ARRAY_BUFFER, this->_id);  
+                glBufferData(GL_ARRAY_BUFFER, sizeof(T) * buffer.size(), buffer.data(), drawType);
+            }
             void setVertices(std::vector<T> buffer){
                 _buffer = std::move(buffer);
             }
+
 
     };
 

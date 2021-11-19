@@ -106,8 +106,8 @@ namespace Cast{
 
 
         
-        _instanceBuffer.setVertices(std::move(m_verticesInstance));
-        _instanceBuffer.buffer();
+        //_instanceBuffer.setVertices(std::move(m_verticesInstance));
+        _instanceBuffer.bufferVertices(m_verticesInstance);
 
         //glDrawArrays(GL_TRIANGLES, 0, draw_size);
         glDrawArraysInstanced(GL_TRIANGLES, 0, 36, draw_size);
