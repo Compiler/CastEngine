@@ -10,6 +10,28 @@ namespace Cast{
         glEnable(GL_DEPTH_TEST);  
         _vao.setLayout(std::move(_layout));
 
+        glBindVertexArray(_vaoID);
+        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(0 * sizeof(float)));
+        glEnableVertexAttribArray(0);
+
+        glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(4 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+
+        glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(8 * sizeof(float)));
+        glEnableVertexAttribArray(2);
+
+        glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(12 * sizeof(float)));
+        glEnableVertexAttribArray(3);
+
+        glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(16 * sizeof(float)));
+        glEnableVertexAttribArray(4);
+
+        glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(20 * sizeof(float)));
+        glEnableVertexAttribArray(5);
+
+        glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, (12 + 16) * sizeof(float), (void*)(24 * sizeof(float)));
+        glEnableVertexAttribArray(6);
+        glBindVertexArray(_vaoID);
         
         UniformBufferObject ubo {glm::mat4(1.0f), glm::mat4(1.0f), glm::mat4(1.0f)};
         Cast::PerspectiveCamera camera{1920, 1080, {2,2,5}, true};
