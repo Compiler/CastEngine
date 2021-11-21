@@ -8,10 +8,12 @@ namespace Cast{
 
     class Window{
         protected:
-            int m_width, m_height;
             const char* m_windowName;
             GLFWwindow* m_window;
         public:
+            static int WINDOW_WIDTH;
+            static int WINDOW_HEIGHT;
+
             Window(int width, int height, const char* windowName);
 
             void update(){
@@ -26,9 +28,9 @@ namespace Cast{
             }
 
             void setSize(int width, int height){
-                m_width = width;
-                m_height = height;
-                glfwSetWindowSize(m_window, m_width, m_height);
+                WINDOW_WIDTH = width;
+                WINDOW_HEIGHT = height;
+                glfwSetWindowSize(m_window, WINDOW_WIDTH, WINDOW_HEIGHT);
             }
 
             void setPosition(int x, int y){
@@ -37,8 +39,6 @@ namespace Cast{
 
 
             inline GLFWwindow* getWindowHandle(){return m_window;}
-            inline int getHeight(){return m_height;}
-            inline int getWidth(){return m_width;}
             inline bool shouldClose(){return glfwWindowShouldClose(m_window);}
             inline void setShouldClose(){glfwSetWindowShouldClose(m_window, GLFW_TRUE);}
             inline void hideWindow()const{glfwHideWindow(m_window);}

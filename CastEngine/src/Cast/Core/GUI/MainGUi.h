@@ -22,9 +22,7 @@ namespace Cast{
                 if(show_demo_window)
                 ImGui::ShowDemoWindow(&show_demo_window);
 
-
                 {
-                    static float f = 0.0f;
                     static int counter = 0;
                     ImGui::SetNextWindowPos(ImVec2(0, 0));
                     ImGui::Begin("LeftPanel");                          // Create a window called "Hello, world!" and append into it.
@@ -33,11 +31,10 @@ namespace Cast{
                     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
                     ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
 
-                    ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
                     ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
 
                     if (ImGui::Button("New Entity")){
-                        counter++;
+
                     }      
                     if (ImGui::CollapsingHeader("Entity List")){
                         for(auto &&[entity, entityName]: sceneRegistry.view<NameComponent>().each()) {
@@ -45,15 +42,16 @@ namespace Cast{
                             ImGui::Text(entityName.name.c_str());
                         }             
                     }
-                    ImGui::Text("counter = %d", counter);
 
                     ImGui::End();
                 }
 
                 {
-                    ImGui::SetNextWindowPos(ImVec2(1080, 0));
+
+                    int panel_width = 300;
+                    ImGui::SetNextWindowSize(ImVec2(panel_width, Window::WINDOW_HEIGHT));
+                    ImGui::SetNextWindowPos(ImVec2(Window::WINDOW_WIDTH - panel_width, 0));
                     ImGui::Begin("Entity Panel");                       
-                    ImGui::Text("Entity Panel");        
 
 
                     ImGui::End();
