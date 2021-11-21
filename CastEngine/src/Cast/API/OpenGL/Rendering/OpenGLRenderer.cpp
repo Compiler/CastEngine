@@ -58,28 +58,57 @@ namespace Cast{
 
 
     void OpenGLRenderer::Draw(){
-        int draw_size = m_vertices.size();
-        if(draw_size > 0){
-            _buffer.setVerticesBuffer(m_vertices);
-            _buffer.buffer();
-            glDrawArrays(GL_TRIANGLES, 0, draw_size);
-            m_vertices.clear();
-        }
+        // int draw_size = m_vertices.size();
+        // if(draw_size > 0){
+        //     _buffer.setVerticesBuffer(m_vertices);
+        //     _buffer.buffer();
+        //     glDrawArrays(GL_TRIANGLES, 0, draw_size);
+        //     m_vertices.clear();
+        // }
 
+       for(auto &&[entity, transform, renderable]: m_registry.view<TransformComponent, RenderableComponent>().each()) {
+            this->m_vertices.insert(this->m_vertices.end(), {transform.position.x+1, transform.position.y+1, transform.position.z, transform.position.w});
+            this->m_vertices.insert(this->m_vertices.end(), {renderable.color.x, renderable.color.y, renderable.color.z, renderable.color.w});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_NORMAL.x, DEFAULT_NORMAL.y, DEFAULT_NORMAL.z, DEFAULT_NORMAL.w});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_MODEL[0][0], DEFAULT_MODEL[0][1], DEFAULT_MODEL[0][2], DEFAULT_MODEL[0][3]});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_MODEL[1][0], DEFAULT_MODEL[1][1], DEFAULT_MODEL[1][2], DEFAULT_MODEL[1][3]});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_MODEL[2][0], DEFAULT_MODEL[2][1], DEFAULT_MODEL[2][2], DEFAULT_MODEL[2][3]});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_MODEL[3][0], DEFAULT_MODEL[3][1], DEFAULT_MODEL[3][2], DEFAULT_MODEL[3][3]});
+
+            this->m_vertices.insert(this->m_vertices.end(), {transform.position.x, transform.position.y+1, transform.position.z, transform.position.w});
+            this->m_vertices.insert(this->m_vertices.end(), {renderable.color.x, renderable.color.y, renderable.color.z, renderable.color.w});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_NORMAL.x, DEFAULT_NORMAL.y, DEFAULT_NORMAL.z, DEFAULT_NORMAL.w});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_MODEL[0][0], DEFAULT_MODEL[0][1], DEFAULT_MODEL[0][2], DEFAULT_MODEL[0][3]});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_MODEL[1][0], DEFAULT_MODEL[1][1], DEFAULT_MODEL[1][2], DEFAULT_MODEL[1][3]});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_MODEL[2][0], DEFAULT_MODEL[2][1], DEFAULT_MODEL[2][2], DEFAULT_MODEL[2][3]});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_MODEL[3][0], DEFAULT_MODEL[3][1], DEFAULT_MODEL[3][2], DEFAULT_MODEL[3][3]});
+
+            this->m_vertices.insert(this->m_vertices.end(), {transform.position.x, transform.position.y, transform.position.z, transform.position.w});
+            this->m_vertices.insert(this->m_vertices.end(), {renderable.color.x, renderable.color.y, renderable.color.z, renderable.color.w});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_NORMAL.x, DEFAULT_NORMAL.y, DEFAULT_NORMAL.z, DEFAULT_NORMAL.w});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_MODEL[0][0], DEFAULT_MODEL[0][1], DEFAULT_MODEL[0][2], DEFAULT_MODEL[0][3]});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_MODEL[1][0], DEFAULT_MODEL[1][1], DEFAULT_MODEL[1][2], DEFAULT_MODEL[1][3]});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_MODEL[2][0], DEFAULT_MODEL[2][1], DEFAULT_MODEL[2][2], DEFAULT_MODEL[2][3]});
+            this->m_vertices.insert(this->m_vertices.end(), {DEFAULT_MODEL[3][0], DEFAULT_MODEL[3][1], DEFAULT_MODEL[3][2], DEFAULT_MODEL[3][3]});
+        }
+        _buffer.setVerticesBuffer(m_vertices);
+        _buffer.buffer();
+        glDrawArrays(GL_TRIANGLES, 0, 5000);
         
+        m_vertices.clear();
     }
 
 
 
 
     void OpenGLRenderer::SubmitVertexBuffer(const std::vector<VertexTemplate>& buffer){
-        for(const auto& vertex : buffer){
-            this->m_vertices.insert(this->m_vertices.end(), {vertex.position.x, vertex.position.y, vertex.position.z, vertex.position.w, vertex.color.x, vertex.color.y, vertex.color.z, vertex.color.w, vertex.normal.x, vertex.normal.y, vertex.normal.z, vertex.normal.w});
-            this->m_vertices.insert(this->m_vertices.end(), {vertex.model[0][0], vertex.model[0][1], vertex.model[0][2], vertex.model[0][3]});
-            this->m_vertices.insert(this->m_vertices.end(), {vertex.model[1][0], vertex.model[1][1], vertex.model[1][2], vertex.model[1][3]});
-            this->m_vertices.insert(this->m_vertices.end(), {vertex.model[2][0], vertex.model[2][1], vertex.model[2][2], vertex.model[2][3]});
-            this->m_vertices.insert(this->m_vertices.end(), {vertex.model[3][0], vertex.model[3][1], vertex.model[3][2], vertex.model[3][3]});
-        }
+        // for(const auto& vertex : buffer){
+        //     this->m_vertices.insert(this->m_vertices.end(), {vertex.position.x, vertex.position.y, vertex.position.z, vertex.position.w, vertex.color.x, vertex.color.y, vertex.color.z, vertex.color.w, vertex.normal.x, vertex.normal.y, vertex.normal.z, vertex.normal.w});
+        //     this->m_vertices.insert(this->m_vertices.end(), {vertex.model[0][0], vertex.model[0][1], vertex.model[0][2], vertex.model[0][3]});
+        //     this->m_vertices.insert(this->m_vertices.end(), {vertex.model[1][0], vertex.model[1][1], vertex.model[1][2], vertex.model[1][3]});
+        //     this->m_vertices.insert(this->m_vertices.end(), {vertex.model[2][0], vertex.model[2][1], vertex.model[2][2], vertex.model[2][3]});
+        //     this->m_vertices.insert(this->m_vertices.end(), {vertex.model[3][0], vertex.model[3][1], vertex.model[3][2], vertex.model[3][3]});
+        // }
     }
     void OpenGLRenderer::SubmitTriangle(float bottomLeftX, float bottomLeftY, float size){
         this->m_vertices.push_back(bottomLeftX);
@@ -141,8 +170,8 @@ namespace Cast{
     }
 
     void OpenGLRenderer::SubmitCube(glm::vec3 position, float side_len){
-        Cube cube{position, side_len, m_curColor};
-        SubmitVertexBuffer(cube.getRendererVertices());
+        // Cube cube{position, side_len, m_curColor};
+        // SubmitVertexBuffer(cube.getRendererVertices());
         
     }
 

@@ -2,7 +2,6 @@
 #define GLFW_INCLUDE_VULKAN
 #include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Input/InputManager.h>
-#include <Cast/Core/Components/Transform.h>
 #include <Cast/Core/Scenes/DebugScene.h>
 #include <Cast/Core/Scenes/StressTestScene.h>
 

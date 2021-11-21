@@ -9,6 +9,7 @@
 #include <Cast/Core/Rendering/Shader/ShaderProgram.h>
 
 #include <Cast/Vendor/entt/entity/registry.hpp>
+#include <Cast/Core/ECS/Components/Components.h>
 
 
 namespace Cast{
@@ -28,7 +29,7 @@ namespace Cast{
 
     class Renderer{
         protected:
-            entt::registry m_registry;
+            entt::registry m_registry{};
 
             std::vector<float> m_vertices;
             int m_currentAliveVertices;

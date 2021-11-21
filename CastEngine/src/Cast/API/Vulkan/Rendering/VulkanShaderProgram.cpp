@@ -18,8 +18,9 @@ namespace Cast{
                 shader_bit = _getShaderBitFromType(shaderType);
             }else{
                 std::string shader_out_path =  fileNameOnly + ".spv";
+                CAST_LOG("Compiling to SPRV");
                 auto shader_spv_format = ShaderParser::compileGLSLToSPRV(shaderFilePath, shader_out_path.c_str(), shaderType);
-
+                CAST_LOG("Got SPRV Format");
                 shader_module = _createShaderModule(shader_spv_format);
                 shader_bit = _getShaderBitFromType(shaderType);
             }

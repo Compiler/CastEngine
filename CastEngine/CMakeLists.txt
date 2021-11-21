@@ -1,4 +1,4 @@
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(
@@ -41,7 +41,7 @@ add_library(
 	src/Cast/Core/EngineCore.cpp
 	src/Cast/Core/EngineCore.h
 	src/Cast/Core/Entry.h
-	src/Cast/Core/ECS/Components/TransformComponent.h
+	src/Cast/Core/ECS/Components/Components.h
 	src/Cast/Core/Input/InputManager.h
 	src/Cast/Core/Input/InputManager.cpp
 	src/Cast/Core/Debug/LoggingUserFormatter.h
@@ -74,7 +74,6 @@ add_library(
 	src/Cast/Core/Rendering/Shapes/Cube.cpp
 	src/Cast/Core/Rendering/Shapes/Cube.h
 	src/Cast/Core/Rendering/Shapes/Shape.h
-	src/Cast/Core/Components/Transform.h
 	src/Cast/Vendor/entt/fwd.hpp
 	src/Cast/Vendor/entt/entt.hpp
 	src/Cast/Vendor/entt/process/process.hpp
@@ -198,6 +197,6 @@ get_filename_component(VULKAN_LIBRARY_PATH ${Vulkan_LIBRARIES} DIRECTORY)
 
 target_include_directories("${LIBRARY_PROJECT_NAME}" PUBLIC ${VULKAN_INCLUDE})
 target_link_directories("${LIBRARY_PROJECT_NAME}" PRIVATE ${VULKAN_LIB})
-target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE ${VULKAN_LIB_NAME} shaderc_shared)
+target_link_libraries("${LIBRARY_PROJECT_NAME}" PRIVATE ${VULKAN_LIB_NAME} shaderc_shared SPIRV-Tools-shared)
 
 

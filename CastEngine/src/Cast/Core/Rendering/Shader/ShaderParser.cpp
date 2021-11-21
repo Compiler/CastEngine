@@ -45,6 +45,10 @@ namespace Cast{
                 CAST_LOG("Loading old spv");
                 std::vector<char> char_vec = FileLoaderFactory::readSPV(preface.c_str());
                 const uint32_t* casted = reinterpret_cast<const uint32_t*>(char_vec.data());
+                // std::vector<uint32_t> return_vec = {};
+                // for(int i = 0; i < char_vec.size();i ++){
+                //     return_vec.push_back(*(casted + i));
+                // }
                 return {casted, casted + char_vec.size()}; // this return the implicit type from return statement of the casted pointer
             }
 

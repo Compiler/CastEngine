@@ -88,7 +88,6 @@ namespace Cast{
     
     void VulkanInstance::_createVertexBuffers(){
         VkDeviceSize bufferSize = sizeof(VertexTemplate) * vertices.size();
-       
         VkBuffer stagingBuffer;
         VkDeviceMemory stagingBufferMemory;
         VulkanBuffer staging{_physicalDevice, _logicalDevice};
@@ -180,7 +179,7 @@ namespace Cast{
         
 
         UniformBufferObject ubo {glm::mat4(1.0f), glm::mat4(1.0f), glm::mat4(1.0f)};
-        Cast::PerspectiveCamera camera{_swapChainExtent.width, _swapChainExtent.height, {2,2,5}};
+        Cast::PerspectiveCamera camera{(float)_swapChainExtent.width, (float)_swapChainExtent.height, {2,2,5}};
         ubo.proj = camera.getProjection();
         ubo.view = camera.getView();
         camera.Update();
