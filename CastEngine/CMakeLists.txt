@@ -41,6 +41,7 @@ add_library(
 	src/Cast/Core/EngineCore.cpp
 	src/Cast/Core/EngineCore.h
 	src/Cast/Core/Entry.h
+	src/Cast/Core/ECS/Components/TransformComponent.h
 	src/Cast/Core/Input/InputManager.h
 	src/Cast/Core/Input/InputManager.cpp
 	src/Cast/Core/Debug/LoggingUserFormatter.h
@@ -74,6 +75,74 @@ add_library(
 	src/Cast/Core/Rendering/Shapes/Cube.h
 	src/Cast/Core/Rendering/Shapes/Shape.h
 	src/Cast/Core/Components/Transform.h
+	src/Cast/Vendor/entt/fwd.hpp
+	src/Cast/Vendor/entt/entt.hpp
+	src/Cast/Vendor/entt/process/process.hpp
+	src/Cast/Vendor/entt/process/scheduler.hpp
+	src/Cast/Vendor/entt/container/dense_hash_set.hpp
+	src/Cast/Vendor/entt/container/fwd.hpp
+	src/Cast/Vendor/entt/container/dense_hash_map.hpp
+	src/Cast/Vendor/entt/poly/fwd.hpp
+	src/Cast/Vendor/entt/poly/poly.hpp
+	src/Cast/Vendor/entt/signal/dispatcher.hpp
+	src/Cast/Vendor/entt/signal/fwd.hpp
+	src/Cast/Vendor/entt/signal/delegate.hpp
+	src/Cast/Vendor/entt/signal/sigh.hpp
+	src/Cast/Vendor/entt/signal/emitter.hpp
+	src/Cast/Vendor/entt/locator/locator.hpp
+	src/Cast/Vendor/entt/platform/android-ndk-r17.hpp
+	src/Cast/Vendor/entt/meta/utility.hpp
+	src/Cast/Vendor/entt/meta/policy.hpp
+	src/Cast/Vendor/entt/meta/factory.hpp
+	src/Cast/Vendor/entt/meta/resolve.hpp
+	src/Cast/Vendor/entt/meta/fwd.hpp
+	src/Cast/Vendor/entt/meta/container.hpp
+	src/Cast/Vendor/entt/meta/ctx.hpp
+	src/Cast/Vendor/entt/meta/range.hpp
+	src/Cast/Vendor/entt/meta/pointer.hpp
+	src/Cast/Vendor/entt/meta/meta.hpp
+	src/Cast/Vendor/entt/meta/type_traits.hpp
+	src/Cast/Vendor/entt/meta/template.hpp
+	src/Cast/Vendor/entt/meta/adl_pointer.hpp
+	src/Cast/Vendor/entt/meta/node.hpp
+	src/Cast/Vendor/entt/config/config.h
+	src/Cast/Vendor/entt/config/version.h
+	src/Cast/Vendor/entt/entity/utility.hpp
+	src/Cast/Vendor/entt/entity/helper.hpp
+	src/Cast/Vendor/entt/entity/observer.hpp
+	src/Cast/Vendor/entt/entity/storage.hpp
+	src/Cast/Vendor/entt/entity/fwd.hpp
+	src/Cast/Vendor/entt/entity/poly_storage.hpp
+	src/Cast/Vendor/entt/entity/view.hpp
+	src/Cast/Vendor/entt/entity/component.hpp
+	src/Cast/Vendor/entt/entity/handle.hpp
+	src/Cast/Vendor/entt/entity/organizer.hpp
+	src/Cast/Vendor/entt/entity/group.hpp
+	src/Cast/Vendor/entt/entity/snapshot.hpp
+	src/Cast/Vendor/entt/entity/registry.hpp
+	src/Cast/Vendor/entt/entity/runtime_view.hpp
+	src/Cast/Vendor/entt/entity/entity.hpp
+	src/Cast/Vendor/entt/entity/sparse_set.hpp
+	src/Cast/Vendor/entt/core/utility.hpp
+	src/Cast/Vendor/entt/core/monostate.hpp
+	src/Cast/Vendor/entt/core/hashed_string.hpp
+	src/Cast/Vendor/entt/core/any.hpp
+	src/Cast/Vendor/entt/core/ident.hpp
+	src/Cast/Vendor/entt/core/fwd.hpp
+	src/Cast/Vendor/entt/core/algorithm.hpp
+	src/Cast/Vendor/entt/core/enum.hpp
+	src/Cast/Vendor/entt/core/type_traits.hpp
+	src/Cast/Vendor/entt/core/iterator.hpp
+	src/Cast/Vendor/entt/core/family.hpp
+	src/Cast/Vendor/entt/core/memory.hpp
+	src/Cast/Vendor/entt/core/compressed_pair.hpp
+	src/Cast/Vendor/entt/core/tuple.hpp
+	src/Cast/Vendor/entt/core/type_info.hpp
+	src/Cast/Vendor/entt/core/attribute.h
+	src/Cast/Vendor/entt/resource/cache.hpp
+	src/Cast/Vendor/entt/resource/fwd.hpp
+	src/Cast/Vendor/entt/resource/handle.hpp
+	src/Cast/Vendor/entt/resource/loader.hpp
 	src/Cast/Vendor/ImGui/imgui_demo.cpp
 	src/Cast/Vendor/ImGui/imgui_impl_opengl3.cpp
 	src/Cast/Vendor/ImGui/imgui_widgets.cpp

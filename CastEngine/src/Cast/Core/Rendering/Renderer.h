@@ -8,6 +8,9 @@
 #include <Cast/Core/Rendering/Shader/Shader.h>
 #include <Cast/Core/Rendering/Shader/ShaderProgram.h>
 
+#include <Cast/Vendor/entt/entity/registry.hpp>
+
+
 namespace Cast{
 
 
@@ -25,6 +28,8 @@ namespace Cast{
 
     class Renderer{
         protected:
+            entt::registry m_registry;
+
             std::vector<float> m_vertices;
             int m_currentAliveVertices;
             int m_offsetToAliveVertices;
@@ -50,6 +55,8 @@ namespace Cast{
             void SetColor(glm::vec4& col){this->m_curColor = col;}
             void SetColor(glm::vec4 col){this->m_curColor = col;}
             static RenderContext::API GetAPI(){return RenderContext::GetAPI();}
+
+            entt::registry& getRegistry(){return this->m_registry;}
 
     };
 

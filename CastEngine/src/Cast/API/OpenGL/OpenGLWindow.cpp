@@ -23,6 +23,8 @@ namespace Cast{
         glfwSetWindowPos(m_window, 1920, 0);
         CAST_DEBUG("GLFWWindow Context created");
 
+        glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_FALSE);
+        glfwSwapInterval(0);
         glfwMakeContextCurrent(m_window);
         glfwSetWindowUserPointer(m_window, reinterpret_cast<void*>(this));
 

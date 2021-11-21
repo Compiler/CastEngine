@@ -64,6 +64,7 @@ namespace Cast{
 
     class VulkanInstance{
         friend class VulkanRenderer;
+        friend class VulkanContext;
         private:
 
             VulkanShaderProgram _shaderProgram;
@@ -111,6 +112,7 @@ namespace Cast{
             inline void _createDescriptorPool();
             inline void _createDescriptorSets();
             inline void _updateUniformBuffer(uint32_t currentImage);
+
 
             const int _MAX_FRAMES_IN_FLIGHT = 2;
             size_t _currentFrame = 0;

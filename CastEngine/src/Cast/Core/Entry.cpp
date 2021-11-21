@@ -25,6 +25,7 @@ namespace Cast{
                 //while(curTime - prevTime < 1.0) curTime = glfwGetTime();
                 prevTime = curTime;
                 std::stringstream ss;
+
                 std::string api;
                 switch(RenderContext::GetAPI()){
                     case RenderContext::API::OpenGL:{api = "OpenGL";break;};

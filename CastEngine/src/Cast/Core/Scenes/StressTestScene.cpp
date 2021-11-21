@@ -15,11 +15,15 @@ namespace Cast{
         static float MIN_CUBE_SIZE = 0.1;
         glm::vec2 curCubeSize = {random_float(MIN_CUBE_SIZE, MAX_CUBE_SIZE), random_float(MIN_CUBE_SIZE, MAX_CUBE_SIZE)};
         _cubes = {};
-        float incremenet = 0.275;
-        float range = 4;
+        float incremenet = 1.575;
+        float range = 8;
+        entt::registry& registry = _renderer->getRegistry();
         for(float x = -range; x <= range; x += incremenet){
             for(float z = -range; z <= range; z += incremenet){
                 for(float y = 1; y <= 1; y += incremenet){
+                    const auto entity = registry.create();
+                    TransformComponent component{{x, 0, z, 1}, {0, 0, 0, 1}, {1, 1, 1, 1}};
+                    registry.emplace<TransformComponent>(entity, component);
                     _cubes.push_back(Cube{{x, 0, z}, incremenet - (0.25 * incremenet)});
                 }
             }

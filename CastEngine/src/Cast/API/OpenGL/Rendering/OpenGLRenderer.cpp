@@ -10,7 +10,6 @@ namespace Cast{
         glEnable(GL_DEPTH_TEST);  
         _vao.setLayout(std::move(_layout));
 
-        
         UniformBufferObject ubo {glm::mat4(1.0f), glm::mat4(1.0f), glm::mat4(1.0f)};
         Cast::PerspectiveCamera camera{1920, 1080, {2,2,5}, true};
         ubo.proj = camera.getProjection();
@@ -23,7 +22,8 @@ namespace Cast{
         glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(ubo.model));
         glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(ubo.view));
         glBufferSubData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(ubo.proj));
-
+        _buffer.init();
+        _vao.init();
     }
 
 
@@ -59,10 +59,12 @@ namespace Cast{
 
     void OpenGLRenderer::Draw(){
         int draw_size = m_vertices.size();
-        _buffer.setVertices(std::move(m_vertices));
-        _buffer.init();
-        _vao.init();
-        glDrawArrays(GL_TRIANGLES, 0, draw_size);
+        if(draw_size > 0){
+            _buffer.setVerticesBuffer(m_vertices);
+            _buffer.buffer();
+            glDrawArrays(GL_TRIANGLES, 0, draw_size);
+            m_vertices.clear();
+        }
 
         
     }

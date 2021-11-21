@@ -69,7 +69,7 @@ namespace Cast{
         _stressScene.update();
         InputManager::clear();
         _renderContext->Update();
-        if(InputManager::isKeyReleased(KeyCodes::KEY_ESCAPE)) this->_renderContext->getWindow()->destroy();
+        if(InputManager::isKeyReleased(KeyCodes::KEY_ESCAPE)) this->_renderContext->getWindow()->setShouldClose();
         if(InputManager::isKeyReleased(KeyCodes::KEY_SPACE)){
             CAST_WARN("Swapping API");
             if(RenderContext::GetAPI() == RenderContext::API::Vulkan)
@@ -88,7 +88,7 @@ namespace Cast{
     }
 
     void EngineCore::unload(){
-        _renderContext->Unload();
+        //_renderContext->Unload();
 
         //_scene.unload();
     }
