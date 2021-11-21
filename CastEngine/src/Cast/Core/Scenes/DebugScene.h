@@ -8,6 +8,7 @@ namespace Cast{
     class DebugScene{
         private:
             Renderer* _renderer;
+            entt::registry _registry{};
         public:
             void load();
             void update();

@@ -76,7 +76,7 @@ namespace Cast{
         _renderer->SubmitCube({0.0f, 0.0f, 0.0f}, 0.25f);
         _renderer->clearColor(0.1f, 0.1f, 0.15f, 1.0f);
         
-        _renderer->Draw();
+        _renderer->Draw(_registry);
     }
     void DebugScene::unload(){}
 

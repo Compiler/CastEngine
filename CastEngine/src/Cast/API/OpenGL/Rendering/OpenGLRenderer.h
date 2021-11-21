@@ -43,7 +43,7 @@ namespace Cast{
                 this->GetShader(name).use();
             };
 
-            void Draw();
+            void Draw(entt::registry& registry);
 
             ~OpenGLRenderer();
     };

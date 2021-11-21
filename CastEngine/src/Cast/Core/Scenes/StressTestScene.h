@@ -9,9 +9,11 @@ namespace Cast{
 
     class StressTestScene{
         private:
+            entt::registry _registry{};
             std::vector<Cube> _cubes;
             Renderer* _renderer;
         public:
+            void init();
             void load();
             void update();
             void render();

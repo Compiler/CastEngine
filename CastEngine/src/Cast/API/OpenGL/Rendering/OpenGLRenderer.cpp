@@ -57,10 +57,10 @@ namespace Cast{
     }
 
 
-    void OpenGLRenderer::Draw(){
+    void OpenGLRenderer::Draw(entt::registry& registry){
 
 
-        for(auto &&[entity, transform, renderable, cube]: m_registry.view<TransformComponent, RenderableComponent, CubeComponent>().each()) {
+        for(auto &&[entity, transform, renderable, cube]: registry.view<TransformComponent, RenderableComponent, CubeComponent>().each()) {
             SubmitVertexBuffer(Cube{transform.position, cube.sideLength, transform.rotation, transform.scale, renderable.color}.getRendererVertices());
         }
         int drawSize = m_vertices.size();

@@ -62,7 +62,10 @@ namespace Cast{
         SubmitVertexBuffer(cube.getRendererVertices());
     }
 
-    void VulkanRenderer::Draw(){
+    void VulkanRenderer::Draw(entt::registry& registry){
+        for(auto &&[entity, transform, renderable, cube]: registry.view<TransformComponent, RenderableComponent, CubeComponent>().each()) {
+            SubmitVertexBuffer(Cube{transform.position, cube.sideLength, transform.rotation, transform.scale, renderable.color}.getRendererVertices());
+        }
         _instance->_createVertexBuffers();
         _instance->_createGraphicsCommandBuffers();//this is our draw call...
         VulkanInstance::vertices.clear();

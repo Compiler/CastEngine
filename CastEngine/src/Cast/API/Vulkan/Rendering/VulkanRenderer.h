@@ -20,7 +20,7 @@ namespace Cast{
             void SubmitTriangle(float bottomLeftX, float bottomLeftY, float size);
             void SubmitCube(glm::vec3 position, float side_len);
 
-            void Draw();
+            void Draw(entt::registry& registry);
 
             void CreateShader(const char* name, std::initializer_list<Shader> shaders);
             void SetShader(const char* name);

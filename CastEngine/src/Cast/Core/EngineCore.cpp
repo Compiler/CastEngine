@@ -24,7 +24,7 @@ namespace Cast{
         //_renderContext->getWindow()->showWindow();
         _renderContext->getWindow()->focusWindow();
         _stressScene.setRenderer(_renderer);
-        //_stressScene.load();
+        _stressScene.load();
     }
 
     void EngineCore::load(StartState state){
@@ -60,6 +60,7 @@ namespace Cast{
             }
 
         }
+        _stressScene.init();
         _stressScene.load();
 
 
