@@ -1,6 +1,7 @@
 #pragma once
 #include <Cast/Core/Rendering/Renderer.h>
 #include <Cast/Core/ECS/Components/Components.h>
+#include <Cast/Core/Utils/MathUtils.h>
 #include <Cast/Core/Rendering/Shapes/Cube.h>
 #include <Cast/Core/Debug/Logger.h>
 #include <Cast/Core/Input/InputManager.h>

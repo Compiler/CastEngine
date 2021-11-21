@@ -16,9 +16,13 @@ namespace Cast{
             Cube(glm::vec3 center, float sideLen);
             Cube(glm::vec3 center, float sideLen, float rotation, glm::vec3 axis);
 
+            Cube(glm::vec4 center, float sideLen, glm::vec4 color);
+            Cube(glm::vec3 center, float sideLen, glm::vec4 rotation, glm::vec4 color);
+            
             Cube(glm::vec4 color);
             Cube(glm::vec3 center, float sideLen, glm::vec4 color);
             Cube(glm::vec3 center, float sideLen, float rotation, glm::vec3 axis, glm::vec4 color);
+            Cube(glm::vec4 center, float sideLen, glm::vec4 rotation, glm::vec4 scale, glm::vec4 color);
             
             void Load();
 
