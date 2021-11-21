@@ -1,2 +1,2 @@
 cd build
-./CastEngine_Driver
+./CastEngine_Driver OpenGL

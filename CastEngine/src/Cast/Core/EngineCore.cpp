@@ -86,6 +86,11 @@ namespace Cast{
         _renderContext->getWindow()->render();
         _stressScene.render();
 
+        _renderContext->BeginGUI();
+        _gui.Render(_stressScene.getRegistry());
+        _stressScene.clearColor = {_gui.clear_color.x, _gui.clear_color.y, _gui.clear_color.z, _gui.clear_color.w};
+        _renderContext->EndGUI();
+
     }
 
     void EngineCore::unload(){

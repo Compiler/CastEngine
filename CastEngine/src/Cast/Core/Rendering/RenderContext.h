@@ -7,7 +7,6 @@ namespace Cast{
         RenderContext is an abstract class that allows for switching between different rendering contexts(opengl, vulkan, directx)
     */
     class RenderContext{
-
         protected:
             Cast::Window* m_window;
         
@@ -28,8 +27,9 @@ namespace Cast{
             virtual void Render(){}
             virtual void Unload(){}
 
-            virtual void LoadImGUI() = 0;
-            virtual void RenderImGUI() = 0;
+            virtual void LoadImGUI(){}
+            virtual void BeginGUI(){}
+            virtual void EndGUI(){}
 
 
 

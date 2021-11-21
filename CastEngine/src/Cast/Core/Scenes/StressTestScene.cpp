@@ -18,6 +18,9 @@ namespace Cast{
                     TransformComponent& tComp = _registry.emplace<TransformComponent>(entity);
                     RenderableComponent& rComp = _registry.emplace<RenderableComponent>(entity);
                     CubeComponent& cComp = _registry.emplace<CubeComponent>(entity);
+                    std::string name = "Entity #" + std::to_string(NameComponent::count) + "!";
+                    NameComponent::count++;
+                    _registry.emplace<NameComponent>(entity, name);
                     
                     tComp.position = {x, -1, z, 1};
                     tComp.rotation = {0, 0, 0, 1};
@@ -33,7 +36,7 @@ namespace Cast{
         _renderer->CreateShader("passthrough_instanced", {{CAST_INTERNAL_SHADER("passthrough_instanced.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Fragment}});
     }
     void StressTestScene::load(){
-         _renderer->CreateShader("blinn_phong", {{CAST_INTERNAL_SHADER("blinn_phong.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("blinn_phong.frag"), Shader::ShaderType::Fragment}});
+        _renderer->CreateShader("blinn_phong", {{CAST_INTERNAL_SHADER("blinn_phong.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("blinn_phong.frag"), Shader::ShaderType::Fragment}});
         _renderer->CreateShader("passthrough_instanced", {{CAST_INTERNAL_SHADER("passthrough_instanced.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Fragment}});
         _renderer->SetShader("passthrough_instanced");
         _renderer->SetShader("blinn_phong");
@@ -56,7 +59,7 @@ namespace Cast{
     void StressTestScene::render(){
         
         _renderer->SubmitCube({0, 0, 0}, 1);
-        _renderer->clearColor(0.1f, 0.1f, 0.15f, 1.0f);
+        _renderer->clearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a );
         _renderer->Draw(_registry);
     }
     void StressTestScene::unload(){

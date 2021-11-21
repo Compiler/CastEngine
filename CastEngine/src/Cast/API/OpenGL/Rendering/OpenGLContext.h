@@ -7,7 +7,7 @@
 
 #include <Cast/Vendor/ImGui/imgui_impl_opengl3.h>
 #include <Cast/Vendor/ImGui/imgui_impl_glfw.h>
-#include <Cast/Vendor/ImGui/imgui.h>
+
 
 namespace Cast{
 
@@ -23,7 +23,8 @@ namespace Cast{
             void Unload();
             
             void LoadImGUI();
-            void RenderImGUI();
+            void BeginGUI();
+            void EndGUI();
 
     };
 

@@ -1,8 +1,12 @@
 #pragma once
 #include <glm/vec4.hpp>
-
+#include <string>
 namespace Cast{
 
+    struct NameComponent{
+        inline static int count = 0;
+        std::string name = "Default Entity #" + (count++);
+    };
     struct TransformComponent{
         
         glm::vec4 position{0};

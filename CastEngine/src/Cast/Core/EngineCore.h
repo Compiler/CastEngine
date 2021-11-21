@@ -12,10 +12,12 @@
 #include <Cast/API/Vulkan/Rendering/VulkanContext.h>
 #include <Cast/Core/Rendering/Shader/ShaderParser.h>
 
+#include <Cast/Core/GUI/MainGUi.h>
 namespace Cast{
     class EngineCore{
         friend class Entry;
         private:
+            MainGUI _gui;
             Renderer* _renderer;
             VulkanRenderer* _vulkanRenderer;
             OpenGLRenderer* _openglRenderer;
