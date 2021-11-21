@@ -61,9 +61,7 @@ namespace Cast{
 
 
         for(auto &&[entity, transform, renderable, cube]: m_registry.view<TransformComponent, RenderableComponent, CubeComponent>().each()) {
-            Cube c{transform.position, cube.sideLength, transform.rotation, transform.scale, renderable.color};
-            SubmitVertexBuffer(c.getRendererVertices());
-            //SubmitCube({transform.position.x, transform.position.y, transform.position.z}, cube.sideLength);
+            SubmitVertexBuffer(Cube{transform.position, cube.sideLength, transform.rotation, transform.scale, renderable.color}.getRendererVertices());
         }
         int drawSize = m_vertices.size();
         _buffer.setVerticesBuffer(m_vertices);
