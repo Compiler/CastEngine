@@ -8,7 +8,7 @@ namespace Cast{
 
         CAST_DEBUG("Engine starting");
         Cast::EngineCore core_engine{};
-        Cast::EngineCore::StartState startingState = Cast::EngineCore::StartState::Vulkan;
+        Cast::EngineCore::StartState startingState = Cast::EngineCore::StartState::OpenGL;
         if(argc >= 2){
             if(strcmp(argv[1], "OpenGL") == 0)startingState = Cast::EngineCore::StartState::OpenGL;
             if(strcmp(argv[1], "Vulkan") == 0)startingState = Cast::EngineCore::StartState::Vulkan;

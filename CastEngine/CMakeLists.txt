@@ -41,6 +41,8 @@ add_library(
 	src/Cast/Core/EngineCore.cpp
 	src/Cast/Core/EngineCore.h
 	src/Cast/Core/Entry.h
+	src/Cast/Core/ECS/EntityFactory.h
+	src/Cast/Core/ECS/EntityFactory.cpp
 	src/Cast/Core/ECS/Components/Components.h
 	src/Cast/Core/Input/InputManager.h
 	src/Cast/Core/Input/InputManager.cpp

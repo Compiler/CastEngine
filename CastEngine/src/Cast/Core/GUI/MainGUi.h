@@ -3,6 +3,8 @@
 #include <Cast/Vendor/entt/entity/registry.hpp>
 
 #include <Cast/Core/ECS/Components/Components.h>
+#include <Cast/Core/ECS/EntityFactory.h>
+#include <Cast/Core/Input/InputManager.h>
 namespace Cast{
 
     class MainGUI{
@@ -22,9 +24,11 @@ namespace Cast{
                 if(show_demo_window)
                 ImGui::ShowDemoWindow(&show_demo_window);
 
+                static int panel_width = Window::WINDOW_WIDTH * 0.2;
                 {
                     static int counter = 0;
                     ImGui::SetNextWindowPos(ImVec2(0, 0));
+                    ImGui::SetNextWindowSize(ImVec2(panel_width, Window::WINDOW_HEIGHT));
                     ImGui::Begin("LeftPanel");                          // Create a window called "Hello, world!" and append into it.
 
                     ImGui::Text("Cast Engine UI");               // Display some text (you can use a format strings too)
@@ -53,25 +57,54 @@ namespace Cast{
 
                 {
 
-                    int panel_width = 300;
                     ImGui::SetNextWindowSize(ImVec2(panel_width, Window::WINDOW_HEIGHT));
                     ImGui::SetNextWindowPos(ImVec2(Window::WINDOW_WIDTH - panel_width, 0));
                     ImGui::Begin("Entity Panel");           
 
                     if(sceneRegistry.any_of<NameComponent>(currentEntity)){
-                        ImGui::Text("Entity: %s", sceneRegistry.get<NameComponent>(currentEntity).name.c_str());
+                        sceneRegistry.get<NameComponent>(currentEntity).RenderComponentView();
                     } 
 
+                    if(sceneRegistry.any_of<TransformComponent>(currentEntity)){
+                        sceneRegistry.get<TransformComponent>(currentEntity).RenderComponentView();
+                    }    
+                    if(sceneRegistry.any_of<CubeComponent>(currentEntity)){
+                        sceneRegistry.get<CubeComponent>(currentEntity).RenderComponentView();
+                    }    
+                    
                     if(sceneRegistry.any_of<RenderableComponent>(currentEntity)){
-                        auto& comp = sceneRegistry.get<RenderableComponent>(currentEntity);
-                        ImGui::ColorEdit4("Sup", &comp.color.r);
-                    }            
+                        sceneRegistry.get<RenderableComponent>(currentEntity).RenderComponentView();
+                    }    
+
+
 
 
                     ImGui::End();
 
                 }
 
+                static bool openRightClickMenu = false;
+                static glm::vec2 mousePositionOnCreation{};
+                if(InputManager::isMousePressed(MouseCodes::MOUSE_BUTTON_RIGHT) && !ImGui::IsWindowHovered() && !ImGui::IsAnyItemHovered()){
+                    openRightClickMenu = true;
+                    mousePositionOnCreation = InputManager::getMouseMovedPosition();
+                }
+               
+                if(openRightClickMenu){
+                    ImGui::SetNextWindowPos(ImVec2(mousePositionOnCreation.x, mousePositionOnCreation.y));
+                    ImGui::Begin("Creation Menu", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize |ImGuiWindowFlags_AlwaysAutoResize);
+                    if(InputManager::isMousePressed(MouseCodes::MOUSE_BUTTON_LEFT) && !ImGui::IsWindowHovered()){
+                        openRightClickMenu = false;
+                    }
+                    
+                    if(ImGui::Selectable("Create new entity?")){
+                        char buf[64] = "Sup\0";
+                        ImGui::InputText("Name: ", buf, IM_ARRAYSIZE(buf));
+                        currentEntity = EntityFactory::GenerateDefaultEntity(sceneRegistry, buf);
+                        openRightClickMenu = false;
+                    }
+                    ImGui::End();
+                }
 
 
                 ImGui::Render();

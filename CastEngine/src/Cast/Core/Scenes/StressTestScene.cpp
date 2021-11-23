@@ -19,7 +19,6 @@ namespace Cast{
                     RenderableComponent& rComp = _registry.emplace<RenderableComponent>(entity);
                     CubeComponent& cComp = _registry.emplace<CubeComponent>(entity);
                     std::string name = "Cube" + std::to_string(NameComponent::count);
-                    NameComponent::count++;
                     _registry.emplace<NameComponent>(entity, name);
                     
                     tComp.position = {x, -1, z, 1};

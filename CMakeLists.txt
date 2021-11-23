@@ -13,7 +13,7 @@ if(LINUX)
     message("LINUX MACHINE")
 	set(OpenGL_GL_PREFERENCE "GLVND")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
-    set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fPIC" )
+    set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -fPIC" )
     set(VULKAN_ROOT "$ENV{VULKAN_SDK}")
     set(VULKAN_LIB "${VULKAN_ROOT}/lib/")
     set(VULKAN_INCLUDE "${VULKAN_ROOT}/include/")
@@ -36,7 +36,8 @@ message(STATUS "${VULKAN_INCLUDE}")
 message(STATUS "${RESOURCES_ABSOLUTE_PATH}")
 
 
-set( CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -O3 -fPIC" )
+set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -O3 -fPIC -ggdb" )
+set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -ggdb" )
 set(EXE_FINAL_NAME "CastEngine_Driver")
 
 find_package(OpenGL REQUIRED)
