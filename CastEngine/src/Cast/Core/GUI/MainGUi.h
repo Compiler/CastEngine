@@ -36,10 +36,15 @@ namespace Cast{
                     if (ImGui::Button("New Entity")){
 
                     }      
+                    static int count = 0;
+                    bool selected = false;
                     if (ImGui::CollapsingHeader("Entity List")){
                         for(auto &&[entity, entityName]: sceneRegistry.view<NameComponent>().each()) {
-                            currentEntity = entity;
-                            ImGui::Text(entityName.name.c_str());
+                            
+                            if(ImGui::Selectable(entityName.name.c_str(), selected)){
+                                currentEntity = entity;
+                                CAST_LOG("{} selected", entityName.name.c_str());
+                            }
                         }             
                     }
 
@@ -51,7 +56,16 @@ namespace Cast{
                     int panel_width = 300;
                     ImGui::SetNextWindowSize(ImVec2(panel_width, Window::WINDOW_HEIGHT));
                     ImGui::SetNextWindowPos(ImVec2(Window::WINDOW_WIDTH - panel_width, 0));
-                    ImGui::Begin("Entity Panel");                       
+                    ImGui::Begin("Entity Panel");           
+
+                    if(sceneRegistry.any_of<NameComponent>(currentEntity)){
+                        ImGui::Text("Entity: %s", sceneRegistry.get<NameComponent>(currentEntity).name.c_str());
+                    } 
+
+                    if(sceneRegistry.any_of<RenderableComponent>(currentEntity)){
+                        auto& comp = sceneRegistry.get<RenderableComponent>(currentEntity);
+                        ImGui::ColorEdit4("Sup", &comp.color.r);
+                    }            
 
 
                     ImGui::End();

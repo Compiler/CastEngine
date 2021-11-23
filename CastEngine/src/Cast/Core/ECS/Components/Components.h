@@ -3,6 +3,8 @@
 #include <string>
 namespace Cast{
 
+    struct Component{
+    };
     struct NameComponent{
         inline static int count = 0;
         std::string name = "Default Entity #" + (count++);

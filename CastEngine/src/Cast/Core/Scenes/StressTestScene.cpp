@@ -18,7 +18,7 @@ namespace Cast{
                     TransformComponent& tComp = _registry.emplace<TransformComponent>(entity);
                     RenderableComponent& rComp = _registry.emplace<RenderableComponent>(entity);
                     CubeComponent& cComp = _registry.emplace<CubeComponent>(entity);
-                    std::string name = "Entity #" + std::to_string(NameComponent::count) + "!";
+                    std::string name = "Cube" + std::to_string(NameComponent::count);
                     NameComponent::count++;
                     _registry.emplace<NameComponent>(entity, name);
                     
@@ -58,7 +58,7 @@ namespace Cast{
     }
     void StressTestScene::render(){
         
-        _renderer->SubmitCube({0, 0, 0}, 1);
+        _renderer->SubmitCube({0, 0, 0}, 0.1);
         _renderer->clearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a );
         _renderer->Draw(_registry);
     }
