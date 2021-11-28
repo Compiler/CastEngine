@@ -117,6 +117,7 @@ namespace Cast{
                 return ray_wor;
             }
 
+
         public:
             ImVec4 clear_color = ImVec4(255.0f / 255.0f, 151.0f / 255.0f, 255.0f / 255.0f, 1.00f);
             bool show_demo_window = true;
@@ -129,9 +130,11 @@ namespace Cast{
                 ImGui::NewFrame();
 
                 if(show_demo_window)
-                ImGui::ShowDemoWindow(&show_demo_window);
+                    ImGui::ShowDemoWindow(&show_demo_window);
 
                 static int panel_width = Window::WINDOW_WIDTH * 0.2;
+                bool OpenGL = RenderContext::GetAPI() == RenderContext::API::OpenGL;
+                bool Vulkan = RenderContext::GetAPI() == RenderContext::API::Vulkan;
                 {
                     static int counter = 0;
                     ImGui::SetNextWindowPos(ImVec2(0, 0));
@@ -141,6 +144,16 @@ namespace Cast{
                     ImGui::Text("Cast Engine UI");               // Display some text (you can use a format strings too)
                     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
                     ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+                    ImGui::SameLine();
+                    if(ImGui::Checkbox("OpenGL", &OpenGL)){
+                        Vulkan = false;
+                        RenderContext::setAPI(RenderContext::API::OpenGL);
+                    }
+                    ImGui::SameLine();
+                    if(ImGui::Checkbox("Vulkan", &Vulkan)){
+                        OpenGL = false;
+                        RenderContext::setAPI(RenderContext::API::Vulkan);
+                    }
 
                     ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
 

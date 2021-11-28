@@ -26,7 +26,7 @@ namespace Cast{
             VulkanContext* _vulkanRenderContext;
             OpenGLContext* _openglRenderContext;
 
-
+            RenderContext::API _activeAPI;
             bool _runStressTest = false;
             DebugScene _scene{};
             StressTestScene _stressScene{};

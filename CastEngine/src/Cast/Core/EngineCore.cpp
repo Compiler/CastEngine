@@ -4,6 +4,7 @@ namespace Cast{
 
     void EngineCore::swapAPI(RenderContext::API newAPI){
         RenderContext::setAPI(newAPI);
+        _activeAPI = newAPI;
         CAST_WARN("UNloading Current API");
         //_renderContext->getWindow()->hideWindow();
         switch(RenderContext::GetAPI()){
@@ -60,6 +61,7 @@ namespace Cast{
             }
 
         }
+        _activeAPI = RenderContext::GetAPI();
         _stressScene.init();
         _stressScene.load();
 
@@ -77,6 +79,9 @@ namespace Cast{
                 swapAPI(RenderContext::API::OpenGL);
             else
                 swapAPI(RenderContext::API::Vulkan);
+        }
+        if(_activeAPI != RenderContext::GetAPI()){
+            swapAPI(RenderContext::GetAPI());
         }
     }
 
