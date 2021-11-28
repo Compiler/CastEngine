@@ -2,6 +2,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <Cast/Core/Rendering/RenderContext.h>
+#include <Cast/Core/GUI/MainGUi.h>
 #include <Cast/API/Vulkan/Rendering/VulkanWindow.h>
 
 

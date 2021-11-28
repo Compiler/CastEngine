@@ -109,12 +109,16 @@ namespace Cast{
     };
 
     CAST_COMPONENT(RenderableComponent){
-        //enum {RightTriangle, Cube} Shape;
+        enum Shape{Triangle, Cube, Rectangle} renderShape = Shape::Cube;
         glm::vec4 color;
 
         void RenderComponentView(){
             if(ImGui::CollapsingHeader("Renderable Component", ImGuiTreeNodeFlags_DefaultOpen)){
                 ImGui::ColorPicker4("Color", &this->color[0], ImGuiColorEditFlags_PickerHueWheel);
+                static const char* list[] = {"Triangle", "Cube", "Rectangle"};
+                static int curItem = renderShape == Triangle ? 0 : renderShape == Cube ? 1 : 2;
+                ImGui::ListBox("Shape Selection (Unsupported)", &curItem, list, 3);
+                renderShape = Shape(curItem);
             }
         }
     };

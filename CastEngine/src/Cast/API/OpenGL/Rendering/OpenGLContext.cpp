@@ -26,12 +26,14 @@ namespace Cast{
 
     void OpenGLContext::LoadImGUI(){
         IMGUI_CHECKVERSION();
+        CAST_DEBUG("Loading GUI");
         ImGui::CreateContext();
         ImGuiIO& io = ImGui::GetIO(); (void)io;
         ImGui::StyleColorsDark();
         ImGui_ImplGlfw_InitForOpenGL(m_window->getWindowHandle(), true);
         ImGui_ImplOpenGL3_Init("#version 460");
-
+        MainGUI::_SetStyle();
+        CAST_DEBUG("GUI Loaded");
 
 
     }

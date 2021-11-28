@@ -13,6 +13,7 @@ CAST_FATAL("Absolute path is relative. Did CMAKE forget to add the include?");
 #define CAST_INTERNAL(x)         CAST_RESOURCES_ABSOLUTE_PATH x
 #define CAST_INTERNAL_SHADER(x)  CAST_INTERNAL("Shaders/") x
 #define CAST_INTERNAL_TEXTURE(x) CAST_INTERNAL("Textures/") x
+#define CAST_INTERNAL_FONTS(x) CAST_INTERNAL("Fonts/") x
 #define CAST_INTERNAL_MODEL(x)   CAST_INTERNAL("Models/") x
 #define CAST_INTERNAL_SOUNDS(x)  CAST_INTERNAL("Sounds/") x
 

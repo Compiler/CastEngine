@@ -48,10 +48,13 @@ namespace Cast{
             float speed = 1.5f;
             if(rand < 2){
                 transform.rotation.z += speed;
+                transform.rotation.z = transform.rotation.z > 360 ? 0 : transform.rotation.z;
             }else if(rand >= 2 && rand < 4){
                 transform.rotation.y += speed;
+                transform.rotation.y = transform.rotation.y > 360 ? 0 : transform.rotation.y;
             }else{
                 transform.rotation.x += speed;
+                transform.rotation.x = transform.rotation.x > 360 ? 0 : transform.rotation.x;
             }
         }
     }
