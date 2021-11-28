@@ -16,7 +16,7 @@ namespace Cast{
             bool _yDown;
             float _fov, _near, _far;
         public:
-
+            PerspectiveCamera() = default;
             PerspectiveCamera(float camWidth, float camHeight, bool yDown = false);
             PerspectiveCamera(float camWidth, float camHeight, glm::vec3 camPos, bool yDown = false);
             void Update();
@@ -24,6 +24,7 @@ namespace Cast{
 
             inline const glm::mat4& getProjection(){return _projection;}
             inline const glm::mat4& getView(){return _view;}
+            inline const glm::vec3& getPosition() const{return _cameraPos;}
 
 
 

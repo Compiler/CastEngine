@@ -71,7 +71,7 @@ namespace Cast{
         InputManager::clear();
         _renderContext->Update();
         if(InputManager::isKeyReleased(KeyCodes::KEY_ESCAPE)) this->_renderContext->getWindow()->setShouldClose();
-        if(InputManager::isKeyReleased(KeyCodes::KEY_SPACE)){
+        if(InputManager::isKeyReleased(KeyCodes::KEY_F1)){
             CAST_WARN("Swapping API");
             if(RenderContext::GetAPI() == RenderContext::API::Vulkan)
                 swapAPI(RenderContext::API::OpenGL);
@@ -87,7 +87,7 @@ namespace Cast{
         _stressScene.render();
 
         _renderContext->BeginGUI();
-        _gui.Render(_stressScene.getRegistry());
+        _gui.Render(_stressScene.getRegistry(), _renderer->getCamera());
         _stressScene.clearColor = {_gui.clear_color.x, _gui.clear_color.y, _gui.clear_color.z, _gui.clear_color.w};
         _renderContext->EndGUI();
 

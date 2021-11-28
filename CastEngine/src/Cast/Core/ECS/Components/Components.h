@@ -25,7 +25,14 @@ namespace Cast{
         NameComponent(const char* name){this->name = name;count++;}
         NameComponent(std::string name){this->name = name;count++;}
         void RenderComponentView(){
-            ImGui::Text(this->name.c_str());
+			char buf[64] = "";
+			bool first = true;
+			if(first){
+				strcpy(buf, this->name.c_str());
+				first = false;
+			}
+			if(ImGui::InputText("Name: ", buf, IM_ARRAYSIZE(buf)))
+				this->name = buf;
         }
     };
     CAST_COMPONENT(TransformComponent){

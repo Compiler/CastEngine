@@ -11,7 +11,7 @@
 #include <Cast/Vendor/entt/entity/registry.hpp>
 #include <Cast/Core/ECS/Components/Components.h>
 
-
+#include <Cast/Core/Rendering/PerspectiveCamera.h>
 namespace Cast{
 
 
@@ -36,6 +36,10 @@ namespace Cast{
             glm::vec4 m_curColor = {0.5, 0.5, 0.5, 1.0};
             glm::vec4 DEFAULT_NORMAL = {0, 0, 1, 1};//TODO Delete this, make it relative to the cameras look position
             glm::mat4 DEFAULT_MODEL = glm::mat4{1};      //TODO Delete this 
+
+
+            PerspectiveCamera m_camera;
+
         public:
             static int MAX_VERTICES;
             Renderer():m_currentAliveVertices(0),m_offsetToAliveVertices(0){}
@@ -54,6 +58,7 @@ namespace Cast{
 
             void SetColor(glm::vec4& col){this->m_curColor = col;}
             void SetColor(glm::vec4 col){this->m_curColor = col;}
+            PerspectiveCamera& getCamera(){return this->m_camera;}
             static RenderContext::API GetAPI(){return RenderContext::GetAPI();}
 
     };

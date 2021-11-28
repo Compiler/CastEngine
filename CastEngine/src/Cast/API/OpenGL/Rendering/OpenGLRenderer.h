@@ -5,8 +5,6 @@
 #include <Cast/API/OpenGL/Rendering/OpenGLVertexBuffer.h>
 #include <Cast/API/OpenGL/Rendering/OpenGLVertexArray.h>
 #include <Cast/Core/Rendering/Shader/UniformBufferObject.h>
-#include <Cast/Core/Rendering/PerspectiveCamera.h>
-#include <Cast/Core/Rendering/Camera.h>
 #include <unordered_map>
 #include <string>
 #include <glm/glm.hpp>

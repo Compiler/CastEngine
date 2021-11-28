@@ -1,11 +1,13 @@
 #pragma once
 #include <Cast/Vendor/ImGui/imgui.h>
 #include <Cast/Vendor/entt/entity/registry.hpp>
-
+#include <glm/vec3.hpp>
 #include <Cast/Core/ECS/Components/Components.h>
 #include <Cast/Core/Utils/Files/FileLoaderFactory.h>
 #include <Cast/Core/ECS/EntityFactory.h>
+#include <Cast/Core/Rendering/Window.h>
 #include <Cast/Core/Input/InputManager.h>
+#include <Cast/Core/Rendering/PerspectiveCamera.h>
 namespace Cast{
 
     class MainGUI{
@@ -99,13 +101,29 @@ namespace Cast{
                 //ImGui::GetIO().Fonts->AddFontFromFileTTF(CAST_INTERNAL_FONTS("Ruda/Ruda-Bold.ttf"), 18);
 
             }
+
+
+            glm::vec3 _GetRayClick(PerspectiveCamera& camera){
+                glm::vec2 mousePos2D = InputManager::getMouseMovedPosition();
+                float x = (2.0f * mousePos2D.x) / Window::WINDOW_WIDTH - 1.0f;
+                float y = 1.0f - (2.0f * mousePos2D.y) / Window::WINDOW_HEIGHT;
+                float z = 1.0f;
+                glm::vec3 ray_nds = glm::vec3(x, y, z);
+                glm::vec4 ray_clip = glm::vec4(ray_nds.x, ray_nds.y, -1.0, 1.0);
+                glm::vec4 ray_eye = glm::inverse(camera.getProjection()) * ray_clip;
+                ray_eye = glm::vec4(ray_eye.x, ray_eye.y, -1.0, 0.0);
+                glm::vec4 prod = glm::inverse(camera.getView()) * ray_eye;
+                glm::vec3 ray_wor = {prod.x, prod.y, prod.z};
+                return ray_wor;
+            }
+
         public:
-            ImVec4 clear_color = ImVec4(50.0f / 255.0f, 27.0f / 255.0f, 50.0f / 255.0f, 1.00f);
+            ImVec4 clear_color = ImVec4(255.0f / 255.0f, 151.0f / 255.0f, 255.0f / 255.0f, 1.00f);
             bool show_demo_window = true;
 
             entt::entity currentEntity;
 
-            void Render(entt::registry& sceneRegistry){
+            void Render(entt::registry& sceneRegistry, PerspectiveCamera& camera){
                 //static bool setStyle = false;
                 //if(!setStyle){_SetStyle(); setStyle = true;}
                 ImGui::NewFrame();
@@ -129,6 +147,15 @@ namespace Cast{
                     if (ImGui::Button("New Entity")){
 
                     }      
+                    if(InputManager::isMouseReleased(MouseCodes::MOUSE_BUTTON_MIDDLE)){
+                        auto e = EntityFactory::GenerateDefaultEntity(sceneRegistry, "Generated");
+                        auto& trans = sceneRegistry.get<TransformComponent>(e);
+                        auto newPos = _GetRayClick(camera);
+                        trans.position.x = newPos.x;
+                        trans.position.y = newPos.y;
+                        trans.position.z = newPos.z;
+
+                    }
                     static int count = 0;
                     static entt::entity deleteEntity;
                     bool selected = false;
@@ -155,7 +182,6 @@ namespace Cast{
                         ImGui::SetNextWindowPos(ImVec2(mousePosRightClickEntity.x, mousePosRightClickEntity.y-25));
                         ImGui::Begin("Entity Options Menu", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize |ImGuiWindowFlags_AlwaysAutoResize);
                         if(ImGui::Selectable("Delete Entity")){
-                            currentEntity = {};
                             sceneRegistry.destroy(deleteEntity);
                             openEntityRightClickMenu = false;
                         }

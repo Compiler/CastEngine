@@ -11,10 +11,10 @@ namespace Cast{
         _vao.setLayout(std::move(_layout));
 
         UniformBufferObject ubo {glm::mat4(1.0f), glm::mat4(1.0f), glm::mat4(1.0f)};
-        Cast::PerspectiveCamera camera{1920, 1080, {2,2,5}, true};
-        ubo.proj = camera.getProjection();
-        ubo.view = camera.getView();
-        camera.Update();
+        m_camera = Cast::PerspectiveCamera{1920, 1080, {2,2,5}, true};
+        ubo.proj = m_camera.getProjection();
+        ubo.view = m_camera.getView();
+        m_camera.Update();
         glGenBuffers(1, &_uboBufferID);
         glBindBuffer(GL_UNIFORM_BUFFER, _uboBufferID);
         glBufferData(GL_UNIFORM_BUFFER, sizeof(UniformBufferObject), NULL, GL_STATIC_DRAW);
