@@ -130,7 +130,10 @@ namespace Cast{
 
                     }      
                     static int count = 0;
+                    static entt::entity deleteEntity;
                     bool selected = false;
+                    static bool openEntityRightClickMenu = false;
+                    static glm::vec2 mousePosRightClickEntity;
                     if (ImGui::CollapsingHeader("Entity List")){
                         for(auto &&[entity, entityName]: sceneRegistry.view<NameComponent>().each()) {
                             
@@ -138,7 +141,25 @@ namespace Cast{
                                 currentEntity = entity;
                                 CAST_LOG("{} selected", entityName.name.c_str());
                             }
+                            if(InputManager::isMousePressed(MouseCodes::MOUSE_BUTTON_RIGHT) && ImGui::IsItemHovered()){
+                                openEntityRightClickMenu = true;
+                                mousePosRightClickEntity = InputManager::getMouseMovedPosition();
+                                deleteEntity = entity;
+                                CAST_LOG("Deciding on entity: {}", entityName.name.c_str());
+                            }
+                            
                         }             
+                    }
+
+                    if(openEntityRightClickMenu){
+                        ImGui::SetNextWindowPos(ImVec2(mousePosRightClickEntity.x, mousePosRightClickEntity.y-25));
+                        ImGui::Begin("Entity Options Menu", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize |ImGuiWindowFlags_AlwaysAutoResize);
+                        if(ImGui::Selectable("Delete Entity")){
+                            currentEntity = {};
+                            sceneRegistry.destroy(deleteEntity);
+                            openEntityRightClickMenu = false;
+                        }
+                        ImGui::End();
                     }
 
                     ImGui::End();
@@ -150,20 +171,22 @@ namespace Cast{
                     ImGui::SetNextWindowPos(ImVec2(Window::WINDOW_WIDTH - panel_width, 0));
                     ImGui::Begin("Entity Panel");           
 
-                    if(sceneRegistry.any_of<NameComponent>(currentEntity)){
-                        sceneRegistry.get<NameComponent>(currentEntity).RenderComponentView();
-                    } 
+                    if(sceneRegistry.valid(currentEntity)){
+                        if(sceneRegistry.any_of<NameComponent>(currentEntity)){
+                            sceneRegistry.get<NameComponent>(currentEntity).RenderComponentView();
+                        } 
 
-                    if(sceneRegistry.any_of<TransformComponent>(currentEntity)){
-                        sceneRegistry.get<TransformComponent>(currentEntity).RenderComponentView();
-                    }    
-                    if(sceneRegistry.any_of<CubeComponent>(currentEntity)){
-                        sceneRegistry.get<CubeComponent>(currentEntity).RenderComponentView();
-                    }    
-                    
-                    if(sceneRegistry.any_of<RenderableComponent>(currentEntity)){
-                        sceneRegistry.get<RenderableComponent>(currentEntity).RenderComponentView();
-                    }    
+                        if(sceneRegistry.any_of<TransformComponent>(currentEntity)){
+                            sceneRegistry.get<TransformComponent>(currentEntity).RenderComponentView();
+                        }    
+                        if(sceneRegistry.any_of<CubeComponent>(currentEntity)){
+                            sceneRegistry.get<CubeComponent>(currentEntity).RenderComponentView();
+                        }    
+                        
+                        if(sceneRegistry.any_of<RenderableComponent>(currentEntity)){
+                            sceneRegistry.get<RenderableComponent>(currentEntity).RenderComponentView();
+                        }    
+                    }
 
 
 
