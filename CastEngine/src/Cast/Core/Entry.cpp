@@ -17,6 +17,8 @@ namespace Cast{
         core_engine.load(startingState);
         double prevTime = glfwGetTime();
         int frameCount = 0;
+        double elapsed = 0;
+        double loopTime = 0;
         while(!core_engine.closeRequested()){
             double curTime = glfwGetTime();
             frameCount++;
@@ -29,15 +31,16 @@ namespace Cast{
                     case RenderContext::API::Vulkan:{api = "Vulkan";break;};
                     default: api = "NO_API";
                 }
-                ss << "[" << api << "] " << "Cast Engine : " << frameCount << " FPS";
+                ss << "[" << api << "] " << "Cast Engine : " << frameCount << " FPS, " << elapsed * 1000 << " ms";
 
                 glfwSetWindowTitle(core_engine._renderContext->getWindow()->getWindowHandle(), ss.str().c_str());
                 frameCount = 0;
 
             }
-
+            loopTime = glfwGetTime();
             core_engine.update();
             core_engine.render();
+            elapsed = glfwGetTime() - loopTime;
         }
         CAST_WARN("Closing engine");
         core_engine.unload();
