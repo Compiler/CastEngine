@@ -104,17 +104,30 @@ namespace Cast{
 
 
             glm::vec3 _GetRayClick(PerspectiveCamera& camera){
+                // glm::vec2 mousePos2D = InputManager::getMouseMovedPosition();
+                // float x = (2.0f * mousePos2D.x) / Window::WINDOW_WIDTH - 1.0f;
+                // float y = 1.0f - (2.0f * mousePos2D.y) / Window::WINDOW_HEIGHT;
+                // float z = 1.0f;
+                // glm::vec3 ray_nds = glm::vec3(x, y, z);
+                // glm::vec4 ray_clip = glm::vec4(ray_nds.x, ray_nds.y, -1.0, 1.0);
+                // glm::vec4 ray_eye = glm::inverse(camera.getProjection()) * ray_clip;
+                // ray_eye = glm::vec4(ray_eye.x, ray_eye.y, -1.0, 0.0);
+                // glm::vec4 prod = glm::inverse(camera.getView()) * ray_eye;
+                // glm::vec3 ray_wor = {prod.x, prod.y, prod.z};
+                // return ray_wor;
+
                 glm::vec2 mousePos2D = InputManager::getMouseMovedPosition();
                 float x = (2.0f * mousePos2D.x) / Window::WINDOW_WIDTH - 1.0f;
                 float y = 1.0f - (2.0f * mousePos2D.y) / Window::WINDOW_HEIGHT;
                 float z = 1.0f;
                 glm::vec3 ray_nds = glm::vec3(x, y, z);
-                glm::vec4 ray_clip = glm::vec4(ray_nds.x, ray_nds.y, -1.0, 1.0);
+                glm::vec4 ray_clip = glm::vec4(ray_nds.x, ray_nds.y, ray_nds.z, 1.0);
                 glm::vec4 ray_eye = glm::inverse(camera.getProjection()) * ray_clip;
                 ray_eye = glm::vec4(ray_eye.x, ray_eye.y, -1.0, 0.0);
                 glm::vec4 prod = glm::inverse(camera.getView()) * ray_eye;
                 glm::vec3 ray_wor = {prod.x, prod.y, prod.z};
-                return ray_wor;
+                CAST_LOG("{}, {} ~ {}, {}", prod.x, prod.y,x,y);
+                return {prod.x, prod.y, prod.z};
             }
 
 

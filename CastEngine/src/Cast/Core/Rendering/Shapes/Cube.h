@@ -9,7 +9,7 @@ namespace Cast{
         private:
             glm::vec4 _center{0, 0, 0, 1};
             float _sideLength;
-            int NUM_VERTICES = 3*2*6;
+            constexpr int NUM_VERTICES = 3*2*6;
 
         public:
             Cube();

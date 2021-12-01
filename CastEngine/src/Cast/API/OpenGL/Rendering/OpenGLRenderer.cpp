@@ -11,7 +11,7 @@ namespace Cast{
         _vao.setLayout(std::move(_layout));
 
         UniformBufferObject ubo {glm::mat4(1.0f), glm::mat4(1.0f), glm::mat4(1.0f)};
-        m_camera = Cast::PerspectiveCamera{1920, 1080, {2,2,5}, true};
+        m_camera = Cast::PerspectiveCamera{1920, 1080, {0,0,2}, true};
         ubo.proj = m_camera.getProjection();
         ubo.view = m_camera.getView();
         m_camera.Update();

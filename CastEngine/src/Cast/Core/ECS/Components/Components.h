@@ -31,7 +31,7 @@ namespace Cast{
 				strcpy(buf, this->name.c_str());
 				first = false;
 			}
-			if(ImGui::InputText("Name: ", buf, IM_ARRAYSIZE(buf)))
+			if(ImGui::InputText("Entity Name", buf, IM_ARRAYSIZE(buf)))
 				this->name = buf;
         }
     };
@@ -40,14 +40,6 @@ namespace Cast{
         glm::vec4 position{0};
         glm::vec4 rotation{0};
         glm::vec4 scale{0};
-
-        // void RenderComponentView(){
-        //     if(ImGui::CollapsingHeader("Transform Component", true)){
-        //         ImGui::InputFloat4("Position", &this->position[0]);
-        //         ImGui::InputFloat4("Rotation", &this->rotation[0]);
-        //         ImGui::InputFloat4("Scale", &this->scale[0]);
-        //     }
-        // }
 
 
         void RenderComponentView(){

@@ -34,8 +34,9 @@ namespace Cast{
             int m_currentAliveVertices;
             int m_offsetToAliveVertices;
             glm::vec4 m_curColor = {0.5, 0.5, 0.5, 1.0};
-            glm::vec4 DEFAULT_NORMAL = {0, 0, 1, 1};//TODO Delete this, make it relative to the cameras look position
-            glm::mat4 DEFAULT_MODEL = glm::mat4{1};      //TODO Delete this 
+            //these are runtime constants because of glm
+            const glm::vec4 DEFAULT_NORMAL = {0, 0, 1, 1};      //TODO Delete this, make it relative to the cameras look position
+            const glm::mat4 DEFAULT_MODEL = glm::mat4{1};       //TODO Delete this 
 
 
             PerspectiveCamera m_camera;
