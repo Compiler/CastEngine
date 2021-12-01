@@ -76,7 +76,8 @@ add_library(
 	src/Cast/Core/Rendering/Shapes/Cube.cpp
 	src/Cast/Core/Rendering/Shapes/Cube.h
 	src/Cast/Core/Rendering/Shapes/Shape.h
-	src/Cast/Core/GUI/MainGUi.h
+	src/Cast/Core/GUI/MainGUI.h
+	src/Cast/Core/GUI/MainGUI.cpp
 	src/Cast/Vendor/entt/fwd.hpp
 	src/Cast/Vendor/entt/entt.hpp
 	src/Cast/Vendor/entt/process/process.hpp

@@ -1,7 +1,7 @@
 #include "EngineCore.h"
 
 namespace Cast{
-
+    extern int test;
     void EngineCore::swapAPI(RenderContext::API newAPI){
         RenderContext::setAPI(newAPI);
         _activeAPI = newAPI;
@@ -29,7 +29,6 @@ namespace Cast{
     }
 
     void EngineCore::load(StartState state){
-
         uint32_t extensionCount = 0;
         vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
         CAST_DEBUG("Vulkan Extensions supported: {}", extensionCount);
