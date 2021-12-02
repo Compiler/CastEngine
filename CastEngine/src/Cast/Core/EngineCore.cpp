@@ -24,8 +24,8 @@ namespace Cast{
         }
         //_renderContext->getWindow()->showWindow();
         _renderContext->getWindow()->focusWindow();
-        _stressScene.setRenderer(_renderer);
-        _stressScene.load();
+        _sceneManager.getCurrentScene()->setRenderer(_renderer);
+        _sceneManager.Load();
     }
 
     void EngineCore::load(StartState state){
@@ -33,7 +33,7 @@ namespace Cast{
         vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
         CAST_DEBUG("Vulkan Extensions supported: {}", extensionCount);
 
-        CAST_DEBUG("Loading renderers");
+
         
         CAST_LOG("Loading OpenGL");
         _openglRenderContext = new OpenGLContext();
@@ -43,7 +43,8 @@ namespace Cast{
         _vulkanRenderContext = new VulkanContext();
         _vulkanRenderContext->Load();
         _vulkanRenderer = new VulkanRenderer(_vulkanRenderContext->getVulkanInstance());
-
+        CAST_DEBUG("Loading Scenes");
+        _sceneManager.addScene(new StressTestScene());
         CAST_DEBUG("Loading contexts");
         switch(state){
             case StartState::OpenGL:{
@@ -61,14 +62,12 @@ namespace Cast{
 
         }
         _activeAPI = RenderContext::GetAPI();
-        _stressScene.init();
-        _stressScene.load();
 
 
     }
 
     void EngineCore::update(){
-        _stressScene.update();
+        _sceneManager.Update();
         InputManager::clear();
         _renderContext->Update();
         if(InputManager::isKeyReleased(KeyCodes::KEY_ESCAPE)) this->_renderContext->getWindow()->setShouldClose();
@@ -88,11 +87,12 @@ namespace Cast{
 
         _renderContext->Render();
         _renderContext->getWindow()->render();
-        _stressScene.render();
+        _renderer->clearColor(_gui.clear_color.x, _gui.clear_color.y, _gui.clear_color.z, _gui.clear_color.w);
+        _sceneManager.Render();
 
         _renderContext->BeginGUI();
-        _gui.Render(_stressScene.getRegistry(), _renderer->getCamera());
-        _stressScene.clearColor = {_gui.clear_color.x, _gui.clear_color.y, _gui.clear_color.z, _gui.clear_color.w};
+        _gui.Render(_sceneManager.getCurrentScene()->getRegistry(), _renderer->getCamera());
+        //_stressScene.clearColor = {_gui.clear_color.x, _gui.clear_color.y, _gui.clear_color.z, _gui.clear_color.w};
         _renderContext->EndGUI();
 
     }

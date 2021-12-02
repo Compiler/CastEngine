@@ -13,6 +13,8 @@
 #include <Cast/Core/Rendering/Shader/ShaderParser.h>
 
 #include <Cast/Core/GUI/MainGUI.h>
+
+#include <Cast/Core/Scenes/SceneManager.h>
 namespace Cast{
     class EngineCore{
         friend class Entry;
@@ -26,12 +28,12 @@ namespace Cast{
             VulkanContext* _vulkanRenderContext;
             OpenGLContext* _openglRenderContext;
 
+            SceneManager _sceneManager{};
+
             RenderContext::API _activeAPI;
             bool _runStressTest = false;
-            DebugScene _scene{};
-            StressTestScene _stressScene{};
         public:
-            enum StartState{ OpenGL = 0, Vulkan = 1 };
+            enum class StartState{ OpenGL = 0, Vulkan = 1 };
             void load(StartState state = StartState::Vulkan);
             void update();
             void render();

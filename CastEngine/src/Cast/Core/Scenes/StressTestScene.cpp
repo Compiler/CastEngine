@@ -4,7 +4,7 @@
 #include <cmath>
 namespace Cast{
 
-    void StressTestScene::init(){
+    void StressTestScene::Initialize(){
         static float MAX_CUBE_SIZE = 1;
         static float MIN_CUBE_SIZE = 0.1;
         glm::vec2 curCubeSize = {random_float(MIN_CUBE_SIZE, MAX_CUBE_SIZE), random_float(MIN_CUBE_SIZE, MAX_CUBE_SIZE)};
@@ -13,13 +13,13 @@ namespace Cast{
         for(float x = -range; x <= range; x += incremenet){
             for(float z = -range; z <= range; z += incremenet){
                 for(float y = 1; y <= 1; y += incremenet){
-                    const auto entity = _registry.create();
+                    const auto entity = m_registry.create();
 
-                    TransformComponent& tComp = _registry.emplace<TransformComponent>(entity);
-                    RenderableComponent& rComp = _registry.emplace<RenderableComponent>(entity);
-                    CubeComponent& cComp = _registry.emplace<CubeComponent>(entity);
+                    TransformComponent& tComp = m_registry.emplace<TransformComponent>(entity);
+                    RenderableComponent& rComp = m_registry.emplace<RenderableComponent>(entity);
+                    CubeComponent& cComp = m_registry.emplace<CubeComponent>(entity);
                     std::string name = "Cube" + std::to_string(NameComponent::count);
-                    _registry.emplace<NameComponent>(entity, name);
+                    m_registry.emplace<NameComponent>(entity, name);
                     
                     tComp.position = {x, -1, z, 1};
                     tComp.rotation = {0, 0, 0, 1};
@@ -30,20 +30,20 @@ namespace Cast{
                 }
             }
         }
-        CAST_ERROR("Entity count = {} " , _registry.size());
-        _renderer->CreateShader("blinn_phong", {{CAST_INTERNAL_SHADER("blinn_phong.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("blinn_phong.frag"), Shader::ShaderType::Fragment}});
-        _renderer->CreateShader("passthrough_instanced", {{CAST_INTERNAL_SHADER("passthrough_instanced.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Fragment}});
+        CAST_ERROR("Entity count = {} " , m_registry.size());
     }
-    void StressTestScene::load(){
-        _renderer->CreateShader("blinn_phong", {{CAST_INTERNAL_SHADER("blinn_phong.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("blinn_phong.frag"), Shader::ShaderType::Fragment}});
-        _renderer->CreateShader("passthrough_instanced", {{CAST_INTERNAL_SHADER("passthrough_instanced.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Fragment}});
-        _renderer->SetShader("passthrough_instanced");
-        _renderer->SetShader("blinn_phong");
+    void StressTestScene::Load(){
+        static bool initialize = true;
+        if(initialize){initialize = false; Initialize();}
+        m_renderer->CreateShader("blinn_phong", {{CAST_INTERNAL_SHADER("blinn_phong.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("blinn_phong.frag"), Shader::ShaderType::Fragment}});
+        m_renderer->CreateShader("passthrough_instanced", {{CAST_INTERNAL_SHADER("passthrough_instanced.vert"), Shader::ShaderType::Vertex}, {CAST_INTERNAL_SHADER("passthrough.frag"), Shader::ShaderType::Fragment}});
+        m_renderer->SetShader("passthrough_instanced");
+        m_renderer->SetShader("blinn_phong");
         CAST_DEBUG("Loaded shaders");
 
     }
-    void StressTestScene::update(){
-        for(auto &&[entity, transform, renderable, cube]: _registry.view<TransformComponent, RenderableComponent, CubeComponent>().each()) {
+    void StressTestScene::Update(){
+        for(auto &&[entity, transform, renderable, cube]: m_registry.view<TransformComponent, RenderableComponent, CubeComponent>().each()) {
             float rand = Cast::random_float(0, 6);
             float speed = 1.5f;
             if(rand < 2){
@@ -58,13 +58,14 @@ namespace Cast{
             }
         }
     }
-    void StressTestScene::render(){
+    void StressTestScene::Render(){
         
-        _renderer->SubmitCube({0, 0, 0}, 0.1);
-        _renderer->clearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a );
-        _renderer->Draw(_registry);
+        m_renderer->SubmitCube({0, 0, 0}, 0.1);
+        m_renderer->Draw(m_registry);
     }
-    void StressTestScene::unload(){
+    void StressTestScene::UnLoad(){
+        m_registry.clear();
+        _cubes.clear();
         CAST_WARN("StresTestScene Unloading!");
     }
 

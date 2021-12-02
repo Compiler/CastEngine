@@ -53,8 +53,12 @@ add_library(
 	src/Cast/Core/Utils/Files/FileLoaderFactory.h
 	src/Cast/Core/Scenes/DebugScene.cpp
 	src/Cast/Core/Scenes/StressTestScene.h
+	src/Cast/Core/Scenes/Scene.h
 	src/Cast/Core/Scenes/StressTestScene.cpp
+	src/Cast/Core/Scenes/SceneManager.cpp
 	src/Cast/Core/Scenes/DebugScene.h
+	src/Cast/Core/Scenes/SceneManager.h
+	src/Cast/Core/Scenes/Scene.cpp
 	src/Cast/Core/Rendering/WindowCallbacks.h
 	src/Cast/Core/Rendering/Window.h
 	src/Cast/Core/Rendering/PerspectiveCamera.h
